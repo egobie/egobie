@@ -81,7 +81,9 @@ export class SideMenuContainer extends Component {
 
   render() {
     return (
-      <SideMenu menu = { this.createMenuComponent() }>
+      <SideMenu
+        menu = { this.createMenuComponent() }
+        edgeHitWidth = { 20 } >
         <View style = {{ backgroundColor: 'white', flex: 1 }}>
           <Text>Hahahahah</Text>
         </View>

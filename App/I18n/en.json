@@ -1,0 +1,13 @@
+{
+  "menu": {
+    "home": "HOME",
+    "egobieServices": "EGOBIE SERVICES",
+    "myServices": "MY SERVICES",
+    "coupons": "COUPONS",
+    "vehicles": "VEHICLES",
+    "payments": "PAYMENTS",
+    "notifications": "NOTIFICATIONS",
+    "settings": "SETTINGS",
+    "about": "ABOUT"
+  }
+}

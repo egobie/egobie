@@ -34,6 +34,10 @@
 		6745495CB09D47B9B3944206 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95766DAD39664FF69E68C858 /* Octicons.ttf */; };
 		DFAE2325DBB547D9935A1CFC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */; };
 		EF3A6A880FE74812AC3715B0 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503C350428B040539FCFD733 /* Zocial.ttf */; };
+		4E0D14EB5EA84C14B385827D /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF0A4A2DFBA46B3BA5565D8 /* libReact.a */; };
+		528ED8DB85AE465DA29010DC /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BD9ED1642149E9BB044BFC /* libyoga.a */; };
+		FA44A57BCE344A87BD4C7538 /* libcxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABE1A4E18C842DC9CE3D6D8 /* libcxxreact.a */; };
+		52C75CF3A47C4A1B90C55B25 /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC8911E17F942FC8E0646D5 /* libjschelpers.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,6 +260,11 @@
 		95766DAD39664FF69E68C858 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		503C350428B040539FCFD733 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		415013DF78444A9885657603 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; name = "RNI18n.xcodeproj"; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		ACF0A4A2DFBA46B3BA5565D8 /* libReact.a */ = {isa = PBXFileReference; name = "libReact.a"; path = "libReact.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		91BD9ED1642149E9BB044BFC /* libyoga.a */ = {isa = PBXFileReference; name = "libyoga.a"; path = "libyoga.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		4ABE1A4E18C842DC9CE3D6D8 /* libcxxreact.a */ = {isa = PBXFileReference; name = "libcxxreact.a"; path = "libcxxreact.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		DFC8911E17F942FC8E0646D5 /* libjschelpers.a */ = {isa = PBXFileReference; name = "libjschelpers.a"; path = "libjschelpers.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +292,10 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				8A237A581CFC419F9232AE51 /* libRNVectorIcons.a in Frameworks */,
+				4E0D14EB5EA84C14B385827D /* libReact.a in Frameworks */,
+				528ED8DB85AE465DA29010DC /* libyoga.a in Frameworks */,
+				FA44A57BCE344A87BD4C7538 /* libcxxreact.a in Frameworks */,
+				52C75CF3A47C4A1B90C55B25 /* libjschelpers.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +441,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				448C3F00AE424B0DA64E7849 /* RNVectorIcons.xcodeproj */,
+				415013DF78444A9885657603 /* RNI18n.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -881,6 +895,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -897,6 +915,10 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/egobie.app/egobie";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};

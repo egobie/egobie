@@ -5,6 +5,14 @@
     "more": "More"
   },
 
+  "step": {
+    "service": "Service",
+    "location": "Location",
+    "payment": "Payment",
+    "summary": "Summary",
+    "confirm": "Confirm"
+  },
+
   "menu": {
     "home": "HOME",
     "egobieServices": "EGOBIE SERVICES",

@@ -5,6 +5,7 @@ import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Service from './ServiceScreen';
+import Steps from '../Components/Steps';
 
 
 export default class extends Component {
@@ -21,7 +22,12 @@ export default class extends Component {
 
   render() {
     return (
-      <Service />
+      <View style = {{
+        marginTop: 50,
+      }}>
+        <Steps />
+        <Service />
+      </View>
     );
   }
 }

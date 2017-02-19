@@ -9,7 +9,8 @@ class ServiceCard extends Component {
       type: 'material-community',
       name: type === 'car-wash' ? 'car-wash' : 'oil',
       style: {
-        color: 'red'
+        color: 'red',
+        fontSize: 35,
       }
     };
   }

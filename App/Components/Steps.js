@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 
 import I18n from 'react-native-i18n';
-import StepIndicator from 'react-native-step-indicator';
+
+import StepIndicator from '../Libs/StepIndicator';
 
 
 const labels = [
-  I18n.t('step.location'),
   I18n.t('step.service'),
+  I18n.t('step.location'),
   I18n.t('step.payment'),
   I18n.t('step.confirm'),
 ];
@@ -17,7 +19,7 @@ export default class extends Component {
       <StepIndicator
         labels = { labels }
         stepCount = { labels.length }
-        currentPosition = { 1 }
+        currentPosition = { 0 }
         customStyles = {{
           separatorStrokeWidth: 2,
 
@@ -41,6 +43,7 @@ export default class extends Component {
           labelColor: '#484E56',
           currentStepLabelColor: '#3FA6D1',
         }}
+        style = { this.props.style }
       />
     );
   }

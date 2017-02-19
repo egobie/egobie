@@ -9,7 +9,18 @@ import Steps from '../Components/Steps';
 
 
 export default class extends Component {
+  constructor() {
+    super();
+    this.selectService = this._selectService.bind(this);
+  }
+
   static navigationOptions = {
+    title: 'Resident',
+    header: {
+      titleStyle: {
+        
+      }
+    },
     tabBar: {
       label: I18n.t('tab.resident'),
       icon: ({ tintColor }) => {
@@ -20,13 +31,27 @@ export default class extends Component {
     }
   };
 
+  _selectService() {
+    this.props.navigation.navigate('Order');
+  }
+
   render() {
     return (
       <View style = {{
-        marginTop: 50,
+        flex: 1,
       }}>
-        <Steps />
-        <Service />
+        <Steps style = {{
+          borderWidth: 1,
+          borderColor: 'red',
+        }}/>
+        <Service
+          style = {{
+            flex: 1,
+            borderWidth: 1,
+            paddingTop: 0,
+          }}
+          onServiceSelect = { this.selectService }
+        />
       </View>
     );
   }

@@ -1,23 +1,16 @@
 import React, { Component } from 'react'
 
-// Keep before all containers and components
+// Import `I18n` before all other containers and components
 import '../I18n/I18n';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 
-
-// export default class App extends Component {
-//   render() {
-//     return (
-//       <SideMenuContainer />
-//     );
-//   }
-// }
 import ResidentContainer from './ResidentScreen';
 import BusinessContainer from './BusinessScreen';
 import MoreContainer from './MoreScreen';
 
+import OrderScreen from './OrderScreen';
 
-export default TabNavigator({
+const MainNavigator = TabNavigator({
   Resident: {
     screen: ResidentContainer,
   },
@@ -30,6 +23,7 @@ export default TabNavigator({
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: false,
+
   tabBarOptions: {
     style: {
       borderTopWidth: 0.5,
@@ -42,3 +36,14 @@ export default TabNavigator({
     inactiveTintColor: '#484E56', // #ABB8C7
   },
 });
+
+const AppNavigator = StackNavigator({
+  Home: {
+    screen: MainNavigator,
+  },
+  Order: {
+    screen: OrderScreen,
+  },
+});
+
+export default AppNavigator;

@@ -19,6 +19,7 @@ class ServiceCard extends Component {
     return (
       <ListItem
         hideChevron
+        onPress = { () => { this.props.onPress(this.props.title) } }
         title = { this.props.title }
         titleStyle = {{
           color: '#484E56',
@@ -49,6 +50,7 @@ ServiceCard.propTypes = {
   title: React.PropTypes.string.isRequired,
   time: React.PropTypes.string.isRequired,
   price: React.PropTypes.string.isRequired,
+  onPress: React.PropTypes.func.isRequired,
 };
 
 export default ServiceCard;

@@ -1,4 +1,10 @@
 {
+  "tab": {
+    "resident": "Resident",
+    "business": "Business",
+    "more": "More"
+  },
+
   "menu": {
     "home": "HOME",
     "egobieServices": "EGOBIE SERVICES",

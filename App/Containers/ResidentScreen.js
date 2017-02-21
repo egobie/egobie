@@ -9,8 +9,8 @@ import Steps from '../Components/Steps';
 
 
 export default class extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.selectService = this._selectService.bind(this);
   }
 
@@ -31,7 +31,10 @@ export default class extends Component {
     }
   };
 
+  service;
+
   _selectService() {
+    this.service.hide();
     this.props.navigation.navigate('Order');
   }
 
@@ -45,6 +48,7 @@ export default class extends Component {
           borderColor: 'red',
         }}/>
         <Service
+          ref = { (s) => { this.service = s } }
           style = {{
             flex: 1,
             borderWidth: 1,

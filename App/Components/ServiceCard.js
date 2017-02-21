@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Dimensions, Animated, StyleSheet, Easing, TouchableWithoutFeedback } from 'react-native';
 
 import { ListItem } from 'react-native-elements';
 
 class ServiceCard extends Component {
+  dimension = Dimensions.get('window');
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      translateX: new Animated.Value(0 - this.dimension.width),
+    };
+  }
+
   serviceIcon(type) {
     return {
       type: 'material-community',
@@ -11,36 +20,70 @@ class ServiceCard extends Component {
       style: {
         color: 'red',
         fontSize: 35,
+        marginRight: 15,
       }
     };
   }
 
+  show() {
+    Animated.timing(this.state.translateX, {
+      toValue: 0,
+      duration: 500,
+      easing: Easing.out(Easing.cubic),
+      delay: this.props.delay,
+    }).start();
+  }
+
+  hide() {
+    Animated.timing(this.state.translateX, {
+      toValue: 0 - this.dimension.width,
+      duration: 500,
+      easing: Easing.out(Easing.cubic),
+      delay: this.props.delay,
+    }).start();
+  }
+
+  componentWillMount() {
+    this.show();
+  }
+
   render() {
     return (
-      <ListItem
-        hideChevron
-        onPress = { () => { this.props.onPress(this.props.title) } }
-        title = { this.props.title }
-        titleStyle = {{
-          color: '#484E56',
-          fontWeight: '600',
-        }}
-        subtitle = { `Estimated Time: ${this.props.time}min` }
-        subtitleStyle = {{
-          color: '#484E56',
-          fontWeight: '300',
-        }}
-        rightTitle = { `$${this.props.price}` }
-        rightTitleStyle = {{
-          color: '#484E56',
-          fontWeight: '700',
-        }}
-        leftIcon = { this.serviceIcon(this.props.type) }
-        containerStyle = {{
-          height: 75,
-          justifyContent: 'center',
-        }}
-      />
+      <TouchableWithoutFeedback onPress = { () => { this.props.onPress(this.props.title) } }>
+        <Animated.View style = {{
+          transform: [
+            { translateX: this.state.translateX },
+          ],
+        }}>
+          <ListItem
+            hideChevron
+            title = { this.props.title }
+            titleStyle = {{
+              color: '#484E56',
+              fontWeight: '600',
+            }}
+            subtitle = { `Estimated Time: ${this.props.time}min` }
+            subtitleStyle = {{
+              color: '#484E56',
+              fontWeight: '300',
+            }}
+            rightTitle = { `$${this.props.price}` }
+            rightTitleStyle = {{
+              color: '#484E56',
+              fontWeight: '600',
+            }}
+            leftIcon = { this.serviceIcon(this.props.type) }
+            containerStyle = {{
+              height: 70,
+              marginLeft: 10,
+              marginRight: 10,
+              justifyContent: 'center',
+              borderBottomWidth: 0.5,
+              borderBottomColor: '#ABB8C7',
+            }}
+          />
+        </Animated.View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -51,6 +94,12 @@ ServiceCard.propTypes = {
   time: React.PropTypes.string.isRequired,
   price: React.PropTypes.string.isRequired,
   onPress: React.PropTypes.func.isRequired,
+  // Used for animation
+  delay: React.PropTypes.number,
+};
+
+ServiceCard.defaultProps = {
+  delay: 0,
 };
 
 export default ServiceCard;

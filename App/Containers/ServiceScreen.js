@@ -5,21 +5,16 @@ import ServiceCard from '../Components/ServiceCard';
 
 
 class ServiceScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
-  createServiceCard(type, title, time, price, key) {
-    return (
-      <ServiceCard
-        type = { type }
-        title = { title }
-        time = { time }
-        price = { price }
-        key = { key }
-        onPress = { this.props.onServiceSelect }
-      />
-    );
+  serviceCards = [];
+
+  hide() {
+    this.serviceCards.forEach((sc, i) => {
+      sc.hide();
+    });
   }
 
   render() {
@@ -27,7 +22,18 @@ class ServiceScreen extends Component {
       <ScrollView style = { [this.props.style && this.props.style] }>
       {
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, key) => {
-          return this.createServiceCard('', 'Premium', '30', '999.99', key);
+          return (
+            <ServiceCard
+              ref = { (sc) => { this.serviceCards.push(sc); } }
+              type = ''
+              title = 'Premium'
+              time = '30'
+              price = '999.99'
+              key = { key }
+              onPress = { this.props.onServiceSelect }
+              delay = { key * 50 }
+            />
+          );
         })
       }
       </ScrollView>

@@ -12,7 +12,7 @@ class ServiceScreen extends Component {
   serviceCards = [];
 
   hide() {
-    this.serviceCards.forEach((sc, i) => {
+    this.serviceCards.forEach((sc) => {
       sc.hide();
     });
   }

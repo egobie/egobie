@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Dimensions } from 'react-native';
 
 import ServiceCard from '../Components/ServiceCard';
-
+import Dimension from '../Libs/Dimension';
 
 class ServiceScreen extends Component {
   constructor(props) {
@@ -17,9 +17,18 @@ class ServiceScreen extends Component {
     });
   }
 
+  show() {
+    this.serviceCards.forEach((sc) => {
+      sc.show();
+    });
+  }
+
   render() {
     return (
-      <ScrollView style = { [this.props.style && this.props.style] }>
+      <ScrollView style = {{
+        flex: 1,
+        width: Dimension.width,
+      }}>
       {
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, key) => {
           return (

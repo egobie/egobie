@@ -4,11 +4,10 @@ import React, { Component } from 'react'
 import '../I18n/I18n';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
-import ResidentContainer from './ResidentScreen';
-import BusinessContainer from './BusinessScreen';
-import MoreContainer from './MoreScreen';
+import ResidentContainer from './ResidentContainer';
+import BusinessContainer from './BusinessContainer';
+import MoreContainer from './MoreContainer';
 
-import OrderScreen from './OrderScreen';
 
 const MainNavigator = TabNavigator({
   Resident: {
@@ -40,9 +39,6 @@ const MainNavigator = TabNavigator({
 const AppNavigator = StackNavigator({
   Home: {
     screen: MainNavigator,
-  },
-  Order: {
-    screen: OrderScreen,
   },
 });
 

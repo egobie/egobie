@@ -13,7 +13,6 @@
 		"react-native-i18n": "^1.0.0",
 		"react-native-navigation": "^1.0.30",
 		"react-native-step-indicator": "^0.0.1",
-		"react-native-swiper": "^1.5.4",
 		"react-navigation": "^1.0.0-beta.5",
 		"redux": "^3.6.0"
 	},

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Dimensions } from 'react-native';
 
-import ServiceCard from '../Components/ServiceCard';
+import Service from '../Components/Service';
 import Dimension from '../Libs/Dimension';
 
 class ServiceScreen extends Component {
@@ -9,17 +9,17 @@ class ServiceScreen extends Component {
     super(props);
   }
 
-  serviceCards = [];
+  services = [];
 
   hide() {
-    this.serviceCards.forEach((sc) => {
-      sc.hide();
+    this.services.forEach((service) => {
+      service.hide();
     });
   }
 
   show() {
-    this.serviceCards.forEach((sc) => {
-      sc.show();
+    this.services.forEach((service) => {
+      service.show();
     });
   }
 
@@ -32,14 +32,15 @@ class ServiceScreen extends Component {
       {
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, key) => {
           return (
-            <ServiceCard
-              ref = { (sc) => { this.serviceCards.push(sc); } }
+            <Service
+              ref = { (service) => { this.services.push(service); } }
+              id = { 1 }
               type = ''
               title = 'Premium'
               time = '30'
               price = '999.99'
               key = { key }
-              onPress = { this.props.onServiceSelect }
+              onClick = { this.props.onServiceSelect }
               delay = { key * 50 }
             />
           );
@@ -51,8 +52,9 @@ class ServiceScreen extends Component {
 }
 
 ServiceScreen.propTypes = {
+  services: React.PropTypes.array.isRequired,
   onServiceSelect: React.PropTypes.func.isRequired,
-}
+};
 
  export default ServiceScreen;
  

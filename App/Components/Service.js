@@ -3,7 +3,7 @@ import { View, Text, Dimensions, Animated, StyleSheet, Easing, TouchableWithoutF
 
 import { ListItem } from 'react-native-elements';
 
-class ServiceCard extends Component {
+class Service extends Component {
   dimension = Dimensions.get('window');
 
   constructor(props) {
@@ -49,7 +49,7 @@ class ServiceCard extends Component {
 
   render() {
     return (
-      <TouchableWithoutFeedback onPress = { () => { this.props.onPress(this.props.title) } }>
+      <TouchableWithoutFeedback onPress = { () => { this.props.onClick(this.props.id) } }>
         <Animated.View style = {{
           transform: [
             { translateX: this.state.translateX },
@@ -88,18 +88,19 @@ class ServiceCard extends Component {
   }
 }
 
-ServiceCard.propTypes = {
+Service.propTypes = {
+  id: React.PropTypes.number.isRequired,
   type: React.PropTypes.string.isRequired,
   title: React.PropTypes.string.isRequired,
   time: React.PropTypes.string.isRequired,
   price: React.PropTypes.string.isRequired,
-  onPress: React.PropTypes.func.isRequired,
+  onClick: React.PropTypes.func.isRequired,
   // Used for animation
   delay: React.PropTypes.number,
 };
 
-ServiceCard.defaultProps = {
+Service.defaultProps = {
   delay: 0,
 };
 
-export default ServiceCard;
+export default Service;

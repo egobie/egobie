@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Steps from '../Components/Steps';
 import ServiceScreen from '../Screens/ServiceScreen';
+import PaymentScreen from '../Screens/PaymentScreen'
 import OrderScreen from '../Screens/OrderScreen';
 
 
@@ -36,7 +37,6 @@ export default class extends Component {
   service;
   order;
   view;
-  x = 0;
 
   _selectService() {
     // this.scrollBy(1);
@@ -47,15 +47,6 @@ export default class extends Component {
   _goBack() {
     this.order.hide();
     this.service.show();
-  }
-
-  scrollBy(page) {
-    this.x = this.x + page * width;
-    this.view.scrollTo({
-      x: this.x,
-      y: 0,
-      animated: true,
-    });
   }
 
   render() {
@@ -69,8 +60,10 @@ export default class extends Component {
           showsHorizontalScrollIndicator = { false }
           scrollEnabled = { false }
         >
+          <PaymentScreen />
           <ServiceScreen
             ref = { (s) => { this.service = s; } }
+            services = { [] }
             onServiceSelect = { this.selectService }
           />
           <OrderScreen

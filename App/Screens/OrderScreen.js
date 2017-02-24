@@ -348,8 +348,8 @@ export default class extends Component {
   render() {
     return (
       <Animated.View style = {{
+        flex: 1,
         width: Dimension.width,
-        borderColor: 'black',
         transform: [
           { translateX: this.state.translateX },
         ],

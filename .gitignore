@@ -41,6 +41,9 @@ buck-out/
 android/app/libs
 *.keystore
 
+# VSCode
+\.vscode
+
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
@@ -51,5 +54,3 @@ android/app/libs
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
-
-.vscode/

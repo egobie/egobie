@@ -1,5 +1,6 @@
 import { AppRegistry } from 'react-native';
-import App from './App/Containers/App'
+
+import egobie from './App/Containers'
 
 
-AppRegistry.registerComponent('egobie', () => App);
+AppRegistry.registerComponent('egobie', () => egobie);

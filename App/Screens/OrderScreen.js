@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, Easing } from 'react-native';
 
+import Reactotron from 'reactotron-react-native';
 import { Button } from 'react-native-elements';
 
 import Label from '../Components/Label';
@@ -41,11 +42,23 @@ export default class extends Component {
   }
 
   hide() {
-    Animated.timing(this.state.translateX, {
-      toValue: Dimension.width,
-      duration: 1500,
-      easing: Easing.out(Easing.cubic)
-    }).start();
+    let animations = this.translateXs.map((translateX, i) => {
+      return Animated.timing(this.translateXs[i], {
+        toValue: Dimension.width,
+        duration: 500,
+        easing: Easing.out(Easing.cubic),
+        delay: i * 30,
+      });
+    });
+    animations = animations.concat(
+      Animated.timing(this.state.translateX, {
+        toValue: Dimension.width,
+        duration: 500,
+        easing: Easing.out(Easing.cubic),
+        delay: this.translateXs.length * 100,
+      })
+    );
+    Animated.parallel(animations).start();
   }
 
   rightIcon() {
@@ -223,7 +236,6 @@ export default class extends Component {
               fontSize: 18,
             }
           }}
-          rightIcon = { this.rightIcon() }
           style = {{
             marginLeft: 15,
             marginRight: 5,
@@ -253,7 +265,6 @@ export default class extends Component {
               fontSize: 18,
             }
           }}
-          rightIcon = { this.rightIcon() }
           style = {{
             marginLeft: 5,
             marginRight: 15,
@@ -328,7 +339,7 @@ export default class extends Component {
         <Button
           title = 'Place Order'
           backgroundColor = '#3FA6D1'
-          onPress = { () => { this.hide(); } }
+          onPress = { () => { this.props.onBack(); } }
         />
       </Animated.View>
     );

@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-
-// Import `I18n` before all other containers and components
-import '../I18n/I18n';
+import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import ResidentContainer from './ResidentContainer';
 import BusinessContainer from './BusinessContainer';
 import MoreContainer from './MoreContainer';
 
-
-const MainNavigator = TabNavigator({
+const routes = {
   Resident: {
     screen: ResidentContainer,
   },
@@ -18,11 +15,12 @@ const MainNavigator = TabNavigator({
   },
   More: {
     screen: MoreContainer,
-  }
-}, {
+  },
+};
+
+const configs = {
   tabBarPosition: 'bottom',
   animationEnabled: false,
-
   tabBarOptions: {
     style: {
       borderTopWidth: 0.5,
@@ -34,12 +32,10 @@ const MainNavigator = TabNavigator({
     activeTintColor: '#3FA6D1',
     inactiveTintColor: '#484E56', // #ABB8C7
   },
-});
+};
 
-const AppNavigator = StackNavigator({
+export default StackNavigator({
   Home: {
-    screen: MainNavigator,
+    screen: TabNavigator(routes, configs),
   },
 });
-
-export default AppNavigator;

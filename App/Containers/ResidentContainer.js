@@ -12,6 +12,7 @@ import OrderScreen from '../Screens/OrderScreen';
 export default class extends Component {
   constructor(props) {
     super(props);
+    this.goBack = this._goBack.bind(this);
     this.selectService = this._selectService.bind(this);
   }
 
@@ -43,6 +44,11 @@ export default class extends Component {
     this.order.show();
   }
 
+  _goBack() {
+    this.order.hide();
+    this.service.show();
+  }
+
   scrollBy(page) {
     this.x = this.x + page * width;
     this.view.scrollTo({
@@ -67,7 +73,10 @@ export default class extends Component {
             ref = { (s) => { this.service = s; } }
             onServiceSelect = { this.selectService }
           />
-          <OrderScreen ref = { (o) => { this.order = o; } }/>
+          <OrderScreen
+            ref = { (o) => { this.order = o; } }
+            onBack = { this.goBack }
+          />
         </ScrollView>
       </View>
     );

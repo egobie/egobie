@@ -70,6 +70,15 @@ ansicolors@~0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansicolors/-/ansicolors-0.2.1.tgz#be089599097b74a5c9c4a84a0cdbcdb62bd87aef"
 
+apisauce@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/apisauce/-/apisauce-0.10.0.tgz#105bf5ec9e297c7e4c7a6bb053b32d851d613e95"
+  dependencies:
+    axios "^0.15.3"
+    babel-runtime "^6.22.0"
+    ramda "^0.23.0"
+    ramdasauce "^1.1.1"
+
 append-transform@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/append-transform/-/append-transform-0.4.0.tgz#d76ebf8ca94d276e247a36bad44a4b74ab611991"
@@ -190,6 +199,12 @@ aws-sign2@~0.6.0:
 aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
+
+axios@^0.15.3:
+  version "0.15.3"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.15.3.tgz#2c9d638b2e191a08ea1d6cc988eadd6ba5bdc053"
+  dependencies:
+    follow-redirects "1.0.0"
 
 babel-code-frame@^6.22.0:
   version "6.22.0"
@@ -1534,6 +1549,12 @@ find-up@^1.0.0, find-up@^1.1.2:
   dependencies:
     path-exists "^2.0.0"
     pinkie-promise "^2.0.0"
+
+follow-redirects@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.0.0.tgz#8e34298cbd2e176f254effec75a1c78cc849fd37"
+  dependencies:
+    debug "^2.2.0"
 
 for-in@^0.1.5:
   version "0.1.6"
@@ -3048,7 +3069,7 @@ ramda@^0.23.0:
   version "0.23.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.23.0.tgz#ccd13fff73497a93974e3e86327bfd87bd6e8e2b"
 
-ramdasauce@^1.2.0:
+ramdasauce@^1.1.1, ramdasauce@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ramdasauce/-/ramdasauce-1.2.0.tgz#7c0da39ffa1b547268c78536fddad9c49f0d12cb"
   dependencies:
@@ -3253,6 +3274,16 @@ react-redux@*:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
 
+react-redux@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.3.tgz#86c3b68d56e74294a42e2a740ab66117ef6c019f"
+  dependencies:
+    hoist-non-react-statics "^1.0.3"
+    invariant "^2.0.0"
+    lodash "^4.2.0"
+    lodash-es "^4.2.0"
+    loose-envify "^1.1.0"
+
 react-test-renderer@~15.4.0-rc.4:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.4.2.tgz#27e1dff5d26d0e830f99614c487622bc831416f3"
@@ -3351,6 +3382,10 @@ redeyed@~1.0.0:
   resolved "https://registry.yarnpkg.com/redeyed/-/redeyed-1.0.1.tgz#e96c193b40c0816b00aec842698e61185e55498a"
   dependencies:
     esprima "~3.0.0"
+
+redux-saga@^0.14.3:
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.3.tgz#28cd2c5b49cf780a1de25875765724150c630513"
 
 redux@^3.6.0:
   version "3.6.0"

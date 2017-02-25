@@ -3125,6 +3125,13 @@ raw-body@~2.1.2:
     iconv-lite "0.4.13"
     unpipe "1.0.0"
 
+react-addons-shallow-compare@latest:
+  version "15.4.2"
+  resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.4.2.tgz#027ffd9720e3a1e0b328dcd8fc62e214a0d174a5"
+  dependencies:
+    fbjs "^0.8.4"
+    object-assign "^4.1.0"
+
 react-clone-referenced-element@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-clone-referenced-element/-/react-clone-referenced-element-1.0.1.tgz#2bba8c69404c5e4a944398600bcc4c941f860682"
@@ -3132,10 +3139,6 @@ react-clone-referenced-element@^1.0.1:
 react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
-
-react-native-carousel-control@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-carousel-control/-/react-native-carousel-control-1.1.1.tgz#edb4195d43044490f2149750c496548177e7158e"
 
 react-native-controllers@^2.0.0:
   version "2.1.4"
@@ -3189,6 +3192,12 @@ react-native-navigation@^1.0.30:
 react-native-side-menu@^0.20.1:
   version "0.20.1"
   resolved "https://registry.yarnpkg.com/react-native-side-menu/-/react-native-side-menu-0.20.1.tgz#df21b4bb9d8a1aa3bae53d74ddf8a739eb59bfc5"
+
+react-native-snap-carousel@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-snap-carousel/-/react-native-snap-carousel-2.0.1.tgz#c8c720365a8beea7ed9ebf0b2d278adf614c5a9c"
+  dependencies:
+    react-addons-shallow-compare latest
 
 react-native-step-indicator@^0.0.1:
   version "0.0.1"

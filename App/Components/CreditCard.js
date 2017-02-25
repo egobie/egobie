@@ -99,11 +99,11 @@ class CreditCard extends Component {
 
   render() {
     return (
-      <View style = {{
+      <View style = {[this.props.containerStyle && this.props.containerStyle, {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-      }}>
+      }]}>
         <Image
           source = { creditCardBgs[this.brand] }
           style = {[ this.props.cardStyle && this.props.cardStyle, {
@@ -132,6 +132,7 @@ CreditCard.propTypes = {
   type: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   cardScale: React.PropTypes.number,
+  containerStyle: React.PropTypes.object,
 };
 
 export default CreditCard;

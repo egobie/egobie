@@ -3,7 +3,7 @@ import { View, Text, Animated, Easing } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
 import { Button, Icon } from 'react-native-elements';
-import Carousel from 'react-native-carousel-control';
+import Carousel from 'react-native-snap-carousel';
 
 import CreditCard from '../Components/CreditCard';
 import Label from '../Components/Label';
@@ -398,6 +398,24 @@ export default class extends Component {
     );
   }
 
+  payments() {
+    return [1, 2].map((_, i) => {
+      return (
+        <CreditCard
+          key = { i }
+          number = '1234'
+          expiry = '12/23'
+          name = 'Bo Huang'
+          type = 'visa'
+          cardScale = { 0.7 }
+          containerStyle = {{
+            width: Dimension.width,
+          }}
+        />
+      );
+    });
+  }
+
   payment() {
     return (
       <Animated.View style = {{
@@ -413,14 +431,22 @@ export default class extends Component {
           { translateY: this.animation.paymentTranslateY },
         ],
       }}>
-        <Carousel swipeThreshold = { 0.2 } >
-          <CreditCard
-            number = '1234'
-            expiry = '12/23'
-            name = 'Bo Huang'
-            type = 'visa'
-            cardScale = { 0.7 }
-          />
+        <Carousel
+          sliderWidth = { Dimension.width }
+          itemWidth = { Dimension.width }
+          inactiveSlideScale = { 0.94 }
+          inactiveSlideOpacity = { 0.6 }
+          enableMomentum = { true }
+          showsHorizontalScrollIndicator = { false }
+          snapOnAndroid = { true }
+          removeClippedSubviews = { false }
+          swipeThreshold = { 1 }
+          slideStyle = {{
+            borderColor: 'red',
+            borderWidth: 1,
+          }}
+        >
+          { this.payments() }
         </Carousel>
         <Icon
           name = 'close'
@@ -446,14 +472,23 @@ export default class extends Component {
         right: 0,
         bottom: 0,
         position: 'absolute',
-        borderWidth: 1,
-        borderColor: 'red',
+        backgroundColor: '#F6F6F6',
         opacity: this.animation.vehicleOpacity,
         transform: [
           { translateY: this.animation.vehicleTranslateY },
         ],
       }}>
-        <Text>New Vehicle</Text>
+        <Icon
+          name = 'close'
+          color = '#3FA6D1'
+          size = { 20 }
+          onPress = { this.hideChild('vehicle') }
+          containerStyle = {{
+            top: 5,
+            right: 30,
+            position: 'absolute',
+          }}
+        />
       </Animated.View>
     );
   }

@@ -21,6 +21,8 @@ export default class extends Component {
       translateXs: [],
       translateX: new Animated.Value(0),
       scale: new Animated.Value(1),
+      maskIndex: new Animated.Value(-1),
+      maskOpacity: new Animated.Value(0),
       placeOrderOpacity: new Animated.Value(1),
       paymentTranslateY: new Animated.Value(200),
       paymentOpacity: new Animated.Value(0),
@@ -82,6 +84,15 @@ export default class extends Component {
         tension: 40,
         friction: 2,
       }),
+      Animated.timing(this.animation.maskOpacity, {
+        toValue: 0.6,
+        duration: 300,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.maskIndex, {
+        toValue: 1,
+        easing: Easing.out(Easing.cubic),
+      }),
       Animated.timing(this.animation.placeOrderOpacity, {
         toValue: 0,
         duration: 300,
@@ -106,6 +117,15 @@ export default class extends Component {
       Animated.timing(this.animation.scale, {
         toValue: 1,
         duration: 500,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.maskOpacity, {
+        toValue: 0,
+        duration: 300,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.maskIndex, {
+        toValue: -1,
         easing: Easing.out(Easing.cubic),
       }),
       Animated.timing(this.animation.placeOrderOpacity, {
@@ -399,7 +419,7 @@ export default class extends Component {
   }
 
   payments() {
-    return [1, 2].map((_, i) => {
+    return [1].map((_, i) => {
       return (
         <CreditCard
           key = { i }
@@ -441,10 +461,6 @@ export default class extends Component {
           snapOnAndroid = { true }
           removeClippedSubviews = { false }
           swipeThreshold = { 1 }
-          slideStyle = {{
-            borderColor: 'red',
-            borderWidth: 1,
-          }}
         >
           { this.payments() }
         </Carousel>
@@ -501,6 +517,7 @@ export default class extends Component {
       <Animated.View style = {{
         flex: 1,
         position: 'relative',
+        zIndex: 2,
       }}>
         <Animated.View
           style = {{
@@ -528,6 +545,21 @@ export default class extends Component {
     );
   }
 
+  mask() {
+    return (
+      <Animated.View style = {{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        opacity: this.animation.maskOpacity,
+        zIndex: this.animation.maskIndex,
+        backgroundColor: '#333',
+      }}/>
+    );
+  }
+
   render() {
     return (
       <Animated.View style = {{
@@ -548,6 +580,7 @@ export default class extends Component {
           { this.paymentViechle() }
           { this.estimatedTime() }
         </Animated.View>
+        { this.mask() }
         { this.placeOrder() }
       </Animated.View>
     );

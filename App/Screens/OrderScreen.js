@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Animated, Easing } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import Carousel from 'react-native-carousel-control';
 
 import CreditCard from '../Components/CreditCard';
@@ -21,6 +21,7 @@ export default class extends Component {
       translateXs: [],
       translateX: new Animated.Value(0),
       scale: new Animated.Value(1),
+      placeOrderOpacity: new Animated.Value(1),
       paymentTranslateY: new Animated.Value(200),
       paymentOpacity: new Animated.Value(0),
       vehicleTranslateY: new Animated.Value(200),
@@ -81,6 +82,11 @@ export default class extends Component {
         tension: 40,
         friction: 2,
       }),
+      Animated.timing(this.animation.placeOrderOpacity, {
+        toValue: 0,
+        duration: 300,
+        easing: Easing.out(Easing.cubic),
+      }),
       Animated.timing(this.animation[`${child}Opacity`], {
         toValue: 1,
         duration: 500,
@@ -102,15 +108,21 @@ export default class extends Component {
         duration: 500,
         easing: Easing.out(Easing.cubic),
       }),
+      Animated.timing(this.animation.placeOrderOpacity, {
+        toValue: 1,
+        duration: 300,
+        easing: Easing.out(Easing.cubic),
+      }),
       Animated.timing(this.animation[`${child}Opacity`], {
         toValue: 0,
         duration: 500,
         easing: Easing.out(Easing.cubic),
+        delay: 50,
       }),
       Animated.spring(this.animation[`${child}TranslateY`], {
         toValue: 200,
-        tension: 40,
-        friction: 5,
+        duration: 500,
+        easing: Easing.out(Easing.cubic),
       }),
     ]).start();
   }
@@ -151,7 +163,6 @@ export default class extends Component {
         }}
       >
         <Label
-          onLongPress = { this.hideChild('payment') }
           title = 'Location'
           value = '414 Hackensack Avenue, APT 1220'
           titleStyle = {{
@@ -396,22 +407,13 @@ export default class extends Component {
         right: 0,
         bottom: 0,
         position: 'absolute',
-        borderWidth: 1,
-        borderColor: 'red',
+        backgroundColor: '#F6F6F6',
         opacity: this.animation.paymentOpacity,
         transform: [
           { translateY: this.animation.paymentTranslateY },
         ],
       }}>
-        <Carousel
-          swipeThreshold = { 0.2 }
-          pageWidth = { 200 }
-          pageStyle = {{
-            backgroundColor: "white",
-            borderWidth: 1,
-            borderRadius: 5,
-          }}
-        >
+        <Carousel swipeThreshold = { 0.2 } >
           <CreditCard
             number = '1234'
             expiry = '12/23'
@@ -420,6 +422,17 @@ export default class extends Component {
             cardScale = { 0.7 }
           />
         </Carousel>
+        <Icon
+          name = 'close'
+          color = '#3FA6D1'
+          size = { 20 }
+          onPress = { this.hideChild('payment') }
+          containerStyle = {{
+            top: 5,
+            right: 30,
+            position: 'absolute',
+          }}
+        />
       </Animated.View>
     );
   }
@@ -459,6 +472,7 @@ export default class extends Component {
             flex: 1,
             marginBottom: 20,
             justifyContent: 'flex-end',
+            opacity: this.animation.placeOrderOpacity,
             transform: [
               { translateX: this.animation.translateXs[i] },
             ],
@@ -489,8 +503,6 @@ export default class extends Component {
         ],
       }}>
         <Animated.View style = {{
-          borderWidth: 1,
-          borderColor: 'red',
           transform: [
             { scale: this.animation.scale },
           ]

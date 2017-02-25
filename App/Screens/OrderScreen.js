@@ -3,7 +3,9 @@ import { View, Text, Animated, Easing } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
 import { Button } from 'react-native-elements';
+import Carousel from 'react-native-carousel-control';
 
+import CreditCard from '../Components/CreditCard';
 import Label from '../Components/Label';
 import Dimension from '../Libs/Dimension';
 
@@ -11,6 +13,8 @@ const borderBottomColor = '#ABB8C7';
 const leftIconColor = '#3FA6D1';
 
 export default class extends Component {
+  showedChild = '';
+
   constructor(props) {
     super(props);
     this.animation = {
@@ -66,6 +70,11 @@ export default class extends Component {
   }
 
   _showChild(child) {
+    if (this.showedChild !== '') {
+      return;
+    }
+
+    this.showedChild = child;
     Animated.parallel([
       Animated.spring(this.animation.scale, {
         toValue: 0.9,
@@ -86,19 +95,20 @@ export default class extends Component {
   }
 
   _hideChild(child) {
+    this.showedChild = '';
     Animated.parallel([
-      this.animation.scale.Animated.spring(this.animation.scale, {
-        toValue: 0.9,
-        tension: 40,
-        friction: 2,
-      }),
-      Animated.timing(this.animation[`${child}Opacity`], {
+      Animated.timing(this.animation.scale, {
         toValue: 1,
         duration: 500,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.spring(this.animation[`${child}TranslateY`], {
+      Animated.timing(this.animation[`${child}Opacity`], {
         toValue: 0,
+        duration: 500,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.spring(this.animation[`${child}TranslateY`], {
+        toValue: 200,
         tension: 40,
         friction: 5,
       }),
@@ -107,6 +117,10 @@ export default class extends Component {
 
   showChild(child) {
     return this._showChild.bind(this, child);
+  }
+
+  hideChild(child) {
+    return this._hideChild.bind(this, child);
   }
 
   rightIcon() {
@@ -137,6 +151,7 @@ export default class extends Component {
         }}
       >
         <Label
+          onLongPress = { this.hideChild('payment') }
           title = 'Location'
           value = '414 Hackensack Avenue, APT 1220'
           titleStyle = {{
@@ -388,7 +403,23 @@ export default class extends Component {
           { translateY: this.animation.paymentTranslateY },
         ],
       }}>
-        <Text>New Payment</Text>
+        <Carousel
+          swipeThreshold = { 0.2 }
+          pageWidth = { 200 }
+          pageStyle = {{
+            backgroundColor: "white",
+            borderWidth: 1,
+            borderRadius: 5,
+          }}
+        >
+          <CreditCard
+            number = '1234'
+            expiry = '12/23'
+            name = 'Bo Huang'
+            type = 'visa'
+            cardScale = { 0.7 }
+          />
+        </Carousel>
       </Animated.View>
     );
   }

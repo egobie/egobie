@@ -3133,6 +3133,10 @@ react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
 
+react-native-carousel-control@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-carousel-control/-/react-native-carousel-control-1.1.1.tgz#edb4195d43044490f2149750c496548177e7158e"
+
 react-native-controllers@^2.0.0:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/react-native-controllers/-/react-native-controllers-2.1.4.tgz#e944857f0b8fe81029f7f6556fe7b6c1b6062911"

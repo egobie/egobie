@@ -5,6 +5,7 @@ import Reactotron from 'reactotron-react-native';
 import { Button, Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 
+import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
 import Label from '../Components/Label';
 import Dimension from '../Libs/Dimension';
@@ -479,6 +480,20 @@ export default class extends Component {
     );
   }
 
+  vehicles() {
+    return [1, 2, 3, 4, 5].map((_, i) => {
+      return (
+        <Plate
+          key = { i }
+          index = { i }
+          number = 'Y96EUV'
+          state = 'New Jersey'
+          plateScale = { 0.7 }
+        />
+      );
+    });
+  }
+
   vehicle() {
     return (
       <Animated.View style = {{
@@ -494,6 +509,19 @@ export default class extends Component {
           { translateY: this.animation.vehicleTranslateY },
         ],
       }}>
+        <Carousel
+          sliderWidth = { Dimension.width }
+          itemWidth = { Dimension.width }
+          inactiveSlideScale = { 0.94 }
+          inactiveSlideOpacity = { 0.6 }
+          enableMomentum = { true }
+          showsHorizontalScrollIndicator = { false }
+          snapOnAndroid = { true }
+          removeClippedSubviews = { false }
+          swipeThreshold = { 1 }
+        >
+          { this.vehicles() }
+        </Carousel>
         <Icon
           name = 'close'
           color = '#3FA6D1'

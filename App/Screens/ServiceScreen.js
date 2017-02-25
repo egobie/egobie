@@ -33,7 +33,7 @@ class ServiceScreen extends Component {
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, key) => {
           return (
             <Service
-              ref = { (service) => { this.services.push(service); } }
+              ref = { (service) => { this.services.push(service) } }
               id = { 1 }
               type = ''
               title = 'Premium'

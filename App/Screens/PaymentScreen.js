@@ -7,6 +7,10 @@ import Dimension from '../Libs/Dimension';
 
 
 class PaymentScreen extends Component {
+  state = {
+    scale: new Animated.Value(1),
+  };
+
   constructor(props) {
     super(props);
     this.cardInput = this._cardInput.bind(this);
@@ -21,10 +25,12 @@ class PaymentScreen extends Component {
       <Animated.View style = {{
         flex: 1,
         width: Dimension.width,
+        transform: [
+          { scale: this.state.scale },
+        ],
       }}>
         <CreditCardInput
-          allowScroll = { true }
-          cardScale = { 0.8 }
+          cardScale = { 0.9 }
           labelStyle = {{
             fontWeight: '500',
             fontSize: 12,

@@ -11,26 +11,30 @@ const borderBottomColor = '#ABB8C7';
 const leftIconColor = '#3FA6D1';
 
 export default class extends Component {
-  translateXs = [];
-
   constructor(props) {
     super(props);
-    this.state = {
+    this.animation = {
+      translateXs: [],
       translateX: new Animated.Value(0),
-    }
+      scale: new Animated.Value(1),
+      paymentTranslateY: new Animated.Value(200),
+      paymentOpacity: new Animated.Value(0),
+      vehicleTranslateY: new Animated.Value(200),
+      vehicleOpacity: new Animated.Value(0),
+    };
   }
 
   show() {
     let animations = [
-      Animated.timing(this.state.translateX, {
+      Animated.timing(this.animation.translateX, {
         toValue: 0 - Dimension.width,
         duration: 500,
         easing: Easing.out(Easing.cubic)
       })
     ];
 
-    animations = animations.concat(this.translateXs.map((translateX, i) => {
-      return Animated.timing(this.translateXs[i], {
+    animations = animations.concat(this.animation.translateXs.map((translateX, i) => {
+      return Animated.timing(this.animation.translateXs[i], {
         toValue: 0,
         duration: 500,
         easing: Easing.out(Easing.cubic),
@@ -42,8 +46,8 @@ export default class extends Component {
   }
 
   hide() {
-    let animations = this.translateXs.map((translateX, i) => {
-      return Animated.timing(this.translateXs[i], {
+    let animations = this.animation.translateXs.map((translateX, i) => {
+      return Animated.timing(this.animation.translateXs[i], {
         toValue: Dimension.width,
         duration: 500,
         easing: Easing.out(Easing.cubic),
@@ -51,39 +55,84 @@ export default class extends Component {
       });
     });
     animations = animations.concat(
-      Animated.timing(this.state.translateX, {
+      Animated.timing(this.animation.translateX, {
         toValue: Dimension.width,
         duration: 500,
         easing: Easing.out(Easing.cubic),
-        delay: this.translateXs.length * 100,
+        delay: this.animation.translateXs.length * 100,
       })
     );
     Animated.parallel(animations).start();
   }
 
+  _showChild(child) {
+    Animated.parallel([
+      Animated.spring(this.animation.scale, {
+        toValue: 0.9,
+        tension: 40,
+        friction: 2,
+      }),
+      Animated.timing(this.animation[`${child}Opacity`], {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.spring(this.animation[`${child}TranslateY`], {
+        toValue: 0,
+        tension: 40,
+        friction: 5,
+      }),
+    ]).start();
+  }
+
+  _hideChild(child) {
+    Animated.parallel([
+      this.animation.scale.Animated.spring(this.animation.scale, {
+        toValue: 0.9,
+        tension: 40,
+        friction: 2,
+      }),
+      Animated.timing(this.animation[`${child}Opacity`], {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.spring(this.animation[`${child}TranslateY`], {
+        toValue: 0,
+        tension: 40,
+        friction: 5,
+      }),
+    ]).start();
+  }
+
+  showChild(child) {
+    return this._showChild.bind(this, child);
+  }
+
   rightIcon() {
-    return {
-      type: 'material-community',
-      name: 'pencil',
-      color: '#3FA6D1',
-      style: {
-        fontSize: 15,
-        marginRight: 10,
-        marginTop: 15,
-      }
-    };
+    return null;
+    // return {
+    //   type: 'material-community',
+    //   name: 'pencil',
+    //   color: '#3FA6D1',
+    //   style: {
+    //     fontSize: 15,
+    //     marginRight: 10,
+    //     marginTop: 15,
+    //   }
+    // };
   }
 
   location() {
-    let i = this.translateXs.length;
-    this.translateXs.push(new Animated.Value(Dimension.width));
+    let i = this.animation.translateXs.length;
+    this.animation.translateXs.push(new Animated.Value(Dimension.width));
 
     return (
       <Animated.View
         style = {{
           marginBottom: 5,
           transform: [
-            { translateX: this.translateXs[i] },
+            { translateX: this.animation.translateXs[i] },
           ],
         }}
       >
@@ -118,15 +167,15 @@ export default class extends Component {
   }
 
   service() {
-    let i = this.translateXs.length;
-    this.translateXs.push(new Animated.Value(Dimension.width));
+    let i = this.animation.translateXs.length;
+    this.animation.translateXs.push(new Animated.Value(Dimension.width));
 
     return (
       <Animated.View
         style = {{
           marginBottom: 5,
           transform: [
-            { translateX: this.translateXs[i] },
+            { translateX: this.animation.translateXs[i] },
           ],
         }}
       >
@@ -161,15 +210,15 @@ export default class extends Component {
   }
 
   schedule() {
-    let i = this.translateXs.length;
-    this.translateXs.push(new Animated.Value(Dimension.width));
+    let i = this.animation.translateXs.length;
+    this.animation.translateXs.push(new Animated.Value(Dimension.width));
 
     return (
       <Animated.View
         style = {{
           marginBottom: 5,
           transform: [
-            { translateX: this.translateXs[i] },
+            { translateX: this.animation.translateXs[i] },
           ],
         }}
       >
@@ -204,8 +253,8 @@ export default class extends Component {
   }
 
   paymentViechle() {
-    let i = this.translateXs.length;
-    this.translateXs.push(new Animated.Value(Dimension.width));
+    let i = this.animation.translateXs.length;
+    this.animation.translateXs.push(new Animated.Value(Dimension.width));
 
     return (
       <Animated.View
@@ -213,11 +262,12 @@ export default class extends Component {
           flexDirection: 'row',
           marginBottom: 5,
           transform: [
-            { translateX: this.translateXs[i] },
+            { translateX: this.animation.translateXs[i] },
           ],
         }}
       >
         <Label
+          onLongPress = { this.showChild('payment') }
           title = 'Payment'
           value = '5860'
           titleStyle = {{
@@ -247,6 +297,7 @@ export default class extends Component {
           }}
         />
         <Label
+          onLongPress = { this.showChild('vehicle') }
           title = 'Viehcle'
           value = 'Y96EUV'
           titleStyle = {{
@@ -280,14 +331,14 @@ export default class extends Component {
   }
 
   estimatedTime() {
-    let i = this.translateXs.length;
-    this.translateXs.push(new Animated.Value(Dimension.width));
+    let i = this.animation.translateXs.length;
+    this.animation.translateXs.push(new Animated.Value(Dimension.width));
 
     return (
       <Animated.View
         style = {{
           transform: [
-            { translateX: this.translateXs[i] },
+            { translateX: this.animation.translateXs[i] },
           ],
         }}
       >
@@ -321,26 +372,78 @@ export default class extends Component {
     );
   }
 
+  payment() {
+    return (
+      <Animated.View style = {{
+        flex: 1,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        position: 'absolute',
+        borderWidth: 1,
+        borderColor: 'red',
+        opacity: this.animation.paymentOpacity,
+        transform: [
+          { translateY: this.animation.paymentTranslateY },
+        ],
+      }}>
+        <Text>New Payment</Text>
+      </Animated.View>
+    );
+  }
+
+  vehicle() {
+    return (
+      <Animated.View style = {{
+        flex: 1,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        position: 'absolute',
+        borderWidth: 1,
+        borderColor: 'red',
+        opacity: this.animation.vehicleOpacity,
+        transform: [
+          { translateY: this.animation.vehicleTranslateY },
+        ],
+      }}>
+        <Text>New Vehicle</Text>
+      </Animated.View>
+    );
+  }
+
   placeOrder() {
-    let i = this.translateXs.length;
-    this.translateXs.push(new Animated.Value(Dimension.width));
+    let i = this.animation.translateXs.length;
+    this.animation.translateXs.push(new Animated.Value(Dimension.width));
 
     return (
-      <Animated.View
-        style = {{
-          flex: 1,
-          marginBottom: 30,
-          justifyContent: 'flex-end',
-          transform: [
-            { translateX: this.translateXs[i] }
-          ],
-        }}
-      >
-        <Button
-          title = 'Place Order'
-          backgroundColor = '#3FA6D1'
-          onPress = { () => { this.props.onBack(); } }
-        />
+      <Animated.View style = {{
+        flex: 1,
+        position: 'relative',
+      }}>
+        <Animated.View
+          style = {{
+            flex: 1,
+            marginBottom: 20,
+            justifyContent: 'flex-end',
+            transform: [
+              { translateX: this.animation.translateXs[i] },
+            ],
+          }}
+        >
+          <Button
+            title = 'Place Order'
+            backgroundColor = '#3FA6D1'
+            onPress = { () => { this.props.onBack(); } }
+            style = {{
+              position: 'relative'
+            }}
+          />
+        </Animated.View>
+        { this.payment() }
+        { this.vehicle() }
       </Animated.View>
     );
   }
@@ -351,14 +454,22 @@ export default class extends Component {
         flex: 1,
         width: Dimension.width,
         transform: [
-          { translateX: this.state.translateX },
+          { translateX: this.animation.translateX },
         ],
       }}>
-        { this.location() }
-        { this.service() }
-        { this.schedule() }
-        { this.paymentViechle() }
-        { this.estimatedTime() }
+        <Animated.View style = {{
+          borderWidth: 1,
+          borderColor: 'red',
+          transform: [
+            { scale: this.animation.scale },
+          ]
+        }}>
+          { this.location() }
+          { this.service() }
+          { this.schedule() }
+          { this.paymentViechle() }
+          { this.estimatedTime() }
+        </Animated.View>
         { this.placeOrder() }
       </Animated.View>
     );

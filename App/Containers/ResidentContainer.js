@@ -60,7 +60,6 @@ export default class extends Component {
           showsHorizontalScrollIndicator = { false }
           scrollEnabled = { false }
         >
-          <PaymentScreen />
           <ServiceScreen
             ref = { (s) => { this.service = s; } }
             services = { [] }

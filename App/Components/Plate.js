@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, Text, Platform } from 'react-native';
 
 import PlateBgs from '../Libs/PlateBg';
+import eGobie from '../Styles/Egobie';
 
 
 class Plate extends Component {
@@ -16,7 +17,7 @@ class Plate extends Component {
     left: 0,
     right: 0,
     textShadowRadius: 1,
-    textShadowColor: 'white',
+    textShadowColor: eGobie.EGOBIE_WHITE,
     textShadowOffset: {
       width: 1,
       height: 1

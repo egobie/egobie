@@ -4,4 +4,6 @@ export default {
   EGOBIE_WHITE: '#F6F6F6',
   EGOBIE_GREY: '#ABB8C7',
   EGOBIE_GREEN: '#4AAE4F',
+  EGOBIE_RED: '#E04329',
+  EGOBIE_SHADOW: '#333',
 }

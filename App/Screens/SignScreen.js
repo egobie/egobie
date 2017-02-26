@@ -112,7 +112,7 @@ class SignScreen extends Component {
               onPress = { this.hide }
               type = { 'material-community' }
               name = { 'close' }
-              color = { '#E04329' }
+              color = { eGobie.EGOBIE_RED }
             />
           </View>
           <View style = {{
@@ -292,14 +292,14 @@ class SignScreen extends Component {
   render() {
     return (
       <Modal
-        transparent = { true }
+        transparent
         visible = { this.state.visible }
       >
         <Animated.View style = {{
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#333',
+          backgroundColor: eGobie.EGOBIE_SHADOW,
         }}>
           <Animated.View style = {{
             height: Dimension.height * 0.75,

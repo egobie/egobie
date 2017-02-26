@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, Easing } from 'react-native';
+import { Modal, View, Text, Animated, Easing } from 'react-native';
 
 import { Button, Icon, SocialIcon } from 'react-native-elements';
 import { Kohana, Fumi } from 'react-native-textinput-effects';
@@ -12,7 +12,8 @@ import BoxShadow from '../Styles/BoxShadow';
 
 class SignScreen extends Component {
   state = {
-    flip: false
+    flip: false,
+    visible: false,
   };
   defaultWidth = 260;
   inputDefaultProps = {
@@ -71,6 +72,7 @@ class SignScreen extends Component {
   }
 
   _show() {
+    this.setState({ visible: true });
     Animated.spring(this.animation.scale, {
       toValue: 1,
       friction: 4,
@@ -79,14 +81,11 @@ class SignScreen extends Component {
   }
 
   _hide() {
+    this.setState({ visible: false });
     Animated.timing(this.animation.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
     }).start();
-  }
-
-  componentDidMount() {
-    this.show();
   }
 
   signIn() {
@@ -291,38 +290,43 @@ class SignScreen extends Component {
 
   render() {
     return (
-      <Animated.View style = {{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#333',
-      }}>
+      <Modal
+        transparent = { true }
+        visible = { this.state.visible }
+      >
         <Animated.View style = {{
-          height: Dimension.height * 0.75,
+          flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          transform: [
-            { scale: this.animation.scale },
-          ],
+          backgroundColor: '#333',
         }}>
-          <FlipCard
-            flip = { this.state.flip }
-            friction = { 15 }
-            perspective = { 2000 }
-            flipHorizontal = { true }
-            flipVertical = { false }
-            clickable = { false }
-            alignWidth = { true }
-            alignHeight = { true }
-            style = {{
-              borderWidth: 0,
-            }}
-          >
-            { this.signIn() }
-            { this.signUp() }
-          </FlipCard>
+          <Animated.View style = {{
+            height: Dimension.height * 0.75,
+            alignItems: 'center',
+            justifyContent: 'center',
+            transform: [
+              { scale: this.animation.scale },
+            ],
+          }}>
+            <FlipCard
+              flip = { this.state.flip }
+              friction = { 15 }
+              perspective = { 2000 }
+              flipHorizontal = { true }
+              flipVertical = { false }
+              clickable = { false }
+              alignWidth = { true }
+              alignHeight = { true }
+              style = {{
+                borderWidth: 0,
+              }}
+            >
+              { this.signIn() }
+              { this.signUp() }
+            </FlipCard>
+          </Animated.View>
         </Animated.View>
-      </Animated.View>
+      </Modal>
     );
   }
 };

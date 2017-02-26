@@ -37,7 +37,7 @@ class PaymentScreen extends Component {
           }}
           inputContainerStyle = {{
             borderBottomWidth: 1,
-            borderBottomColor: '#ABB8C7',
+            borderBottomColor: eGobie.EGOBIE_GREY,
           }}
           inputStyle = {{
             lineHeight: 30,

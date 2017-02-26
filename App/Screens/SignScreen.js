@@ -74,19 +74,30 @@ class SignScreen extends Component {
 
   _show() {
     this.setState({ visible: true });
-    Animated.spring(this.animation.scale, {
-      toValue: 1,
-      friction: 4,
-      tension: 40,
-    }).start();
+    setTimeout(() => {
+      Animated.spring(this.animation.scale, {
+        toValue: 1,
+        friction: 4,
+        tension: 40,
+      }).start();
+    }, 100);
   }
 
   _hide() {
-    this.setState({ visible: false });
     Animated.timing(this.animation.scale, {
       toValue: 0,
+      duration: 250,
       easing: Easing.out(Easing.cubic),
-    }).start();
+    }).start(() => {
+      this._resetState();
+    });
+  }
+
+  _resetState() {
+    this.setState({
+      flip: false,
+      visible: false,
+    });
   }
 
   signIn() {

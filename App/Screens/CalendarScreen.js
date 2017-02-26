@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Modal, Animated, Easing } from 'react-native';
+import {
+  View, ScrollView, TouchableWithoutFeedback,
+  Modal, Animated, Easing,
+} from 'react-native';
 
 import Calendar from 'react-native-calendar';
 import { CheckBox, Icon } from 'react-native-elements';
@@ -79,7 +82,7 @@ const dayHeadings = [
 class CalendarScreen extends Component {
 
   state = {
-    visible: true,
+    visible: false,
     selectedDate: null,
   };
   animation = {
@@ -112,11 +115,13 @@ class CalendarScreen extends Component {
 
   _show() {
     this.setState({ visible: true });
-    Animated.spring(this.animation.scale, {
-      toValue: 0.95,
-      friction: 2,
-      tension: 30,
-    }).start();
+    setTimeout(() => {
+      Animated.spring(this.animation.scale, {
+        toValue: 0.95,
+        friction: 4,
+        tension: 40,
+      }).start();
+    }, 100);
   }
 
   _hide() {
@@ -129,12 +134,16 @@ class CalendarScreen extends Component {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-    ]).start();
-    this.setState({ visible: false });
+    ]).start(() => {
+      this._resetState();
+    });
   }
 
-  componentDidMount() {
-    this.show();
+  _resetState() {
+    this.setState({
+      visible: false,
+      selectedDate: null,
+    });
   }
 
   openingDays() {
@@ -191,14 +200,15 @@ class CalendarScreen extends Component {
               { scale: this.animation.scale },
             ],
           }}>
-            <View>
-              <Icon
-                onPress = { this.hide }
-                type = { 'material-community' }
-                name = { 'close' }
-                color = { eGobie.EGOBIE_RED }
-              />
-            </View>
+            <TouchableWithoutFeedback onPress = { this.hide }>
+              <View>
+                <Icon
+                  type = { 'material-community' }
+                  name = { 'close' }
+                  color = { eGobie.EGOBIE_RED }
+                />
+              </View>
+            </TouchableWithoutFeedback>
             <Calendar
               scrollEnabled
               showControls

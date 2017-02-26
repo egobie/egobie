@@ -9,12 +9,12 @@ import eGobie from '../Styles/Egobie';
 
 
 const routes = {
-  // Resident: {
-  //   screen: ResidentContainer,
-  // },
-  // Business: {
-  //   screen: BusinessContainer,
-  // },
+  Resident: {
+    screen: ResidentContainer,
+  },
+  Business: {
+    screen: BusinessContainer,
+  },
   More: {
     screen: MoreContainer,
   },

@@ -28,10 +28,10 @@ export default class extends Component {
           currentStepIndicatorSize: 20,
 
           separatorUnFinishedColor: eGobie.EGOBIE_GREY,
-          separatorFinishedColor: egobie.EGOBIE_GREEN,
+          separatorFinishedColor: eGobie.EGOBIE_GREEN,
 
           stepIndicatorUnFinishedColor: eGobie.EGOBIE_GREY,
-          stepIndicatorFinishedColor: egobie.EGOBIE_GREEN,
+          stepIndicatorFinishedColor: eGobie.EGOBIE_GREEN,
           stepStrokeCurrentColor: eGobie.EGOBIE_BLUE,
 
           stepIndicatorLabelFontSize: 8,

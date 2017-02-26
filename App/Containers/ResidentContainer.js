@@ -8,6 +8,8 @@ import Steps from '../Components/Steps';
 import ServiceScreen from '../Screens/ServiceScreen';
 import PaymentScreen from '../Screens/PaymentScreen'
 import OrderScreen from '../Screens/OrderScreen';
+import SignScreen from '../Screens/SignScreen';
+import CalendarScreen from '../Screens/CalendarScreen';
 
 
 export default class extends Component {
@@ -39,9 +41,10 @@ export default class extends Component {
   view;
 
   _selectService() {
+    this.refs.calendar.show();
     // this.scrollBy(1);
-    this.service.hide();
-    this.order.show();
+    // this.service.hide();
+    // this.order.show();
   }
 
   _goBack() {
@@ -69,6 +72,8 @@ export default class extends Component {
             ref = { (o) => { this.order = o; } }
             onBack = { this.goBack }
           />
+          <SignScreen ref = { 'sign' }/>
+          <CalendarScreen ref = { 'calendar' }/>
         </ScrollView>
       </View>
     );

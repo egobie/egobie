@@ -4,6 +4,8 @@ import { View, Text } from 'react-native';
 import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import SignScreen from '../Screens/SignScreen';
+
 
 export default class extends Component {
   static navigationOptions = {
@@ -19,8 +21,10 @@ export default class extends Component {
 
   render() {
     return (
-      <View>
-        <Text>BusinessContainer</Text>
+      <View style = {{
+        flex: 1,
+      }}>
+        <SignScreen />
       </View>
     );
   }

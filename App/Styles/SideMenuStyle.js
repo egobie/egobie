@@ -1,6 +1,5 @@
 import { StyleSheet, Image } from 'react-native';
 
-
 export default StyleSheet.create({
   menuBg: {
     position: 'absolute',

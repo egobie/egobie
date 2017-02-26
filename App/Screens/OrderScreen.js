@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, Easing } from 'react-native';
+import { View, Text, Modal, Animated, Easing } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
 import { Button, Icon } from 'react-native-elements';
@@ -9,6 +9,7 @@ import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
 import Label from '../Components/Label';
 import Dimension from '../Libs/Dimension';
+
 
 const borderBottomColor = '#ABB8C7';
 const leftIconColor = '#3FA6D1';
@@ -561,7 +562,7 @@ export default class extends Component {
           <Button
             title = 'Place Order'
             backgroundColor = '#3FA6D1'
-            onPress = { () => { this.props.onBack(); } }
+            onPress = { () => { this.props.onBack() } }
             style = {{
               position: 'relative'
             }}

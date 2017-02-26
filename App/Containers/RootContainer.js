@@ -7,9 +7,9 @@ import BusinessContainer from './BusinessContainer';
 import MoreContainer from './MoreContainer';
 
 const routes = {
-  // Resident: {
-  //   screen: ResidentContainer,
-  // },
+  Resident: {
+    screen: ResidentContainer,
+  },
   Business: {
     screen: BusinessContainer,
   },

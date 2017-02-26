@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Animated } from 'react-native';
+import { View, Text, Animated, Easing } from 'react-native';
 
 import { Button, Icon, SocialIcon } from 'react-native-elements';
 import { Kohana, Fumi } from 'react-native-textinput-effects';
@@ -54,6 +54,8 @@ class SignScreen extends Component {
     super(props);
     this.goToSignIn = this._goToSignIn.bind(this);
     this.goToSignUp = this._goToSignUp.bind(this);
+    this.show = this._show.bind(this);
+    this.hide = this._hide.bind(this);
   }
 
   _goToSignUp() {
@@ -68,7 +70,7 @@ class SignScreen extends Component {
     });
   }
 
-  componentDidMount() {
+  _show() {
     Animated.spring(this.animation.scale, {
       toValue: 1,
       friction: 4,
@@ -76,15 +78,23 @@ class SignScreen extends Component {
     }).start();
   }
 
+  _hide() {
+    Animated.timing(this.animation.scale, {
+      toValue: 0,
+      easing: Easing.out(Easing.cubic),
+    }).start();
+  }
+
+  componentDidMount() {
+    this.show();
+  }
+
   signIn() {
     return (
-      <Animated.View style = {{
+      <View style = {{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        transform: [
-          { scale: this.animation.scale },
-        ],
       }}>
         <View style = {{
           justifyContent: 'center',
@@ -99,6 +109,7 @@ class SignScreen extends Component {
             alignItems: 'flex-end',
           }}>
             <Icon
+              onPress = { this.hide }
               type = { 'material-community' }
               name = { 'close' }
               color = { '#E04329' }
@@ -186,13 +197,13 @@ class SignScreen extends Component {
             </View>
           </View>
         </View>
-      </Animated.View>
+      </View>
     );
   }
 
   signUp() {
     return (
-      <Animated.View style = {{
+      <View style = {{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -232,6 +243,7 @@ class SignScreen extends Component {
                 type = { 'material-community' }
                 name = { 'close' }
                 color = { '#E04329' }
+                onPress = { this.hide }
               />
             </View>
           </View>
@@ -273,22 +285,25 @@ class SignScreen extends Component {
             }}
           />
         </View>
-      </Animated.View>
+      </View>
     );
   }
 
   render() {
     return (
-      <View style = {{
+      <Animated.View style = {{
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#333',
       }}>
-        <View style = {{
+        <Animated.View style = {{
           height: Dimension.height * 0.75,
           alignItems: 'center',
           justifyContent: 'center',
+          transform: [
+            { scale: this.animation.scale },
+          ],
         }}>
           <FlipCard
             flip = { this.state.flip }
@@ -299,12 +314,15 @@ class SignScreen extends Component {
             clickable = { false }
             alignWidth = { true }
             alignHeight = { true }
+            style = {{
+              borderWidth: 0,
+            }}
           >
             { this.signIn() }
             { this.signUp() }
           </FlipCard>
-        </View>
-      </View>
+        </Animated.View>
+      </Animated.View>
     );
   }
 };

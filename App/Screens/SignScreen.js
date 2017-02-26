@@ -4,7 +4,7 @@ import { View, Text, Animated } from 'react-native';
 import { Button, Icon, SocialIcon } from 'react-native-elements';
 import { Kohana, Fumi } from 'react-native-textinput-effects';
 import FlipCard from 'react-native-flip-card'
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';
@@ -16,16 +16,17 @@ class SignScreen extends Component {
   };
   defaultWidth = 260;
   inputDefaultProps = {
-    iconClass: FontAwesomeIcon,
+    iconClass: MaterialCommunityIcon,
     iconColor: '#3FA6D1',
     labelStyle: {
       fontSize: 14,
+      marginLeft: 5,
       fontWeight: '400',
     },
     inputStyle: {
       fontSize: 14,
       fontWeight: '400',
-      color: '#3FA6D1',
+      color: '#484E56',
     },
     style: {
       borderBottomColor: '#ABB8C7',
@@ -70,7 +71,7 @@ class SignScreen extends Component {
   componentDidMount() {
     Animated.spring(this.animation.scale, {
       toValue: 1,
-      friction: 5,
+      friction: 4,
       tension: 40,
     }).start();
   }
@@ -110,7 +111,7 @@ class SignScreen extends Component {
           }}>
             <Kohana
               label = { 'Username' }
-              iconName = { 'user' }
+              iconName = { 'account' }
               { ...this.inputDefaultProps }
             />
             <Kohana
@@ -134,7 +135,7 @@ class SignScreen extends Component {
             flexDirection: 'row',
             width: this.defaultWidth,
             height: 30,
-            marginBottom: 10,
+            marginBottom: 15,
           }}>
             <Text style = {{
               flex: 3,
@@ -167,10 +168,11 @@ class SignScreen extends Component {
             <Text style = {{
               flex: 2,
               fontSize: 12,
+              fontWeight: '500',
               lineHeight: 50,
               color: '#ABB8C7',
             }}>
-              Sign In With
+              or Sign In With
             </Text>
             <View style = {{
               flex: 4,
@@ -192,20 +194,85 @@ class SignScreen extends Component {
     return (
       <Animated.View style = {{
         flex: 1,
-        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}>
-        <Kohana
-          label = { 'Username' }
-          iconName = { 'user' }
-          { ...this.inputDefaultProps }
-        />
-        <Kohana
-          secureTextEntry
-          label = { 'Password' }
-          iconName = { 'lock' }
-          { ...this.inputDefaultProps }
-        />
-        <Button onPress = { this.goToSignIn } />
+        <View style = {{
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#F6F6F6',
+          ...BoxShadow,
+        }}>
+          <View style = {{
+            flexDirection: 'row',
+            width: this.defaultWidth,
+            height: 30,
+            marginTop: 15,
+          }}>
+            <View style = {{
+              flex: 1,
+              alignItems: 'flex-start',
+            }}>
+              <Text
+                onPress = { this.goToSignIn }
+                style = {{
+                  color: '#3FA6D1',
+                  lineHeight: 30,
+                  fontSize: 14,
+                }}
+              >
+                Sign In
+              </Text>
+            </View>
+            <View style = {{
+              flex: 1,
+              alignItems: 'flex-end',
+            }}>
+              <Icon
+                type = { 'material-community' }
+                name = { 'close' }
+                color = { '#E04329' }
+              />
+            </View>
+          </View>
+          <View style = {{
+            height: 200,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <Kohana
+              label = { 'Username' }
+              iconName = { 'account' }
+              { ...this.inputDefaultProps }
+            />
+            <Kohana
+              secureTextEntry
+              label = { 'Password' }
+              { ...this.inputDefaultProps }
+              iconName = { 'key-variant' }
+            />
+            <Kohana
+              secureTextEntry
+              label = { 'Confirm Password' }
+              iconName = { 'lock' }
+              { ...this.inputDefaultProps }
+            />
+            <Kohana
+              label = { 'Email' }
+              { ...this.inputDefaultProps }
+              iconName = { 'email' }
+            />
+          </View>
+          <Button
+            title = 'CREATE NEW ACCOUNT'
+            backgroundColor = '#3FA6D1'
+            buttonStyle = {{
+              width: this.defaultWidth,
+              marginBottom: 10,
+              ...BoxShadow,
+            }}
+          />
+        </View>
       </Animated.View>
     );
   }
@@ -231,6 +298,7 @@ class SignScreen extends Component {
             flipVertical = { false }
             clickable = { false }
             alignWidth = { true }
+            alignHeight = { true }
           >
             { this.signIn() }
             { this.signUp() }

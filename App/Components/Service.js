@@ -3,6 +3,9 @@ import { View, Text, Dimensions, Animated, StyleSheet, Easing, TouchableWithoutF
 
 import { ListItem } from 'react-native-elements';
 
+import eGobie from '../Styles/Egobie';
+
+
 class Service extends Component {
   dimension = Dimensions.get('window');
 
@@ -59,17 +62,17 @@ class Service extends Component {
             hideChevron
             title = { this.props.title }
             titleStyle = {{
-              color: '#484E56',
+              color: eGobie.EGOBIE_BLACK,
               fontWeight: '600',
             }}
             subtitle = { `Estimated Time: ${this.props.time}min` }
             subtitleStyle = {{
-              color: '#484E56',
+              color: eGobie.EGOBIE_BLACK,
               fontWeight: '300',
             }}
             rightTitle = { `$${this.props.price}` }
             rightTitleStyle = {{
-              color: '#484E56',
+              color: eGobie.EGOBIE_BLACK,
               fontWeight: '600',
             }}
             leftIcon = { this.serviceIcon(this.props.type) }
@@ -79,7 +82,7 @@ class Service extends Component {
               marginRight: 10,
               justifyContent: 'center',
               borderBottomWidth: 0.5,
-              borderBottomColor: '#ABB8C7',
+              borderBottomColor: eGobie.EGOBIE_GREY,
             }}
           />
         </Animated.View>

@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import I18n from 'react-native-i18n';
 
 import StepIndicator from '../Libs/StepIndicator';
+import eGobie from '../Styles/Egobie';
 
 
 const labels = [
@@ -26,22 +27,22 @@ export default class extends Component {
           stepIndicatorSize: 15,
           currentStepIndicatorSize: 20,
 
-          separatorUnFinishedColor: '#ABB8C7',
-          separatorFinishedColor: '#4AAE4F',
+          separatorUnFinishedColor: eGobie.EGOBIE_GREY,
+          separatorFinishedColor: egobie.EGOBIE_GREEN,
 
-          stepIndicatorUnFinishedColor: '#ABB8C7',
-          stepIndicatorFinishedColor: '#4AAE4F',
-          stepStrokeCurrentColor: '#3FA6D1',
+          stepIndicatorUnFinishedColor: eGobie.EGOBIE_GREY,
+          stepIndicatorFinishedColor: egobie.EGOBIE_GREEN,
+          stepStrokeCurrentColor: eGobie.EGOBIE_BLUE,
 
           stepIndicatorLabelFontSize: 8,
-          stepIndicatorLabelFinishedColor: '#F6F6F6',
-          stepIndicatorLabelCurrentColor: '#F6F6F6',
+          stepIndicatorLabelFinishedColor: eGobie.EGOBIE_WHITE,
+          stepIndicatorLabelCurrentColor: eGobie.EGOBIE_WHITE,
           currentStepIndicatorLabelFontSize: 10,
-          stepIndicatorCurrentColor: '#3FA6D1',
+          stepIndicatorCurrentColor: eGobie.EGOBIE_BLUE,
 
           labelSize: 8,
-          labelColor: '#484E56',
-          currentStepLabelColor: '#3FA6D1',
+          labelColor: eGobie.EGOBIE_BLACK,
+          currentStepLabelColor: eGobie.EGOBIE_BLUE,
         }}
         style = { this.props.style }
       />

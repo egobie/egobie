@@ -9,10 +9,8 @@ import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
 import Label from '../Components/Label';
 import Dimension from '../Libs/Dimension';
+import eGobie from '../Styles/Egobie';
 
-
-const borderBottomColor = '#ABB8C7';
-const leftIconColor = '#3FA6D1';
 
 export default class extends Component {
   showedChild = '';
@@ -162,7 +160,7 @@ export default class extends Component {
     // return {
     //   type: 'material-community',
     //   name: 'pencil',
-    //   color: '#3FA6D1',
+    //   color: eGobie.EGOBIE_BLUE,
     //   style: {
     //     fontSize: 15,
     //     marginRight: 10,
@@ -188,17 +186,17 @@ export default class extends Component {
           title = 'Location'
           value = '414 Hackensack Avenue, APT 1220'
           titleStyle = {{
-            color: '#ABB8C7',
+            color: eGobie.EGOBIE_GREY,
             fontSize: 12,
           }}
           valueStyle = {{
-            color: '#484E56',
+            color: eGobie.EGOBIE_BLACK,
             fontSize: 12,
           }}
           leftIcon = {{
             type: 'material-community',
             name: 'map-marker-radius',
-            color: leftIconColor,
+            color: eGobie.EGOBIE_BLUE,
           }}
           rightIcon = { this.rightIcon() }
           style = {{
@@ -207,7 +205,7 @@ export default class extends Component {
             paddingTop: 5,
             paddingBottom: 5,
             borderBottomWidth: 1,
-            borderBottomColor: borderBottomColor,
+            borderBottomColor: eGobie.EGOBIE_GREY,
           }}
         />
       </Animated.View>
@@ -231,17 +229,17 @@ export default class extends Component {
           title = 'Service'
           value = 'Premium'
           titleStyle = {{
-            color: '#ABB8C7',
+            color: eGobie.EGOBIE_GREY,
             fontSize: 12,
           }}
           valueStyle = {{
-            color: '#484E56',
+            color: eGobie.EGOBIE_BLACK,
             fontSize: 12,
           }}
           leftIcon = {{
             type: 'material-community',
             name: 'car-wash',
-            color: leftIconColor,
+            color: eGobie.EGOBIE_BLUE,
           }}
           rightIcon = { this.rightIcon() }
           style = {{
@@ -250,7 +248,7 @@ export default class extends Component {
             marginLeft: 15,
             marginRight: 15,
             borderBottomWidth: 1,
-            borderBottomColor: borderBottomColor,
+            borderBottomColor: eGobie.EGOBIE_GREY,
           }}
         />
       </Animated.View>
@@ -274,17 +272,17 @@ export default class extends Component {
           title = 'Schedule'
           value = '08/20/2016 09:00 A.M.'
           titleStyle = {{
-            color: '#ABB8C7',
+            color: eGobie.EGOBIE_GREY,
             fontSize: 12,
           }}
           valueStyle = {{
-            color: '#484E56',
+            color: eGobie.EGOBIE_BLACK,
             fontSize: 12,
           }}
           leftIcon = {{
             type: 'material-community',
             name: 'calendar-check',
-            color: leftIconColor,
+            color: eGobie.EGOBIE_BLUE,
           }}
           rightIcon = { this.rightIcon() }
           style = {{
@@ -293,7 +291,7 @@ export default class extends Component {
             paddingTop: 5,
             paddingBottom: 5,
             borderBottomWidth: 1,
-            borderBottomColor: borderBottomColor,
+            borderBottomColor: eGobie.EGOBIE_GREY,
           }}
         />
       </Animated.View>
@@ -319,17 +317,17 @@ export default class extends Component {
           title = 'Payment'
           value = '5860'
           titleStyle = {{
-            color: '#ABB8C7',
+            color: eGobie.EGOBIE_GREY,
             fontSize: 12,
           }}
           valueStyle = {{
-            color: '#484E56',
+            color: eGobie.EGOBIE_BLACK,
             fontSize: 12,
           }}
           leftIcon = {{
             type: 'font-awesome',
             name: 'cc-visa',
-            color: leftIconColor,
+            color: eGobie.EGOBIE_BLUE,
             style: {
               fontSize: 18,
             }
@@ -340,7 +338,7 @@ export default class extends Component {
             paddingTop: 5,
             paddingBottom: 5,
             borderBottomWidth: 1,
-            borderBottomColor: borderBottomColor,
+            borderBottomColor: eGobie.EGOBIE_GREY,
             flex: 1,
           }}
         />
@@ -349,17 +347,17 @@ export default class extends Component {
           title = 'Viehcle'
           value = 'Y96EUV'
           titleStyle = {{
-            color: '#ABB8C7',
+            color: eGobie.EGOBIE_GREY,
             fontSize: 12,
           }}
           valueStyle = {{
-            color: '#484E56',
+            color: eGobie.EGOBIE_BLACK,
             fontSize: 12,
           }}
           leftIcon = {{
             type: 'font-awesome',
             name: 'car',
-            color: leftIconColor,
+            color: eGobie.EGOBIE_BLUE,
             style: {
               fontSize: 18,
             }
@@ -370,7 +368,7 @@ export default class extends Component {
             paddingTop: 5,
             paddingBottom: 5,
             borderBottomWidth: 1,
-            borderBottomColor: borderBottomColor,
+            borderBottomColor: eGobie.EGOBIE_GREY,
             flex: 1,
           }}
         />
@@ -394,17 +392,17 @@ export default class extends Component {
           title = 'Estimated Time'
           value = '1 hour 30 mins'
           titleStyle = {{
-            color: '#ABB8C7',
+            color: eGobie.EGOBIE_GREY,
             fontSize: 12,
           }}
           valueStyle = {{
-            color: '#484E56',
+            color: eGobie.EGOBIE_BLACK,
             fontSize: 12,
           }}
           leftIcon = {{
             type: 'material-community',
             name: 'av-timer',
-            color: leftIconColor,
+            color: eGobie.EGOBIE_BLUE,
           }}
           rightIcon = { this.rightIcon() }
           style = {{
@@ -413,7 +411,7 @@ export default class extends Component {
             paddingTop: 5,
             paddingBottom: 5,
             borderBottomWidth: 1,
-            borderBottomColor: borderBottomColor,
+            borderBottomColor: eGobie.EGOBIE_GREY,
           }}
         />
       </Animated.View>
@@ -447,7 +445,7 @@ export default class extends Component {
         right: 0,
         bottom: 0,
         position: 'absolute',
-        backgroundColor: '#F6F6F6',
+        backgroundColor: eGobie.EGOBIE_WHITE,
         opacity: this.animation.paymentOpacity,
         transform: [
           { translateY: this.animation.paymentTranslateY },
@@ -468,7 +466,7 @@ export default class extends Component {
         </Carousel>
         <Icon
           name = 'close'
-          color = '#3FA6D1'
+          color = { eGobie.EGOBIE_BLUE }
           size = { 20 }
           onPress = { this.hideChild('payment') }
           containerStyle = {{
@@ -504,7 +502,7 @@ export default class extends Component {
         right: 0,
         bottom: 0,
         position: 'absolute',
-        backgroundColor: '#F6F6F6',
+        backgroundColor: eGobie.EGOBIE_WHITE,
         opacity: this.animation.vehicleOpacity,
         transform: [
           { translateY: this.animation.vehicleTranslateY },
@@ -525,7 +523,7 @@ export default class extends Component {
         </Carousel>
         <Icon
           name = 'close'
-          color = '#3FA6D1'
+          color = { eGobie.EGOBIE_BLUE }
           size = { 20 }
           onPress = { this.hideChild('vehicle') }
           containerStyle = {{
@@ -561,7 +559,7 @@ export default class extends Component {
         >
           <Button
             title = 'Place Order'
-            backgroundColor = '#3FA6D1'
+            backgroundColor = { eGobie.EGOBIE_BLUE }
             onPress = { () => { this.props.onBack() } }
             style = {{
               position: 'relative'

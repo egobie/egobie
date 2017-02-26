@@ -5,14 +5,16 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import ResidentContainer from './ResidentContainer';
 import BusinessContainer from './BusinessContainer';
 import MoreContainer from './MoreContainer';
+import eGobie from '../Styles/Egobie';
+
 
 const routes = {
-  Resident: {
-    screen: ResidentContainer,
-  },
-  Business: {
-    screen: BusinessContainer,
-  },
+  // Resident: {
+  //   screen: ResidentContainer,
+  // },
+  // Business: {
+  //   screen: BusinessContainer,
+  // },
   More: {
     screen: MoreContainer,
   },
@@ -24,13 +26,13 @@ const configs = {
   tabBarOptions: {
     style: {
       borderTopWidth: 0.5,
-      backgroundColor: '#F6F6F6',
+      backgroundColor: eGobie.EGOBIE_WHITE,
     },
     labelStyle: {
       fontSize: 10,
     },
-    activeTintColor: '#3FA6D1',
-    inactiveTintColor: '#484E56', // #ABB8C7
+    activeTintColor: eGobie.EGOBIE_BLUE,
+    inactiveTintColor: eGobie.EGOBIE_BLACK,
   },
 };
 

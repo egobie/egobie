@@ -4,6 +4,7 @@ import { View, Image, Text } from 'react-native';
 import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import CalendarScreen from '../Screens/CalendarScreen';
 import SideMenuStyle from '../Styles/SideMenuStyle';
 
 export default class extends Component {
@@ -106,9 +107,7 @@ export default class extends Component {
   */
   render() {
     return (
-      <View>
-        <Text>Menu</Text>
-      </View>
+      <CalendarScreen />
     );
   }
 };

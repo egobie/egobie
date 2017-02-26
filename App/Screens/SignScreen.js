@@ -8,6 +8,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';
+import eGobie from '../Styles/Egobie';
 
 
 class SignScreen extends Component {
@@ -18,7 +19,7 @@ class SignScreen extends Component {
   defaultWidth = 260;
   inputDefaultProps = {
     iconClass: MaterialCommunityIcon,
-    iconColor: '#3FA6D1',
+    iconColor: eGobie.EGOBIE_BLUE,
     labelStyle: {
       fontSize: 14,
       marginLeft: 5,
@@ -27,13 +28,13 @@ class SignScreen extends Component {
     inputStyle: {
       fontSize: 14,
       fontWeight: '400',
-      color: '#484E56',
+      color: eGobie.EGOBIE_BLACK,
     },
     style: {
-      borderBottomColor: '#ABB8C7',
+      borderBottomColor: eGobie.EGOBIE_GREY,
       borderBottomWidth: 1,
       marginBottom: 10,
-      backgroundColor: '#F6F6F6',
+      backgroundColor: eGobie.EGOBIE_WHITE,
       width: this.defaultWidth,
     },
   };
@@ -98,7 +99,7 @@ class SignScreen extends Component {
         <View style = {{
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#F6F6F6',
+          backgroundColor: eGobie.EGOBIE_WHITE,
           ...BoxShadow,
         }}>
           <View style = {{
@@ -133,7 +134,7 @@ class SignScreen extends Component {
           </View>
           <Button
             title = 'SIGN IN'
-            backgroundColor = '#3FA6D1'
+            backgroundColor = { eGobie.EGOBIE_BLUE }
             buttonStyle = {{
               width: this.defaultWidth,
               marginTop: 10,
@@ -152,7 +153,7 @@ class SignScreen extends Component {
               fontSize: 12,
               lineHeight: 30,
               textAlign: 'left',
-              color: '#3FA6D1',
+              color: eGobie.EGOBIE_BLUE,
             }}>
               Recover your password
             </Text>
@@ -163,7 +164,7 @@ class SignScreen extends Component {
                 textAlign: 'right',
                 fontSize: 12,
                 lineHeight: 30,
-                color: '#3FA6D1',
+                color: eGobie.EGOBIE_BLUE,
               }}
             >
               Sign Up
@@ -180,7 +181,7 @@ class SignScreen extends Component {
               fontSize: 12,
               fontWeight: '500',
               lineHeight: 50,
-              color: '#ABB8C7',
+              color: eGobie.EGOBIE_GREY,
             }}>
               or Sign In With
             </Text>
@@ -210,7 +211,7 @@ class SignScreen extends Component {
         <View style = {{
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#F6F6F6',
+          backgroundColor: eGobie.EGOBIE_WHITE,
           ...BoxShadow,
         }}>
           <View style = {{
@@ -226,7 +227,7 @@ class SignScreen extends Component {
               <Text
                 onPress = { this.goToSignIn }
                 style = {{
-                  color: '#3FA6D1',
+                  color: eGobie.EGOBIE_BLUE,
                   lineHeight: 30,
                   fontSize: 14,
                 }}
@@ -276,7 +277,7 @@ class SignScreen extends Component {
           </View>
           <Button
             title = 'CREATE NEW ACCOUNT'
-            backgroundColor = '#3FA6D1'
+            backgroundColor = { eGobie.EGOBIE_BLUE }
             buttonStyle = {{
               width: this.defaultWidth,
               marginBottom: 10,

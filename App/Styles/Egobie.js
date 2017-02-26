@@ -1,0 +1,7 @@
+export default {
+  EGOBIE_BLACK: '#484E56',
+  EGOBIE_BLUE: '#3FA6D1',
+  EGOBIE_WHITE: '#F6F6F6',
+  EGOBIE_GREY: '#ABB8C7',
+  EGOBIE_GREEN: '#4AAE4F',
+}

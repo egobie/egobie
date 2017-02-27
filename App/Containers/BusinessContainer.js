@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import SignScreen from '../Screens/SignScreen';
+import PaymentScreen from '../Screens/PaymentScreen';
 
 
 export default class extends Component {
@@ -24,7 +24,7 @@ export default class extends Component {
       <View style = {{
         flex: 1,
       }}>
-        <SignScreen />
+        <PaymentScreen />
       </View>
     );
   }

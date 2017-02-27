@@ -9,9 +9,9 @@ import eGobie from '../Styles/Egobie';
 
 
 const routes = {
-  Resident: {
-    screen: ResidentContainer,
-  },
+  // Resident: {
+  //   screen: ResidentContainer,
+  // },
   Business: {
     screen: BusinessContainer,
   },

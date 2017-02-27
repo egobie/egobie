@@ -41,10 +41,11 @@ export default class extends Component {
   view;
 
   _selectService() {
-    this.refs.calendar.show();
+    // this.refs.calendar.show();
+    // this.refs.sign.show();
     // this.scrollBy(1);
-    // this.service.hide();
-    // this.order.show();
+    this.service.hide();
+    this.order.show();
   }
 
   _goBack() {

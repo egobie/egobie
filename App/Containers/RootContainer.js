@@ -5,6 +5,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import ResidentContainer from './ResidentContainer';
 import BusinessContainer from './BusinessContainer';
 import MoreContainer from './MoreContainer';
+import UserScreen from '../Screens/UserScreen';
 import eGobie from '../Styles/Egobie';
 
 
@@ -39,5 +40,8 @@ const configs = {
 export default StackNavigator({
   Home: {
     screen: TabNavigator(routes, configs),
+  },
+  User: {
+    screen: UserScreen,
   },
 });

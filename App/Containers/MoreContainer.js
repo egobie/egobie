@@ -21,7 +21,7 @@ export default class extends Component {
 
   render() {
     return (
-      <MenuScreen />
+      <MenuScreen { ...this.props } />
     );
   }
 };

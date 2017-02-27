@@ -27,7 +27,7 @@ const leftIconStyle = {
   fontSize: 25,
 }
 
-class UserScreen extends Component {
+class MenuScreen extends Component {
 
   menuItems = [
     { title: I18n.t('menu.myServices'),     icon: 'oil' },
@@ -45,6 +45,7 @@ class UserScreen extends Component {
   user() {
     return (
       <ListItem
+        onPress = { () => { this.props.navigation.navigate('User') } }
         leftIcon = {{
           type: 'material-community',
           name: 'account',
@@ -140,8 +141,8 @@ class UserScreen extends Component {
   }
 };
 
-UserScreen.propTypes = {
+MenuScreen.propTypes = {
 
 };
 
-export default UserScreen;
+export default MenuScreen;

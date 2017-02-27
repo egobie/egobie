@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 
 import { ListItem } from 'react-native-elements';
 
@@ -8,7 +8,7 @@ class Label extends Component {
   render() {
     return (
       <ListItem
-        onLongPress = { this.props.onLongPress }
+        onLongPress = { this.props.onLongPress && this.props.onLongPress }
         hideChevron = { !this.props.rightIcon }
         title = { this.props.title }
         titleStyle = { this.props.titleStyle && this.props.titleStyle }

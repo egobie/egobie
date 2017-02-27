@@ -4,8 +4,8 @@ import { View, Image, Text } from 'react-native';
 import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import CalendarScreen from '../Screens/CalendarScreen';
-import SideMenuStyle from '../Styles/SideMenuStyle';
+import UserScreen from '../Screens/UserScreen';
+
 
 export default class extends Component {
   static navigationOptions = {
@@ -107,7 +107,7 @@ export default class extends Component {
   */
   render() {
     return (
-      <CalendarScreen />
+      <UserScreen />
     );
   }
 };

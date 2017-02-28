@@ -6,13 +6,14 @@ import ResidentContainer from './ResidentContainer';
 import BusinessContainer from './BusinessContainer';
 import MoreContainer from './MoreContainer';
 import UserScreen from '../Screens/UserScreen';
+import PaymentScreen from '../Screens/PaymentScreen';
 import eGobie from '../Styles/Egobie';
 
 
 const routes = {
-  Resident: {
-    screen: ResidentContainer,
-  },
+  // Resident: {
+  //   screen: ResidentContainer,
+  // },
   Business: {
     screen: BusinessContainer,
   },
@@ -44,4 +45,7 @@ export default StackNavigator({
   User: {
     screen: UserScreen,
   },
+  Payments: {
+    screen: PaymentScreen,
+  }
 });

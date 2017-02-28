@@ -4,8 +4,6 @@ import { View, Text } from 'react-native';
 import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import PaymentModal from '../Modals/PaymentModal';
-
 
 export default class extends Component {
   static navigationOptions = {
@@ -24,7 +22,7 @@ export default class extends Component {
       <View style = {{
         flex: 1,
       }}>
-        <PaymentModal />
+        
       </View>
     );
   }

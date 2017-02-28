@@ -30,16 +30,44 @@ const leftIconStyle = {
 class MenuScreen extends Component {
 
   menuItems = [
-    { title: I18n.t('menu.myServices'),     icon: 'oil' },
-    { title: I18n.t('menu.vehicles'),       icon: 'car' },
-    { title: I18n.t('menu.payments'),       icon: 'credit-card' },
-    { title: I18n.t('menu.coupons'),        icon: 'barcode' },
-    { title: I18n.t('menu.notifications'),  icon: 'comment-alert' },
+    {
+      title: I18n.t('menu.myServices'),
+      icon: 'oil',
+      onPress: () => { },
+    },
+    {
+      title: I18n.t('menu.vehicles'),
+      icon: 'car',
+      onPress: () => { },
+    },
+    {
+      title: I18n.t('menu.payments'),
+      icon: 'credit-card',
+      onPress: () => { this.props.navigation.navigate('Payments') },
+    },
+    {
+      title: I18n.t('menu.coupons'),
+      icon: 'barcode',
+      onPress: () => { },
+    },
+    {
+      title: I18n.t('menu.notifications'),
+      icon: 'comment-alert',
+      onPress: () => { },
+    }
   ];
 
   moreItems = [
-    { title: I18n.t('menu.settings'),       icon: 'settings' },
-    { title: I18n.t('menu.about'),          icon: 'comment-question-outline' },
+    {
+      title: I18n.t('menu.settings'),
+      icon: 'settings',
+      onPress: () => { },
+    },
+    {
+      title: I18n.t('menu.about'),
+      icon: 'comment-question-outline',
+      onPress: () => { },
+    },
   ];
 
   user() {
@@ -70,6 +98,7 @@ class MenuScreen extends Component {
       return (
         <ListItem
           key = { i }
+          onPress = { item.onPress }
           leftIcon = {{
             type: 'material-community',
             color: eGobie.EGOBIE_BLUE,
@@ -96,6 +125,7 @@ class MenuScreen extends Component {
       return (
         <ListItem
           key = { i }
+          onPress = { item.onPress }
           leftIcon = {{
             type: 'material-community',
             color: eGobie.EGOBIE_BLUE,

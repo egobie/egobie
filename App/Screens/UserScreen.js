@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Kohana } from 'react-native-textinput-effects';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
@@ -29,6 +29,34 @@ const customStyle = {
 }
 
 class UserScreen extends Component {
+  static navigationOptions = {
+    title: 'User',
+    header: ({ goBack }) => ({
+      titleStyle: {
+        fontWeight: '400',
+      },
+      left: (
+        <TouchableWithoutFeedback onPress = { () => goBack() }>
+          <View>
+            <Icon
+              type = { 'material-community' }
+              name = { 'chevron-left' }
+              iconStyle = {{
+                color: eGobie.EGOBIE_BLUE,
+                fontWeight: '400',
+                fontSize: 35,
+              }}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      ),
+    }),
+  };
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <View style = {{

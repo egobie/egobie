@@ -8,7 +8,7 @@ import Carousel from 'react-native-snap-carousel';
 import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
 import Label from '../Components/Label';
-import CalendarScreen from '../Screens/CalendarScreen';
+import CalendarModal from '../Modals/CalendarModal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 

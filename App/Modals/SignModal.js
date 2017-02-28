@@ -11,7 +11,7 @@ import BoxShadow from '../Styles/BoxShadow';
 import eGobie from '../Styles/Egobie';
 
 
-class SignScreen extends Component {
+class SignModal extends Component {
   state = {
     flip: false,
     visible: false,
@@ -343,4 +343,4 @@ class SignScreen extends Component {
   }
 };
 
-export default SignScreen;
+export default SignModal;

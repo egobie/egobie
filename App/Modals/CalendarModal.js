@@ -79,7 +79,7 @@ const dayHeadings = [
   'SUN', 'MON', 'TUE', 'WED', 'THR', 'FRI', 'SAT',
 ];
 
-class CalendarScreen extends Component {
+class CalendarModal extends Component {
 
   state = {
     visible: false,
@@ -243,8 +243,8 @@ class CalendarScreen extends Component {
   }
 };
 
-CalendarScreen.propTypes = {
+CalendarModal.propTypes = {
 
 }
 
-export default CalendarScreen;
+export default CalendarModal;

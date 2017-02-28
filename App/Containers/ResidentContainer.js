@@ -6,10 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Steps from '../Components/Steps';
 import ServiceScreen from '../Screens/ServiceScreen';
-import PaymentScreen from '../Screens/PaymentScreen'
 import OrderScreen from '../Screens/OrderScreen';
-import SignScreen from '../Screens/SignScreen';
-import CalendarScreen from '../Screens/CalendarScreen';
+import SignModal from '../Modals/SignModal';
+import CalendarModal from '../Modals/CalendarModal';
 
 
 export default class extends Component {
@@ -73,8 +72,8 @@ export default class extends Component {
             ref = { (o) => { this.order = o; } }
             onBack = { this.goBack }
           />
-          <SignScreen ref = { 'sign' }/>
-          <CalendarScreen ref = { 'calendar' }/>
+          <SignModal ref = { 'sign' }/>
+          <CalendarModal ref = { 'calendar' }/>
         </ScrollView>
       </View>
     );

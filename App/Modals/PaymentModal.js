@@ -8,7 +8,7 @@ import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
 
-class PaymentScreen extends Component {
+class PaymentModal extends Component {
   state = {
     visibile: false,
   };
@@ -133,6 +133,6 @@ class PaymentScreen extends Component {
       </Modal>
     );
   }
-}
+};
 
-export default PaymentScreen;
+export default PaymentModal;

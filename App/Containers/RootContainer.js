@@ -7,6 +7,7 @@ import BusinessContainer from './BusinessContainer';
 import MoreContainer from './MoreContainer';
 import UserScreen from '../Screens/UserScreen';
 import PaymentScreen from '../Screens/PaymentScreen';
+import AboutScreen from '../Screens/AboutScreen';
 import eGobie from '../Styles/Egobie';
 
 
@@ -47,5 +48,8 @@ export default StackNavigator({
   },
   Payments: {
     screen: PaymentScreen,
+  },
+  About: {
+    screen: AboutScreen,
   }
 });

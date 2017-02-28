@@ -59,14 +59,9 @@ class MenuScreen extends Component {
 
   moreItems = [
     {
-      title: I18n.t('menu.settings'),
-      icon: 'settings',
-      onPress: () => { },
-    },
-    {
       title: I18n.t('menu.about'),
       icon: 'comment-question-outline',
-      onPress: () => { },
+      onPress: () => { this.props.navigation.navigate('About') },
     },
   ];
 

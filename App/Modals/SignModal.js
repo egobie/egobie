@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal, View, Text, Animated, Easing } from 'react-native';
 
 import { Button, Icon, SocialIcon } from 'react-native-elements';
-import { Kohana, Fumi } from 'react-native-textinput-effects';
+import { Kohana } from 'react-native-textinput-effects';
 import FlipCard from 'react-native-flip-card'
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 

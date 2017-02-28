@@ -38,7 +38,7 @@ class MenuScreen extends Component {
     {
       title: I18n.t('menu.vehicles'),
       icon: 'car',
-      onPress: () => { },
+      onPress: () => { this.props.navigation.navigate('Vehicles') },
     },
     {
       title: I18n.t('menu.payments'),

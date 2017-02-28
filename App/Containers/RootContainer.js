@@ -7,6 +7,7 @@ import BusinessContainer from './BusinessContainer';
 import MoreContainer from './MoreContainer';
 import UserScreen from '../Screens/UserScreen';
 import PaymentScreen from '../Screens/PaymentScreen';
+import VehicleScreen from '../Screens/VehicleScreen';
 import AboutScreen from '../Screens/AboutScreen';
 import eGobie from '../Styles/Egobie';
 
@@ -45,6 +46,9 @@ export default StackNavigator({
   },
   User: {
     screen: UserScreen,
+  },
+  Vehicles: {
+    screen: VehicleScreen,
   },
   Payments: {
     screen: PaymentScreen,

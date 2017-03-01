@@ -3,6 +3,7 @@ import { View, Image, ScrollView, TouchableWithoutFeedback } from 'react-native'
 
 import { ListItem, Button, Icon } from 'react-native-elements';
 
+import ViechleModal from '../Modals/VehicleModal';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 
@@ -33,6 +34,10 @@ class VehicleScreen extends Component {
       ),
     }),
   };
+
+  showVehicleModal() {
+    this.refs.vehicle.show();
+  }
 
   vehicles() {
     return [1, 2].map((_, i) => {
@@ -77,6 +82,7 @@ class VehicleScreen extends Component {
       <ScrollView>
         { this.vehicles() }
         <Button
+          onPress = { () => { this.showVehicleModal() } }
           title = 'ADD NEW VEHICLE'
           buttonStyle = {{
             marginTop: 10,
@@ -84,6 +90,7 @@ class VehicleScreen extends Component {
             ...BoxShadow
           }}
         />
+        <ViechleModal ref = { 'vehicle' }/>
       </ScrollView>
     );
   }

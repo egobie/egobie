@@ -3,19 +3,25 @@ import { View, Animated, Modal, Easing } from 'react-native';
 
 import { Kaede } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
-import ModalPicker from 'react-native-modal-picker';
 
+import Dropdown from '../Components/Dropdown';
 import Dimension from '../Libs/Dimension';
+import States from '../Libs/States';
+import Colors from '../Libs/Colors';
 import eGobie from '../Styles/Egobie';
+import BoxShadow from '../Styles/BoxShadow';
 
 
 const inputDefaultProps = {
   labelStyle: {
     fontSize: 16,
-    marginLeft: 15,
+    marginLeft: 30,
     fontWeight: '400',
     color: eGobie.EGOBIE_WHITE,
     backgroundColor: eGobie.EGOBIE_BLUE,
+    transform: [
+      { scaleY: 0.9 },
+    ],
   },
   inputStyle: {
     fontSize: 14,
@@ -32,6 +38,17 @@ const inputDefaultProps = {
   },
   height: 40,
 };
+
+const dropDownStyle = {
+  style: {
+    flex: 1,
+    backgroundColor: eGobie.EGOBIE_BLUE,
+    paddingLeft: 5,
+  },
+  styleText: {
+    color: eGobie.EGOBIE_WHITE,
+  }
+}
 
 class VehicleModal extends Component {
   state = {
@@ -75,6 +92,24 @@ class VehicleModal extends Component {
     });
   }
 
+  _onSelect(value, type) {
+
+  }
+
+  getYears() {
+    let year = new Date().getFullYear() + 1;
+    let years = [];
+    let limit = 1980;
+
+    for (let i = year; i >= limit; i--) {
+      years.push(i);
+    }
+
+    return years.map((y) => {
+      return { name: `${y}`, value: `${y}` };
+    });
+  }
+
   componentDidMount() {
     this.show();
   }
@@ -83,6 +118,8 @@ class VehicleModal extends Component {
     return (
       <View style = {{
         height: 350,
+        paddingLeft: 15,
+        paddingRight: 15,
         overflow: 'hidden',
         justifyContent: 'center',
         backgroundColor: eGobie.EGOBIE_WHITE,
@@ -91,15 +128,21 @@ class VehicleModal extends Component {
           label = { 'PLATE' }
           { ...inputDefaultProps }
         />
-        <ModalPicker
-          initValue = { 'Choose Year' }
-          cancelText = { 'Cancel' }
-          style = {{
-            height: 50,
-          }}
-          overlayStyle = {{
-            backgroundColor: 'transparent',
-          }}
+        <Kaede
+          label = { 'MAKE' }
+          { ...inputDefaultProps }
+        />
+        <Kaede
+          label = { 'MODEL' }
+          { ...inputDefaultProps }
+        />
+        <Kaede
+          label = { 'STATE' }
+          { ...inputDefaultProps }
+        />
+        <Kaede
+          label = { 'YEAR' }
+          { ...inputDefaultProps }
         />
       </View>
     );
@@ -151,7 +194,10 @@ class VehicleModal extends Component {
             }}>
               <Button
                 title = 'ADD VEHICLE'
-                backgroundColor = { eGobie.EGOBIE_BLUE }
+                buttonStyle = {{
+                  backgroundColor: eGobie.EGOBIE_BLUE,
+                  ...BoxShadow
+                }}
               />
             </View>
           </Animated.View>

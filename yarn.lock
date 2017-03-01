@@ -3187,10 +3187,6 @@ react-native-i18n@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-1.0.0.tgz#0c407d9ebb846aae1aa5e05de6503008553f02fd"
 
-react-native-modal-picker@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/react-native-modal-picker/-/react-native-modal-picker-0.0.16.tgz#c9324d880a3bb8f36b772f378164977e2f431cbc"
-
 react-native-navigation@^1.0.30:
   version "1.0.30"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.0.30.tgz#8e47a58f4b8a7256d912d2efe64bea78a900650e"

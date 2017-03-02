@@ -4,7 +4,6 @@ import { View, Animated, Modal, Easing } from 'react-native';
 import { Kaede } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
-import Dropdown from '../Components/Dropdown';
 import Dimension from '../Libs/Dimension';
 import States from '../Libs/States';
 import Colors from '../Libs/Colors';
@@ -92,10 +91,6 @@ class VehicleModal extends Component {
     });
   }
 
-  _onSelect(value, type) {
-
-  }
-
   getYears() {
     let year = new Date().getFullYear() + 1;
     let years = [];
@@ -108,10 +103,6 @@ class VehicleModal extends Component {
     return years.map((y) => {
       return { name: `${y}`, value: `${y}` };
     });
-  }
-
-  componentDidMount() {
-    this.show();
   }
 
   vehicleForm() {
@@ -137,6 +128,7 @@ class VehicleModal extends Component {
           { ...inputDefaultProps }
         />
         <Kaede
+          ref = { (ref) => { this.refs.stateInput = ref } }
           label = { 'STATE' }
           { ...inputDefaultProps }
         />
@@ -146,6 +138,10 @@ class VehicleModal extends Component {
         />
       </View>
     );
+  }
+
+  saveVehicle() {
+    
   }
 
   render() {
@@ -193,6 +189,7 @@ class VehicleModal extends Component {
               backgroundColor: eGobie.EGOBIE_WHITE,
             }}>
               <Button
+                onPress = { () => { this.saveVehicle() } }
                 title = 'ADD VEHICLE'
                 buttonStyle = {{
                   backgroundColor: eGobie.EGOBIE_BLUE,

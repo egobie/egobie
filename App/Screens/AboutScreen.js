@@ -19,7 +19,7 @@ const rightIcon = {
 
 class AboutScreen extends Component {
   static navigationOptions = {
-    title: 'Payments',
+    title: 'About',
     header: ({ goBack }) => ({
       titleStyle: {
         fontWeight: '400',
@@ -51,6 +51,7 @@ class AboutScreen extends Component {
           marginTop: 15,
           marginLeft: 10,
           marginRight: 10,
+          backgroundColor: eGobie.EGOBIE_WHITE,
         }}>
           <ListItem
             hideChevron

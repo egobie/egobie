@@ -4,6 +4,7 @@ import { View, Image, ScrollView, TouchableWithoutFeedback } from 'react-native'
 import { ListItem, Button, Icon } from 'react-native-elements';
 
 import ViechleModal from '../Modals/VehicleModal';
+import VehicleIcons from '../Libs/VehicleIcon';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 
@@ -40,7 +41,7 @@ class VehicleScreen extends Component {
   }
 
   vehicles() {
-    return [1, 2].map((_, i) => {
+    return ['suv', 'sedan', 'truck', 'van'].map((mode, i) => {
       return (
         <TouchableWithoutFeedback
           key = { i }
@@ -48,8 +49,9 @@ class VehicleScreen extends Component {
           <View>
             <ListItem
               hideChevron
+              avatar = { VehicleIcons[mode] }
               avatarStyle = {{
-                width: 50,
+                width: 40,
                 borderRadius: 5,
               }}
               title = { 'Y96EUV' }

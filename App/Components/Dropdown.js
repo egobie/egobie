@@ -1,14 +1,38 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { Animated, ScrollView, Text, Easing } from 'react-native';
+
+import eGobie from '../Styles/Egobie';
+import BoxShadow from '../Styles/BoxShadow';
 
 
 class Dropdown extends Component {
+  state = {
+    top: 0,
+    left: 50,
+  }
+  animation = {
+    height: new Animated.Value(200),
+  };
+
+  constructor(props) {
+    super(props);
+  }
+
   options() {
     return this.props.options.map((option, i) => {
       return (
         <Text
           key = { i }
           onPress = { () => { this.props.onSelect(option.key) } }
+          style = {{
+            textAlign: 'left',
+            paddingLeft: 10,
+            fontSize: 14,
+            fontWeight: '400',
+            height: 40,
+            lineHeight: 40,
+            color: eGobie.EGOBIE_BLACK,
+          }}
         >
           { option.label }
         </Text>
@@ -16,14 +40,43 @@ class Dropdown extends Component {
     });
   }
 
+  setPosition(top, left) {
+    this.setState({
+      top: top,
+      left: left,
+    });
+  }
+
+  hide() {
+    Animated.timing(this.animation.height, {
+      toValue: 0,
+      easing: Easing.inOut(Easing.cubic),
+    }).start();
+  }
+
+  show() {
+    Animated.timing(this.animation.height, {
+      toValue: 200,
+      easing: Easing.inOut(Easing.cubic),
+    }).start();
+  }
+
   render() {
     return (
-      <ScrollView
-        showsHorizontalScrollIndicator = { false }
-        
-      >
-        { this.options() }
-      </ScrollView>
+      <Animated.View style = {{
+        position: 'absolute',
+        top: this.state.top + 5,
+        left: this.state.left,
+        width: 200,
+        height: this.animation.height,
+        overflow: 'hidden',
+        backgroundColor: eGobie.EGOBIE_WHITE,
+        ...BoxShadow,
+      }}>
+        <ScrollView showsHorizontalScrollIndicator = { false } >
+          { this.options() }
+        </ScrollView>
+      </Animated.View>
     );
   }
 };
@@ -34,16 +87,6 @@ Dropdown.propTypes = {
     label: React.PropTypes.string.isRequired,
   })).isRequired,
   onSelect: React.PropTypes.func.isRequired,
-  selectStyle: React.PropTypes.objectOf(React.PropTypes.shape({
-    style: React.PropTypes.object,
-    styleText: React.PropTypes.object,
-    styleOption: React.PropTypes.object,
-  })),
-  optionStyle: React.PropTypes.objectOf(React.PropTypes.shape({
-    style: React.PropTypes.object,
-    styleText: React.PropTypes.object,
-  })),
-  overlayStyles: React.PropTypes.object,
 };
 
 export default Dropdown;

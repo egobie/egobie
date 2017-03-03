@@ -9,6 +9,8 @@ class Label extends Component {
     return (
       <ListItem
         onLongPress = { this.props.onLongPress && this.props.onLongPress }
+        avatar = { this.props.avatar && this.props.avatar }
+        avatarStyle = { this.props.avatarStyle && this.props.avatarStyle }
         hideChevron = { !this.props.rightIcon }
         title = { this.props.title }
         titleStyle = { this.props.titleStyle && this.props.titleStyle }
@@ -39,6 +41,8 @@ Label.propTypes = {
   leftIcon: React.PropTypes.object,
   rightIcon: React.PropTypes.object,
   onLongPress: React.PropTypes.func,
+  avatar: React.PropTypes.any,
+  avatarStyle: React.PropTypes.object,
 }
 
 export default Label;

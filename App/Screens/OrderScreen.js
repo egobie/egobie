@@ -5,6 +5,7 @@ import Reactotron from 'reactotron-react-native';
 import { Button, Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 
+import Vehicle from '../Components/Vehicle';
 import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
 import Label from '../Components/Label';
@@ -481,15 +482,27 @@ export default class extends Component {
   }
 
   vehicles() {
-    return [1, 2, 3, 4, 5].map((_, i) => {
+    return ['sedan', 'suv', 'van', 'truck'].map((type, i) => {
       return (
-        <Plate
+        <View
           key = { i }
-          index = { i }
-          number = 'Y96EUV'
-          state = 'New Jersey'
-          plateScale = { 0.7 }
+          style = {{
+            flex: 1,
+            width: Dimension.width,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+        <Vehicle
+          key = { i }
+          plate = 'Y96EUV'
+          make = 'Honda'
+          model = 'Accord'
+          year = '2013'
+          color = 'White'
+          type = { type }
         />
+        </View>
       );
     });
   }

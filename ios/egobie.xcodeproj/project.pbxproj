@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -12,6 +13,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* egobieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* egobieTests.m */; };
+		0401A694ED1245F5B727691E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 479EB8C3BEA14905B2E027AB /* FontAwesome.ttf */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -21,23 +23,41 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1E7ADE3D39C04A6BA3FA3108 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5346C1F329C0410D8A5673C4 /* MaterialCommunityIcons.ttf */; };
+		2A7168021E6B0FF800DC33F6 /* AIRGMSMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167E11E6B0FF800DC33F6 /* AIRGMSMarker.m */; };
+		2A7168031E6B0FF800DC33F6 /* AIRGoogleMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167E31E6B0FF800DC33F6 /* AIRGoogleMap.m */; };
+		2A7168041E6B0FF800DC33F6 /* AIRGoogleMapCallout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167E51E6B0FF800DC33F6 /* AIRGoogleMapCallout.m */; };
+		2A7168051E6B0FF800DC33F6 /* AIRGoogleMapCalloutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167E71E6B0FF800DC33F6 /* AIRGoogleMapCalloutManager.m */; };
+		2A7168061E6B0FF800DC33F6 /* AIRGoogleMapCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167E91E6B0FF800DC33F6 /* AIRGoogleMapCircle.m */; };
+		2A7168071E6B0FF800DC33F6 /* AIRGoogleMapCircleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167EB1E6B0FF800DC33F6 /* AIRGoogleMapCircleManager.m */; };
+		2A7168081E6B0FF800DC33F6 /* AIRGoogleMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167ED1E6B0FF800DC33F6 /* AIRGoogleMapManager.m */; };
+		2A7168091E6B0FF800DC33F6 /* AIRGoogleMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167EF1E6B0FF800DC33F6 /* AIRGoogleMapMarker.m */; };
+		2A71680A1E6B0FF800DC33F6 /* AIRGoogleMapMarkerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167F11E6B0FF800DC33F6 /* AIRGoogleMapMarkerManager.m */; };
+		2A71680B1E6B0FF800DC33F6 /* AIRGoogleMapPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167F31E6B0FF800DC33F6 /* AIRGoogleMapPolygon.m */; };
+		2A71680C1E6B0FF800DC33F6 /* AIRGoogleMapPolygonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167F51E6B0FF800DC33F6 /* AIRGoogleMapPolygonManager.m */; };
+		2A71680D1E6B0FF800DC33F6 /* AIRGoogleMapPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167F71E6B0FF800DC33F6 /* AIRGoogleMapPolyline.m */; };
+		2A71680E1E6B0FF800DC33F6 /* AIRGoogleMapPolylineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167F91E6B0FF800DC33F6 /* AIRGoogleMapPolylineManager.m */; };
+		2A71680F1E6B0FF800DC33F6 /* AIRGoogleMapUrlTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167FB1E6B0FF800DC33F6 /* AIRGoogleMapUrlTile.m */; };
+		2A7168101E6B0FF800DC33F6 /* AIRGoogleMapURLTileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167FD1E6B0FF800DC33F6 /* AIRGoogleMapURLTileManager.m */; };
+		2A7168111E6B0FF800DC33F6 /* DummyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167FF1E6B0FF800DC33F6 /* DummyView.m */; };
+		2A7168121E6B0FF800DC33F6 /* RCTConvert+GMSMapViewType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7168011E6B0FF800DC33F6 /* RCTConvert+GMSMapViewType.m */; };
+		4E0D14EB5EA84C14B385827D /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF0A4A2DFBA46B3BA5565D8 /* libReact.a */; };
+		528ED8DB85AE465DA29010DC /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BD9ED1642149E9BB044BFC /* libyoga.a */; };
+		52C75CF3A47C4A1B90C55B25 /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC8911E17F942FC8E0646D5 /* libjschelpers.a */; };
+		59B560A98DEC4BF69F2835F2 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D96611248BF84A4A9BA343AF /* MaterialIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		6745495CB09D47B9B3944206 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95766DAD39664FF69E68C858 /* Octicons.ttf */; };
+		71F6A633B0718EE2DB6F6EB6 /* libPods-egobie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34028913FBF557066B3428CD /* libPods-egobie.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8A237A581CFC419F9232AE51 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C4417F08444BCE948BCF79 /* libRNVectorIcons.a */; };
 		941ADB44AE374514882D3FD1 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2D803E650AD4530875397F5 /* Entypo.ttf */; };
-		CD2AB8AC4FC347CB9A1DEDF9 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE2DD0468064E2F827E6C0D /* EvilIcons.ttf */; };
-		0401A694ED1245F5B727691E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 479EB8C3BEA14905B2E027AB /* FontAwesome.ttf */; };
-		D4E329D05C6D48E1A6DD727B /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D858AF9B20CD4BCBB156F8A5 /* Foundation.ttf */; };
+		A6BED426A88B4D7FA8F619CB /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD35085369249CC9EC5ED48 /* libAirMaps.a */; };
 		C662A982EF6F494B8A8C24E0 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CDC47A28E313406296899882 /* Ionicons.ttf */; };
-		1E7ADE3D39C04A6BA3FA3108 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5346C1F329C0410D8A5673C4 /* MaterialCommunityIcons.ttf */; };
-		59B560A98DEC4BF69F2835F2 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D96611248BF84A4A9BA343AF /* MaterialIcons.ttf */; };
-		6745495CB09D47B9B3944206 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95766DAD39664FF69E68C858 /* Octicons.ttf */; };
+		CD2AB8AC4FC347CB9A1DEDF9 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE2DD0468064E2F827E6C0D /* EvilIcons.ttf */; };
+		D4E329D05C6D48E1A6DD727B /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D858AF9B20CD4BCBB156F8A5 /* Foundation.ttf */; };
 		DFAE2325DBB547D9935A1CFC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */; };
 		EF3A6A880FE74812AC3715B0 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503C350428B040539FCFD733 /* Zocial.ttf */; };
-		4E0D14EB5EA84C14B385827D /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF0A4A2DFBA46B3BA5565D8 /* libReact.a */; };
-		528ED8DB85AE465DA29010DC /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BD9ED1642149E9BB044BFC /* libyoga.a */; };
 		FA44A57BCE344A87BD4C7538 /* libcxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABE1A4E18C842DC9CE3D6D8 /* libcxxreact.a */; };
-		52C75CF3A47C4A1B90C55B25 /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC8911E17F942FC8E0646D5 /* libjschelpers.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +123,34 @@
 			proxyType = 2;
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		2A7167D11E6B0F6F00DC33F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415013DF78444A9885657603 /* RNI18n.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD7BF781B2D5125006FDA75;
+			remoteInfo = RNI18n;
+		};
+		2A7167D31E6B0F6F00DC33F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415013DF78444A9885657603 /* RNI18n.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD7BF831B2D5126006FDA75;
+			remoteInfo = RNI18nTests;
+		};
+		2A7167D81E6B0F6F00DC33F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0FD10181D39242F2933A120D /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
+		};
+		2A7167DD1E6B0F6F00DC33F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 448C3F00AE424B0DA64E7849 /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -235,6 +283,7 @@
 		00E356EE1AD99517003FC87E /* egobieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = egobieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* egobieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = egobieTests.m; sourceTree = "<group>"; };
+		0FD10181D39242F2933A120D /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* egobie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = egobie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,26 +294,64 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = egobie/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = egobie/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		2A7167E01E6B0FF800DC33F6 /* AIRGMSMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGMSMarker.h; sourceTree = "<group>"; };
+		2A7167E11E6B0FF800DC33F6 /* AIRGMSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGMSMarker.m; sourceTree = "<group>"; };
+		2A7167E21E6B0FF800DC33F6 /* AIRGoogleMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMap.h; sourceTree = "<group>"; };
+		2A7167E31E6B0FF800DC33F6 /* AIRGoogleMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMap.m; sourceTree = "<group>"; };
+		2A7167E41E6B0FF800DC33F6 /* AIRGoogleMapCallout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapCallout.h; sourceTree = "<group>"; };
+		2A7167E51E6B0FF800DC33F6 /* AIRGoogleMapCallout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapCallout.m; sourceTree = "<group>"; };
+		2A7167E61E6B0FF800DC33F6 /* AIRGoogleMapCalloutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapCalloutManager.h; sourceTree = "<group>"; };
+		2A7167E71E6B0FF800DC33F6 /* AIRGoogleMapCalloutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapCalloutManager.m; sourceTree = "<group>"; };
+		2A7167E81E6B0FF800DC33F6 /* AIRGoogleMapCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapCircle.h; sourceTree = "<group>"; };
+		2A7167E91E6B0FF800DC33F6 /* AIRGoogleMapCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapCircle.m; sourceTree = "<group>"; };
+		2A7167EA1E6B0FF800DC33F6 /* AIRGoogleMapCircleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapCircleManager.h; sourceTree = "<group>"; };
+		2A7167EB1E6B0FF800DC33F6 /* AIRGoogleMapCircleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapCircleManager.m; sourceTree = "<group>"; };
+		2A7167EC1E6B0FF800DC33F6 /* AIRGoogleMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapManager.h; sourceTree = "<group>"; };
+		2A7167ED1E6B0FF800DC33F6 /* AIRGoogleMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapManager.m; sourceTree = "<group>"; };
+		2A7167EE1E6B0FF800DC33F6 /* AIRGoogleMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapMarker.h; sourceTree = "<group>"; };
+		2A7167EF1E6B0FF800DC33F6 /* AIRGoogleMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapMarker.m; sourceTree = "<group>"; };
+		2A7167F01E6B0FF800DC33F6 /* AIRGoogleMapMarkerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapMarkerManager.h; sourceTree = "<group>"; };
+		2A7167F11E6B0FF800DC33F6 /* AIRGoogleMapMarkerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapMarkerManager.m; sourceTree = "<group>"; };
+		2A7167F21E6B0FF800DC33F6 /* AIRGoogleMapPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapPolygon.h; sourceTree = "<group>"; };
+		2A7167F31E6B0FF800DC33F6 /* AIRGoogleMapPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapPolygon.m; sourceTree = "<group>"; };
+		2A7167F41E6B0FF800DC33F6 /* AIRGoogleMapPolygonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapPolygonManager.h; sourceTree = "<group>"; };
+		2A7167F51E6B0FF800DC33F6 /* AIRGoogleMapPolygonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapPolygonManager.m; sourceTree = "<group>"; };
+		2A7167F61E6B0FF800DC33F6 /* AIRGoogleMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapPolyline.h; sourceTree = "<group>"; };
+		2A7167F71E6B0FF800DC33F6 /* AIRGoogleMapPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapPolyline.m; sourceTree = "<group>"; };
+		2A7167F81E6B0FF800DC33F6 /* AIRGoogleMapPolylineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapPolylineManager.h; sourceTree = "<group>"; };
+		2A7167F91E6B0FF800DC33F6 /* AIRGoogleMapPolylineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapPolylineManager.m; sourceTree = "<group>"; };
+		2A7167FA1E6B0FF800DC33F6 /* AIRGoogleMapUrlTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapUrlTile.h; sourceTree = "<group>"; };
+		2A7167FB1E6B0FF800DC33F6 /* AIRGoogleMapUrlTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapUrlTile.m; sourceTree = "<group>"; };
+		2A7167FC1E6B0FF800DC33F6 /* AIRGoogleMapUrlTileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapUrlTileManager.h; sourceTree = "<group>"; };
+		2A7167FD1E6B0FF800DC33F6 /* AIRGoogleMapURLTileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapURLTileManager.m; sourceTree = "<group>"; };
+		2A7167FE1E6B0FF800DC33F6 /* DummyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyView.h; sourceTree = "<group>"; };
+		2A7167FF1E6B0FF800DC33F6 /* DummyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyView.m; sourceTree = "<group>"; };
+		2A7168001E6B0FF800DC33F6 /* RCTConvert+GMSMapViewType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+GMSMapViewType.h"; sourceTree = "<group>"; };
+		2A7168011E6B0FF800DC33F6 /* RCTConvert+GMSMapViewType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+GMSMapViewType.m"; sourceTree = "<group>"; };
+		2AD35085369249CC9EC5ED48 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
+		34028913FBF557066B3428CD /* libPods-egobie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-egobie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		415013DF78444A9885657603 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
+		448C3F00AE424B0DA64E7849 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		479EB8C3BEA14905B2E027AB /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		4ABE1A4E18C842DC9CE3D6D8 /* libcxxreact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libcxxreact.a; sourceTree = "<group>"; };
+		503C350428B040539FCFD733 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		5346C1F329C0410D8A5673C4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		74C4417F08444BCE948BCF79 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		448C3F00AE424B0DA64E7849 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		74C4417F08444BCE948BCF79 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		E2D803E650AD4530875397F5 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CBE2DD0468064E2F827E6C0D /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		479EB8C3BEA14905B2E027AB /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D858AF9B20CD4BCBB156F8A5 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CDC47A28E313406296899882 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5346C1F329C0410D8A5673C4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D96611248BF84A4A9BA343AF /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		95766DAD39664FF69E68C858 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		503C350428B040539FCFD733 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		415013DF78444A9885657603 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; name = "RNI18n.xcodeproj"; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		ACF0A4A2DFBA46B3BA5565D8 /* libReact.a */ = {isa = PBXFileReference; name = "libReact.a"; path = "libReact.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		91BD9ED1642149E9BB044BFC /* libyoga.a */ = {isa = PBXFileReference; name = "libyoga.a"; path = "libyoga.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		4ABE1A4E18C842DC9CE3D6D8 /* libcxxreact.a */ = {isa = PBXFileReference; name = "libcxxreact.a"; path = "libcxxreact.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		DFC8911E17F942FC8E0646D5 /* libjschelpers.a */ = {isa = PBXFileReference; name = "libjschelpers.a"; path = "libjschelpers.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		91BD9ED1642149E9BB044BFC /* libyoga.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libyoga.a; sourceTree = "<group>"; };
+		95766DAD39664FF69E68C858 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		9AD969C86FB68ED4C2732C2F /* Pods-egobie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-egobie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-egobie/Pods-egobie.debug.xcconfig"; sourceTree = "<group>"; };
+		A4666110EE91E9AF25965AE0 /* Pods-egobie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-egobie.release.xcconfig"; path = "Pods/Target Support Files/Pods-egobie/Pods-egobie.release.xcconfig"; sourceTree = "<group>"; };
+		ACF0A4A2DFBA46B3BA5565D8 /* libReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReact.a; sourceTree = "<group>"; };
+		CBE2DD0468064E2F827E6C0D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		CDC47A28E313406296899882 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		D858AF9B20CD4BCBB156F8A5 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		D96611248BF84A4A9BA343AF /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		DFC8911E17F942FC8E0646D5 /* libjschelpers.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libjschelpers.a; sourceTree = "<group>"; };
+		E2D803E650AD4530875397F5 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +383,8 @@
 				528ED8DB85AE465DA29010DC /* libyoga.a in Frameworks */,
 				FA44A57BCE344A87BD4C7538 /* libcxxreact.a in Frameworks */,
 				52C75CF3A47C4A1B90C55B25 /* libjschelpers.a in Frameworks */,
+				A6BED426A88B4D7FA8F619CB /* libAirMaps.a in Frameworks */,
+				71F6A633B0718EE2DB6F6EB6 /* libPods-egobie.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +450,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		02FE41CBAFCB45FEA1C267A4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E2D803E650AD4530875397F5 /* Entypo.ttf */,
+				CBE2DD0468064E2F827E6C0D /* EvilIcons.ttf */,
+				479EB8C3BEA14905B2E027AB /* FontAwesome.ttf */,
+				D858AF9B20CD4BCBB156F8A5 /* Foundation.ttf */,
+				CDC47A28E313406296899882 /* Ionicons.ttf */,
+				5346C1F329C0410D8A5673C4 /* MaterialCommunityIcons.ttf */,
+				D96611248BF84A4A9BA343AF /* MaterialIcons.ttf */,
+				95766DAD39664FF69E68C858 /* Octicons.ttf */,
+				F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */,
+				503C350428B040539FCFD733 /* Zocial.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +514,81 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2A7167B41E6B0F6F00DC33F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A7167D21E6B0F6F00DC33F6 /* libRNI18n.a */,
+				2A7167D41E6B0F6F00DC33F6 /* RNI18nTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A7167D51E6B0F6F00DC33F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A7167D91E6B0F6F00DC33F6 /* libAirMaps.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A7167DA1E6B0F6F00DC33F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A7167DE1E6B0F6F00DC33F6 /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A7167DF1E6B0FF800DC33F6 /* AirGoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				2A7167E01E6B0FF800DC33F6 /* AIRGMSMarker.h */,
+				2A7167E11E6B0FF800DC33F6 /* AIRGMSMarker.m */,
+				2A7167E21E6B0FF800DC33F6 /* AIRGoogleMap.h */,
+				2A7167E31E6B0FF800DC33F6 /* AIRGoogleMap.m */,
+				2A7167E41E6B0FF800DC33F6 /* AIRGoogleMapCallout.h */,
+				2A7167E51E6B0FF800DC33F6 /* AIRGoogleMapCallout.m */,
+				2A7167E61E6B0FF800DC33F6 /* AIRGoogleMapCalloutManager.h */,
+				2A7167E71E6B0FF800DC33F6 /* AIRGoogleMapCalloutManager.m */,
+				2A7167E81E6B0FF800DC33F6 /* AIRGoogleMapCircle.h */,
+				2A7167E91E6B0FF800DC33F6 /* AIRGoogleMapCircle.m */,
+				2A7167EA1E6B0FF800DC33F6 /* AIRGoogleMapCircleManager.h */,
+				2A7167EB1E6B0FF800DC33F6 /* AIRGoogleMapCircleManager.m */,
+				2A7167EC1E6B0FF800DC33F6 /* AIRGoogleMapManager.h */,
+				2A7167ED1E6B0FF800DC33F6 /* AIRGoogleMapManager.m */,
+				2A7167EE1E6B0FF800DC33F6 /* AIRGoogleMapMarker.h */,
+				2A7167EF1E6B0FF800DC33F6 /* AIRGoogleMapMarker.m */,
+				2A7167F01E6B0FF800DC33F6 /* AIRGoogleMapMarkerManager.h */,
+				2A7167F11E6B0FF800DC33F6 /* AIRGoogleMapMarkerManager.m */,
+				2A7167F21E6B0FF800DC33F6 /* AIRGoogleMapPolygon.h */,
+				2A7167F31E6B0FF800DC33F6 /* AIRGoogleMapPolygon.m */,
+				2A7167F41E6B0FF800DC33F6 /* AIRGoogleMapPolygonManager.h */,
+				2A7167F51E6B0FF800DC33F6 /* AIRGoogleMapPolygonManager.m */,
+				2A7167F61E6B0FF800DC33F6 /* AIRGoogleMapPolyline.h */,
+				2A7167F71E6B0FF800DC33F6 /* AIRGoogleMapPolyline.m */,
+				2A7167F81E6B0FF800DC33F6 /* AIRGoogleMapPolylineManager.h */,
+				2A7167F91E6B0FF800DC33F6 /* AIRGoogleMapPolylineManager.m */,
+				2A7167FA1E6B0FF800DC33F6 /* AIRGoogleMapUrlTile.h */,
+				2A7167FB1E6B0FF800DC33F6 /* AIRGoogleMapUrlTile.m */,
+				2A7167FC1E6B0FF800DC33F6 /* AIRGoogleMapUrlTileManager.h */,
+				2A7167FD1E6B0FF800DC33F6 /* AIRGoogleMapURLTileManager.m */,
+				2A7167FE1E6B0FF800DC33F6 /* DummyView.h */,
+				2A7167FF1E6B0FF800DC33F6 /* DummyView.m */,
+				2A7168001E6B0FF800DC33F6 /* RCTConvert+GMSMapViewType.h */,
+				2A7168011E6B0FF800DC33F6 /* RCTConvert+GMSMapViewType.m */,
+			);
+			name = AirGoogleMaps;
+			path = "../node_modules/react-native-maps/ios/AirGoogleMaps";
+			sourceTree = "<group>";
+		};
+		368E86460A92EE8EA50E3F1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34028913FBF557066B3428CD /* libPods-egobie.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +607,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		819F4FAB111F6B39D60825BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9AD969C86FB68ED4C2732C2F /* Pods-egobie.debug.xcconfig */,
+				A4666110EE91E9AF25965AE0 /* Pods-egobie.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,6 +632,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				448C3F00AE424B0DA64E7849 /* RNVectorIcons.xcodeproj */,
 				415013DF78444A9885657603 /* RNI18n.xcodeproj */,
+				0FD10181D39242F2933A120D /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -458,11 +649,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				2A7167DF1E6B0FF800DC33F6 /* AirGoogleMaps */,
 				13B07FAE1A68108700A75B9A /* egobie */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* egobieTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				02FE41CBAFCB45FEA1C267A4 /* Resources */,
+				819F4FAB111F6B39D60825BB /* Pods */,
+				368E86460A92EE8EA50E3F1D /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -475,24 +669,6 @@
 				00E356EE1AD99517003FC87E /* egobieTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		02FE41CBAFCB45FEA1C267A4 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E2D803E650AD4530875397F5 /* Entypo.ttf */,
-				CBE2DD0468064E2F827E6C0D /* EvilIcons.ttf */,
-				479EB8C3BEA14905B2E027AB /* FontAwesome.ttf */,
-				D858AF9B20CD4BCBB156F8A5 /* Foundation.ttf */,
-				CDC47A28E313406296899882 /* Ionicons.ttf */,
-				5346C1F329C0410D8A5673C4 /* MaterialCommunityIcons.ttf */,
-				D96611248BF84A4A9BA343AF /* MaterialIcons.ttf */,
-				95766DAD39664FF69E68C858 /* Octicons.ttf */,
-				F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */,
-				503C350428B040539FCFD733 /* Zocial.ttf */,
-			);
-			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,10 +696,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "egobie" */;
 			buildPhases = (
+				465143296788AF83B536A56B /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				66FDFAD23E95D2B814698C56 /* [CP] Embed Pods Frameworks */,
+				B2B28564CA02EFD5CEA9F088 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -561,6 +740,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 2A7167D51E6B0F6F00DC33F6 /* Products */;
+					ProjectRef = 0FD10181D39242F2933A120D /* AirMaps.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -604,6 +787,14 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 2A7167B41E6B0F6F00DC33F6 /* Products */;
+					ProjectRef = 415013DF78444A9885657603 /* RNI18n.xcodeproj */;
+				},
+				{
+					ProductGroup = 2A7167DA1E6B0F6F00DC33F6 /* Products */;
+					ProjectRef = 448C3F00AE424B0DA64E7849 /* RNVectorIcons.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -669,6 +860,34 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A7167D21E6B0F6F00DC33F6 /* libRNI18n.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNI18n.a;
+			remoteRef = 2A7167D11E6B0F6F00DC33F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A7167D41E6B0F6F00DC33F6 /* RNI18nTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNI18nTests.xctest;
+			remoteRef = 2A7167D31E6B0F6F00DC33F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A7167D91E6B0F6F00DC33F6 /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = 2A7167D81E6B0F6F00DC33F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A7167DE1E6B0F6F00DC33F6 /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = 2A7167DD1E6B0F6F00DC33F6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -836,6 +1055,51 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		465143296788AF83B536A56B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		66FDFAD23E95D2B814698C56 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-egobie/Pods-egobie-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2B28564CA02EFD5CEA9F088 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-egobie/Pods-egobie-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -851,8 +1115,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A7168031E6B0FF800DC33F6 /* AIRGoogleMap.m in Sources */,
+				2A7168061E6B0FF800DC33F6 /* AIRGoogleMapCircle.m in Sources */,
+				2A7168101E6B0FF800DC33F6 /* AIRGoogleMapURLTileManager.m in Sources */,
+				2A7168071E6B0FF800DC33F6 /* AIRGoogleMapCircleManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				2A7168121E6B0FF800DC33F6 /* RCTConvert+GMSMapViewType.m in Sources */,
+				2A7168091E6B0FF800DC33F6 /* AIRGoogleMapMarker.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				2A71680D1E6B0FF800DC33F6 /* AIRGoogleMapPolyline.m in Sources */,
+				2A7168051E6B0FF800DC33F6 /* AIRGoogleMapCalloutManager.m in Sources */,
+				2A71680F1E6B0FF800DC33F6 /* AIRGoogleMapUrlTile.m in Sources */,
+				2A71680B1E6B0FF800DC33F6 /* AIRGoogleMapPolygon.m in Sources */,
+				2A7168041E6B0FF800DC33F6 /* AIRGoogleMapCallout.m in Sources */,
+				2A7168021E6B0FF800DC33F6 /* AIRGMSMarker.m in Sources */,
+				2A7168111E6B0FF800DC33F6 /* DummyView.m in Sources */,
+				2A7168081E6B0FF800DC33F6 /* AIRGoogleMapManager.m in Sources */,
+				2A71680A1E6B0FF800DC33F6 /* AIRGoogleMapMarkerManager.m in Sources */,
+				2A71680C1E6B0FF800DC33F6 /* AIRGoogleMapPolygonManager.m in Sources */,
+				2A71680E1E6B0FF800DC33F6 /* AIRGoogleMapPolylineManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,8 +1171,6 @@
 				INFOPLIST_FILE = egobieTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/egobie.app/egobie";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -899,7 +1178,10 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/egobie.app/egobie";
 			};
 			name = Debug;
 		};
@@ -911,8 +1193,6 @@
 				INFOPLIST_FILE = egobieTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/egobie.app/egobie";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -920,12 +1200,16 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/egobie.app/egobie";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AD969C86FB68ED4C2732C2F /* Pods-egobie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -938,12 +1222,14 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = egobie;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4666110EE91E9AF25965AE0 /* Pods-egobie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -955,6 +1241,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = egobie;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

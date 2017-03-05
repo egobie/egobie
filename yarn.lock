@@ -1888,6 +1888,10 @@ inquirer@^0.12.0:
     strip-ansi "^3.0.0"
     through "^2.3.6"
 
+install@^0.8.7:
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.8.7.tgz#f6a8a0e5d696208e8811574031b6e96a7c4c77b2"
+
 invariant@^2.0.0, invariant@^2.2.0:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
@@ -3088,6 +3092,10 @@ qs@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-4.0.0.tgz#c31d9b74ec27df75e543a86c78728ed8d4623607"
 
+qs@^5.2.0:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-5.2.1.tgz#801fee030e0b9450d6385adc48a4cc55b44aedfc"
+
 qs@~6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
@@ -3182,6 +3190,12 @@ react-native-elements@^0.9.3:
 react-native-flip-card@^3.3.0:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/react-native-flip-card/-/react-native-flip-card-3.3.3.tgz#89b44d175d953a1d806134cbbfcd20002d0b3fd1"
+
+react-native-google-places-autocomplete@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/react-native-google-places-autocomplete/-/react-native-google-places-autocomplete-1.2.8.tgz#644a867936e2774d5273f566eed7eaa941b8ea02"
+  dependencies:
+    qs "^5.2.0"
 
 react-native-i18n@^1.0.0:
   version "1.0.0"

@@ -7,8 +7,8 @@ export default Platform.select({
       height: 1,
       width: 1
     },
-    shadowOpacity: 1,
-    shadowRadius: 1
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
   },
   android: {
     elevation: 2

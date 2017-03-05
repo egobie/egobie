@@ -20,7 +20,7 @@
   /**
    * Google Map
    */
-  [GMSServices provideAPIKey:@"AIzaSyCFrN47j25SREP0YFCJUwKxNTfVNnLj2zs"];
+  [GMSServices provideAPIKey:@"AIzaSyCEf3_Un5VM1fBr5U5NTNNPq5KJD6Q0NyY"];
 
   NSURL *jsCodeLocation;
 

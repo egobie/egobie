@@ -24,6 +24,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1E7ADE3D39C04A6BA3FA3108 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5346C1F329C0410D8A5673C4 /* MaterialCommunityIcons.ttf */; };
+		2A27474D1E6B272C0088ADB7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A27474C1E6B272C0088ADB7 /* InfoPlist.strings */; };
 		2A7168021E6B0FF800DC33F6 /* AIRGMSMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167E11E6B0FF800DC33F6 /* AIRGMSMarker.m */; };
 		2A7168031E6B0FF800DC33F6 /* AIRGoogleMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167E31E6B0FF800DC33F6 /* AIRGoogleMap.m */; };
 		2A7168041E6B0FF800DC33F6 /* AIRGoogleMapCallout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7167E51E6B0FF800DC33F6 /* AIRGoogleMapCallout.m */; };
@@ -294,6 +295,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = egobie/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = egobie/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		2A27474C1E6B272C0088ADB7 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		2A7167E01E6B0FF800DC33F6 /* AIRGMSMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGMSMarker.h; sourceTree = "<group>"; };
 		2A7167E11E6B0FF800DC33F6 /* AIRGMSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGMSMarker.m; sourceTree = "<group>"; };
 		2A7167E21E6B0FF800DC33F6 /* AIRGoogleMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMap.h; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 		13B07FAE1A68108700A75B9A /* egobie */ = {
 			isa = PBXGroup;
 			children = (
+				2A27474C1E6B272C0088ADB7 /* InfoPlist.strings */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -725,6 +728,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = A9P3U9QDHE;
 					};
 				};
 			};
@@ -1026,6 +1032,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				941ADB44AE374514882D3FD1 /* Entypo.ttf in Resources */,
+				2A27474D1E6B272C0088ADB7 /* InfoPlist.strings in Resources */,
 				CD2AB8AC4FC347CB9A1DEDF9 /* EvilIcons.ttf in Resources */,
 				0401A694ED1245F5B727691E /* FontAwesome.ttf in Resources */,
 				D4E329D05C6D48E1A6DD727B /* Foundation.ttf in Resources */,
@@ -1214,6 +1221,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = A9P3U9QDHE;
 				INFOPLIST_FILE = egobie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1233,6 +1241,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9P3U9QDHE;
 				INFOPLIST_FILE = egobie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

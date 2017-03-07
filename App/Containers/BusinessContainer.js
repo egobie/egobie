@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Reactotron from 'reactotron-react-native';
 
 import MapScreen from '../Screens/MapScreen';
+import Dimension from '../Libs/Dimension';
 
 
 export default class extends Component {
@@ -36,16 +37,7 @@ export default class extends Component {
       <View style = {{
         flex: 1,
       }}>
-        <View style = {{
-          flex: 3,
-        }}>
-          <MapScreen />
-        </View>
-        <View style = {{
-          flex: 1,
-        }}>
-          
-        </View>
+        <MapScreen />
       </View>
     );
   }

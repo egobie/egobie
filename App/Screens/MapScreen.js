@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 import MapView from 'react-native-maps';
+import Reactotron from 'reactotron-react-native';
 
 import PlaceSearch from '../Components/PlaceSearch';
 import eGobie from '../Styles/Egobie';
@@ -28,6 +29,10 @@ class MapScreen extends Component {
     Reactotron.log(place);
   }
 
+  onPress(place) {
+    
+  }
+
   render() {
     return (
       <View style = {{
@@ -45,6 +50,7 @@ class MapScreen extends Component {
             loadingIndicatorColor = { eGobie.EGOBIE_WHITE }
             loadingBackgroundColor = { eGobie.EGOBIE_SHADOW }
             region = { this.state.region }
+            onPress = { this.onPress.bind(this) }
             style = {{
               position: 'absolute',
               top: 0,

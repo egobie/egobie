@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Animated } from 'react-native';
 
 import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Reactotron from 'reactotron-react-native';
 
 import MapScreen from '../Screens/MapScreen';
+import ServiceScreen from '../Screens/ServiceScreen';
 import Dimension from '../Libs/Dimension';
+import eGobie from '../Styles/Egobie';
 
 
 export default class extends Component {
@@ -37,7 +39,6 @@ export default class extends Component {
       <View style = {{
         flex: 1,
       }}>
-        <MapScreen />
       </View>
     );
   }

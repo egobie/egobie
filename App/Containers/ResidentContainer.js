@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions } from 'react-native';
+import { View, Text, Animated, ScrollView, Dimensions } from 'react-native';
 
 import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Steps from '../Components/Steps';
+import MapScreen from '../Screens/MapScreen';
 import ServiceScreen from '../Screens/ServiceScreen';
 import OrderScreen from '../Screens/OrderScreen';
 import SignModal from '../Modals/SignModal';
 import CalendarModal from '../Modals/CalendarModal';
+import Dimension from '../Libs/Dimension';
+import eGobie from '../Styles/Egobie';
 
 
 export default class extends Component {
@@ -55,7 +58,6 @@ export default class extends Component {
   render() {
     return (
       <View style = {{ flex: 1 }}>
-        <Steps />
         <ScrollView
           ref = { (sv) => { this.view = sv; } }
           horizontal = { true }
@@ -63,11 +65,26 @@ export default class extends Component {
           showsHorizontalScrollIndicator = { false }
           scrollEnabled = { false }
         >
-          <ServiceScreen
-            ref = { (s) => { this.service = s; } }
-            services = { [] }
-            onServiceSelect = { this.selectService }
-          />
+          <View style = {{
+            flex: 1,
+            width: Dimension.width,
+          }}>
+            <MapScreen />
+            <Animated.View style = {{
+              position: 'absolute',
+              backgroundColor: eGobie.EGOBIE_WHITE,
+              top: Dimension.height * 0.5,
+              transform: [
+                { scale: 0.80 },
+              ],
+            }}>
+              <ServiceScreen
+                ref = { (s) => { this.service = s; } }
+                services = { [] }
+                onServiceSelect = { this.selectService }
+              />
+            </Animated.View>
+          </View>
           <OrderScreen
             ref = { (o) => { this.order = o; } }
             onBack = { this.goBack }

@@ -16,7 +16,7 @@ class MapScreen extends Component {
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
-      this.refs.map.animateToRegion({
+      this.refs.map && this.refs.map.animateToRegion({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
         latitudeDelta: 0.01,
@@ -37,28 +37,30 @@ class MapScreen extends Component {
     return (
       <View style = {{
         flex: 1,
-      }}>
+      }} onPress = { () => { Reactotron.log('click') } } >
         <View style = {{
           flex: 1,
           justifyContent: 'flex-end',
           alignItems: 'center',
         }}>
-          <MapView
-            ref = { 'map' }
-            showsUserLocation = { true }
-            loadingEnabled = { true }
-            loadingIndicatorColor = { eGobie.EGOBIE_WHITE }
-            loadingBackgroundColor = { eGobie.EGOBIE_SHADOW }
-            region = { this.state.region }
-            onPress = { this.onPress.bind(this) }
-            style = {{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-            }}
-          />
+        {
+          // <MapView
+          //   ref = { 'map' }
+          //   showsUserLocation = { true }
+          //   loadingEnabled = { true }
+          //   loadingIndicatorColor = { eGobie.EGOBIE_WHITE }
+          //   loadingBackgroundColor = { eGobie.EGOBIE_SHADOW }
+          //   region = { this.state.region }
+          //   onPress = { this.onPress.bind(this) }
+          //   style = {{
+          //     position: 'absolute',
+          //     top: 0,
+          //     bottom: 0,
+          //     left: 0,
+          //     right: 0,
+          //   }}
+          // />
+        }
         </View>
         <PlaceSearch selectPlace = { this.selectPlace.bind(this) } />
       </View>

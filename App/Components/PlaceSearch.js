@@ -158,7 +158,7 @@ class PlaceSearch extends Component {
           placeholderTextColor = { eGobie.EGOBIE_GREY }
           minLength = { 2 }
           styles = { styles }
-          predefinedPlaces = { [  ] }
+          predefinedPlaces = { [ homePlace, workPlace ] }
           renderLeftButton = { this.cancelButton.bind(this) }
           onPress = { this.formatPlace.bind(this) }
           textInputProps = {{

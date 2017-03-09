@@ -58,40 +58,34 @@ export default class extends Component {
   render() {
     return (
       <View style = {{ flex: 1 }}>
-        <ScrollView
-          ref = { (sv) => { this.view = sv; } }
-          horizontal = { true }
-          pagingEnabled = { true }
-          showsHorizontalScrollIndicator = { false }
-          scrollEnabled = { false }
-        >
-          <View style = {{
-            flex: 1,
-            width: Dimension.width,
-          }}>
-            <MapScreen />
-            <Animated.View style = {{
-              position: 'absolute',
-              backgroundColor: eGobie.EGOBIE_WHITE,
-              top: Dimension.height * 0.5,
-              transform: [
-                { scale: 0.80 },
-              ],
-            }}>
-              <ServiceScreen
-                ref = { (s) => { this.service = s; } }
-                services = { [] }
-                onServiceSelect = { this.selectService }
-              />
-            </Animated.View>
-          </View>
-          <OrderScreen
-            ref = { (o) => { this.order = o; } }
-            onBack = { this.goBack }
-          />
-          <SignModal ref = { 'sign' }/>
-          <CalendarModal ref = { 'calendar' }/>
-        </ScrollView>
+        <MapScreen />
+        <ServiceScreen
+          ref = { (s) => { this.service = s; } }
+          services = { [] }
+          onServiceSelect = { this.selectService }
+        />
+        {
+        // <ScrollView
+        //   ref = { (sv) => { this.view = sv; } }
+        //   horizontal = { true }
+        //   pagingEnabled = { true }
+        //   showsHorizontalScrollIndicator = { false }
+        //   scrollEnabled = { false }
+        // >
+        //   <View style = {{
+        //     flex: 1,
+        //     width: Dimension.width,
+        //   }}>
+            
+        //   </View>
+        //   <OrderScreen
+        //     ref = { (o) => { this.order = o; } }
+        //     onBack = { this.goBack }
+        //   />
+        //   <SignModal ref = { 'sign' }/>
+        //   <CalendarModal ref = { 'calendar' }/>
+        // </ScrollView>
+        }
       </View>
     );
   }

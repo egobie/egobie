@@ -21,7 +21,7 @@ class Service extends Component {
       type: 'material-community',
       name: type === 'car-wash' ? 'car-wash' : 'oil',
       style: {
-        color: 'red',
+        color: eGobie.EGOBIE_BLUE,
         fontSize: 35,
         marginRight: 15,
       }

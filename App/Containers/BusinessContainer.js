@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Animated } from 'react-native';
+import { View, Text, Animated, ScrollView } from 'react-native';
 
 import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -39,6 +39,7 @@ export default class extends Component {
       <View style = {{
         flex: 1,
       }}>
+        <MapScreen />
       </View>
     );
   }

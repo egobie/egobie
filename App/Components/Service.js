@@ -8,10 +8,6 @@ import eGobie from '../Styles/Egobie';
 
 
 class Service extends Component {
-  dimension = Dimensions.get('window');
-  animation = {
-    translateX: new Animated.Value(0 - this.dimension.width),
-  };
   state = {
     selected: false,
     color: eGobie.EGOBIE_BLACK,
@@ -22,6 +18,7 @@ class Service extends Component {
   constructor(props) {
     super(props);
     this.onPress = this._onPress.bind(this);
+    this.onLongPress = this._onLongPress.bind(this);
   }
 
   serviceIcon(type) {
@@ -36,30 +33,9 @@ class Service extends Component {
     };
   }
 
-  show() {
-    Animated.timing(this.animation.translateX, {
-      toValue: 0,
-      duration: 500,
-      easing: Easing.out(Easing.cubic),
-      delay: this.props.delay,
-    }).start();
-  }
-
-  hide() {
-    Animated.timing(this.animation.translateX, {
-      toValue: 0 - this.dimension.width,
-      duration: 500,
-      easing: Easing.out(Easing.cubic),
-      delay: this.props.delay,
-    }).start();
-  }
-
-  componentDidMount() {
-    this.show();
-  }
-
   _onPress() {
     let selected = this.state.selected;
+    this.props.onPress(this.props.id, !selected);
     this.setState({
       selected: !selected,
       backgroundColor: !selected ? eGobie.EGOBIE_BLACK: eGobie.EGOBIE_WHITE,
@@ -68,17 +44,18 @@ class Service extends Component {
     });
   }
 
+  _onLongPress() {
+    this.props.onLongPress(this.props.id);
+  }
+
   render() {
     return (
       <TouchableWithoutFeedback
         onPress = { this.onPress }
-        onLongPress = { () => {} }
+        onLongPress = { this.onLongPress }
       >
         <Animated.View style = {{
           backgroundColor: this.state.backgroundColor,
-          transform: [
-            { translateX: this.animation.translateX },
-          ],
         }}>
           <ListItem
             hideChevron
@@ -119,13 +96,8 @@ Service.propTypes = {
   title: React.PropTypes.string.isRequired,
   time: React.PropTypes.string.isRequired,
   price: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func.isRequired,
-  // Used for animation
-  delay: React.PropTypes.number,
-};
-
-Service.defaultProps = {
-  delay: 0,
+  onPress: React.PropTypes.func.isRequired,
+  onLongPress: React.PropTypes.func.isRequired,
 };
 
 export default Service;

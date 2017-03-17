@@ -164,17 +164,17 @@ class ServiceScreen extends Component {
           showsVerticalScrollIndicator = { false }
         >
         {
-          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, key) => {
+          this.props.services.map((_, key) => {
             return (
               <Service
+                key = { key }
                 id = { 1 }
                 type = ''
                 title = 'Premium'
                 time = '30'
                 price = '999.99'
-                key = { key }
-                onClick = { this.props.onServiceSelect }
-                delay = { key * 50 }
+                onPress = { (id, selected) => { this.props.onServicePress(id, selected) } }
+                onLongPress = { (id) => { this.props.onServiceLongPress(id) } }
               />
             );
           })
@@ -205,8 +205,8 @@ class ServiceScreen extends Component {
 
 ServiceScreen.propTypes = {
   services: React.PropTypes.array.isRequired,
-  onServiceSelect: React.PropTypes.func.isRequired,
+  onServicePress: React.PropTypes.func.isRequired,
+  onServiceLongPress: React.PropTypes.func.isRequired,
 };
 
- export default ServiceScreen;
- 
+export default ServiceScreen;

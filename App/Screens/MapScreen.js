@@ -62,10 +62,6 @@ class MapScreen extends Component {
     });
   }
 
-  componentDidMount() {
-    this.blur();
-  }
-
   render() {
     return (
       <Animated.View style = {{

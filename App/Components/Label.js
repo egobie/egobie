@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 
 import { ListItem } from 'react-native-elements';
 
@@ -8,6 +8,7 @@ class Label extends Component {
   render() {
     return (
       <ListItem
+        onPress = { this.props.onPress && this.props.onPress }
         onLongPress = { this.props.onLongPress && this.props.onLongPress }
         avatar = { this.props.avatar && this.props.avatar }
         avatarStyle = { this.props.avatarStyle && this.props.avatarStyle }
@@ -40,6 +41,7 @@ Label.propTypes = {
   style: React.PropTypes.object,
   leftIcon: React.PropTypes.object,
   rightIcon: React.PropTypes.object,
+  onPress: React.PropTypes.func,
   onLongPress: React.PropTypes.func,
   avatar: React.PropTypes.any,
   avatarStyle: React.PropTypes.object,

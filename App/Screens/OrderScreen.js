@@ -20,8 +20,6 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.animation = {
-      translateXs: [],
-      translateX: new Animated.Value(0),
       scale: new Animated.Value(1),
       maskIndex: new Animated.Value(-1),
       maskOpacity: new Animated.Value(0),
@@ -31,47 +29,6 @@ export default class extends Component {
       vehicleTranslateY: new Animated.Value(200),
       vehicleOpacity: new Animated.Value(0),
     };
-  }
-
-  show() {
-    let animations = [
-      Animated.timing(this.animation.translateX, {
-        toValue: 0 - Dimension.width,
-        duration: 500,
-        easing: Easing.out(Easing.cubic)
-      })
-    ];
-
-    animations = animations.concat(this.animation.translateXs.map((translateX, i) => {
-      return Animated.timing(this.animation.translateXs[i], {
-        toValue: 0,
-        duration: 500,
-        easing: Easing.out(Easing.cubic),
-        delay: i * 50,
-      });
-    }));
-
-    Animated.parallel(animations).start();
-  }
-
-  hide() {
-    let animations = this.animation.translateXs.map((translateX, i) => {
-      return Animated.timing(this.animation.translateXs[i], {
-        toValue: Dimension.width,
-        duration: 500,
-        easing: Easing.out(Easing.cubic),
-        delay: i * 30,
-      });
-    });
-    animations = animations.concat(
-      Animated.timing(this.animation.translateX, {
-        toValue: Dimension.width,
-        duration: 500,
-        easing: Easing.out(Easing.cubic),
-        delay: this.animation.translateXs.length * 100,
-      })
-    );
-    Animated.parallel(animations).start();
   }
 
   _showChild(child) {
@@ -172,15 +129,10 @@ export default class extends Component {
   }
 
   location() {
-    let i = this.animation.translateXs.length;
-    this.animation.translateXs.push(new Animated.Value(Dimension.width));
-
     return (
-      <Animated.View
-        style = {{
-          marginBottom: 5,
-        }}
-      >
+      <Animated.View style = {{
+        marginBottom: 5,
+      }}>
         <Label
           title = 'Location'
           value = '414 Hackensack Avenue, APT 1220'
@@ -212,15 +164,10 @@ export default class extends Component {
   }
 
   service() {
-    let i = this.animation.translateXs.length;
-    this.animation.translateXs.push(new Animated.Value(Dimension.width));
-
     return (
-      <Animated.View
-        style = {{
-          marginBottom: 5,
-        }}
-      >
+      <Animated.View style = {{
+        marginBottom: 5,
+      }}>
         <Label
           title = 'Service'
           value = 'Premium'
@@ -252,15 +199,10 @@ export default class extends Component {
   }
 
   schedule() {
-    let i = this.animation.translateXs.length;
-    this.animation.translateXs.push(new Animated.Value(Dimension.width));
-
     return (
-      <Animated.View
-        style = {{
-          marginBottom: 5,
-        }}
-      >
+      <Animated.View style = {{
+        marginBottom: 5,
+      }}>
         <Label
           title = 'Schedule'
           value = '08/20/2016 09:00 A.M.'
@@ -292,18 +234,13 @@ export default class extends Component {
   }
 
   paymentViechle() {
-    let i = this.animation.translateXs.length;
-    this.animation.translateXs.push(new Animated.Value(Dimension.width));
-
     return (
-      <Animated.View
-        style = {{
-          flexDirection: 'row',
-          marginBottom: 5,
-        }}
-      >
+      <Animated.View style = {{
+        flexDirection: 'row',
+        marginBottom: 5,
+      }}>
         <Label
-          onLongPress = { this.showChild('payment') }
+          onPress = { this.showChild('payment') }
           title = 'Payment'
           value = '5860'
           titleStyle = {{
@@ -333,7 +270,7 @@ export default class extends Component {
           }}
         />
         <Label
-          onLongPress = { this.showChild('vehicle') }
+          onPress = { this.showChild('vehicle') }
           title = 'Viehcle'
           value = 'Y96EUV'
           titleStyle = {{
@@ -367,9 +304,6 @@ export default class extends Component {
   }
 
   estimatedTime() {
-    let i = this.animation.translateXs.length;
-    this.animation.translateXs.push(new Animated.Value(Dimension.width));
-
     return (
       <Animated.View>
         <Label
@@ -533,9 +467,6 @@ export default class extends Component {
   }
 
   placeOrder() {
-    let i = this.animation.translateXs.length;
-    this.animation.translateXs.push(new Animated.Value(Dimension.width));
-
     return (
       <Animated.View style = {{
         flex: 1,
@@ -553,7 +484,6 @@ export default class extends Component {
           <Button
             title = 'Place Order'
             backgroundColor = { eGobie.EGOBIE_BLUE }
-            onPress = { () => { this.props.onBack() } }
             style = {{
               position: 'relative'
             }}

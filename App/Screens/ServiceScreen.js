@@ -209,4 +209,8 @@ ServiceScreen.propTypes = {
   onServiceLongPress: React.PropTypes.func.isRequired,
 };
 
+ServiceScreen.defaultProps = {
+  services: [],
+};
+
 export default ServiceScreen;

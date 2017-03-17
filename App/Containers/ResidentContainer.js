@@ -21,35 +21,22 @@ export default class extends Component {
 
   constructor(props) {
     super(props);
-    this.goBack = this._goBack.bind(this);
-    this.selectService = this._selectService.bind(this);
-  }
-
-  _selectService() {
-    // this.refs.calendar.show();
-    // this.refs.sign.show();
-    // this.scrollBy(1);
-    this.service.hide();
-    this.order.show();
-  }
-
-  _goBack() {
-    this.order.hide();
-    this.service.show();
   }
 
   render() {
     return (
       <View style = {{ flex: 1 }}>
-        <MapScreen />
+        <MapScreen
+          selectPlace = { () => {} }
+        />
         <ServiceScreen
           ref = { (s) => { this.service = s; } }
           services = { [] }
-          onServiceSelect = { this.selectService }
+          onServicePress = { () => {} }
+          onServiceLongPress = { () => {} }
         />
         <OrderScreen
           ref = { (o) => { this.order = o; } }
-          onBack = { this.goBack }
         />
         {
         // <ScrollView

@@ -11,9 +11,6 @@ import Dimension from '../Libs/Dimension';
 
 
 class MapScreen extends Component {
-  state = {
-    region: {},
-  };
   delta = 0.01;
   animation = {
     height: new Animated.Value(Dimension.height),
@@ -66,8 +63,7 @@ class MapScreen extends Component {
   }
 
   componentDidMount() {
-    // this.goToCurrentLocation();
-    this.focus();
+    this.blur();
   }
 
   render() {
@@ -88,7 +84,6 @@ class MapScreen extends Component {
             loadingEnabled = { true }
             loadingIndicatorColor = { eGobie.EGOBIE_WHITE }
             loadingBackgroundColor = { eGobie.EGOBIE_SHADOW }
-            region = { this.state.region }
             style = {{
               position: 'absolute',
               top: 0,

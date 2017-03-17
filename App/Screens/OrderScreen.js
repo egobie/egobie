@@ -179,9 +179,6 @@ export default class extends Component {
       <Animated.View
         style = {{
           marginBottom: 5,
-          transform: [
-            { translateX: this.animation.translateXs[i] },
-          ],
         }}
       >
         <Label
@@ -222,9 +219,6 @@ export default class extends Component {
       <Animated.View
         style = {{
           marginBottom: 5,
-          transform: [
-            { translateX: this.animation.translateXs[i] },
-          ],
         }}
       >
         <Label
@@ -265,9 +259,6 @@ export default class extends Component {
       <Animated.View
         style = {{
           marginBottom: 5,
-          transform: [
-            { translateX: this.animation.translateXs[i] },
-          ],
         }}
       >
         <Label
@@ -309,9 +300,6 @@ export default class extends Component {
         style = {{
           flexDirection: 'row',
           marginBottom: 5,
-          transform: [
-            { translateX: this.animation.translateXs[i] },
-          ],
         }}
       >
         <Label
@@ -383,13 +371,7 @@ export default class extends Component {
     this.animation.translateXs.push(new Animated.Value(Dimension.width));
 
     return (
-      <Animated.View
-        style = {{
-          transform: [
-            { translateX: this.animation.translateXs[i] },
-          ],
-        }}
-      >
+      <Animated.View>
         <Label
           title = 'Estimated Time'
           value = '1 hour 30 mins'
@@ -566,9 +548,6 @@ export default class extends Component {
             marginBottom: 20,
             justifyContent: 'flex-end',
             opacity: this.animation.placeOrderOpacity,
-            transform: [
-              { translateX: this.animation.translateXs[i] },
-            ],
           }}
         >
           <Button
@@ -605,10 +584,8 @@ export default class extends Component {
     return (
       <Animated.View style = {{
         flex: 1,
+        marginTop: 10,
         width: Dimension.width,
-        transform: [
-          { translateX: this.animation.translateX },
-        ],
       }}>
         <Animated.View style = {{
           transform: [

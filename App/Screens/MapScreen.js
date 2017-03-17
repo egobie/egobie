@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Animated, TouchableWithoutFeedback } from 'react-native';
+import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 
 import MapView from 'react-native-maps';
 import Reactotron from 'reactotron-react-native';
@@ -11,7 +11,6 @@ import Dimension from '../Libs/Dimension';
 
 
 class MapScreen extends Component {
-
   state = {
     region: {},
   };
@@ -22,11 +21,9 @@ class MapScreen extends Component {
 
   constructor(props) {
     super(props);
+    this.focus = this._focus.bind(this);
+    this.blur = this._blur.bind(this);
     this.goToCurrentLocation = this._goToCurrentLocation.bind(this);
-  }
-
-  componentDidMount() {
-    this.goToCurrentLocation();
   }
 
   selectPlace(place) {
@@ -35,6 +32,23 @@ class MapScreen extends Component {
 
   onPress(place) {
     
+  }
+
+  _focus() {
+    Animated.timing(this.animation.height, {
+      toValue: Dimension.height,
+      easing: Easing.out(Easing.cubic),
+    }).start(() => {
+      this.refs.placeSearch.show();
+    });
+  }
+
+  _blur() {
+    this.refs.placeSearch.hide();
+    Animated.timing(this.animation.height, {
+      toValue: 150,
+      easing: Easing.out(Easing.cubic),
+    }).start();
   }
 
   _goToCurrentLocation() {
@@ -46,6 +60,11 @@ class MapScreen extends Component {
         longitudeDelta: this.delta,
       });
     });
+  }
+
+  componentDidMount() {
+    // this.goToCurrentLocation();
+    this.blur();
   }
 
   render() {
@@ -100,7 +119,10 @@ class MapScreen extends Component {
             />
           </View>
         </TouchableWithoutFeedback>
-        <PlaceSearch selectPlace = { this.selectPlace.bind(this) } />
+        <PlaceSearch
+          ref = { 'placeSearch' }
+          selectPlace = { this.selectPlace.bind(this) }
+        />
       </Animated.View>
     );
   }

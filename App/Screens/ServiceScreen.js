@@ -13,8 +13,6 @@ class ServiceScreen extends Component {
   state = {
     showed: false,
   };
-
-  services = [];
   animation = {
     top: new Animated.Value(Dimension.height),
     scale: new Animated.Value(0.8),
@@ -25,21 +23,14 @@ class ServiceScreen extends Component {
 
   constructor(props) {
     super(props);
+    this.show = this._show.bind(this);
+    this.hide = this._hide.bind(this);
+    this.focus = this._focus.bind(this);
+    this.blur = this._blur.bind(this);
+    this.toogle = this._toogle.bind(this);
   }
 
-  hide() {
-    this.services.forEach((service) => {
-      service.hide();
-    });
-  }
-
-  show() {
-    this.services.forEach((service) => {
-      service.show();
-    });
-  }
-
-  showScreen() {
+  _focus() {
     Animated.parallel([
       Animated.timing(this.animation.top, {
         toValue: 0,
@@ -68,7 +59,7 @@ class ServiceScreen extends Component {
     });
   }
 
-  hideScreen() {
+  _blur() {
     Animated.parallel([
       Animated.timing(this.animation.top, {
         toValue: Dimension.height - 80,
@@ -97,7 +88,7 @@ class ServiceScreen extends Component {
     });
   }
 
-  componentDidMount() {
+  _show() {
     Animated.timing(this.animation.top, {
       toValue: Dimension.height - 80,
       easing: Easing.out(Easing.cubic),
@@ -105,13 +96,24 @@ class ServiceScreen extends Component {
     }).start();
   }
 
-  toogleScreen() {
-    this.state.showed ? this.hideScreen() : this.showScreen();
+  _hide() {
+    Animated.timing(this.animation.top, {
+      toValue: Dimension.height,
+      easing: Easing.out(Easing.cubic),
+    }).start();
+  }
+
+  _toogle() {
+    this.state.showed ? this.blur() : this.focus();
+  }
+
+  componentDidMount() {
+    this.show();
   }
 
   renderBanner() {
     return (
-      <TouchableWithoutFeedback onPress = { this.toogleScreen.bind(this) }>
+      <TouchableWithoutFeedback onPress = { this.toogle }>
       <View style = {{
         flexDirection: 'row',
         alignItems: 'center',
@@ -165,7 +167,6 @@ class ServiceScreen extends Component {
           [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, key) => {
             return (
               <Service
-                ref = { (service) => { this.services.push(service) } }
                 id = { 1 }
                 type = ''
                 title = 'Premium'

@@ -47,6 +47,10 @@ export default class extends Component {
           services = { [] }
           onServiceSelect = { this.selectService }
         />
+        <OrderScreen
+          ref = { (o) => { this.order = o; } }
+          onBack = { this.goBack }
+        />
         {
         // <ScrollView
         //   ref = { (sv) => { this.view = sv; } }

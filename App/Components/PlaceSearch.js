@@ -160,7 +160,6 @@ class PlaceSearch extends Component {
     Animated.timing(this.animation.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
-      delay: 500,
     }).start();
   }
 

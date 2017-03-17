@@ -40,9 +40,21 @@ const configs = {
   },
 };
 
+const stackRouteConfigs = {
+  navigationOptions: {
+    header: {
+      visible: false,
+    },
+  },
+};
+
 export default StackNavigator({
-  Home: {
-    screen: TabNavigator(routes, configs),
+  // Home: {
+  //   screen: TabNavigator(routes, configs),
+  // },
+  Resident: {
+    screen: ResidentContainer,
+    ...stackRouteConfigs,
   },
   User: {
     screen: UserScreen,
@@ -56,4 +68,6 @@ export default StackNavigator({
   About: {
     screen: AboutScreen,
   }
+}, {
+  headerMode: 'screen',
 });

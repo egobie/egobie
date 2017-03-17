@@ -15,32 +15,15 @@ import eGobie from '../Styles/Egobie';
 
 
 export default class extends Component {
+  service;
+  order;
+  view;
+
   constructor(props) {
     super(props);
     this.goBack = this._goBack.bind(this);
     this.selectService = this._selectService.bind(this);
   }
-
-  static navigationOptions = {
-    title: 'Resident',
-    header: {
-      titleStyle: {
-        
-      }
-    },
-    tabBar: {
-      label: I18n.t('tab.resident'),
-      icon: ({ tintColor }) => {
-        return (
-          <Icon name = 'home' size = { 25 } color = { tintColor } />
-        );
-      },
-    }
-  };
-
-  service;
-  order;
-  view;
 
   _selectService() {
     // this.refs.calendar.show();

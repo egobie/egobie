@@ -16,8 +16,11 @@ class ServiceScreen extends Component {
 
   services = [];
   animation = {
-    top: new Animated.Value(Dimension.height - 180),
+    top: new Animated.Value(Dimension.height - 80),
     scale: new Animated.Value(0.8),
+    topDistance: new Animated.Value(0),
+    height: new Animated.Value(0),
+    rotate: new Animated.Value(0),
   };
 
   constructor(props) {
@@ -39,11 +42,23 @@ class ServiceScreen extends Component {
   showScreen() {
     Animated.parallel([
       Animated.timing(this.animation.top, {
-        toValue: Dimension.height - 380,
+        toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
       Animated.timing(this.animation.scale, {
-        toValue: 0.95,
+        toValue: 1,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.height, {
+        toValue: Dimension.height - 50,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.rotate, {
+        toValue: 1,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.topDistance, {
+        toValue: 15,
         easing: Easing.out(Easing.cubic),
       }),
     ]).start(() => {
@@ -56,11 +71,23 @@ class ServiceScreen extends Component {
   hideScreen() {
     Animated.parallel([
       Animated.timing(this.animation.top, {
-        toValue: Dimension.height - 180,
+        toValue: Dimension.height - 80,
         easing: Easing.out(Easing.cubic),
       }),
       Animated.timing(this.animation.scale, {
         toValue: 0.80,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.height, {
+        toValue: 0,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.rotate, {
+        toValue: 0,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.animation.topDistance, {
+        toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
     ]).start(() => {
@@ -76,78 +103,79 @@ class ServiceScreen extends Component {
 
   renderBanner() {
     return (
+      <TouchableWithoutFeedback onPress = { this.toogleScreen.bind(this) }>
       <View style = {{
         flexDirection: 'row',
         alignItems: 'center',
         height: 50,
         backgroundColor: eGobie.EGOBIE_BLUE,
       }}>
-        <Text style = {{
+        <Animated.Text style = {{
           flex: 1,
           fontSize: 15,
           paddingLeft: 15,
+          paddingTop: this.animation.topDistance,
           color: eGobie.EGOBIE_WHITE,
-        }}> eGobie Services </Text>
-        <TouchableWithoutFeedback onPress = { this.toogleScreen.bind(this) }>
-          <View style = {{
+        }}> eGobie Services </Animated.Text>
+          <Animated.View style = {{
             height: 30,
             width: 30,
             marginRight: 10,
+            marginTop: this.animation.topDistance,
             justifyContent: 'center',
             alignItems: 'center',
+            transform: [
+              { rotate: this.animation.rotate.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['0deg', '180deg'],
+                }),
+              },
+            ],
           }}>
-            {
-              !this.state.showed && <Icon
-                type = { 'material-community' }
-                name = { 'chevron-up' }
-                iconStyle = {{
-                  color: eGobie.EGOBIE_WHITE,
-                }}
-              />
-            }
-            {
-              this.state.showed && <Icon
-                type = { 'material-community' }
-                name = { 'chevron-down' }
-                iconStyle = {{
-                  color: eGobie.EGOBIE_WHITE,
-                }}
-              />
-            }
-          </View>
-        </TouchableWithoutFeedback>
+            <Icon
+              type = { 'material-community' }
+              name = { 'chevron-up' }
+              iconStyle = {{
+                color: eGobie.EGOBIE_WHITE,
+              }}
+            />
+          </Animated.View>
       </View>
+      </TouchableWithoutFeedback>
     );
   }
 
   renderList() {
     return (
-      <ScrollView
-        showsVerticalScrollIndicator = { false }
-        style = {{
-          height: 200,
-          marginTop: 5,
-          marginBottom: 10,
-        }}
-      >
-      {
-        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, key) => {
-          return (
-            <Service
-              ref = { (service) => { this.services.push(service) } }
-              id = { 1 }
-              type = ''
-              title = 'Premium'
-              time = '30'
-              price = '999.99'
-              key = { key }
-              onClick = { this.props.onServiceSelect }
-              delay = { key * 50 }
-            />
-          );
-        })
-      }
-      </ScrollView>
+      <Animated.View style = {{
+        height: this.animation.height,
+      }}>
+        <ScrollView
+          showsVerticalScrollIndicator = { false }
+          style = {{
+            marginTop: 5,
+            marginBottom: 10,
+          }}
+        >
+        {
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, key) => {
+            return (
+              <Service
+                ref = { (service) => { this.services.push(service) } }
+                id = { 1 }
+                type = ''
+                title = 'Premium'
+                time = '30'
+                price = '999.99'
+                key = { key }
+                onClick = { this.props.onServiceSelect }
+                delay = { key * 50 }
+              />
+            );
+          })
+        }
+        </ScrollView>
+      </Animated.View>
     );
   }
 

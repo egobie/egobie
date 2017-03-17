@@ -130,22 +130,20 @@ class PlaceSearch extends Component {
   }
 
   _formatPlace(data, detail) {
-    // Reactotron.log(data);
-    // Reactotron.log(detail);
+    let addresDetails = detail.address_components;
 
-    // let addresDetails = detail.address_components;
-
-    // this.props.selectPlace({
-    //   address: detail.name,
-    //   formattedAddress: detail.formatted_address,
-    //   city: addresDetails[2] ? addresDetails[2].long_name : '',
-    //   county: addresDetails[3] ? addresDetails[3].short_name : '',
-    //   state: addresDetails[4] ? addresDetails[4].short_name : '',
-    //   zipcode: addresDetails[6] ? addresDetails[6].short_name : '',
-    //   latitude: detail.geometry.location.lat,
-    //   longitude: detail.geometry.location.lng,
-    //   utcOffset: detail.utc_offset,
-    // });
+    this.blur();
+    this.props.selectPlace({
+      address: detail.name,
+      formattedAddress: detail.formatted_address,
+      city: addresDetails[2] ? addresDetails[2].long_name : '',
+      county: addresDetails[3] ? addresDetails[3].short_name : '',
+      state: addresDetails[4] ? addresDetails[4].short_name : '',
+      zipcode: addresDetails[6] ? addresDetails[6].short_name : '',
+      latitude: detail.geometry.location.lat,
+      longitude: detail.geometry.location.lng,
+      utcOffset: detail.utc_offset,
+    });
   }
 
   _show() {
@@ -261,7 +259,7 @@ PlaceSearch.propTypes = {
   /**
    * Place Details JSON: (The GooglePlacesAutocomplete returns `result`)
    *  https://developers.google.com/places/web-service/details#PlaceDetailsResponses
-   * */
+   **/
   selectPlace: React.PropTypes.func.isRequired,
 };
 

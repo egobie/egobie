@@ -23,15 +23,14 @@ class MapScreen extends Component {
     super(props);
     this.focus = this._focus.bind(this);
     this.blur = this._blur.bind(this);
+    this.goToLocation = this._goToLocation.bind(this);
     this.goToCurrentLocation = this._goToCurrentLocation.bind(this);
+    this.selectPlace = this._selectPlace.bind(this);
   }
 
-  selectPlace(place) {
-    Reactotron.log(place);
-  }
-
-  onPress(place) {
-    
+  _selectPlace(place) {
+    this.goToLocation(place.latitude, place.longitude);
+    this.props.selectPlace(place);
   }
 
   _focus() {
@@ -46,32 +45,36 @@ class MapScreen extends Component {
   _blur() {
     this.refs.placeSearch.hide();
     Animated.timing(this.animation.height, {
-      toValue: 150,
+      toValue: 128,
       easing: Easing.out(Easing.cubic),
     }).start();
   }
 
+  _goToLocation(latitude, longitude) {
+    this.refs.map && this.refs.map.animateToRegion({
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: this.delta,
+      longitudeDelta: this.delta,
+    });
+  }
+
   _goToCurrentLocation() {
     navigator.geolocation.getCurrentPosition((position) => {
-      this.refs.map && this.refs.map.animateToRegion({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        latitudeDelta: this.delta,
-        longitudeDelta: this.delta,
-      });
+      this.goToLocation(position.coords.latitude, position.coords.longitude);
     });
   }
 
   componentDidMount() {
     // this.goToCurrentLocation();
-    this.blur();
+    this.focus();
   }
 
   render() {
     return (
       <Animated.View style = {{
         height: this.animation.height,
-      }} onPress = { () => { Reactotron.log('click') } } >
+      }}>
         <View style = {{
           flex: 1,
           justifyContent: 'flex-end',
@@ -86,7 +89,6 @@ class MapScreen extends Component {
             loadingIndicatorColor = { eGobie.EGOBIE_WHITE }
             loadingBackgroundColor = { eGobie.EGOBIE_SHADOW }
             region = { this.state.region }
-            onPress = { this.onPress.bind(this) }
             style = {{
               position: 'absolute',
               top: 0,
@@ -121,7 +123,7 @@ class MapScreen extends Component {
         </TouchableWithoutFeedback>
         <PlaceSearch
           ref = { 'placeSearch' }
-          selectPlace = { this.selectPlace.bind(this) }
+          selectPlace = { this.selectPlace }
         />
       </Animated.View>
     );
@@ -129,7 +131,7 @@ class MapScreen extends Component {
 }
 
 MapScreen.propTypes = {
-
+  selectPlace: React.PropTypes.func.isRequired,
 }
 
 export default MapScreen;

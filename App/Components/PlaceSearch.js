@@ -33,7 +33,17 @@ class PlaceSearch extends Component {
     ],
   };
 
-  show() {
+  constructor(props) {
+    super(props);
+    this.focus = this._focus.bind(this);
+    this.blur = this._blur.bind(this);
+    this.cancelButton = this._cancelButton.bind(this);
+    this.formatPlace = this._formatPlace.bind(this);
+    this.show = this._show.bind(this);
+    this.hide = this._hide.bind(this);
+  }
+
+  _focus() {
     Animated.parallel([
       Animated.timing(this.animation.padding, {
         toValue: 10,
@@ -66,7 +76,7 @@ class PlaceSearch extends Component {
     ]).start();
   }
 
-  hide() {
+  _blur() {
     this.refs.googlePlace.triggerBlur();
     Animated.parallel([
       Animated.timing(this.animation.padding, {
@@ -100,9 +110,9 @@ class PlaceSearch extends Component {
     ]).start();
   }
 
-  cancelButton() {
+  _cancelButton() {
     return (
-      <TouchableWithoutFeedback onPress = { this.hide.bind(this) } >
+      <TouchableWithoutFeedback onPress = { this.blur } >
         <Animated.View style = {{
           top: 4,
           marginRight: this.animation.marginRight,
@@ -119,7 +129,7 @@ class PlaceSearch extends Component {
     );
   }
 
-  formatPlace(data, detail) {
+  _formatPlace(data, detail) {
     // Reactotron.log(data);
     // Reactotron.log(detail);
 
@@ -138,12 +148,24 @@ class PlaceSearch extends Component {
     // });
   }
 
-  componentDidMount() {
+  _show() {
     Animated.timing(this.animation.scale, {
       toValue: 0.8,
       easing: Easing.out(Easing.cubic),
       delay: 500,
     }).start();
+  }
+
+  _hide() {
+    Animated.timing(this.animation.scale, {
+      toValue: 0,
+      easing: Easing.out(Easing.cubic),
+      delay: 500,
+    }).start();
+  }
+
+  componentDidMount() {
+    this.show();
   }
 
   render() {
@@ -167,10 +189,10 @@ class PlaceSearch extends Component {
           minLength = { 2 }
           styles = { styles }
           predefinedPlaces = { [ homePlace, workPlace ] }
-          renderLeftButton = { this.cancelButton.bind(this) }
-          onPress = { this.formatPlace.bind(this) }
+          renderLeftButton = { this.cancelButton }
+          onPress = { this.formatPlace }
           textInputProps = {{
-            onFocus: () => { this.show() },
+            onFocus: this.focus,
           }}
         />
       </Animated.View>

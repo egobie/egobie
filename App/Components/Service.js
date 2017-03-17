@@ -2,18 +2,26 @@ import React, { Component } from 'react';
 import { View, Text, Dimensions, Animated, StyleSheet, Easing, TouchableWithoutFeedback } from 'react-native';
 
 import { ListItem } from 'react-native-elements';
+import Reactotron from 'reactotron-react-native';
 
 import eGobie from '../Styles/Egobie';
 
 
 class Service extends Component {
   dimension = Dimensions.get('window');
+  animation = {
+    translateX: new Animated.Value(0 - this.dimension.width),
+  };
+  state = {
+    selected: false,
+    color: eGobie.EGOBIE_BLACK,
+    iconColor: eGobie.EGOBIE_BLUE,
+    backgroundColor: eGobie.EGOBIE_WHITE,
+  };
 
   constructor(props) {
     super(props);
-    this.state = {
-      translateX: new Animated.Value(0 - this.dimension.width),
-    };
+    this.onPress = this._onPress.bind(this);
   }
 
   serviceIcon(type) {
@@ -21,7 +29,7 @@ class Service extends Component {
       type: 'material-community',
       name: type === 'car-wash' ? 'car-wash' : 'oil',
       style: {
-        color: eGobie.EGOBIE_BLUE,
+        color: this.state.iconColor,
         fontSize: 35,
         marginRight: 15,
       }
@@ -29,7 +37,7 @@ class Service extends Component {
   }
 
   show() {
-    Animated.timing(this.state.translateX, {
+    Animated.timing(this.animation.translateX, {
       toValue: 0,
       duration: 500,
       easing: Easing.out(Easing.cubic),
@@ -38,7 +46,7 @@ class Service extends Component {
   }
 
   hide() {
-    Animated.timing(this.state.translateX, {
+    Animated.timing(this.animation.translateX, {
       toValue: 0 - this.dimension.width,
       duration: 500,
       easing: Easing.out(Easing.cubic),
@@ -46,33 +54,47 @@ class Service extends Component {
     }).start();
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.show();
+  }
+
+  _onPress() {
+    let selected = this.state.selected;
+    this.setState({
+      selected: !selected,
+      backgroundColor: !selected ? eGobie.EGOBIE_BLACK: eGobie.EGOBIE_WHITE,
+      color: !selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLACK,
+      iconColor: !selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLUE,
+    });
   }
 
   render() {
     return (
-      <TouchableWithoutFeedback onPress = { () => { this.props.onClick(this.props.id) } }>
+      <TouchableWithoutFeedback
+        onPress = { this.onPress }
+        onLongPress = { () => {} }
+      >
         <Animated.View style = {{
+          backgroundColor: this.state.backgroundColor,
           transform: [
-            { translateX: this.state.translateX },
+            { translateX: this.animation.translateX },
           ],
         }}>
           <ListItem
             hideChevron
             title = { this.props.title }
             titleStyle = {{
-              color: eGobie.EGOBIE_BLACK,
+              color: this.state.color,
               fontWeight: '600',
             }}
             subtitle = { `Estimated Time: ${this.props.time}min` }
             subtitleStyle = {{
-              color: eGobie.EGOBIE_BLACK,
+              color: this.state.color,
               fontWeight: '300',
             }}
             rightTitle = { `$${this.props.price}` }
             rightTitleStyle = {{
-              color: eGobie.EGOBIE_BLACK,
+              color: this.state.color,
               fontWeight: '600',
             }}
             leftIcon = { this.serviceIcon(this.props.type) }

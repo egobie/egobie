@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableWithoutFeedback } from 'react-native';
+import { View, Animated, TouchableWithoutFeedback } from 'react-native';
 
 import MapView from 'react-native-maps';
 import Reactotron from 'reactotron-react-native';
@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements';
 
 import PlaceSearch from '../Components/PlaceSearch';
 import eGobie from '../Styles/Egobie';
+import Dimension from '../Libs/Dimension';
 
 
 class MapScreen extends Component {
@@ -15,6 +16,9 @@ class MapScreen extends Component {
     region: {},
   };
   delta = 0.01;
+  animation = {
+    height: new Animated.Value(Dimension.height),
+  };
 
   constructor(props) {
     super(props);
@@ -46,8 +50,8 @@ class MapScreen extends Component {
 
   render() {
     return (
-      <View style = {{
-        flex: 1,
+      <Animated.View style = {{
+        height: this.animation.height,
       }} onPress = { () => { Reactotron.log('click') } } >
         <View style = {{
           flex: 1,
@@ -97,7 +101,7 @@ class MapScreen extends Component {
           </View>
         </TouchableWithoutFeedback>
         <PlaceSearch selectPlace = { this.selectPlace.bind(this) } />
-      </View>
+      </Animated.View>
     );
   }
 }

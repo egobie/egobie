@@ -16,7 +16,7 @@ const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818,
 class PlaceSearch extends Component {
   animation = {
     height: new Animated.Value(50),
-    scale: new Animated.Value(0.8),
+    scale: new Animated.Value(0),
     opacity: new Animated.Value(0.9),
     padding: new Animated.Value(0),
     iconHeight: new Animated.Value(0),
@@ -136,6 +136,14 @@ class PlaceSearch extends Component {
     //   longitude: detail.geometry.location.lng,
     //   utcOffset: detail.utc_offset,
     // });
+  }
+
+  componentDidMount() {
+    Animated.timing(this.animation.scale, {
+      toValue: 0.8,
+      easing: Easing.out(Easing.cubic),
+      delay: 500,
+    }).start();
   }
 
   render() {

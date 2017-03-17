@@ -16,7 +16,7 @@ class ServiceScreen extends Component {
 
   services = [];
   animation = {
-    top: new Animated.Value(Dimension.height - 80),
+    top: new Animated.Value(Dimension.height),
     scale: new Animated.Value(0.8),
     topDistance: new Animated.Value(0),
     height: new Animated.Value(0),
@@ -95,6 +95,14 @@ class ServiceScreen extends Component {
         showed: false,
       });
     });
+  }
+
+  componentDidMount() {
+    Animated.timing(this.animation.top, {
+      toValue: Dimension.height - 80,
+      easing: Easing.out(Easing.cubic),
+      delay: 500,
+    }).start();
   }
 
   toogleScreen() {

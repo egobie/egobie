@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
 
-import user from './UserSaga';
-import resident from './ResidentSaga';
+import user from './UserReducer';
 
 export default combineReducers({
   user,
-  resident,
 });

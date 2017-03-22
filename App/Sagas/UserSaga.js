@@ -1,20 +1,43 @@
+import { take, put, cancelled, takeLatest } from 'react-redux/effects';
+
 import * as Action from '../Actions/UserAction';
 
-const user = {
-  signIn: false,
-};
 
-export default (state = user, action) => {
-  switch (action.type) {
-    case Action.USER_SIGN_IN:
-      return Object.assign({}, state, {
-        signIn: true,
-      });
-    case Action.USER_SIGN_OUT:
-      return Object.assign({}, state, {
-        signIn: false,
-      })
-    default:
-      return state;
+function* signIn(action) {
+  try {
+    yield put({
+      type: Action.USER_SIGN_IN_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: Action.USER_SIGN_IN_ERROR,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      // Cancel
+    }
   }
+}
+
+function* signUp(action) {
+  try {
+    yield put({
+      type: Action.USER_SIGN_UP_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: Action.USER_SIGN_UP_ERROR,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      // Cancel
+    }
+  }
+}
+
+export default function* userSaga() {
+  yield takeLatest(Action.USER_SIGN_IN, signIn);
+  yield takeLatest(Action.USER_SIGN_UP, signUp);
 };

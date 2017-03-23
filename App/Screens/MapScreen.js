@@ -14,12 +14,15 @@ class MapScreen extends Component {
   delta = 0.01;
   animation = {
     height: new Animated.Value(Dimension.height),
+    scale: new Animated.Value(0),
   };
 
   constructor(props) {
     super(props);
     this.focus = this._focus.bind(this);
     this.blur = this._blur.bind(this);
+    this.show = this._show.bind(this);
+    this.hide = this._hide.bind(this);
     this.goToLocation = this._goToLocation.bind(this);
     this.goToCurrentLocation = this._goToCurrentLocation.bind(this);
     this.selectPlace = this._selectPlace.bind(this);
@@ -47,6 +50,20 @@ class MapScreen extends Component {
     }).start();
   }
 
+  _show() {
+    Animated.timing(this.animation.scale, {
+      toValue: 1,
+      easing: Easing.out(Easing.cubic),
+    }).start();
+  }
+
+  _hide() {
+    Animated.timing(this.animation.scale, {
+      toValue: 0,
+      easing: Easing.out(Easing.cubic),
+    }).start();
+  }
+
   _goToLocation(latitude, longitude) {
     this.refs.map && this.refs.map.animateToRegion({
       latitude: latitude,
@@ -60,6 +77,10 @@ class MapScreen extends Component {
     navigator.geolocation.getCurrentPosition((position) => {
       this.goToLocation(position.coords.latitude, position.coords.longitude);
     });
+  }
+
+  componentDidMount() {
+    this.show();
   }
 
   render() {
@@ -91,7 +112,7 @@ class MapScreen extends Component {
         }
         </View>
         <TouchableWithoutFeedback onPress = { this.goToCurrentLocation }>
-          <View style = {{
+          <Animated.View style = {{
             position: 'absolute',
             alignItems: 'center',
             justifyContent: 'center',
@@ -100,7 +121,10 @@ class MapScreen extends Component {
             width: 30,
             height: 30,
             borderRadius: 15,
-            backgroundColor: eGobie.EGOBIE_WHITE
+            backgroundColor: eGobie.EGOBIE_WHITE,
+            transform: [
+              { scale: this.animation.scale },
+            ],
           }}>
             <Icon
               type = { 'material' }
@@ -110,7 +134,7 @@ class MapScreen extends Component {
                 color: eGobie.EGOBIE_BLACK,
               }}
             />
-          </View>
+          </Animated.View>
         </TouchableWithoutFeedback>
         <PlaceSearch
           ref = { 'placeSearch' }

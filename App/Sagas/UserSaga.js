@@ -1,9 +1,9 @@
-import { take, put, cancelled, takeLatest } from 'react-redux/effects';
+import { call, put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as Action from '../Actions/UserAction';
 
 
-function* signIn(action) {
+function* signInTask(action) {
   try {
     yield put({
       type: Action.USER_SIGN_IN_SUCCESS,
@@ -15,12 +15,14 @@ function* signIn(action) {
     });
   } finally {
     if (yield cancelled()) {
-      // Cancel
+      yield put({
+        type: Action.USER_SIGN_IN_FAIL,
+      });
     }
   }
 }
 
-function* signUp(action) {
+function* signUpTask(action) {
   try {
     yield put({
       type: Action.USER_SIGN_UP_SUCCESS,
@@ -32,12 +34,14 @@ function* signUp(action) {
     });
   } finally {
     if (yield cancelled()) {
-      // Cancel
+      yield put({
+        type: Action.USER_SIGN_UP_FAIL,
+      });
     }
   }
 }
 
 export default function* userSaga() {
-  yield takeLatest(Action.USER_SIGN_IN, signIn);
-  yield takeLatest(Action.USER_SIGN_UP, signUp);
+  yield takeLatest(Action.USER_SIGN_IN, signInTask);
+  yield takeLatest(Action.USER_SIGN_UP, signUpTask);
 };

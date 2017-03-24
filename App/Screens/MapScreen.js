@@ -97,6 +97,20 @@ class MapScreen extends Component {
     this.goToCurrentLocation();
   }
 
+  renderMarker() {
+    return (
+      <MapView.Marker coordinate = { this.state.currentLocation } >
+        <MapView.Callout style = {{
+          width: Dimension.width * 0.8,
+          height: 25,
+          padding: 0,
+        }}>
+          <Callout location = { '414 Hackensack Ave' }/>
+        </MapView.Callout>
+      </MapView.Marker>
+    );
+  }
+
   render() {
     return (
       <Animated.View style = {{
@@ -124,11 +138,7 @@ class MapScreen extends Component {
               right: 0,
             }}
           >
-            <MapView.Marker coordinate = { this.state.currentLocation } >
-              <MapView.Callout>
-                <Callout></Callout>
-              </MapView.Callout>
-            </MapView.Marker>
+            { this.renderMarker() }
           </MapView>
         }
         </View>

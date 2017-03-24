@@ -6,6 +6,7 @@ import MapView from 'react-native-maps';
 import Reactotron from 'reactotron-react-native';
 import { Icon } from 'react-native-elements';
 
+import * as Action from '../Actions/LocationAction';
 import PlaceSearch from '../Components/PlaceSearch';
 import Callout from '../Components/Callout';
 import eGobie from '../Styles/Egobie';
@@ -73,6 +74,7 @@ class MapScreen extends Component {
   }
 
   _goToLocation(latitude, longitude) {
+    this.props.getCurrentLocation(latitude, longitude);
     this.refs.map && this.refs.map.animateToRegion({
       latitude: latitude,
       longitude: longitude,
@@ -99,8 +101,6 @@ class MapScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    Reactotron.log('New Place');
-    Reactotron.log(nextProps);
     this.goToLocation(nextProps.latitude, nextProps.longitude);
   }
 
@@ -115,7 +115,7 @@ class MapScreen extends Component {
           height: 25,
           padding: 0,
         }}>
-          <Callout location = { '414 Hackensack Ave' }/>
+          <Callout location = { this.props.address }/>
         </MapView.Callout>
       </MapView.Marker>
     );
@@ -187,7 +187,20 @@ const mapStateToProps = (state) => {
   return {
     latitude: state.location.latitude,
     longitude: state.location.longitude,
+    address: state.location.address,
   };
 };
 
-export default connect(mapStateToProps)(MapScreen);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCurrentLocation: (latitude, longitude) => {
+      dispatch({
+        type: Action.LOCATION_GET_CURRENT,
+        latitude,
+        longitude,
+      });
+    },
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapScreen);

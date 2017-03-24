@@ -7,9 +7,11 @@ import Reactotron from 'reactotron-react-native'
 const { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
 
 import * as Action from '../Actions/LocationAction';
+import * as ApiKey from '../Libs/ApiKey';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 import Dimension from '../Libs/Dimension';
+
 
 const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
 const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
@@ -132,24 +134,8 @@ class PlaceSearch extends Component {
   }
 
   _choosePlace(data, detail) {
-    let addresDetails = detail.address_components;
-
     this.blur();
-    /**
-     * Place Details JSON: (The GooglePlacesAutocomplete returns `result`)
-     *  https://developers.google.com/places/web-service/details#PlaceDetailsResponses
-     **/
-    this.props.choosePlace({
-      address: detail.name,
-      formattedAddress: detail.formatted_address,
-      city: addresDetails[2] ? addresDetails[2].long_name : '',
-      county: addresDetails[3] ? addresDetails[3].short_name : '',
-      state: addresDetails[4] ? addresDetails[4].short_name : '',
-      zipcode: addresDetails[6] ? addresDetails[6].short_name : '',
-      latitude: detail.geometry.location.lat,
-      longitude: detail.geometry.location.lng,
-      utcOffset: detail.utc_offset,
-    });
+    this.props.choosePlace(detail);
   }
 
   _show() {
@@ -182,7 +168,7 @@ class PlaceSearch extends Component {
         <GooglePlacesAutocomplete
           ref = { 'googlePlace' }
           query = {{
-            key: '', //AIzaSyC2J6HexU68TpGCtIU7gTOMR-Ta_hiU0a4',
+            key: ApiKey.GOOGLE_PLACE_KEY,
             language: 'en',
           }}
           autoFocus = { false }
@@ -191,7 +177,7 @@ class PlaceSearch extends Component {
           placeholderTextColor = { eGobie.EGOBIE_GREY }
           minLength = { 2 }
           styles = { styles }
-          predefinedPlaces = { [ homePlace, workPlace ] }
+          // predefinedPlaces = { [ homePlace, workPlace ] }
           renderLeftButton = { this.cancelButton }
           onPress = { this.choosePlace }
           textInputProps = {{
@@ -263,10 +249,10 @@ const styles = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    choosePlace: (location) => {
+    choosePlace: (detail) => {
       dispatch({
         type: Action.LOCATION_SELECT,
-        location,
+        detail,
       });
     }
   }

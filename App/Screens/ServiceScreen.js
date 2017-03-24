@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
+import * as Action from '../Actions/ServiceAction';
 import Service from '../Components/Service';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
@@ -108,6 +110,7 @@ class ServiceScreen extends Component {
   }
 
   componentDidMount() {
+    this.props.initServices();
     this.show();
   }
 
@@ -164,17 +167,15 @@ class ServiceScreen extends Component {
           showsVerticalScrollIndicator = { false }
         >
         {
-          this.props.services.map((_, key) => {
+          this.props.services.map((service, key) => {
             return (
               <Service
                 key = { key }
-                id = { 1 }
-                type = ''
-                title = 'Premium'
-                time = '30'
-                price = '999.99'
-                onPress = { (id, selected) => { this.props.onServicePress(id, selected) } }
-                onLongPress = { (id) => { this.props.onServiceLongPress(id) } }
+                id = { service.id }
+                type = { service.type.toLowerCase() }
+                title = { service.name }
+                time = { service.time }
+                price = { service.price }
               />
             );
           })
@@ -205,12 +206,26 @@ class ServiceScreen extends Component {
 
 ServiceScreen.propTypes = {
   services: React.PropTypes.array.isRequired,
-  onServicePress: React.PropTypes.func.isRequired,
-  onServiceLongPress: React.PropTypes.func.isRequired,
 };
 
 ServiceScreen.defaultProps = {
   services: [],
 };
 
-export default ServiceScreen;
+const mapStateToProps = (state) => {
+  return {
+    services: state.service.services,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initServices: () => {
+      dispatch({
+        type: Action.SERVICE_GET_ALL,
+      })
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceScreen);

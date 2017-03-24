@@ -6,13 +6,16 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 
-import Reducer from '../Reducers';
-import Saga from '../Sagas';
+import * as ServiceAction from '../Actions/ServiceAction';
+import eGobieReducer from '../Reducers';
+import eGobieSaga from '../Sagas';
 import RootContainer from './RootContainer';
 
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(Reducer, applyMiddleware(sagaMiddleware));
+const store = createStore(eGobieReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(eGobieSaga);
 
 export default class extends Component {
   render() {

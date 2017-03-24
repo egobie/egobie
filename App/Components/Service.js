@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, Animated, StyleSheet, Easing, TouchableWithoutFeedback } from 'react-native';
 
+import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import Reactotron from 'reactotron-react-native';
 
+import * as Action from '../Actions/ServiceAction';
 import eGobie from '../Styles/Egobie';
 
 
@@ -24,7 +26,7 @@ class Service extends Component {
   serviceIcon(type) {
     return {
       type: 'material-community',
-      name: type === 'car-wash' ? 'car-wash' : 'oil',
+      name: type === 'car_wash' ? 'car-wash' : 'oil',
       style: {
         color: this.state.iconColor,
         fontSize: 35,
@@ -100,4 +102,22 @@ Service.propTypes = {
   onLongPress: React.PropTypes.func.isRequired,
 };
 
-export default Service;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onPress: (id, selected) => {
+      if (selected) {
+        dispatch({
+          type: Action.SERVICE_SELECT,
+          id,
+        });
+      } else {
+        dispatch({
+          type: Action.SERVICE_DESELECT,
+          id,
+        });
+      }
+    },
+  };
+};
+
+export default connect(undefined, mapDispatchToProps)(Service);

@@ -1,9 +1,11 @@
+import Reactotron from 'reactotron-react-native'
+
 import * as Action from '../Actions/ServiceAction';
 
 
 const service = {
   loading: false,
-  servics: [],
+  services: [],
   selected: [],
 };
 
@@ -22,6 +24,8 @@ export default (state = service, action) => {
 
     case Action.SERVICE_GET_ALL_FAIL:
     case Action.SERVICE_GET_ALL_ERROR:
+      Reactotron.log('error -');
+      Reactotron.log(action.error);
       return Object.assign({}, state, {
         loading: false,
         services: [],
@@ -29,7 +33,13 @@ export default (state = service, action) => {
 
     case Action.SERVICE_SELECT:
       let selected1 = [].concat(state.selected);
-      selected1.push(action.service);
+      let find1 = state.servics.find((service) => {
+        return service.id === action.id;
+      });
+
+      if (find1) {
+        selected1.push(find1);
+      }
 
       return Object.assign({}, state, {
         selected: selected1,
@@ -37,7 +47,9 @@ export default (state = service, action) => {
 
     case Action.SERVICE_DESELECT:
       let selected2 = [].concat(state.selected);
-      let index = selected2.indexOf(action.service);
+      let index = selected2.findIndex((service) => {
+        return service.id === action.id;
+      });
 
       if (index >= 0) {
         selected2.splice(index, 1);

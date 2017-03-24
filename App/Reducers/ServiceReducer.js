@@ -1,5 +1,3 @@
-import Reactotron from 'reactotron-react-native'
-
 import * as Action from '../Actions/ServiceAction';
 
 
@@ -24,8 +22,6 @@ export default (state = service, action) => {
 
     case Action.SERVICE_GET_ALL_FAIL:
     case Action.SERVICE_GET_ALL_ERROR:
-      Reactotron.log('error -');
-      Reactotron.log(action.error);
       return Object.assign({}, state, {
         loading: false,
         services: [],

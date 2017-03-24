@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 
+import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 import Reactotron from 'reactotron-react-native';
 import { Icon } from 'react-native-elements';
@@ -82,7 +83,7 @@ class MapScreen extends Component {
       currentLocation: {
         latitude: latitude,
         longitude: longitude,
-      },
+      }
     });
   }
 
@@ -97,9 +98,18 @@ class MapScreen extends Component {
     this.goToCurrentLocation();
   }
 
+  componentWillReceiveProps(nextProps) {
+    Reactotron.log('New Place');
+    Reactotron.log(nextProps);
+    this.goToLocation(nextProps.latitude, nextProps.longitude);
+  }
+
   renderMarker() {
     return (
-      <MapView.Marker coordinate = { this.state.currentLocation } >
+      <MapView.Marker
+        coordinate = { this.state.currentLocation }
+        onCalloutPress = { () => { this.props.goToOrder(); } }
+      >
         <MapView.Callout style = {{
           width: Dimension.width * 0.8,
           height: 25,
@@ -167,18 +177,17 @@ class MapScreen extends Component {
             />
           </Animated.View>
         </TouchableWithoutFeedback>
-        <PlaceSearch
-          ref = { 'placeSearch' }
-          selectPlace = { this.selectPlace }
-        />
+        <PlaceSearch ref = { 'placeSearch' } />
       </Animated.View>
     );
   }
 }
 
-MapScreen.propTypes = {
-  selectPlace: React.PropTypes.func.isRequired,
-}
+const mapStateToProps = (state) => {
+  return {
+    latitude: state.location.latitude,
+    longitude: state.location.longitude,
+  };
+};
 
-
-export default MapScreen;
+export default connect(mapStateToProps)(MapScreen);

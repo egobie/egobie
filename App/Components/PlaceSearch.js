@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import Reactotron from 'reactotron-react-native'
 const { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
 
+import * as Action from '../Actions/LocationAction';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 import Dimension from '../Libs/Dimension';
@@ -38,7 +40,7 @@ class PlaceSearch extends Component {
     this.focus = this._focus.bind(this);
     this.blur = this._blur.bind(this);
     this.cancelButton = this._cancelButton.bind(this);
-    this.formatPlace = this._formatPlace.bind(this);
+    this.choosePlace = this._choosePlace.bind(this);
     this.show = this._show.bind(this);
     this.hide = this._hide.bind(this);
   }
@@ -121,7 +123,7 @@ class PlaceSearch extends Component {
         }}>
           <Icon
             type = { 'material-community' }
-            name = 'keyboard-backspace'
+            name = { 'keyboard-backspace' }
             color = { eGobie.EGOBIE_BLACK }
           />
         </Animated.View>
@@ -129,11 +131,15 @@ class PlaceSearch extends Component {
     );
   }
 
-  _formatPlace(data, detail) {
+  _choosePlace(data, detail) {
     let addresDetails = detail.address_components;
 
     this.blur();
-    this.props.selectPlace({
+    /**
+     * Place Details JSON: (The GooglePlacesAutocomplete returns `result`)
+     *  https://developers.google.com/places/web-service/details#PlaceDetailsResponses
+     **/
+    this.props.choosePlace({
       address: detail.name,
       formattedAddress: detail.formatted_address,
       city: addresDetails[2] ? addresDetails[2].long_name : '',
@@ -176,7 +182,7 @@ class PlaceSearch extends Component {
         <GooglePlacesAutocomplete
           ref = { 'googlePlace' }
           query = {{
-            key: '', //'AIzaSyC2J6HexU68TpGCtIU7gTOMR-Ta_hiU0a4',
+            key: '', //AIzaSyC2J6HexU68TpGCtIU7gTOMR-Ta_hiU0a4',
             language: 'en',
           }}
           autoFocus = { false }
@@ -187,7 +193,7 @@ class PlaceSearch extends Component {
           styles = { styles }
           predefinedPlaces = { [ homePlace, workPlace ] }
           renderLeftButton = { this.cancelButton }
-          onPress = { this.formatPlace }
+          onPress = { this.choosePlace }
           textInputProps = {{
             onFocus: this.focus,
           }}
@@ -255,12 +261,16 @@ const styles = {
   },
 };
 
-PlaceSearch.propTypes = {
-  /**
-   * Place Details JSON: (The GooglePlacesAutocomplete returns `result`)
-   *  https://developers.google.com/places/web-service/details#PlaceDetailsResponses
-   **/
-  selectPlace: React.PropTypes.func.isRequired,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    choosePlace: (location) => {
+      dispatch({
+        type: Action.LOCATION_SELECT,
+        location,
+      });
+    }
+  }
 };
 
-export default PlaceSearch;
+
+export default connect(undefined, mapDispatchToProps)(PlaceSearch);

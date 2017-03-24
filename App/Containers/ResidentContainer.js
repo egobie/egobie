@@ -26,9 +26,7 @@ export default class extends Component {
   render() {
     return (
       <View style = {{ flex: 1 }}>
-        <MapScreen
-          selectPlace = { () => {} }
-        />
+        <MapScreen />
         <ServiceScreen
           ref = { (s) => { this.service = s; } }
           services = { [] }

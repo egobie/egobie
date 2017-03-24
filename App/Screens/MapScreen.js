@@ -6,6 +6,7 @@ import Reactotron from 'reactotron-react-native';
 import { Icon } from 'react-native-elements';
 
 import PlaceSearch from '../Components/PlaceSearch';
+import Callout from '../Components/Callout';
 import eGobie from '../Styles/Egobie';
 import Dimension from '../Libs/Dimension';
 
@@ -15,6 +16,12 @@ class MapScreen extends Component {
   animation = {
     height: new Animated.Value(Dimension.height),
     scale: new Animated.Value(0),
+  };
+  state = {
+    currentLocation: {
+      latitude: 0,
+      longitude: 0,
+    },
   };
 
   constructor(props) {
@@ -71,6 +78,12 @@ class MapScreen extends Component {
       latitudeDelta: this.delta,
       longitudeDelta: this.delta,
     });
+    this.setState({
+      currentLocation: {
+        latitude: latitude,
+        longitude: longitude,
+      },
+    });
   }
 
   _goToCurrentLocation() {
@@ -81,6 +94,7 @@ class MapScreen extends Component {
 
   componentDidMount() {
     this.show();
+    this.goToCurrentLocation();
   }
 
   render() {
@@ -96,7 +110,8 @@ class MapScreen extends Component {
         {
           <MapView
             ref = { 'map' }
-            showsUserLocation = { true }
+            showsUserLocation = { false }
+            showsMyLocationButton = { false }
             followsUserLocation = { true }
             loadingEnabled = { true }
             loadingIndicatorColor = { eGobie.EGOBIE_WHITE }
@@ -108,7 +123,13 @@ class MapScreen extends Component {
               left: 0,
               right: 0,
             }}
-          />
+          >
+            <MapView.Marker coordinate = { this.state.currentLocation } >
+              <MapView.Callout>
+                <Callout></Callout>
+              </MapView.Callout>
+            </MapView.Marker>
+          </MapView>
         }
         </View>
         <TouchableWithoutFeedback onPress = { this.goToCurrentLocation }>
@@ -148,5 +169,6 @@ class MapScreen extends Component {
 MapScreen.propTypes = {
   selectPlace: React.PropTypes.func.isRequired,
 }
+
 
 export default MapScreen;

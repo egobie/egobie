@@ -1,4 +1,5 @@
 import { put, takeLatest, cancelled } from 'redux-saga/effects';
+import Reactotron from 'reactotron-react-native';
 
 import * as Action from '../Actions/LocationAction';
 import { getCurrentLocation } from '../Requests/LocationRequest';
@@ -7,10 +8,9 @@ import { getCurrentLocation } from '../Requests/LocationRequest';
 function* getCurrentLocationTask(action) {
   try {
     const detail = yield getCurrentLocation(action.latitude, action.longitude);
-    Reactotron.log(detail);
     yield put({
       type: Action.LOCATION_GET_CURRENT_SUCCESS,
-      detail
+      detail: detail.results[0],
     });
   } catch (error) {
     yield put({

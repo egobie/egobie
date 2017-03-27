@@ -74,7 +74,7 @@ class MapScreen extends Component {
   }
 
   _goToLocation(latitude, longitude) {
-    this.props.getCurrentLocation(latitude, longitude);
+    
     this.refs.map && this.refs.map.animateToRegion({
       latitude: latitude,
       longitude: longitude,
@@ -91,7 +91,7 @@ class MapScreen extends Component {
 
   _goToCurrentLocation() {
     navigator.geolocation.getCurrentPosition((position) => {
-      this.goToLocation(position.coords.latitude, position.coords.longitude);
+      this.props.getCurrentLocation(position.coords.latitude, position.coords.longitude);
     });
   }
 

@@ -14,8 +14,8 @@ const location = {
 };
 
 const serializeLocation = (result) => {
-  Reactotron.log('result');
   Reactotron.log(result);
+
   /**
    * Place Details JSON: (The GooglePlacesAutocomplete returns `result`)
    *  https://developers.google.com/places/web-service/details#PlaceDetailsResponses

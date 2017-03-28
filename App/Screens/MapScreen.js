@@ -187,7 +187,7 @@ const mapStateToProps = (state) => {
   return {
     latitude: state.location.latitude,
     longitude: state.location.longitude,
-    address: state.location.address,
+    address: state.location.formattedAddress,
   };
 };
 

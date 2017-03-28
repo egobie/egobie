@@ -4,6 +4,8 @@ import Reactotron from 'reactotron-react-native';
 const location = {
   address: '',
   formattedAddress: '',
+  streetNumber: '',
+  street: '',
   city: '',
   county: '',
   state: '',
@@ -14,26 +16,51 @@ const location = {
 };
 
 const serializeLocation = (result) => {
-  Reactotron.log(result);
-
   /**
    * Place Details JSON: (The GooglePlacesAutocomplete returns `result`)
    *  https://developers.google.com/places/web-service/details#PlaceDetailsResponses
    **/
   let detail = result.results ? result.results : result;
-  let addresDetails = detail.address_components;
-
-  return {
+  let addresComponents = detail.address_components;
+  let location = {
     address: detail.name,
     formattedAddress: detail.formatted_address,
-    city: addresDetails[2] ? addresDetails[2].long_name : '',
-    county: addresDetails[3] ? addresDetails[3].short_name : '',
-    state: addresDetails[4] ? addresDetails[4].short_name : '',
-    zipcode: addresDetails[6] ? addresDetails[6].short_name : '',
     latitude: detail.geometry.location.lat,
     longitude: detail.geometry.location.lng,
-    utcOffset: detail.utc_offset,
+    utcOffset: detail.utc_offset ? detail.utc_offset : '',
+    streetNumber: '',
+    street: '',
+    city: '',
+    county: '',
+    state: '',
+    zipcode: '',
   };
+
+  for (let component of addresComponents) {
+    let types = component.types;
+    let value = component.long_name;
+    if (types) {
+      if (types.includes('street_number')) {
+        location.streetNumber = value;
+      } else if (types.includes('route')) {
+        location.street = value;
+      } else if (types.includes('locality')) {
+        location.city = value;
+      } else if (types.includes('administrative_area_level_2')) {
+        location.county = value;
+      } else if (types.includes('administrative_area_level_1')) {
+        location.state = component.short_name;
+      } else if (types.includes('postal_code')) {
+        location.zipcode = value;
+      }
+    }
+  }
+
+  location.address = location.address ? location.address : `${location.streetNumber} ${location.street}`;
+
+  Reactotron.log(location);
+
+  return location;
 };
 
 export default (state = location, action) => {

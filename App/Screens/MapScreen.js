@@ -123,7 +123,38 @@ class MapScreen extends Component {
           padding: 0,
         }} >
           <TouchableWithoutFeedback onPress={() => {this.blur()} }>
-            <Text>{this.props.address}</Text>
+            <View style = {{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+              <Text style = {{
+                flex: 9,
+                fontSize: 14,
+                color: eGobie.EGOBIE_BLUE,
+                height: 25,
+                lineHeight: 25,
+              }}>
+                { this.props.address }
+              </Text>
+              <View style = {{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: 25,
+              }}>
+                <Icon
+                  type = { 'material-community' }
+                  name = { 'chevron-right' }
+                  color = { eGobie.EGOBIE_BLUE }
+                  iconStyle = {{
+                    flex: 1,
+                    justifyContent: 'center',
+                    paddingTop: 1,
+                  }}
+                />
+              </View>
+            </View>
           </TouchableWithoutFeedback>
         </MapView.Callout>
       </MapView.Marker>

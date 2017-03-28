@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import eGobie from '../Styles/Egobie';
 
 
@@ -13,11 +15,13 @@ class Callout extends Component {
 
   render() {
     return (
-      <View style = {{
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-      }}>
+      <View
+        style = {{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
         <Text style = {{
           flex: 9,
           fontSize: 14,
@@ -53,4 +57,14 @@ Callout.propTypes = {
   location: React.PropTypes.string.isRequired,
 };
 
-export default Callout;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    goToOrder: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_ORDER,
+      });
+    },
+  };
+};
+
+export default connect(undefined, mapDispatchToProps)(Callout);

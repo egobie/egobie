@@ -1,0 +1,2 @@
+export const WORK_FLOW_LOCATION = 'WORK_FLOW_LOCATION';
+export const WORK_FLOW_ORDER = 'WORK_FLOW_ORDER';

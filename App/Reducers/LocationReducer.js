@@ -58,8 +58,6 @@ const serializeLocation = (result) => {
 
   location.address = location.address ? location.address : `${location.streetNumber} ${location.street}`;
 
-  Reactotron.log(location);
-
   return location;
 };
 

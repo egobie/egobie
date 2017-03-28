@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 import Reactotron from 'reactotron-react-native';
 import { Icon } from 'react-native-elements';
 
-import * as Action from '../Actions/LocationAction';
+import * as LocationAction from '../Actions/LocationAction';
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import PlaceSearch from '../Components/PlaceSearch';
 import Callout from '../Components/Callout';
 import eGobie from '../Styles/Egobie';
@@ -35,6 +36,7 @@ class MapScreen extends Component {
     this.goToLocation = this._goToLocation.bind(this);
     this.goToCurrentLocation = this._goToCurrentLocation.bind(this);
     this.selectPlace = this._selectPlace.bind(this);
+    this.goToOrder = this._goToOrder.bind(this);
   }
 
   _selectPlace(place) {
@@ -95,6 +97,10 @@ class MapScreen extends Component {
     });
   }
 
+  _goToOrder() {
+    this.blur();
+  }
+
   componentDidMount() {
     this.show();
     this.goToCurrentLocation();
@@ -102,20 +108,23 @@ class MapScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.goToLocation(nextProps.latitude, nextProps.longitude);
+    switch (nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_ORDER:
+        this.blur();
+    }
   }
 
   renderMarker() {
     return (
-      <MapView.Marker
-        coordinate = { this.state.currentLocation }
-        onCalloutPress = { () => { this.props.goToOrder(); } }
-      >
+      <MapView.Marker coordinate = { this.state.currentLocation } >
         <MapView.Callout style = {{
           width: Dimension.width * 0.8,
           height: 25,
           padding: 0,
-        }}>
-          <Callout location = { this.props.address }/>
+        }} >
+          <TouchableWithoutFeedback onPress={() => {this.blur()} }>
+            <Text>{this.props.address}</Text>
+          </TouchableWithoutFeedback>
         </MapView.Callout>
       </MapView.Marker>
     );
@@ -188,6 +197,7 @@ const mapStateToProps = (state) => {
     latitude: state.location.latitude,
     longitude: state.location.longitude,
     address: state.location.formattedAddress,
+    workflow: state.workflow.name,
   };
 };
 
@@ -195,7 +205,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCurrentLocation: (latitude, longitude) => {
       dispatch({
-        type: Action.LOCATION_GET_CURRENT,
+        type: LocationAction.LOCATION_GET_CURRENT,
         latitude,
         longitude,
       });

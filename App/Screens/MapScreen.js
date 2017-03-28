@@ -9,7 +9,6 @@ import { Icon } from 'react-native-elements';
 import * as LocationAction from '../Actions/LocationAction';
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import PlaceSearch from '../Components/PlaceSearch';
-import Callout from '../Components/Callout';
 import eGobie from '../Styles/Egobie';
 import Dimension from '../Libs/Dimension';
 
@@ -29,55 +28,47 @@ class MapScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.focus = this._focus.bind(this);
-    this.blur = this._blur.bind(this);
-    this.show = this._show.bind(this);
-    this.hide = this._hide.bind(this);
-    this.goToLocation = this._goToLocation.bind(this);
-    this.goToCurrentLocation = this._goToCurrentLocation.bind(this);
-    this.selectPlace = this._selectPlace.bind(this);
-    this.goToOrder = this._goToOrder.bind(this);
   }
 
-  _selectPlace(place) {
+  selectPlace = () => {
     this.goToLocation(place.latitude, place.longitude);
     this.props.selectPlace(place);
   }
 
-  _focus() {
+  focus = () => {
     Animated.timing(this.animation.height, {
       toValue: Dimension.height,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
-      this.refs.placeSearch.show();
+      this.placeSearch.show();
     });
   }
 
-  _blur() {
-    this.refs.placeSearch.hide();
+  blur = () => {
+    Reactotron.log(Object.keys(this.placeSearch));
+    this.placeSearch.hide();
     Animated.timing(this.animation.height, {
       toValue: 128,
       easing: Easing.out(Easing.cubic),
     }).start();
   }
 
-  _show() {
+  show = () => {
     Animated.timing(this.animation.scale, {
       toValue: 1,
       easing: Easing.out(Easing.cubic),
     }).start();
   }
 
-  _hide() {
+  hide = () => {
     Animated.timing(this.animation.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
     }).start();
   }
 
-  _goToLocation(latitude, longitude) {
-    
-    this.refs.map && this.refs.map.animateToRegion({
+  goToLocation = (latitude, longitude) => {
+    this.map && this.map.animateToRegion({
       latitude: latitude,
       longitude: longitude,
       latitudeDelta: this.delta,
@@ -91,14 +82,10 @@ class MapScreen extends Component {
     });
   }
 
-  _goToCurrentLocation() {
+  goToCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       this.props.getCurrentLocation(position.coords.latitude, position.coords.longitude);
     });
-  }
-
-  _goToOrder() {
-    this.blur();
   }
 
   componentDidMount() {
@@ -122,7 +109,7 @@ class MapScreen extends Component {
           height: 25,
           padding: 0,
         }} >
-          <TouchableWithoutFeedback onPress={() => {this.blur()} }>
+          <TouchableWithoutFeedback onPress = { this.props.goToOrder }>
             <View style = {{
               flex: 1,
               flexDirection: 'row',
@@ -173,7 +160,7 @@ class MapScreen extends Component {
         }}>
         {
           <MapView
-            ref = { 'map' }
+            ref = { (ref) => { this.map = ref; } }
             showsUserLocation = { false }
             showsMyLocationButton = { false }
             followsUserLocation = { true }
@@ -217,7 +204,7 @@ class MapScreen extends Component {
             />
           </Animated.View>
         </TouchableWithoutFeedback>
-        <PlaceSearch ref = { 'placeSearch' } />
+        <PlaceSearch ref = { (ref) => { this.placeSearch = ref; } } />
       </Animated.View>
     );
   }
@@ -239,6 +226,11 @@ const mapDispatchToProps = (dispatch) => {
         type: LocationAction.LOCATION_GET_CURRENT,
         latitude,
         longitude,
+      });
+    },
+    goToOrder: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_ORDER,
       });
     },
   }

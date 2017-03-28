@@ -13,10 +13,6 @@ import BoxShadow from '../Styles/BoxShadow';
 import Dimension from '../Libs/Dimension';
 
 
-const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
-const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
-
-
 class PlaceSearch extends Component {
   animation = {
     height: new Animated.Value(50),
@@ -39,15 +35,9 @@ class PlaceSearch extends Component {
 
   constructor(props) {
     super(props);
-    this.focus = this._focus.bind(this);
-    this.blur = this._blur.bind(this);
-    this.cancelButton = this._cancelButton.bind(this);
-    this.choosePlace = this._choosePlace.bind(this);
-    this.show = this._show.bind(this);
-    this.hide = this._hide.bind(this);
   }
 
-  _focus() {
+  focus = () => {
     Animated.parallel([
       Animated.timing(this.animation.padding, {
         toValue: 10,
@@ -80,8 +70,8 @@ class PlaceSearch extends Component {
     ]).start();
   }
 
-  _blur() {
-    this.refs.googlePlace.triggerBlur();
+  blur = () => {
+    this.googlePlace.triggerBlur();
     Animated.parallel([
       Animated.timing(this.animation.padding, {
         toValue: 0,
@@ -114,7 +104,7 @@ class PlaceSearch extends Component {
     ]).start();
   }
 
-  _cancelButton() {
+  cancelButton = () => {
     return (
       <TouchableWithoutFeedback onPress = { this.blur } >
         <Animated.View style = {{
@@ -133,12 +123,12 @@ class PlaceSearch extends Component {
     );
   }
 
-  _choosePlace(data, detail) {
+  choosePlace = (data, detail) => {
     this.blur();
     this.props.choosePlace(detail);
   }
 
-  _show() {
+  show = () => {
     Animated.timing(this.animation.scale, {
       toValue: 0.8,
       easing: Easing.out(Easing.cubic),
@@ -146,7 +136,7 @@ class PlaceSearch extends Component {
     }).start();
   }
 
-  _hide() {
+  hide = () => {
     Animated.timing(this.animation.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
@@ -166,7 +156,7 @@ class PlaceSearch extends Component {
         ...this.animatedStyle,
       }}>
         <GooglePlacesAutocomplete
-          ref = { 'googlePlace' }
+          ref = { (ref) => { this.googlePlace = ref; } }
           query = {{
             key: ApiKey.GOOGLE_PLACE_KEY,
             language: 'en',
@@ -177,7 +167,6 @@ class PlaceSearch extends Component {
           placeholderTextColor = { eGobie.EGOBIE_GREY }
           minLength = { 2 }
           styles = { styles }
-          // predefinedPlaces = { [ homePlace, workPlace ] }
           renderLeftButton = { this.cancelButton }
           onPress = { this.choosePlace }
           textInputProps = {{

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, Modal, Animated, Easing } from 'react-native';
 
+import { connect } from 'react-redux';
 import Reactotron from 'reactotron-react-native';
 import { Button, Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import Vehicle from '../Components/Vehicle';
 import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
@@ -14,7 +16,7 @@ import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
 
-export default class extends Component {
+class OrderScreen extends Component {
   showedChild = '';
 
   constructor(props) {
@@ -134,8 +136,9 @@ export default class extends Component {
         marginBottom: 5,
       }}>
         <Label
+          onPress = { () => { this.props.goToLocation() } }
           title = 'Location'
-          value = '414 Hackensack Avenue, APT 1220'
+          value = { this.props.address }
           titleStyle = {{
             color: eGobie.EGOBIE_GREY,
             fontSize: 12,
@@ -534,3 +537,22 @@ export default class extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    address: state.location.formattedAddress,
+    workflow: state.workflow.name,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    goToLocation: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_LOCATION,
+      });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderScreen);

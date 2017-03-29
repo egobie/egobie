@@ -35,18 +35,27 @@ class MapScreen extends Component {
     this.props.selectPlace(place);
   }
 
-  focus = () => {
+  focus = (showCallout = false) => {
     Animated.timing(this.animation.height, {
       toValue: Dimension.height,
       easing: Easing.out(Easing.cubic),
+    }).start(() => {
+      if (showCallout) {
+        Reactotron.log('showCallout');
+        this.marker.showCallout();
+      }
     });
   }
 
-  blur = () => {
+  blur = (hideCallout = true) => {
     Animated.timing(this.animation.height, {
       toValue: 128,
       easing: Easing.out(Easing.cubic),
-    }).start();
+    }).start(() => {
+      if (hideCallout) {
+        this.marker.hideCallout();
+      }
+    });
   }
 
   show = () => {
@@ -85,14 +94,10 @@ class MapScreen extends Component {
   }
 
   goToOrder = () => {
-    setTimeout(() => {
-      this.marker.hideCallout();
-    }, 500);
     this.props.goToOrder();
   }
 
   componentDidMount() {
-    this.show();
     this.goToCurrentLocation();
   }
 
@@ -101,6 +106,11 @@ class MapScreen extends Component {
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_ORDER:
         this.blur();
+        break;
+
+      case WorkflowAction.WORK_FLOW_LOCATION:
+        this.focus(true);
+        break;
     }
   }
 

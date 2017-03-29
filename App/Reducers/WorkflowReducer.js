@@ -3,7 +3,7 @@ import * as Action from '../Actions/WorkflowAction';
 
 const workflow = {
   step: 1,
-  name: Action.WORK_FLOW_LOCATION,
+  name: Action.WORK_FLOW_START,
 };
 
 export default (state = workflow, action) => {

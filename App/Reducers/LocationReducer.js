@@ -3,7 +3,7 @@ import Reactotron from 'reactotron-react-native';
 
 const location = {
   address: '',
-  formattedAddress: '',
+  formattedAddress: ' ',
   streetNumber: '',
   street: '',
   city: '',

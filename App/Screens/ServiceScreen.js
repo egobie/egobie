@@ -4,7 +4,8 @@ import { View, Text, ScrollView, TouchableWithoutFeedback, Animated, Easing } fr
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
-import * as Action from '../Actions/ServiceAction';
+import * as ServiceAction from '../Actions/ServiceAction';
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import Service from '../Components/Service';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
@@ -25,14 +26,9 @@ class ServiceScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.show = this._show.bind(this);
-    this.hide = this._hide.bind(this);
-    this.focus = this._focus.bind(this);
-    this.blur = this._blur.bind(this);
-    this.toogle = this._toogle.bind(this);
   }
 
-  _focus() {
+  focus = () => {
     Animated.parallel([
       Animated.timing(this.animation.top, {
         toValue: 0,
@@ -61,7 +57,7 @@ class ServiceScreen extends Component {
     });
   }
 
-  _blur() {
+  blur = () => {
     Animated.parallel([
       Animated.timing(this.animation.top, {
         toValue: Dimension.height - 80,
@@ -90,7 +86,7 @@ class ServiceScreen extends Component {
     });
   }
 
-  _show() {
+  show = () => {
     Animated.timing(this.animation.top, {
       toValue: Dimension.height - 80,
       easing: Easing.out(Easing.cubic),
@@ -98,15 +94,27 @@ class ServiceScreen extends Component {
     }).start();
   }
 
-  _hide() {
+  hide = () => {
     Animated.timing(this.animation.top, {
       toValue: Dimension.height,
       easing: Easing.out(Easing.cubic),
     }).start();
   }
 
-  _toogle() {
+  toogle = () => {
     this.state.showed ? this.blur() : this.focus();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    switch (nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_LOCATION:
+        this.show();
+        break;
+
+      case WorkflowAction.WORK_FLOW_ORDER:
+        this.hide();
+        break;
+    }
   }
 
   componentDidMount() {
@@ -215,6 +223,7 @@ ServiceScreen.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     services: state.service.services,
+    workflow: state.workflow.name,
   };
 };
 
@@ -222,7 +231,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     initServices: () => {
       dispatch({
-        type: Action.SERVICE_GET_ALL,
+        type: ServiceAction.SERVICE_GET_ALL,
       })
     },
   };

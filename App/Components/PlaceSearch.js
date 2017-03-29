@@ -6,7 +6,8 @@ import { Icon } from 'react-native-elements';
 import Reactotron from 'reactotron-react-native'
 const { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
 
-import * as Action from '../Actions/LocationAction';
+import * as LocationAction from '../Actions/LocationAction';
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as ApiKey from '../Libs/ApiKey';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
@@ -143,6 +144,18 @@ class PlaceSearch extends Component {
     }).start();
   }
 
+  componentWillReceiveProps(nextProps) {
+    switch (nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_ORDER:
+        this.hide();
+        break;
+
+      case WorkflowAction.WORK_FLOW_LOCATION:
+        this.show();
+        break;
+    }
+  }
+
   componentDidMount() {
     this.show();
   }
@@ -236,11 +249,17 @@ const styles = {
   },
 };
 
+const mapStateToProps = (state) => {
+  return {
+    workflow: state.workflow.name,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     choosePlace: (detail) => {
       dispatch({
-        type: Action.LOCATION_SELECT,
+        type: LocationAction.LOCATION_SELECT,
         detail,
       });
     }
@@ -248,4 +267,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default connect(undefined, mapDispatchToProps)(PlaceSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceSearch);

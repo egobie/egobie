@@ -39,14 +39,10 @@ class MapScreen extends Component {
     Animated.timing(this.animation.height, {
       toValue: Dimension.height,
       easing: Easing.out(Easing.cubic),
-    }).start(() => {
-      this.placeSearch.show();
     });
   }
 
   blur = () => {
-    Reactotron.log(Object.keys(this.placeSearch));
-    this.placeSearch.hide();
     Animated.timing(this.animation.height, {
       toValue: 128,
       easing: Easing.out(Easing.cubic),
@@ -88,6 +84,13 @@ class MapScreen extends Component {
     });
   }
 
+  goToOrder = () => {
+    setTimeout(() => {
+      this.marker.hideCallout();
+    }, 500);
+    this.props.goToOrder();
+  }
+
   componentDidMount() {
     this.show();
     this.goToCurrentLocation();
@@ -103,13 +106,16 @@ class MapScreen extends Component {
 
   renderMarker() {
     return (
-      <MapView.Marker coordinate = { this.state.currentLocation } >
+      <MapView.Marker
+        ref = { (ref) => { this.marker = ref; } }
+        coordinate = { this.state.currentLocation }
+      >
         <MapView.Callout style = {{
           width: Dimension.width * 0.8,
           height: 25,
           padding: 0,
         }} >
-          <TouchableWithoutFeedback onPress = { this.props.goToOrder }>
+          <TouchableWithoutFeedback onPress = { this.goToOrder }>
             <View style = {{
               flex: 1,
               flexDirection: 'row',
@@ -204,7 +210,7 @@ class MapScreen extends Component {
             />
           </Animated.View>
         </TouchableWithoutFeedback>
-        <PlaceSearch ref = { (ref) => { this.placeSearch = ref; } } />
+        <PlaceSearch />
       </Animated.View>
     );
   }

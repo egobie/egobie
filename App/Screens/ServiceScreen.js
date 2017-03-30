@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 
+import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
@@ -13,9 +14,7 @@ import BoxShadow from '../Styles/BoxShadow';
 
 
 class ServiceScreen extends Component {
-  state = {
-    showed: false,
-  };
+  showed = false;
   animation = {
     top: new Animated.Value(Dimension.height),
     scale: new Animated.Value(0.8),
@@ -51,9 +50,7 @@ class ServiceScreen extends Component {
         easing: Easing.out(Easing.cubic),
       }),
     ]).start(() => {
-      this.setState({
-        showed: true,
-      });
+      this.showed = true;
     });
   }
 
@@ -80,9 +77,7 @@ class ServiceScreen extends Component {
         easing: Easing.out(Easing.cubic),
       }),
     ]).start(() => {
-      this.setState({
-        showed: false,
-      });
+      this.showed = false;
     });
   }
 
@@ -102,24 +97,34 @@ class ServiceScreen extends Component {
   }
 
   toogle = () => {
-    this.state.showed ? this.blur() : this.focus();
+    if (this.showed) {
+      this.props.changeWorkflow(WorkflowAction.WORK_FLOW_BACK);
+    } else {
+      this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SERVICE);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    Reactotron.log(nextProps.workflow);
     switch (nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_START:
       case WorkflowAction.WORK_FLOW_LOCATION:
         this.show();
+        this.blur();
         break;
 
       case WorkflowAction.WORK_FLOW_ORDER:
         this.hide();
+        break;
+
+      case WorkflowAction.WORK_FLOW_SERVICE:
+        this.focus();
         break;
     }
   }
 
   componentDidMount() {
     this.props.initServices();
-    this.show();
   }
 
   renderBanner() {
@@ -233,6 +238,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: ServiceAction.SERVICE_GET_ALL,
       })
+    },
+    changeWorkflow: (type) => {
+      dispatch({ type })
     },
   };
 };

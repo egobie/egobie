@@ -172,6 +172,7 @@ class OrderScreen extends Component {
         marginBottom: 5,
       }}>
         <Label
+          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SERVICE) } }
           title = 'Service'
           value = 'Premium'
           titleStyle = {{

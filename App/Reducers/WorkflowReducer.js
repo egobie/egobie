@@ -1,3 +1,5 @@
+import Reactotron from 'reactotron-react-native';
+
 import * as Action from '../Actions/WorkflowAction';
 
 
@@ -11,24 +13,13 @@ export default (state = workflow, action) => {
 
   switch (action.type) {
     case Action.WORK_FLOW_LOCATION:
-      prev.push(state.name);
-      return Object.assign({}, state, {
-        prev,
-        name: Action.WORK_FLOW_LOCATION,
-      });
-
     case Action.WORK_FLOW_ORDER:
-      prev.push(state.name);
-      return Object.assign({}, state, {
-        prev,
-        name: Action.WORK_FLOW_ORDER,
-      });
-
     case Action.WORK_FLOW_CALENDAR:
+    case Action.WORK_FLOW_SERVICE:
       prev.push(state.name);
       return Object.assign({}, state, {
         prev,
-        name: Action.WORK_FLOW_CALENDAR,
+        name: action.type,
       });
 
     case Action.WORK_FLOW_BACK:

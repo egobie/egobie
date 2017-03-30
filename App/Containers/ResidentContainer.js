@@ -27,8 +27,8 @@ export default class extends Component {
     return (
       <View style = {{ flex: 1 }}>
         <MapScreen />
-        <ServiceScreen />
         <OrderScreen />
+        <ServiceScreen />
         <CalendarModal />
         {
         // <ScrollView

@@ -41,7 +41,6 @@ class MapScreen extends Component {
       easing: Easing.out(Easing.cubic),
     }).start(() => {
       if (showCallout) {
-        Reactotron.log('showCallout');
         this.marker.showCallout();
       }
     });

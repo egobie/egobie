@@ -175,10 +175,6 @@ class CalendarModal extends Component {
       case WorkflowAction.WORK_FLOW_CALENDAR:
         this.show();
         break;
-
-      default:
-        this.hide();
-        break;
     }
   }
 
@@ -260,6 +256,7 @@ const mapDispatchToProps = (dispatch) => {
       });
     },
     closeModal: () => {
+      Reactotron.log('dispatch - WorkflowAction.WORK_FLOW_BACK');
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
       });

@@ -19,8 +19,6 @@ class Service extends Component {
 
   constructor(props) {
     super(props);
-    this.onPress = this._onPress.bind(this);
-    this.onLongPress = this._onLongPress.bind(this);
   }
 
   serviceIcon(type) {
@@ -35,7 +33,7 @@ class Service extends Component {
     };
   }
 
-  _onPress() {
+  onPress = () => {
     let selected = this.state.selected;
     this.props.onPress(this.props.id, !selected);
     this.setState({
@@ -46,7 +44,7 @@ class Service extends Component {
     });
   }
 
-  _onLongPress() {
+  onLongPress = () => {
     this.props.onLongPress(this.props.id);
   }
 

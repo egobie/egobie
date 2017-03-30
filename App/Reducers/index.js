@@ -4,6 +4,7 @@ import user from './UserReducer';
 import service from './ServiceReducer';
 import location from './LocationReducer';
 import workflow from './WorkflowReducer';
+import calendar from './CalendarReducer';
 
 
 export default combineReducers({
@@ -11,4 +12,5 @@ export default combineReducers({
   service,
   location,
   workflow,
+  calendar,
 });

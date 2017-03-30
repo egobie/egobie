@@ -9,6 +9,8 @@ import Calendar from 'react-native-calendar';
 import { CheckBox, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as CalendarAction from '../Actions/CalendarAction';
+import Range from '../Components/Range';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
@@ -97,6 +99,8 @@ class CalendarModal extends Component {
   }
 
   onDateSelect = (date) => {
+    let dateString = moment(date).format('YYYY-MM-DD');
+
     setTimeout(() => {
       Animated.parallel([
         Animated.timing(this.animation.scale, {
@@ -109,7 +113,11 @@ class CalendarModal extends Component {
         }),
       ]).start();
     }, 500);
-    this.setState({ selectedDate: date });
+
+    this.props.selectDate(dateString);
+    this.setState({
+      selectedDate: dateString,
+    });
   }
 
   show = () => {
@@ -134,22 +142,18 @@ class CalendarModal extends Component {
         easing: Easing.out(Easing.cubic),
       }),
     ]).start(() => {
-      this.resetState();
-    });
-  };
-
-  resetState = () => {
-    this.setState({
-      visible: false,
-      selectedDate: null,
+      this.props.closeModal();
+      this.setState({
+        visible: false,
+        selectedDate: null,
+      });
     });
   };
 
   openingDays() {
     let openings = [];
     if (this.state.selectedDate) {
-      let dateString = moment(this.state.selectedDate).format('YYYY-MM-DD');
-      if (dateString === '2017-02-01') {
+      if (this.state.selectedDate === '2017-03-31') {
         openings = [1, 2, 3, 4, 5, 6];
       } else {
         openings = [1, 2];
@@ -158,23 +162,9 @@ class CalendarModal extends Component {
 
     return openings.map((_, i) => {
       return (
-        <CheckBox
+        <Range
           key = { i }
-          center
-          iconRight
-          checked
-          title = '09:30 A.M. 10:00 A.M.'
-          uncheckedColor = { eGobie.EGOBIE_GREY }
-          checkedColor = { eGobie.EGOBIE_GREEN }
-          textStyle = {{
-            fontSize: 13,
-            fontWeight: '400',
-            color: eGobie.EGOBIE_BLACK,
-          }}
-          containerStyle = {{
-            backgroundColor: eGobie.EGOBIE_WHITE,
-            ...BoxShadow
-          }}
+          range = '09:30 A.M. 10:00 A.M.'
         />
       );
     });
@@ -196,6 +186,7 @@ class CalendarModal extends Component {
     return (
       <Modal
         transparent
+        animationType = { 'fade' }
         visible = { this.state.visible }
       >
         <View style = {{
@@ -228,7 +219,7 @@ class CalendarModal extends Component {
               prevButtonText = { 'Prev' }
               customStyle = { customStyle }
               dayHeadings = { dayHeadings }
-              eventDates = {['2017-02-01', '2017-02-03', '2017-02-05']}
+              eventDates = {['2017-03-30', '2017-03-31', '2017-03-15']}
               onDateSelect = { this.onDateSelect }
             />
           </Animated.View>
@@ -262,7 +253,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    selectDate: (date, range) => {
+      dispatch({
+        type: CalendarAction.CALENDAR_SELECT_DATE,
+        date,
+      });
+    },
+    closeModal: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_BACK,
+      });
+    },
   };
 };
 

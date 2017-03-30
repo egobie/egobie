@@ -25,12 +25,10 @@ class Range extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedRange !== this.props.range) {
-      Reactotron.log('checked - false');
       this.setState({
         checked: false,
       });
     } else {
-      Reactotron.log('checked - true');
       this.setState({
         checked: true,
       });

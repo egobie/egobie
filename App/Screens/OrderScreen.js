@@ -209,7 +209,7 @@ class OrderScreen extends Component {
         <Label
           onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_CALENDAR) } }
           title = 'Schedule'
-          value = '08/20/2016 09:00 A.M.'
+          value = { this.props.schedule }
           titleStyle = {{
             color: eGobie.EGOBIE_GREY,
             fontSize: 12,
@@ -543,6 +543,7 @@ const mapStateToProps = (state) => {
   return {
     address: state.location.formattedAddress,
     workflow: state.workflow.name,
+    schedule: `${state.calendar.date} ${state.calendar.range}`,
   };
 };
 

@@ -105,7 +105,6 @@ class ServiceScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    Reactotron.log(nextProps.workflow);
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_START:
       case WorkflowAction.WORK_FLOW_LOCATION:
@@ -194,6 +193,42 @@ class ServiceScreen extends Component {
           })
         }
         </ScrollView>
+      </Animated.View>
+    );
+  }
+
+  renderSelected() {
+    return (
+      <Animated.View style = {{
+        position: 'absolute',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 50,
+        borderWidth: 1,
+        left: 0,
+        right: 0,
+        top: -60,
+      }}>
+        <Icon
+          type = { 'material-community' }
+          name = { 'car-wash' }
+          iconStyle = {{
+            color: eGobie.EGOBIE_BLACK,
+            fontSize: 40,
+            marginRight: 20,
+          }}
+        />
+        <Icon
+          type = { 'material-community' }
+          name = { 'oil' }
+          iconStyle = {{
+            color: eGobie.EGOBIE_BLACK,
+            fontSize: 50,
+            marginLeft: 20,
+          }}
+        />
       </Animated.View>
     );
   }

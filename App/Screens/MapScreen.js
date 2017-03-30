@@ -94,7 +94,7 @@ class MapScreen extends Component {
   }
 
   goToOrder = () => {
-    this.props.goToOrder();
+    this.props.changeWorkflow(WorkflowAction.WORK_FLOW_ORDER);
   }
 
   componentDidMount() {
@@ -244,10 +244,8 @@ const mapDispatchToProps = (dispatch) => {
         longitude,
       });
     },
-    goToOrder: () => {
-      dispatch({
-        type: WorkflowAction.WORK_FLOW_ORDER,
-      });
+    changeWorkflow: (type) => {
+      dispatch({ type });
     },
   }
 };

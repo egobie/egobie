@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import {
-  View, ScrollView, TouchableWithoutFeedback,
-  Modal, Animated, Easing,
+  View, ScrollView, TouchableWithoutFeedback, Modal, Animated, Easing,
 } from 'react-native';
 
+import Reactotron from 'reactotron-react-native';
+import { connect } from 'react-redux';
 import Calendar from 'react-native-calendar';
 import { CheckBox, Icon } from 'react-native-elements';
 
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
@@ -92,12 +94,9 @@ class CalendarModal extends Component {
 
   constructor(props) {
     super(props);
-    this.onDateSelect = this._onDateSelect.bind(this);
-    this.hide = this._hide.bind(this);
-    this.show = this._show.bind(this);
   }
 
-  _onDateSelect(date) {
+  onDateSelect = (date) => {
     setTimeout(() => {
       Animated.parallel([
         Animated.timing(this.animation.scale, {
@@ -113,7 +112,7 @@ class CalendarModal extends Component {
     this.setState({ selectedDate: date });
   }
 
-  _show() {
+  show = () => {
     this.setState({ visible: true });
     setTimeout(() => {
       Animated.spring(this.animation.scale, {
@@ -122,9 +121,9 @@ class CalendarModal extends Component {
         tension: 40,
       }).start();
     }, 100);
-  }
+  };
 
-  _hide() {
+  hide = () => {
     Animated.parallel([
       Animated.timing(this.animation.translateY, {
         toValue: 250,
@@ -135,16 +134,16 @@ class CalendarModal extends Component {
         easing: Easing.out(Easing.cubic),
       }),
     ]).start(() => {
-      this._resetState();
+      this.resetState();
     });
-  }
+  };
 
-  _resetState() {
+  resetState = () => {
     this.setState({
       visible: false,
       selectedDate: null,
     });
-  }
+  };
 
   openingDays() {
     let openings = [];
@@ -179,6 +178,18 @@ class CalendarModal extends Component {
         />
       );
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    switch (nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_CALENDAR:
+        this.show();
+        break;
+
+      default:
+        this.hide();
+        break;
+    }
   }
 
   render() {
@@ -243,8 +254,16 @@ class CalendarModal extends Component {
   }
 };
 
-CalendarModal.propTypes = {
+const mapStateToProps = (state) => {
+  return {
+    workflow: state.workflow.name,
+  };
+};
 
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
 
-export default CalendarModal;
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarModal);

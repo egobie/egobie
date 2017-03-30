@@ -136,7 +136,7 @@ class OrderScreen extends Component {
         marginBottom: 5,
       }}>
         <Label
-          onPress = { () => { this.props.goToLocation() } }
+          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_LOCATION) } }
           title = 'Location'
           value = { this.props.address }
           titleStyle = {{
@@ -207,6 +207,7 @@ class OrderScreen extends Component {
         marginBottom: 5,
       }}>
         <Label
+          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_CALENDAR) } }
           title = 'Schedule'
           value = '08/20/2016 09:00 A.M.'
           titleStyle = {{
@@ -547,10 +548,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    goToLocation: () => {
-      dispatch({
-        type: WorkflowAction.WORK_FLOW_LOCATION,
-      });
+    changeWorkflow: (type) => {
+      dispatch({ type });
     },
   };
 };

@@ -27,15 +27,9 @@ export default class extends Component {
     return (
       <View style = {{ flex: 1 }}>
         <MapScreen />
-        <ServiceScreen
-          ref = { (s) => { this.service = s; } }
-          services = { [] }
-          onServicePress = { () => {} }
-          onServiceLongPress = { () => {} }
-        />
-        <OrderScreen
-          ref = { (o) => { this.order = o; } }
-        />
+        <ServiceScreen />
+        <OrderScreen />
+        <CalendarModal />
         {
         // <ScrollView
         //   ref = { (sv) => { this.view = sv; } }

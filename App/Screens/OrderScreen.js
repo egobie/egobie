@@ -258,7 +258,7 @@ class OrderScreen extends Component {
           }}
           leftIcon = {{
             type: 'font-awesome',
-            name: 'cc-visa',
+            name: 'credit-card-alt',
             color: eGobie.EGOBIE_BLUE,
             style: {
               fontSize: 18,
@@ -308,9 +308,11 @@ class OrderScreen extends Component {
     );
   }
 
-  estimatedTime() {
+  estimatedTimeAndPrice() {
     return (
-      <Animated.View>
+      <Animated.View style = {{
+        flexDirection: 'row',
+      }}>
         <Label
           title = 'Estimated Time'
           value = '1 hour 30 mins'
@@ -329,7 +331,36 @@ class OrderScreen extends Component {
           }}
           rightIcon = { this.rightIcon() }
           style = {{
+            flex: 1,
             marginLeft: 15,
+            marginRight: 5,
+            paddingTop: 5,
+            paddingBottom: 5,
+            borderBottomWidth: 1,
+            borderBottomColor: eGobie.EGOBIE_GREY,
+          }}
+        />
+        <Label
+          title = 'Estimated Price'
+          value = '29.85'
+          titleStyle = {{
+            color: eGobie.EGOBIE_GREY,
+            fontSize: 12,
+          }}
+          valueStyle = {{
+            color: eGobie.EGOBIE_BLACK,
+            fontSize: 12,
+          }}
+          leftIcon = {{
+            type: 'font-awesome',
+            name: 'money',
+            color: eGobie.EGOBIE_BLUE,
+            size: 20,
+          }}
+          rightIcon = { this.rightIcon() }
+          style = {{
+            flex: 1,
+            marginLeft: 5,
             marginRight: 15,
             paddingTop: 5,
             paddingBottom: 5,
@@ -487,7 +518,7 @@ class OrderScreen extends Component {
           }}
         >
           <Button
-            title = 'Place Order'
+            title = 'Make Reservation'
             backgroundColor = { eGobie.EGOBIE_BLUE }
             style = {{
               position: 'relative'
@@ -529,9 +560,9 @@ class OrderScreen extends Component {
         }}>
           { this.location() }
           { this.service() }
-          { this.schedule() }
           { this.paymentViechle() }
-          { this.estimatedTime() }
+          { this.schedule() }
+          { this.estimatedTimeAndPrice() }
         </Animated.View>
         { this.mask() }
         { this.placeOrder() }

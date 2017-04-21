@@ -1,12 +1,14 @@
 import { call, put, cancelled, takeLatest } from 'redux-saga/effects';
-
+import Reactotron from 'reactotron-react-native'
 import * as Action from '../Actions/ServiceAction';
 import { getAllServices } from '../Requests/ServiceRequest';
 
 
 function* getAllServicesTask() {
   try {
+    Reactotron.log('getAllServicesTask');
     const services = yield call(getAllServices)
+    Reactotron.log(services);
     yield put({
       type: Action.SERVICE_GET_ALL_SUCCESS,
       services: services,

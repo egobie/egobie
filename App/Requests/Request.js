@@ -1,6 +1,6 @@
 // No trailing `/`
 // const baseUrl = 'http://localhost:8000';
-const baseUrl = 'http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com';
+const baseUrl = 'https://api.egobie.com';
 
 export default (method, url, headers, body) => {
   let _headers = headers ? headers : {};
@@ -16,5 +16,9 @@ export default (method, url, headers, body) => {
       user_id: 1,
       user_token: 'bc2543',
     })),
+  }).then((response) => {
+    return response.json();
+  }, () => {
+    return null;
   });
 };

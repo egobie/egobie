@@ -67,9 +67,10 @@ class Service extends Component {
             subtitle = { `Estimated Time: ${this.props.time}min` }
             subtitleStyle = {{
               color: this.state.color,
+              width: 150,
               fontWeight: '300',
             }}
-            rightTitle = { `$${this.props.price}` }
+            rightTitle = { `$${this.props.price}.00` }
             rightTitleStyle = {{
               color: this.state.color,
               fontWeight: '600',

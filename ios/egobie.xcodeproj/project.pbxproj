@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -59,6 +58,7 @@
 		DFAE2325DBB547D9935A1CFC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */; };
 		EF3A6A880FE74812AC3715B0 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503C350428B040539FCFD733 /* Zocial.ttf */; };
 		FA44A57BCE344A87BD4C7538 /* libcxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABE1A4E18C842DC9CE3D6D8 /* libcxxreact.a */; };
+		C0B1ECEF649149F8AAB016AF /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B18EE43ACB482C90E1E65F /* libRCTCamera.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -354,6 +354,8 @@
 		DFC8911E17F942FC8E0646D5 /* libjschelpers.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libjschelpers.a; sourceTree = "<group>"; };
 		E2D803E650AD4530875397F5 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		39560AAAD7C2488BB9FBE721 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; name = "RCTCamera.xcodeproj"; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		78B18EE43ACB482C90E1E65F /* libRCTCamera.a */ = {isa = PBXFileReference; name = "libRCTCamera.a"; path = "libRCTCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +389,7 @@
 				52C75CF3A47C4A1B90C55B25 /* libjschelpers.a in Frameworks */,
 				A6BED426A88B4D7FA8F619CB /* libAirMaps.a in Frameworks */,
 				71F6A633B0718EE2DB6F6EB6 /* libPods-egobie.a in Frameworks */,
+				C0B1ECEF649149F8AAB016AF /* libRCTCamera.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +639,7 @@
 				448C3F00AE424B0DA64E7849 /* RNVectorIcons.xcodeproj */,
 				415013DF78444A9885657603 /* RNI18n.xcodeproj */,
 				0FD10181D39242F2933A120D /* AirMaps.xcodeproj */,
+				39560AAAD7C2488BB9FBE721 /* RCTCamera.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1186,6 +1190,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/egobie.app/egobie";
@@ -1202,6 +1207,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

@@ -3154,6 +3154,10 @@ react-native-calendar@^0.10.0:
   dependencies:
     moment ">=2.10.3"
 
+"react-native-camera@https://github.com/lwansbrough/react-native-camera.git":
+  version "0.7.0"
+  resolved "https://github.com/lwansbrough/react-native-camera.git#01189f8b7d20a12bfd103e7e2cc1c338b1a56620"
+
 react-native-controllers@^2.0.0:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/react-native-controllers/-/react-native-controllers-2.1.4.tgz#e944857f0b8fe81029f7f6556fe7b6c1b6062911"

@@ -14,6 +14,7 @@ import Label from '../Components/Label';
 import CalendarModal from '../Modals/CalendarModal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
+import { totalPrice } from '../Utils/PriceUtil';
 
 
 class OrderScreen extends Component {
@@ -174,7 +175,7 @@ class OrderScreen extends Component {
         <Label
           onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SERVICE) } }
           title = 'Service'
-          value = 'Premium'
+          value = { this.props.services }
           titleStyle = {{
             color: eGobie.EGOBIE_GREY,
             fontSize: 12,
@@ -342,7 +343,7 @@ class OrderScreen extends Component {
         />
         <Label
           title = 'Estimated Price'
-          value = '29.85'
+          value = { this.props.price }
           titleStyle = {{
             color: eGobie.EGOBIE_GREY,
             fontSize: 12,
@@ -572,10 +573,16 @@ class OrderScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
+  let services = state.service.selected.map((service) => {
+    return service.name;
+  });
+
   return {
     address: state.location.formattedAddress,
     workflow: state.workflow.name,
     schedule: `${state.calendar.date} ${state.calendar.range}`,
+    services: services.length > 0 ? services.join(', ') : ' ',
+    price: totalPrice([], 0),
   };
 };
 

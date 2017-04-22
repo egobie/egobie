@@ -188,6 +188,7 @@ class ServiceScreen extends Component {
                 title = { service.name }
                 time = { service.time }
                 price = { service.price }
+                onLongPress = { () => {} }
               />
             );
           })

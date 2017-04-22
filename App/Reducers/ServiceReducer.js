@@ -29,7 +29,7 @@ export default (state = service, action) => {
 
     case Action.SERVICE_SELECT:
       let selected1 = [].concat(state.selected);
-      let find1 = state.servics.find((service) => {
+      let find1 = state.services.find((service) => {
         return service.id === action.id;
       });
 

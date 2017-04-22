@@ -94,8 +94,8 @@ Service.propTypes = {
   id: React.PropTypes.number.isRequired,
   type: React.PropTypes.string.isRequired,
   title: React.PropTypes.string.isRequired,
-  time: React.PropTypes.string.isRequired,
-  price: React.PropTypes.string.isRequired,
+  time: React.PropTypes.number.isRequired,
+  price: React.PropTypes.number.isRequired,
   onPress: React.PropTypes.func.isRequired,
   onLongPress: React.PropTypes.func.isRequired,
 };

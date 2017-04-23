@@ -36,6 +36,10 @@ class Nav extends Component {
     this.props.showScanner();
   }
 
+  showSign = () => {
+    this.props.showSign();
+  }
+
   componentWillReceiveProps(nextProps) {
     switch(nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_ORDER:
@@ -50,7 +54,7 @@ class Nav extends Component {
 
   renderUserIcon() {
     return (
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress = { this.showSign }>
         <View style = {{
           position: 'absolute',
           justifyContent: 'center',
@@ -114,6 +118,11 @@ const mapDispatchToProps = (dispatch) => {
     showScanner: () => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_SCANNER,
+      });
+    },
+    showSign: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_SIGN,
       });
     },
   };

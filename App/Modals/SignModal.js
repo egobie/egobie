@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Modal, View, Text, Animated, Easing } from 'react-native';
+import { Modal, View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
+import { connect } from 'react-redux';
 
 import { Button, Icon, SocialIcon } from 'react-native-elements';
 import { Kohana } from 'react-native-textinput-effects';
 import FlipCard from 'react-native-flip-card'
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';
 import eGobie from '../Styles/Egobie';
@@ -13,6 +15,7 @@ import eGobie from '../Styles/Egobie';
 
 class SignModal extends Component {
   state = {
+    scale: new Animated.Value(0),
     flip: false,
     visible: false,
   };
@@ -49,33 +52,29 @@ class SignModal extends Component {
     }
   };
   animation = {
-    scale: new Animated.Value(0),
+    
   };
 
   constructor(props) {
     super(props);
-    this.goToSignIn = this._goToSignIn.bind(this);
-    this.goToSignUp = this._goToSignUp.bind(this);
-    this.show = this._show.bind(this);
-    this.hide = this._hide.bind(this);
   }
 
-  _goToSignUp() {
+  goToSignUp = () => {
     this.setState({
       flip: true,
     });
   }
 
-  _goToSignIn() {
+  goToSignIn = () => {
     this.setState({
       flip: false,
     });
   }
 
-  _show() {
+  show = () => {
     this.setState({ visible: true });
     setTimeout(() => {
-      Animated.spring(this.animation.scale, {
+      Animated.spring(this.state.scale, {
         toValue: 1,
         friction: 4,
         tension: 40,
@@ -83,21 +82,36 @@ class SignModal extends Component {
     }, 100);
   }
 
-  _hide() {
-    Animated.timing(this.animation.scale, {
+  hide = () => {
+    Animated.timing(this.state.scale, {
       toValue: 0,
-      duration: 250,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
-      this._resetState();
+      this.resetState();
     });
   }
 
-  _resetState() {
+  resetState = () => {
     this.setState({
       flip: false,
       visible: false,
     });
+  }
+
+  hideSign = () => {
+    this.props.hideSign();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    switch(nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_SIGN:
+        this.show();
+        break;
+
+      default:
+        this.hide();
+        break;
+    }
   }
 
   signIn() {
@@ -113,19 +127,20 @@ class SignModal extends Component {
           backgroundColor: eGobie.EGOBIE_WHITE,
           ...BoxShadow,
         }}>
-          <View style = {{
-            width: this.defaultWidth,
-            height: 30,
-            marginTop: 15,
-            alignItems: 'flex-end',
-          }}>
-            <Icon
-              onPress = { this.hide }
-              type = { 'material-community' }
-              name = { 'close' }
-              color = { eGobie.EGOBIE_RED }
-            />
-          </View>
+          <TouchableWithoutFeedback onPress = { this.hideSign } >
+            <View style = {{
+              width: this.defaultWidth,
+              height: 30,
+              marginTop: 15,
+              alignItems: 'flex-end',
+            }}>
+              <Icon
+                type = { 'material-community' }
+                name = { 'close' }
+                color = { eGobie.EGOBIE_RED }
+              />
+            </View>
+          </TouchableWithoutFeedback>
           <View style = {{
             height: 100,
             justifyContent: 'center',
@@ -243,20 +258,21 @@ class SignModal extends Component {
                   fontSize: 14,
                 }}
               >
-                Sign In
+                { '< Sign In' }
               </Text>
             </View>
-            <View style = {{
-              flex: 1,
-              alignItems: 'flex-end',
-            }}>
-              <Icon
-                type = { 'material-community' }
-                name = { 'close' }
-                color = { '#E04329' }
-                onPress = { this.hide }
-              />
-            </View>
+            <TouchableWithoutFeedback onPress = { this.hideSign } >
+              <View style = {{
+                flex: 1,
+                alignItems: 'flex-end',
+              }}>
+                <Icon
+                  type = { 'material-community' }
+                  name = { 'close' }
+                  color = { '#E04329' }
+                />
+              </View>
+            </TouchableWithoutFeedback>
           </View>
           <View style = {{
             height: 200,
@@ -317,7 +333,7 @@ class SignModal extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             transform: [
-              { scale: this.animation.scale },
+              { scale: this.state.scale },
             ],
           }}>
             <FlipCard
@@ -343,4 +359,20 @@ class SignModal extends Component {
   }
 };
 
-export default SignModal;
+const mapStateToProps = (state) => {
+  return {
+    workflow: state.workflow.name,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    hideSign: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_BACK,
+      });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignModal);

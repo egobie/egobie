@@ -16,6 +16,7 @@ export default (state = workflow, action) => {
     case Action.WORK_FLOW_ORDER:
     case Action.WORK_FLOW_CALENDAR:
     case Action.WORK_FLOW_SERVICE:
+    case Action.WORK_FLOW_SCANNER:
       prev.push(state.name);
       return Object.assign({}, state, {
         prev,

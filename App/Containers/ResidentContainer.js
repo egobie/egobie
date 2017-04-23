@@ -5,6 +5,7 @@ import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Steps from '../Components/Steps';
+import ScannerScreen from '../Screens/ScannerScreen';
 import MapScreen from '../Screens/MapScreen';
 import ServiceScreen from '../Screens/ServiceScreen';
 import OrderScreen from '../Screens/OrderScreen';
@@ -30,6 +31,8 @@ export default class extends Component {
         <OrderScreen />
         <ServiceScreen />
         <CalendarModal />
+        <SignModal />
+        <ScannerScreen />
         {
         // <ScrollView
         //   ref = { (sv) => { this.view = sv; } }

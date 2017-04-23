@@ -15,7 +15,7 @@ import Dimension from '../Libs/Dimension';
 
 
 class PlaceSearch extends Component {
-  animation = {
+  state = {
     height: new Animated.Value(50),
     scale: new Animated.Value(0),
     opacity: new Animated.Value(0.9),
@@ -26,11 +26,11 @@ class PlaceSearch extends Component {
   };
 
   animatedStyle = {
-    height: this.animation.height,
-    padding: this.animation.padding,
-    opacity: this.animation.opacity,
+    height: this.state.height,
+    padding: this.state.padding,
+    opacity: this.state.opacity,
     transform: [
-      { scale: this.animation.scale },
+      { scale: this.state.scale },
     ],
   };
 
@@ -40,31 +40,31 @@ class PlaceSearch extends Component {
 
   focus = () => {
     Animated.parallel([
-      Animated.timing(this.animation.padding, {
+      Animated.timing(this.state.padding, {
         toValue: 10,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.opacity, {
+      Animated.timing(this.state.opacity, {
         toValue: 1,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.height, {
+      Animated.timing(this.state.height, {
         toValue: Dimension.height - 200,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.scale, {
+      Animated.timing(this.state.scale, {
         toValue: 1,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.iconHeight, {
+      Animated.timing(this.state.iconHeight, {
         toValue: 20,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.iconWidth, {
+      Animated.timing(this.state.iconWidth, {
         toValue: 20,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.marginRight, {
+      Animated.timing(this.state.marginRight, {
         toValue: 15,
         easing: Easing.out(Easing.cubic),
       }),
@@ -74,31 +74,31 @@ class PlaceSearch extends Component {
   blur = () => {
     this.googlePlace.triggerBlur();
     Animated.parallel([
-      Animated.timing(this.animation.padding, {
+      Animated.timing(this.state.padding, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.opacity, {
+      Animated.timing(this.state.opacity, {
         toValue: 0.9,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.height, {
+      Animated.timing(this.state.height, {
         toValue: 50,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.scale, {
+      Animated.timing(this.state.scale, {
         toValue: 0.8,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.iconHeight, {
+      Animated.timing(this.state.iconHeight, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.iconWidth, {
+      Animated.timing(this.state.iconWidth, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.marginRight, {
+      Animated.timing(this.state.marginRight, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
@@ -110,9 +110,9 @@ class PlaceSearch extends Component {
       <TouchableWithoutFeedback onPress = { this.blur } >
         <Animated.View style = {{
           top: 4,
-          marginRight: this.animation.marginRight,
-          width: this.animation.iconWidth,
-          height: this.animation.iconHeight,
+          marginRight: this.state.marginRight,
+          width: this.state.iconWidth,
+          height: this.state.iconHeight,
         }}>
           <Icon
             type = { 'material-community' }
@@ -130,7 +130,7 @@ class PlaceSearch extends Component {
   }
 
   show = () => {
-    Animated.timing(this.animation.scale, {
+    Animated.timing(this.state.scale, {
       toValue: 0.8,
       easing: Easing.out(Easing.cubic),
       delay: 500,
@@ -138,7 +138,7 @@ class PlaceSearch extends Component {
   }
 
   hide = () => {
-    Animated.timing(this.animation.scale, {
+    Animated.timing(this.state.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
     }).start();
@@ -196,7 +196,7 @@ const styles = {
     backgroundColor: 'transparent',
     borderTopWidth: 0,
     borderBottomWidth: 0,
-    marginTop: 50,
+    marginTop: 80,
     justifyContent: 'center',
     alignItems: 'center',
   },

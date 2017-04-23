@@ -8,6 +8,7 @@ import { Icon } from 'react-native-elements';
 
 import * as LocationAction from '../Actions/LocationAction';
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import Nav from '../Components/Nav';
 import PlaceSearch from '../Components/PlaceSearch';
 import eGobie from '../Styles/Egobie';
 import Dimension from '../Libs/Dimension';
@@ -15,11 +16,9 @@ import Dimension from '../Libs/Dimension';
 
 class MapScreen extends Component {
   delta = 0.01;
-  animation = {
+  state = {
     height: new Animated.Value(Dimension.height),
     scale: new Animated.Value(0),
-  };
-  state = {
     currentLocation: {
       latitude: 0,
       longitude: 0,
@@ -36,7 +35,7 @@ class MapScreen extends Component {
   }
 
   focus = (showCallout = false) => {
-    Animated.timing(this.animation.height, {
+    Animated.timing(this.state.height, {
       toValue: Dimension.height,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
@@ -47,7 +46,7 @@ class MapScreen extends Component {
   }
 
   blur = (hideCallout = true) => {
-    Animated.timing(this.animation.height, {
+    Animated.timing(this.state.height, {
       toValue: 128,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
@@ -58,14 +57,14 @@ class MapScreen extends Component {
   }
 
   show = () => {
-    Animated.timing(this.animation.scale, {
+    Animated.timing(this.state.scale, {
       toValue: 1,
       easing: Easing.out(Easing.cubic),
     }).start();
   }
 
   hide = () => {
-    Animated.timing(this.animation.scale, {
+    Animated.timing(this.state.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
     }).start();
@@ -166,7 +165,7 @@ class MapScreen extends Component {
   render() {
     return (
       <Animated.View style = {{
-        height: this.animation.height,
+        height: this.state.height,
       }}>
         <View style = {{
           flex: 1,
@@ -206,7 +205,7 @@ class MapScreen extends Component {
             borderRadius: 15,
             backgroundColor: eGobie.EGOBIE_WHITE,
             transform: [
-              { scale: this.animation.scale },
+              { scale: this.state.scale },
             ],
           }}>
             <Icon
@@ -220,6 +219,7 @@ class MapScreen extends Component {
           </Animated.View>
         </TouchableWithoutFeedback>
         <PlaceSearch />
+        <Nav />
       </Animated.View>
     );
   }

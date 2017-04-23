@@ -86,12 +86,10 @@ const dayHeadings = [
 class CalendarModal extends Component {
 
   state = {
-    visible: false,
-    selectedDate: null,
-  };
-  animation = {
     scale: new Animated.Value(0),
     translateY: new Animated.Value(250),
+    visible: false,
+    selectedDate: null,
   };
 
   constructor(props) {
@@ -103,11 +101,11 @@ class CalendarModal extends Component {
 
     setTimeout(() => {
       Animated.parallel([
-        Animated.timing(this.animation.scale, {
+        Animated.timing(this.state.scale, {
           toValue: 0.85,
           easing: Easing.out(Easing.cubic),
         }),
-        Animated.timing(this.animation.translateY, {
+        Animated.timing(this.state.translateY, {
           toValue: 0,
           easing: Easing.out(Easing.cubic),
         }),
@@ -123,7 +121,7 @@ class CalendarModal extends Component {
   show = () => {
     this.setState({ visible: true });
     setTimeout(() => {
-      Animated.spring(this.animation.scale, {
+      Animated.spring(this.state.scale, {
         toValue: 0.95,
         friction: 4,
         tension: 40,
@@ -133,11 +131,11 @@ class CalendarModal extends Component {
 
   hide = () => {
     Animated.parallel([
-      Animated.timing(this.animation.translateY, {
+      Animated.timing(this.state.translateY, {
         toValue: 250,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.scale, {
+      Animated.timing(this.state.scale, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
@@ -195,7 +193,7 @@ class CalendarModal extends Component {
             flex: 2,
             marginTop: 15,
             transform: [
-              { scale: this.animation.scale },
+              { scale: this.state.scale },
             ],
           }}>
             <TouchableWithoutFeedback onPress = { this.hide }>
@@ -225,7 +223,7 @@ class CalendarModal extends Component {
             marginBottom: 10,
             backgroundColor: eGobie.EGOBIE_WHITE,
             transform: [
-              { translateY: this.animation.translateY },
+              { translateY: this.state.translateY },
             ],
           }}>
             <ScrollView

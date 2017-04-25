@@ -134,7 +134,7 @@ class SignModal extends Component {
   }
 
   signUp = () => {
-
+    
   }
 
   signInSide() {
@@ -339,6 +339,7 @@ class SignModal extends Component {
             />
           </View>
           <Button
+            onPress = { this.signUp }
             title = 'CREATE NEW ACCOUNT'
             backgroundColor = { eGobie.EGOBIE_BLUE }
             buttonStyle = {{

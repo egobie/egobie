@@ -18,6 +18,7 @@
 		"react-native-google-places-autocomplete": "^1.2.8",
 		"react-native-i18n": "^1.0.0",
 		"react-native-maps": "0.13.0",
+		"react-native-message-bar": "^1.6.0",
 		"react-native-navigation": "^1.0.30",
 		"react-native-snap-carousel": "^2.0.1",
 		"react-native-step-indicator": "^0.0.1",

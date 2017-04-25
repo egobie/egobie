@@ -1,5 +1,5 @@
 import { call, put, cancelled, takeLatest } from 'redux-saga/effects';
-import Reactotron from 'reactotron-react-native';
+
 import * as Action from '../Actions/ServiceAction';
 import { getAllServices } from '../Requests/ServiceRequest';
 
@@ -12,7 +12,6 @@ function* getAllServicesTask() {
       services: services,
     });
   } catch (error) {
-    Reactotron.log(error);
     yield put({
       type: Action.SERVICE_GET_ALL_ERROR,
       error,

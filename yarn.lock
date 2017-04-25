@@ -3209,6 +3209,10 @@ react-native-maps@0.13.0:
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.13.0.tgz#f3d791a06d36d553bcc177514ee52fdea45474c0"
 
+react-native-message-bar@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-message-bar/-/react-native-message-bar-1.6.0.tgz#79623e89655475216927090771b0238616b6f1c7"
+
 react-native-navigation@^1.0.30:
   version "1.0.30"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.0.30.tgz#8e47a58f4b8a7256d912d2efe64bea78a900650e"

@@ -1,12 +1,15 @@
 import { call, put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as Action from '../Actions/UserAction';
+import { signIn, signUp } from '../Requests/UserRequest';
 
 
 function* signInTask(action) {
   try {
+    const user = yield signIn(action.username, action.password);
     yield put({
       type: Action.USER_SIGN_IN_SUCCESS,
+      user,
     });
   } catch (error) {
     yield put({

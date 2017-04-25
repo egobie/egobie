@@ -8,6 +8,9 @@ import FlipCard from 'react-native-flip-card'
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as UserAction from '../Actions/UserAction';
+import * as ErrorAction from '../Actions/ErrorAction';
+import ErrorMessage from '../Components/ErrorMessage';
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';
 import eGobie from '../Styles/Egobie';
@@ -51,8 +54,20 @@ class SignModal extends Component {
       ],
     }
   };
-  animation = {
-    
+
+  errorMessage = null;
+
+  signInForm = {
+    username: '',
+    password: '',
+  };
+
+  signUpForm = {
+    username: '',
+    password1: '',
+    password2: '',
+    email: '',
+    phoneNumber: '',
   };
 
   constructor(props) {
@@ -114,7 +129,15 @@ class SignModal extends Component {
     }
   }
 
-  signIn() {
+  signIn = () => {
+    
+  }
+
+  signUp = () => {
+
+  }
+
+  signInSide() {
     return (
       <View style = {{
         flex: 1,
@@ -149,16 +172,19 @@ class SignModal extends Component {
             <Kohana
               label = { 'Username' }
               iconName = { 'account' }
+              onChangeText = { (text) => { this.signInForm.username = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
               secureTextEntry
               label = { 'Password' }
               iconName = { 'lock' }
+              onChangeText = { (text) => { this.signInForm.password = text; } }
               { ...this.inputDefaultProps }
             />
           </View>
           <Button
+            onPress = { this.signIn }
             title = 'SIGN IN'
             backgroundColor = { eGobie.EGOBIE_BLUE }
             buttonStyle = {{
@@ -227,7 +253,7 @@ class SignModal extends Component {
     );
   }
 
-  signUp() {
+  signUpSide() {
     return (
       <View style = {{
         flex: 1,
@@ -275,31 +301,41 @@ class SignModal extends Component {
             </TouchableWithoutFeedback>
           </View>
           <View style = {{
-            height: 200,
+            height: 250,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
             <Kohana
               label = { 'Username' }
               iconName = { 'account' }
+              onChangeText = { (text) => { this.signUpForm.username = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
               secureTextEntry
-              label = { 'Password' }
-              { ...this.inputDefaultProps }
               iconName = { 'key-variant' }
+              label = { 'Password' }
+              onChangeText = { (text) => { this.signUpForm.password1 = text; } }
+              { ...this.inputDefaultProps }
             />
             <Kohana
               secureTextEntry
               label = { 'Confirm Password' }
               iconName = { 'lock' }
+              onChangeText = { (text) => { this.signUpForm.password2 = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
               label = { 'Email' }
-              { ...this.inputDefaultProps }
               iconName = { 'email' }
+              onChangeText = { (text) => { this.signUpForm.email = text; } }
+              { ...this.inputDefaultProps }
+            />
+            <Kohana
+              label = { 'Phone' }
+              iconName = { 'phone' }
+              onChangeText = { (text) => { this.signUpForm.phoneNumber = text; } }
+              { ...this.inputDefaultProps }
             />
           </View>
           <Button
@@ -349,10 +385,11 @@ class SignModal extends Component {
                 borderWidth: 0,
               }}
             >
-              { this.signIn() }
-              { this.signUp() }
+              { this.signInSide() }
+              { this.signUpSide() }
             </FlipCard>
           </Animated.View>
+          <ErrorMessage ref = { (ref) => { this.errorMessage = ref; } }/>
         </Animated.View>
       </Modal>
     );
@@ -367,11 +404,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    signIn: (username, password) => {
+      dispatch({
+        type: UserAction.USER_SIGN_IN,
+        username,
+        password,
+      });
+    },
     hideSign: () => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
       });
-    }
+    },
   };
 };
 

@@ -18,7 +18,7 @@ export default (method, url, headers, body) => {
     })),
   }).then((response) => {
     return response.json();
-  }, () => {
-    return null;
+  }, (error) => {
+    return error;
   });
 };

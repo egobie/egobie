@@ -5,6 +5,7 @@ import service from './ServiceReducer';
 import location from './LocationReducer';
 import workflow from './WorkflowReducer';
 import calendar from './CalendarReducer';
+import error from './ErrorReducer';
 
 
 export default combineReducers({
@@ -13,4 +14,5 @@ export default combineReducers({
   location,
   workflow,
   calendar,
+  error,
 });

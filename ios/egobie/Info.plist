@@ -62,5 +62,30 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
+	<!-- Facebook Login - start-->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>fb287186355065258</string>
+		</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>287186355065258</string>
+	<key>FacebookDisplayName</key>
+	<string>eGobie</string>
+	<!-- Facebook Login - end -->
+	<!--  Facebook other staff - start -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<!--  Facebook other staff - end -->
 </dict>
 </plist>

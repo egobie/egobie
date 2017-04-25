@@ -15,6 +15,10 @@
 // Facebook Login
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
+// Google Login
+#import <RNGoogleSignin/RNGoogleSignin.h>
+
+
 @import GoogleMaps;
 @implementation AppDelegate
 
@@ -52,7 +56,12 @@
   // Add any custom logic here.
   return YES;
 }
+// Facebook Login - end
 
+// Google & Facebook Login - start
+/******************************************/
+/* Only one openURL method can be defined */
+/******************************************/
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url 
     sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 
@@ -60,10 +69,15 @@
     openURL:url
     sourceApplication:sourceApplication
     annotation:annotation
+  ] || [RNGoogleSignin application:application
+                      openURL:url
+            sourceApplication:sourceApplication
+                    annotation:annotation
   ];
   // Add any custom logic here.
   return handled;
 }
-// Facebook Login - ene
+// Google & Facebook Login - end
+
 
 @end

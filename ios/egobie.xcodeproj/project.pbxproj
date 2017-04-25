@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -61,6 +60,11 @@
 		DFAE2325DBB547D9935A1CFC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */; };
 		EF3A6A880FE74812AC3715B0 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503C350428B040539FCFD733 /* Zocial.ttf */; };
 		FA44A57BCE344A87BD4C7538 /* libcxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABE1A4E18C842DC9CE3D6D8 /* libcxxreact.a */; };
+		4EACEE8EB9C74116A75B8D3C /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D4C3CE3ED479DB308E61C /* libRNGoogleSignin.a */; };
+		3F7C19939BEB41F0AE37F36F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3985B3B8E8EA456AA79024AB /* libz.tbd */; };
+		EC3AA19170DB4AE695379691 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEADAB31454FBDB7C665A6 /* SafariServices.framework */; };
+		69FD968F5BEA4A819F1350EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E11E9433D4D3C856DF88B /* SystemConfiguration.framework */; };
+		1ECE3270BC764D99AA4D4F72 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E75A68C90D84104B67C6E05 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -366,6 +370,12 @@
 		DFC8911E17F942FC8E0646D5 /* libjschelpers.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libjschelpers.a; sourceTree = "<group>"; };
 		E2D803E650AD4530875397F5 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		F8B3D7380D8748F2A524A7BB /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		2A99BAF7F2854802A0D14283 /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; name = "RNGoogleSignin.xcodeproj"; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		6D4D4C3CE3ED479DB308E61C /* libRNGoogleSignin.a */ = {isa = PBXFileReference; name = "libRNGoogleSignin.a"; path = "libRNGoogleSignin.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		3985B3B8E8EA456AA79024AB /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		42AEADAB31454FBDB7C665A6 /* SafariServices.framework */ = {isa = PBXFileReference; name = "SafariServices.framework"; path = "System/Library/Frameworks/SafariServices.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		B17E11E9433D4D3C856DF88B /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		4E75A68C90D84104B67C6E05 /* AddressBook.framework */ = {isa = PBXFileReference; name = "AddressBook.framework"; path = "System/Library/Frameworks/AddressBook.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,6 +411,11 @@
 				A6BED426A88B4D7FA8F619CB /* libAirMaps.a in Frameworks */,
 				71F6A633B0718EE2DB6F6EB6 /* libPods-egobie.a in Frameworks */,
 				C0B1ECEF649149F8AAB016AF /* libRCTCamera.a in Frameworks */,
+				4EACEE8EB9C74116A75B8D3C /* libRNGoogleSignin.a in Frameworks */,
+				3F7C19939BEB41F0AE37F36F /* libz.tbd in Frameworks */,
+				EC3AA19170DB4AE695379691 /* SafariServices.framework in Frameworks */,
+				69FD968F5BEA4A819F1350EA /* SystemConfiguration.framework in Frameworks */,
+				1ECE3270BC764D99AA4D4F72 /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +626,10 @@
 			children = (
 				2A94ECE91EAEEB8700D6FAE2 /* FBSDKLoginKit.framework */,
 				34028913FBF557066B3428CD /* libPods-egobie.a */,
+				3985B3B8E8EA456AA79024AB /* libz.tbd */,
+				42AEADAB31454FBDB7C665A6 /* SafariServices.framework */,
+				B17E11E9433D4D3C856DF88B /* SystemConfiguration.framework */,
+				4E75A68C90D84104B67C6E05 /* AddressBook.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -660,6 +679,7 @@
 				415013DF78444A9885657603 /* RNI18n.xcodeproj */,
 				0FD10181D39242F2933A120D /* AirMaps.xcodeproj */,
 				39560AAAD7C2488BB9FBE721 /* RCTCamera.xcodeproj */,
+				2A99BAF7F2854802A0D14283 /* RNGoogleSignin.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1222,6 +1242,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/egobie.app/egobie";
@@ -1238,6 +1259,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

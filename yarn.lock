@@ -3211,6 +3211,10 @@ react-native-google-places-autocomplete@^1.2.8:
   dependencies:
     qs "^5.2.0"
 
+react-native-google-signin@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-0.10.0.tgz#cc47d3726165735ee61e3a4a589c2ced888f1a98"
+
 react-native-i18n@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-1.0.0.tgz#0c407d9ebb846aae1aa5e05de6503008553f02fd"

@@ -24,5 +24,6 @@ target 'egobie' do
 
   # Comment this line if you do not want to support GoogleMaps on iOS
   pod 'GoogleMaps'
+  pod 'Google/SignIn'
 
 end

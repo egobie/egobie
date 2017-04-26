@@ -12,6 +12,8 @@ import ServiceScreen from '../Screens/ServiceScreen';
 import OrderScreen from '../Screens/OrderScreen';
 import SignModal from '../Modals/SignModal';
 import CalendarModal from '../Modals/CalendarModal';
+import PaymentModal from '../Modals/PaymentModal';
+import VehicleModal from '../Modals/VehicleModal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
@@ -33,6 +35,8 @@ export default class extends Component {
         <ServiceScreen />
         <CalendarModal />
         <SignModal />
+        <PaymentModal />
+        <VehicleModal />
         <ScannerScreen />
         <Loading />
         {

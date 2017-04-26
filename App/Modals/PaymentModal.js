@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Animated, Modal, Easing } from 'react-native';
+import { connect } from 'react-redux';
 
 import { CreditCardInput } from 'react-native-credit-card-input';
 import { Button, Icon } from 'react-native-elements';
@@ -11,27 +12,21 @@ import eGobie from '../Styles/Egobie';
 class PaymentModal extends Component {
   state = {
     visibile: false,
-  };
-
-  animation = {
     cardScale: new Animated.Value(0),
   };
 
   constructor(props) {
     super(props);
-    this.cardInput = this._cardInput.bind(this);
-    this.show = this._show.bind(this);
-    this.hide = this._hide.bind(this);
   }
 
-  _cardInput(card) {
+  cardInput = (card) => {
 
   }
 
-  _show() {
+  show = () => {
     this.setState({ visibile: true });
     setTimeout(() => {
-      Animated.spring(this.animation.cardScale, {
+      Animated.spring(this.state.cardScale, {
         toValue: 0.85,
         friction: 4,
         tension: 40,
@@ -39,17 +34,17 @@ class PaymentModal extends Component {
     }, 200);
   }
 
-  _hide() {
-    Animated.timing(this.animation.cardScale, {
+  hide = () => {
+    Animated.timing(this.state.cardScale, {
       toValue: 0,
       duration: 300,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
-      this._resetState();
+      this.resetState();
     });
   }
 
-  _resetState() {
+  resetState = () => {
     this.setState({
       visibile: false,
     });
@@ -73,7 +68,7 @@ class PaymentModal extends Component {
             width: Dimension.width,
             backgroundColor: eGobie.EGOBIE_SHADOW,
             transform: [
-              { scale: this.animation.cardScale },
+              { scale: this.state.cardScale },
             ],
           }}>
             <View style = {{
@@ -135,4 +130,13 @@ class PaymentModal extends Component {
   }
 };
 
-export default PaymentModal;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentModal);
+

@@ -18,31 +18,28 @@ class ErrorMessage extends Component {
   }
 
   show(errorMessage) {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+
+    this.timer = setTimeout(() => {
+      this.hide();
+    }, 2000);
+
     this.setState({
       errorMessage,
     });
     Animated.timing(this.state.top, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
-    }).start(() => {
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
-      this.timer = setTimeout(() => {
-        this.hide();
-      }, 2000);
-    });
+    }).start();
   }
 
   hide() {
     Animated.timing(this.state.top, {
       toValue: -70,
       easing: Easing.out(Easing.cubic),
-    }).start(() => {
-      this.setState({
-        errorMessage: ' ',
-      });
-    });
+    }).start();
   }
 
   render() {

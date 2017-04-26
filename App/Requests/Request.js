@@ -1,6 +1,6 @@
 // No trailing `/`
-const baseUrl = 'http://localhost:8000';
-// const baseUrl = 'https://api.egobie.com';
+// const baseUrl = 'http://localhost:8000';
+const baseUrl = 'https://api.egobie.com';
 
 export default (method, url, headers, body) => {
   let _headers = headers ? headers : {};

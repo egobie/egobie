@@ -14,6 +14,7 @@
 
 // Facebook Login
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 // Google Login
 #import <RNGoogleSignin/RNGoogleSignin.h>
@@ -44,19 +45,15 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  return YES;
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];;
 }
 
-// Facebook Login - start
-- (BOOL)application:(UIApplication *)application 
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-    didFinishLaunchingWithOptions:launchOptions];
-  // Add any custom logic here.
-  return YES;
+// Facebook - Login - start
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBSDKAppEvents activateApp];
 }
-// Facebook Login - end
+// Facebook - Login - end
 
 // Google & Facebook Login - start
 /******************************************/

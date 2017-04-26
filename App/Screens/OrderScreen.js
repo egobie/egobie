@@ -14,7 +14,7 @@ import Label from '../Components/Label';
 import CalendarModal from '../Modals/CalendarModal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
-import { totalPrice } from '../Utils/PriceUtil';
+import * as Price from '../Libs/Price';
 
 
 class OrderScreen extends Component {
@@ -582,7 +582,7 @@ const mapStateToProps = (state) => {
     workflow: state.workflow.name,
     schedule: `${state.calendar.date} ${state.calendar.range}`,
     services: services.length > 0 ? services.join(', ') : ' ',
-    price: totalPrice([], 0),
+    price: Price.totalPrice([], 0),
   };
 };
 

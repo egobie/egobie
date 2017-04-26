@@ -14,6 +14,7 @@ import ErrorMessage from '../Components/ErrorMessage';
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';
 import eGobie from '../Styles/Egobie';
+import * as Validator from '../Libs/Validator';
 
 
 class SignModal extends Component {
@@ -130,11 +131,54 @@ class SignModal extends Component {
   }
 
   signIn = () => {
-    
+    if (this.signInForm.username.length === 0) {
+      this.errorMessage.show('Please input username');
+      return;
+    }
+
+    if (this.signInForm.password.length === 0) {
+      this.errorMessage.show('Please input password');
+      return;
+    }
+
+    this.props.signIn(this.signInForm.username, this.signInForm.password);
   }
 
   signUp = () => {
-    
+    if (this.signUpForm.username.length === 0) {
+      this.errorMessage.show('Please input username');
+      return;
+    }
+
+    if (this.signUpForm.username.length < 5 || this.signUpForm.username.length > 16) {
+      this.errorMessage.show('Username must be 5 - 16 characters');
+      return;
+    }
+
+    if (this.signUpForm.password1.length === 0) {
+      this.errorMessage.show('Please input password');
+      return;
+    }
+
+    if (this.signUpForm.password1.length < 8 || this.signUpForm.password1.length > 20) {
+      this.errorMessage.show('Password must be 8 - 20 characters');
+      return;
+    }
+
+    if (this.signUpForm.password1 !== this.signUpForm.password2) {
+      this.errorMessage.show('Password does not match');
+      return;
+    }
+
+    if (!Validator.validateEmail(this.signUpForm.email)) {
+      this.errorMessage.show('Please input valid Email');
+      return;
+    }
+
+    if (!Validator.validatePhone(this.signUpForm.phoneNumber)) {
+      this.errorMessage.show('Please input valid phone number');
+      return;
+    }
   }
 
   signInSide() {

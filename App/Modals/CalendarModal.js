@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View, ScrollView, TouchableWithoutFeedback, Modal, Animated, Easing,
-} from 'react-native';
+import { View, ScrollView, Modal, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
@@ -180,7 +178,6 @@ class CalendarModal extends Component {
     return (
       <Modal
         transparent
-        animationType = { 'fade' }
         visible = { this.state.visible }
       >
         <View style = {{

@@ -18,6 +18,7 @@ export default (state = workflow, action) => {
     case Action.WORK_FLOW_SIGN:
     case Action.WORK_FLOW_SERVICE:
     case Action.WORK_FLOW_SCANNER:
+    case Action.WORK_FLOW_LOADING:
       prev.push(state.name);
       return Object.assign({}, state, {
         prev,

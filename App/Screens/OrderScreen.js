@@ -551,10 +551,11 @@ class OrderScreen extends Component {
     return (
       <Animated.View style = {{
         flex: 1,
-        marginTop: 10,
         width: Dimension.width,
+        backgroundColor: eGobie.EGOBIE_WHITE,
       }}>
         <Animated.View style = {{
+          marginTop: 10,
           transform: [
             { scale: this.animation.scale },
           ]

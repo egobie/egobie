@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Button, Icon, SocialIcon } from 'react-native-elements';
@@ -11,6 +11,7 @@ import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as UserAction from '../Actions/UserAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import ErrorMessage from '../Components/ErrorMessage';
+import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';
 import eGobie from '../Styles/Egobie';
@@ -399,11 +400,8 @@ class SignModal extends Component {
 
   render() {
     return (
-      <Modal
-        transparent
-        visible = { this.state.visible }
-      >
-        <Animated.View style = {{
+      <Modal visible = { this.state.visible } >
+        <View style = {{
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
@@ -435,7 +433,7 @@ class SignModal extends Component {
             </FlipCard>
           </Animated.View>
           <ErrorMessage ref = { (ref) => { this.errorMessage = ref; } }/>
-        </Animated.View>
+        </View>
       </Modal>
     );
   }

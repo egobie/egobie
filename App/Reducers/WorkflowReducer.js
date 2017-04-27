@@ -1,5 +1,4 @@
 import Reactotron from 'reactotron-react-native';
-
 import * as Action from '../Actions/WorkflowAction';
 
 

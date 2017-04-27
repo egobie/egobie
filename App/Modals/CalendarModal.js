@@ -82,7 +82,6 @@ const dayHeadings = [
 ];
 
 class CalendarModal extends Component {
-  showed = false;
   state = {
     scale: new Animated.Value(0),
     translateY: new Animated.Value(250),
@@ -117,11 +116,6 @@ class CalendarModal extends Component {
   }
 
   show = () => {
-    if (this.showed) {
-      return;
-    }
-
-    this.showed = true;
     this.setState({ visible: true });
     setTimeout(() => {
       Animated.spring(this.state.scale, {
@@ -133,10 +127,6 @@ class CalendarModal extends Component {
   };
 
   hide = () => {
-    if (!this.showed) {
-      return;
-    }
-
     Animated.parallel([
       Animated.timing(this.state.translateY, {
         toValue: 250,
@@ -148,8 +138,7 @@ class CalendarModal extends Component {
       }),
     ]).start(() => {
       this.resetState();
-      this.props.closeModal();
-      this.showed = false;
+      this.props.hideCalendar();
     });
   };
 
@@ -185,9 +174,6 @@ class CalendarModal extends Component {
       case WorkflowAction.WORK_FLOW_CALENDAR:
         this.show();
         break;
-
-      default:
-        this.hide();
     }
   }
 
@@ -267,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
         date,
       });
     },
-    closeModal: () => {
+    hideCalendar: () => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
       });

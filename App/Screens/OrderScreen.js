@@ -19,19 +19,19 @@ import * as Price from '../Libs/Price';
 
 class OrderScreen extends Component {
   showedChild = '';
+  state = {
+    scale: new Animated.Value(1),
+    maskIndex: new Animated.Value(-1),
+    maskOpacity: new Animated.Value(0),
+    placeOrderOpacity: new Animated.Value(1),
+    paymentTranslateY: new Animated.Value(200),
+    paymentOpacity: new Animated.Value(0),
+    vehicleTranslateY: new Animated.Value(200),
+    vehicleOpacity: new Animated.Value(0),
+  };
 
   constructor(props) {
     super(props);
-    this.animation = {
-      scale: new Animated.Value(1),
-      maskIndex: new Animated.Value(-1),
-      maskOpacity: new Animated.Value(0),
-      placeOrderOpacity: new Animated.Value(1),
-      paymentTranslateY: new Animated.Value(200),
-      paymentOpacity: new Animated.Value(0),
-      vehicleTranslateY: new Animated.Value(200),
-      vehicleOpacity: new Animated.Value(0),
-    };
   }
 
   _showChild(child) {
@@ -41,31 +41,31 @@ class OrderScreen extends Component {
 
     this.showedChild = child;
     Animated.parallel([
-      Animated.spring(this.animation.scale, {
+      Animated.spring(this.state.scale, {
         toValue: 0.9,
         tension: 40,
         friction: 2,
       }),
-      Animated.timing(this.animation.maskOpacity, {
+      Animated.timing(this.state.maskOpacity, {
         toValue: 0.6,
         duration: 300,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.maskIndex, {
+      Animated.timing(this.state.maskIndex, {
         toValue: 1,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.placeOrderOpacity, {
+      Animated.timing(this.state.placeOrderOpacity, {
         toValue: 0,
         duration: 300,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation[`${child}Opacity`], {
+      Animated.timing(this.state[`${child}Opacity`], {
         toValue: 1,
         duration: 500,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.spring(this.animation[`${child}TranslateY`], {
+      Animated.spring(this.state[`${child}TranslateY`], {
         toValue: 0,
         tension: 40,
         friction: 5,
@@ -76,32 +76,32 @@ class OrderScreen extends Component {
   _hideChild(child) {
     this.showedChild = '';
     Animated.parallel([
-      Animated.timing(this.animation.scale, {
+      Animated.timing(this.state.scale, {
         toValue: 1,
         duration: 500,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.maskOpacity, {
+      Animated.timing(this.state.maskOpacity, {
         toValue: 0,
         duration: 300,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.maskIndex, {
+      Animated.timing(this.state.maskIndex, {
         toValue: -1,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.placeOrderOpacity, {
+      Animated.timing(this.state.placeOrderOpacity, {
         toValue: 1,
         duration: 300,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation[`${child}Opacity`], {
+      Animated.timing(this.state[`${child}Opacity`], {
         toValue: 0,
         duration: 500,
         easing: Easing.out(Easing.cubic),
         delay: 50,
       }),
-      Animated.spring(this.animation[`${child}TranslateY`], {
+      Animated.spring(this.state[`${child}TranslateY`], {
         toValue: 200,
         duration: 500,
         easing: Easing.out(Easing.cubic),
@@ -374,21 +374,45 @@ class OrderScreen extends Component {
   }
 
   payments() {
-    return [1].map((_, i) => {
-      return (
-        <CreditCard
-          key = { i }
-          number = '1234'
-          expiry = '12/23'
-          name = 'Bo Huang'
-          type = 'visa'
-          cardScale = { 0.7 }
-          containerStyle = {{
-            width: Dimension.width,
-          }}
-        />
-      );
-    });
+    let cards = [];
+
+    if (cards.length === 0) {
+      return [-1].map((_, i) => {
+        return (
+          <Button
+            key = { i }
+            raised
+            title = { 'ADD PAYMENT' }
+            icon = {{
+              type: 'material-community',
+              name: 'credit-card-plus',
+            }}
+            color = { eGobie.EGOBIE_WHITE }
+            backgroundColor = { eGobie.EGOBIE_BLUE }
+            buttonStyle = {{
+              width: 180,
+              marginTop: 80,
+              marginLeft: Dimension.width / 2 - 90,
+            }}/>
+        );
+      });
+    } else {
+      return cards.map((_, i) => {
+        return (
+          <CreditCard
+            key = { i }
+            number = '1234'
+            expiry = '12/23'
+            name = 'Bo Huang'
+            type = 'visa'
+            cardScale = { 0.7 }
+            containerStyle = {{
+              width: Dimension.width,
+            }}
+          />
+        );
+      });
+    }
   }
 
   payment() {
@@ -401,9 +425,9 @@ class OrderScreen extends Component {
         bottom: 0,
         position: 'absolute',
         backgroundColor: eGobie.EGOBIE_WHITE,
-        opacity: this.animation.paymentOpacity,
+        opacity: this.state.paymentOpacity,
         transform: [
-          { translateY: this.animation.paymentTranslateY },
+          { translateY: this.state.paymentTranslateY },
         ],
       }}>
         <Carousel
@@ -421,7 +445,7 @@ class OrderScreen extends Component {
         </Carousel>
         <Icon
           name = 'close'
-          color = { eGobie.EGOBIE_BLUE }
+          color = { eGobie.EGOBIE_RED }
           size = { 20 }
           onPress = { this.hideChild('payment') }
           containerStyle = {{
@@ -435,29 +459,53 @@ class OrderScreen extends Component {
   }
 
   vehicles() {
-    return ['sedan', 'suv', 'van', 'truck'].map((type, i) => {
-      return (
-        <View
-          key = { i }
-          style = {{
-            flex: 1,
-            width: Dimension.width,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-        <Vehicle
-          key = { i }
-          plate = 'Y96EUV'
-          make = 'Honda'
-          model = 'Accord'
-          year = '2013'
-          color = 'White'
-          type = { type }
-        />
-        </View>
-      );
-    });
+    let cars = [];
+
+    if (cars.length === 0) {
+      return [-1].map((_, i) => {
+        return (
+          <Button
+            key = { i }
+            raised
+            title = { 'ADD VEHICLE' }
+            icon = {{
+              type: 'material-community',
+              name: 'plus',
+            }}
+            color = { eGobie.EGOBIE_WHITE }
+            backgroundColor = { eGobie.EGOBIE_BLUE }
+            buttonStyle = {{
+              width: 180,
+              marginTop: 80,
+              marginLeft: Dimension.width / 2 - 90,
+            }}/>
+        );
+      });
+    } else {
+      return cars.map((type, i) => {
+        return (
+          <View
+            key = { i }
+            style = {{
+              flex: 1,
+              width: Dimension.width,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+          <Vehicle
+            key = { i }
+            plate = 'Y96EUV'
+            make = 'Honda'
+            model = 'Accord'
+            year = '2013'
+            color = 'White'
+            type = { type }
+          />
+          </View>
+        );
+      });
+    }
   }
 
   vehicle() {
@@ -470,9 +518,9 @@ class OrderScreen extends Component {
         bottom: 0,
         position: 'absolute',
         backgroundColor: eGobie.EGOBIE_WHITE,
-        opacity: this.animation.vehicleOpacity,
+        opacity: this.state.vehicleOpacity,
         transform: [
-          { translateY: this.animation.vehicleTranslateY },
+          { translateY: this.state.vehicleTranslateY },
         ],
       }}>
         <Carousel
@@ -490,7 +538,7 @@ class OrderScreen extends Component {
         </Carousel>
         <Icon
           name = 'close'
-          color = { eGobie.EGOBIE_BLUE }
+          color = { eGobie.EGOBIE_RED }
           size = { 20 }
           onPress = { this.hideChild('vehicle') }
           containerStyle = {{
@@ -515,7 +563,7 @@ class OrderScreen extends Component {
             flex: 1,
             marginBottom: 20,
             justifyContent: 'flex-end',
-            opacity: this.animation.placeOrderOpacity,
+            opacity: this.state.placeOrderOpacity,
           }}
         >
           <Button
@@ -540,8 +588,8 @@ class OrderScreen extends Component {
         left: 0,
         right: 0,
         bottom: 0,
-        opacity: this.animation.maskOpacity,
-        zIndex: this.animation.maskIndex,
+        opacity: this.state.maskOpacity,
+        zIndex: this.state.maskIndex,
         backgroundColor: '#333',
       }}/>
     );
@@ -557,7 +605,7 @@ class OrderScreen extends Component {
         <Animated.View style = {{
           marginTop: 10,
           transform: [
-            { scale: this.animation.scale },
+            { scale: this.state.scale },
           ]
         }}>
           { this.location() }

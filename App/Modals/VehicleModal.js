@@ -52,7 +52,6 @@ const dropDownStyle = {
 }
 
 class VehicleModal extends Component {
-  showed = false;
   state = {
     visibile: false,
     cardScale: new Animated.Value(0),
@@ -63,11 +62,6 @@ class VehicleModal extends Component {
   }
 
   show = () => {
-    if (this.showed) {
-      return;
-    }
-
-    this.showed = true;
     this.setState({ visibile: true });
     setTimeout(() => {
       Animated.spring(this.state.cardScale, {
@@ -79,17 +73,13 @@ class VehicleModal extends Component {
   }
 
   hide = () => {
-    if (!this.showed) {
-      return;
-    }
-
     Animated.timing(this.state.cardScale, {
       toValue: 0,
       duration: 300,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
       this.resetState();
-      this.showed = false;
+      this.props.hideVehicle();
     });
   }
 
@@ -157,9 +147,6 @@ class VehicleModal extends Component {
       case WorkflowAction.WORK_FLOW_VEHICLE:
         this.show();
         break;
-
-      default:
-        this.hide();
     }
   }
 
@@ -231,7 +218,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    hideVehicle: () => {
+      dispatch(WorkflowAction.WORK_FLOW_BACK);
+    },
   };
 };
 

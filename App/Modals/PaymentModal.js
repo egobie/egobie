@@ -11,7 +11,6 @@ import eGobie from '../Styles/Egobie';
 
 
 class PaymentModal extends Component {
-  showed = false;
   state = {
     visibile: false,
     cardScale: new Animated.Value(0),
@@ -26,11 +25,6 @@ class PaymentModal extends Component {
   }
 
   show = () => {
-    if (this.showed) {
-      return;
-    }
-
-    this.showed = true;
     this.setState({ visibile: true });
     setTimeout(() => {
       Animated.spring(this.state.cardScale, {
@@ -42,16 +36,12 @@ class PaymentModal extends Component {
   }
 
   hide = () => {
-    if (!this.showed) {
-      return;
-    }
-
     Animated.timing(this.state.cardScale, {
       toValue: 0,
       duration: 300,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
-      this.showed = false;
+      this.props.hidePayment();
       this.resetState();
     });
   }
@@ -67,9 +57,6 @@ class PaymentModal extends Component {
       case WorkflowAction.WORK_FLOW_PAYMENT:
         this.show();
         break;
-
-      default:
-        this.hide();
     }
   }
 
@@ -160,7 +147,13 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    hidePayment: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_BACK,
+      });
+    }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentModal);

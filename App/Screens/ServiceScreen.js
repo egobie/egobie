@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
-
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -14,8 +13,8 @@ import BoxShadow from '../Styles/BoxShadow';
 
 
 class ServiceScreen extends Component {
-  showed = false;
-  animation = {
+  focused = false;
+  state = {
     top: new Animated.Value(Dimension.height),
     scale: new Animated.Value(0.8),
     topDistance: new Animated.Value(0),
@@ -28,61 +27,59 @@ class ServiceScreen extends Component {
   }
 
   focus = () => {
+    this.focused = true;
     Animated.parallel([
-      Animated.timing(this.animation.top, {
+      Animated.timing(this.state.top, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.scale, {
+      Animated.timing(this.state.scale, {
         toValue: 1,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.height, {
+      Animated.timing(this.state.height, {
         toValue: Dimension.height - 50,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.rotate, {
+      Animated.timing(this.state.rotate, {
         toValue: 1,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.topDistance, {
+      Animated.timing(this.state.topDistance, {
         toValue: 15,
         easing: Easing.out(Easing.cubic),
       }),
-    ]).start(() => {
-      this.showed = true;
-    });
+    ]).start();
   }
 
   blur = () => {
+    this.focused = false;
     Animated.parallel([
-      Animated.timing(this.animation.top, {
+      Animated.timing(this.state.top, {
         toValue: Dimension.height - 80,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.scale, {
+      Animated.timing(this.state.scale, {
         toValue: 0.80,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.height, {
+      Animated.timing(this.state.height, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.rotate, {
+      Animated.timing(this.state.rotate, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.animation.topDistance, {
+      Animated.timing(this.state.topDistance, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-    ]).start(() => {
-      this.showed = false;
-    });
+    ]).start();
   }
 
   show = () => {
-    Animated.timing(this.animation.top, {
+    Animated.timing(this.state.top, {
       toValue: Dimension.height - 80,
       easing: Easing.out(Easing.cubic),
       delay: 500,
@@ -90,17 +87,22 @@ class ServiceScreen extends Component {
   }
 
   hide = () => {
-    Animated.timing(this.animation.top, {
+    Animated.timing(this.state.top, {
       toValue: Dimension.height,
       easing: Easing.out(Easing.cubic),
     }).start();
   }
 
   toogle = () => {
-    if (this.showed) {
-      this.props.changeWorkflow(WorkflowAction.WORK_FLOW_BACK);
+    if (this.focused) {
+      this.blur();
+
+      if (this.props.workflow !== WorkflowAction.WORK_FLOW_START && this.props.workflow !== WorkflowAction.WORK_FLOW_LOCATION) {
+        this.props.changeWorkflow(WorkflowAction.WORK_FLOW_BACK);
+      }
     } else {
-      this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SERVICE);
+      this.show();
+      this.focus();
     }
   }
 
@@ -139,18 +141,18 @@ class ServiceScreen extends Component {
           flex: 1,
           fontSize: 15,
           paddingLeft: 15,
-          paddingTop: this.animation.topDistance,
+          paddingTop: this.state.topDistance,
           color: eGobie.EGOBIE_WHITE,
         }}> eGobie Services </Animated.Text>
           <Animated.View style = {{
             height: 30,
             width: 30,
             marginRight: 10,
-            marginTop: this.animation.topDistance,
+            marginTop: this.state.topDistance,
             justifyContent: 'center',
             alignItems: 'center',
             transform: [
-              { rotate: this.animation.rotate.interpolate({
+              { rotate: this.state.rotate.interpolate({
                   inputRange: [0, 1],
                   outputRange: ['0deg', '180deg'],
                 }),
@@ -173,7 +175,7 @@ class ServiceScreen extends Component {
   renderList() {
     return (
       <Animated.View style = {{
-        height: this.animation.height,
+        height: this.state.height,
       }}>
         <ScrollView
           showsVerticalScrollIndicator = { false }
@@ -238,11 +240,11 @@ class ServiceScreen extends Component {
     return (
       <Animated.View style = {{
         position: 'absolute',
-        top: this.animation.top,
+        top: this.state.top,
         width: Dimension.width,
         backgroundColor: eGobie.EGOBIE_WHITE,
         transform: [
-          { scale: this.animation.scale },
+          { scale: this.state.scale },
         ],
         ...BoxShadow,
       }}>
@@ -273,11 +275,13 @@ const mapDispatchToProps = (dispatch) => {
     initServices: () => {
       dispatch({
         type: ServiceAction.SERVICE_GET_ALL,
-      })
+      });
     },
     changeWorkflow: (type) => {
-      dispatch({ type })
-    },
+      dispatch({
+        type,
+      });
+    }
   };
 };
 

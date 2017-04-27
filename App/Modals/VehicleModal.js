@@ -6,6 +6,7 @@ import { Kaede } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import Dropdown from '../Components/Dropdown';
 import Dimension from '../Libs/Dimension';
 import States from '../Libs/States';
 import Colors from '../Libs/Colors';
@@ -99,41 +100,59 @@ class VehicleModal extends Component {
     }
 
     return years.map((y) => {
-      return { name: `${y}`, value: `${y}` };
+      return { key: `${y}`, label: `${y}` };
     });
   }
 
   vehicleForm() {
     return (
       <View style = {{
-        height: 350,
+        height: 400,
+        paddingTop: 25,
         paddingLeft: 15,
         paddingRight: 15,
         overflow: 'hidden',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         backgroundColor: eGobie.EGOBIE_WHITE,
       }}>
         <Kaede
           label = { 'PLATE' }
           { ...inputDefaultProps }
         />
-        <Kaede
-          label = { 'MAKE' }
-          { ...inputDefaultProps }
-        />
-        <Kaede
-          label = { 'MODEL' }
-          { ...inputDefaultProps }
-        />
-        <Kaede
-          ref = { (ref) => { this.refs.stateInput = ref } }
-          label = { 'STATE' }
-          { ...inputDefaultProps }
-        />
-        <Kaede
-          label = { 'YEAR' }
-          { ...inputDefaultProps }
-        />
+        <Dropdown
+          placeholder = { 'MAKE' }
+          zIndex = { 5 }
+          options = { [
+            { key: '1', label: '1', },
+            { key: '2', label: '2', },
+            { key: '3', label: '3', },
+            { key: '4', label: '4', },
+            { key: '5', label: '5', },
+          ] }/>
+        <Dropdown
+          placeholder = { 'MODEL' }
+          zIndex = { 4 }
+          options = { [
+            { key: '1', label: '1', },
+            { key: '2', label: '2', },
+            { key: '3', label: '3', },
+            { key: '4', label: '4', },
+            { key: '5', label: '5', },
+          ] }/>
+        <Dropdown
+          placeholder = { 'STATE' }
+          zIndex = { 3 }
+          options = { [
+            { key: '1', label: '1', },
+            { key: '2', label: '2', },
+            { key: '3', label: '3', },
+            { key: '4', label: '4', },
+            { key: '5', label: '5', },
+          ] }/>
+        <Dropdown
+          placeholder = { 'YEAR' }
+          zIndex = { 2 }
+          options = { this.getYears() }/>
       </View>
     );
   }
@@ -184,7 +203,7 @@ class VehicleModal extends Component {
                 iconStyle = {{
                   color: eGobie.EGOBIE_RED,
                   marginTop: 20,
-                  marginRight: 20,
+                  marginRight: 15,
                 }}
               />
             </View>
@@ -193,6 +212,7 @@ class VehicleModal extends Component {
               height: 70,
               justifyContent: 'flex-start',
               backgroundColor: eGobie.EGOBIE_WHITE,
+              zIndex: -1,
             }}>
               <Button
                 onPress = { () => { this.saveVehicle() } }
@@ -219,7 +239,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     hideVehicle: () => {
-      dispatch(WorkflowAction.WORK_FLOW_BACK);
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_BACK,
+      });
     },
   };
 };

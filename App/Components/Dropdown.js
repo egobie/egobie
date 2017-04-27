@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import { Animated, ScrollView, Text, Easing } from 'react-native';
+import { View } from 'react-native';
 
 import eGobie from '../Styles/Egobie';
-import BoxShadow from '../Styles/BoxShadow';
+import Dimensions from '../Libs/Dimension';
 
+const DropDown = require('react-native-dropdown');
 
 class Dropdown extends Component {
-  state = {
-    top: 0,
-    left: 50,
-  }
-  animation = {
-    height: new Animated.Value(200),
-  };
-
   constructor(props) {
     super(props);
   }
@@ -21,62 +14,67 @@ class Dropdown extends Component {
   options() {
     return this.props.options.map((option, i) => {
       return (
-        <Text
+        <DropDown.Option
           key = { i }
-          onPress = { () => { this.props.onSelect(option.key) } }
           style = {{
-            textAlign: 'left',
-            paddingLeft: 10,
-            fontSize: 14,
+            padding: 0,
+          }}
+          styleText = {{
+            height: 30,
+            fontSize: 16,
             fontWeight: '400',
-            height: 40,
-            lineHeight: 40,
+            paddingLeft: 30,
+            paddingTop: 10,
             color: eGobie.EGOBIE_BLACK,
           }}
         >
           { option.label }
-        </Text>
+        </DropDown.Option>
       );
     });
   }
 
-  setPosition(top, left) {
-    this.setState({
-      top: top,
-      left: left,
-    });
+  optionList = () => {
+    return this.optionsRef;
   }
 
-  hide() {
-    Animated.timing(this.animation.height, {
-      toValue: 0,
-      easing: Easing.inOut(Easing.cubic),
-    }).start();
-  }
-
-  show() {
-    Animated.timing(this.animation.height, {
-      toValue: 200,
-      easing: Easing.inOut(Easing.cubic),
-    }).start();
+  componentDidMount() {
+    DropDown.updatePosition(this.selectRef);
+    DropDown.updatePosition(this.optionsRef);
   }
 
   render() {
     return (
-      <Animated.View style = {{
-        position: 'absolute',
-        top: this.state.top + 5,
-        left: this.state.left,
-        width: 200,
-        height: this.animation.height,
-        overflow: 'hidden',
-        backgroundColor: eGobie.EGOBIE_WHITE,
-        ...BoxShadow,
+      <View style = {{
+        marginBottom: 10,
       }}>
-        <ScrollView showsHorizontalScrollIndicator = { false } >
+        <DropDown.Select
+          ref = { (ref) => { this.selectRef = ref; } }
+          optionListRef = { this.optionList }
+          defaultValue = { this.props.placeholder }
+          height = { 40 }
+          width = { Dimensions.width * 0.9 }
+          style = {{
+            borderWidth: 0,
+            marginTop: 0,
+          }}
+          styleOption = {{
+            padding: 0,
+          }}
+          styleText = {{
+            height: 40,
+            fontSize: 16,
+            fontWeight: '400',
+            paddingLeft: 30,
+            paddingTop: 10,
+            color: eGobie.EGOBIE_WHITE,
+            backgroundColor: eGobie.EGOBIE_BLUE,
+          }}
+        >
           { this.options() }
-        </ScrollView>
-      </Animated.View>
+        </DropDown.Select>
+        <DropDown.OptionList ref = { (ref) => { this.optionsRef = ref; } } />
+      </View>
     );
   }
 };
@@ -86,7 +84,8 @@ Dropdown.propTypes = {
     key: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
   })).isRequired,
-  onSelect: React.PropTypes.func.isRequired,
+  placeholder: React.PropTypes.string.isRequired,
+  zIndex: React.PropTypes.number,
 };
 
 export default Dropdown;

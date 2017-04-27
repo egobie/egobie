@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, Animated, Modal, Easing } from 'react-native';
+import { View, ScrollView, Animated, Modal, Easing } from 'react-native';
 import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
-import { CreditCardInput } from 'react-native-credit-card-input';
-import { Button, Icon } from 'react-native-elements';
+
+import { Button, Icon, CheckBox } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import Dimension from '../Libs/Dimension';
@@ -13,22 +12,18 @@ import eGobie from '../Styles/Egobie';
 class PaymentModal extends Component {
   state = {
     visibile: false,
-    cardScale: new Animated.Value(0),
+    selected: null,
+    pickerScale: new Animated.Value(0),
   };
 
   constructor(props) {
     super(props);
   }
 
-  cardInput = (card) => {
-
-  }
-
   show = () => {
-    Reactotron.log('Show Payment');
     this.setState({ visibile: true });
     setTimeout(() => {
-      Animated.spring(this.state.cardScale, {
+      Animated.spring(this.state.pickerScale, {
         toValue: 0.85,
         friction: 4,
         tension: 40,
@@ -37,26 +32,41 @@ class PaymentModal extends Component {
   }
 
   hide = () => {
-    Reactotron.log('Hide Payment');
-    Animated.timing(this.state.cardScale, {
+    Animated.timing(this.state.pickerScale, {
       toValue: 0,
       duration: 300,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
-      this.props.hidePayment();
+      this.props.hidePicker();
       this.resetState();
+    });
+  }
+
+  scrollList = () => {
+    return this.state.options.map((option, i) => {
+      return (
+        <CheckBox
+          center
+          title = { option.label }
+          checked = { option.key === this.state.selected }
+        />
+      );
     });
   }
 
   resetState = () => {
     this.setState({
       visibile: false,
+      selected: null,
     });
   }
 
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
-      case WorkflowAction.WORK_FLOW_PAYMENT:
+      case Action.WORK_FLOW_PICKER_MAKE:
+      case Action.WORK_FLOW_PICKER_MODEL:
+      case Action.WORK_FLOW_PICKER_STATE:
+      case Action.WORK_FLOW_PICKER_YEAR:
         this.show();
         break;
     }
@@ -80,7 +90,7 @@ class PaymentModal extends Component {
             width: Dimension.width,
             backgroundColor: eGobie.EGOBIE_SHADOW,
             transform: [
-              { scale: this.state.cardScale },
+              { scale: this.state.pickerScale },
             ],
           }}>
             <View style = {{
@@ -100,38 +110,20 @@ class PaymentModal extends Component {
                 }}
               />
             </View>
-            <View style = {{
+            <ScrollView style = {{
               height: 350,
               justifyContent: 'center',
               backgroundColor: eGobie.EGOBIE_WHITE,
             }}>
-              <CreditCardInput
-                requiresName
-                cardScale = { 0.9 }
-                invalidColor = { eGobie.EGOBIE_RED }
-                placeholderColor = { eGobie.EGOBIE_GREY }
-                labelStyle = {{
-                  fontWeight: '500',
-                  fontSize: 12,
-                }}
-                inputContainerStyle = {{
-                  borderBottomWidth: 1,
-                  borderBottomColor: eGobie.EGOBIE_GREY,
-                }}
-                inputStyle = {{
-                  lineHeight: 30,
-                  fontSize: 14,
-                }}
-                onChange = { this.cardInput }
-              />
-            </View>
+              { this.scrollList() }
+            </ScrollView>
             <View style = {{
               height: 100,
               justifyContent: 'flex-start',
               backgroundColor: eGobie.EGOBIE_WHITE,
             }}>
               <Button
-                title = 'ADD CARD'
+                title = 'CONFIRM'
                 backgroundColor = { eGobie.EGOBIE_BLUE }
               />
             </View>
@@ -150,7 +142,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    hidePayment: () => {
+    hidePicker: () => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
       });

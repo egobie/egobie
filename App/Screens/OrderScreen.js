@@ -137,7 +137,7 @@ class OrderScreen extends Component {
         marginBottom: 5,
       }}>
         <Label
-          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_LOCATION) } }
+          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_LOCATION); } }
           title = 'Location'
           value = { this.props.address }
           titleStyle = {{
@@ -173,7 +173,7 @@ class OrderScreen extends Component {
         marginBottom: 5,
       }}>
         <Label
-          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SERVICE) } }
+          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SERVICE); } }
           title = 'Service'
           value = { this.props.services }
           titleStyle = {{
@@ -209,7 +209,7 @@ class OrderScreen extends Component {
         marginBottom: 5,
       }}>
         <Label
-          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_CALENDAR) } }
+          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_CALENDAR); } }
           title = 'Schedule'
           value = { this.props.schedule }
           titleStyle = {{
@@ -382,6 +382,7 @@ class OrderScreen extends Component {
           <Button
             key = { i }
             raised
+            onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_PAYMENT); } }
             title = { 'ADD PAYMENT' }
             icon = {{
               type: 'material-community',
@@ -467,6 +468,7 @@ class OrderScreen extends Component {
           <Button
             key = { i }
             raised
+            onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_VEHICLE); } }
             title = { 'ADD VEHICLE' }
             icon = {{
               type: 'material-community',

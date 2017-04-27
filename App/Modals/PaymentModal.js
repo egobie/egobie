@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
+
 import { CreditCardInput } from 'react-native-credit-card-input';
 import { Button, Icon } from 'react-native-elements';
 
@@ -26,19 +26,15 @@ class PaymentModal extends Component {
   }
 
   show = () => {
-    Reactotron.log('Show Payment');
     this.setState({ visibile: true });
-    setTimeout(() => {
-      Animated.spring(this.state.cardScale, {
-        toValue: 0.85,
-        friction: 4,
-        tension: 40,
-      }).start();
-    }, 200);
+    Animated.spring(this.state.cardScale, {
+      toValue: 0.85,
+      friction: 5,
+      tension: 40,
+    }).start();
   }
 
   hide = () => {
-    Reactotron.log('Hide Payment');
     Animated.timing(this.state.cardScale, {
       toValue: 0,
       duration: 300,
@@ -65,10 +61,7 @@ class PaymentModal extends Component {
 
   render() {
     return (
-      <Modal
-        transparent
-        visible = { this.state.visibile }
-      >
+      <Modal visible = { this.state.visibile } >
         <View style = {{
           flex: 1,
           backgroundColor: eGobie.EGOBIE_SHADOW,
@@ -106,7 +99,7 @@ class PaymentModal extends Component {
               justifyContent: 'center',
               backgroundColor: eGobie.EGOBIE_WHITE,
             }}>
-              <CreditCardInput
+              { this.state.visibile && <CreditCardInput
                 requiresName
                 cardScale = { 0.9 }
                 invalidColor = { eGobie.EGOBIE_RED }
@@ -124,7 +117,7 @@ class PaymentModal extends Component {
                   fontSize: 14,
                 }}
                 onChange = { this.cardInput }
-              />
+              /> }
             </View>
             <View style = {{
               height: 100,

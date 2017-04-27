@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Animated, Modal, Easing } from 'react-native';
+import { View, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Kaede } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
-import Dropdown from '../Components/Dropdown';
+import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import States from '../Libs/States';
 import Colors from '../Libs/Colors';
@@ -119,46 +119,12 @@ class VehicleModal extends Component {
           label = { 'PLATE' }
           { ...inputDefaultProps }
         />
-        <Dropdown
-          placeholder = { 'MAKE' }
-          zIndex = { 5 }
-          options = { [
-            { key: '1', label: '1', },
-            { key: '2', label: '2', },
-            { key: '3', label: '3', },
-            { key: '4', label: '4', },
-            { key: '5', label: '5', },
-          ] }/>
-        <Dropdown
-          placeholder = { 'MODEL' }
-          zIndex = { 4 }
-          options = { [
-            { key: '1', label: '1', },
-            { key: '2', label: '2', },
-            { key: '3', label: '3', },
-            { key: '4', label: '4', },
-            { key: '5', label: '5', },
-          ] }/>
-        <Dropdown
-          placeholder = { 'STATE' }
-          zIndex = { 3 }
-          options = { [
-            { key: '1', label: '1', },
-            { key: '2', label: '2', },
-            { key: '3', label: '3', },
-            { key: '4', label: '4', },
-            { key: '5', label: '5', },
-          ] }/>
-        <Dropdown
-          placeholder = { 'YEAR' }
-          zIndex = { 2 }
-          options = { this.getYears() }/>
       </View>
     );
   }
 
   saveVehicle() {
-    
+    this.props.showPicker();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -171,10 +137,7 @@ class VehicleModal extends Component {
 
   render() {
     return (
-      <Modal
-        transparent
-        visible = { this.state.visibile }
-      >
+      <Modal visible = { this.state.visibile } >
         <View style = {{
           flex: 1,
           backgroundColor: eGobie.EGOBIE_SHADOW,
@@ -241,6 +204,11 @@ const mapDispatchToProps = (dispatch) => {
     hideVehicle: () => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
+      });
+    },
+    showPicker: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_PICKER_MAKE,
       });
     },
   };

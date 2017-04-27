@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Animated, Modal, Easing } from 'react-native';
+import { View, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
 import Reactotron from 'reactotron-react-native';
 import { CreditCardInput } from 'react-native-credit-card-input';
 import { Button, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 

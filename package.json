@@ -14,7 +14,6 @@
 		"react-native-calendar": "^0.10.0",
 		"react-native-camera": "https://github.com/lwansbrough/react-native-camera.git",
 		"react-native-credit-card-input": "^0.3.3",
-		"react-native-dropdown": "https://github.com/g6ling/react-native-dropdown",
 		"react-native-elements": "^0.9.3",
 		"react-native-facebook-login": "^1.5.0",
 		"react-native-google-places-autocomplete": "^1.2.8",

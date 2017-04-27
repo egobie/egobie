@@ -13,7 +13,13 @@ class PaymentModal extends Component {
   state = {
     visibile: false,
     selected: null,
-    pickerScale: new Animated.Value(0),
+    pickerScale: new Animated.Value(0.85),
+    options: [
+      { key: '1', label: '1', },
+      { key: '2', label: '2', },
+      { key: '3', label: '3', },
+      { key: '4', label: '4', },
+    ],
   };
 
   constructor(props) {
@@ -22,31 +28,18 @@ class PaymentModal extends Component {
 
   show = () => {
     this.setState({ visibile: true });
-    setTimeout(() => {
-      Animated.spring(this.state.pickerScale, {
-        toValue: 0.85,
-        friction: 4,
-        tension: 40,
-      }).start();
-    }, 200);
   }
 
   hide = () => {
-    Animated.timing(this.state.pickerScale, {
-      toValue: 0,
-      duration: 300,
-      easing: Easing.out(Easing.cubic),
-    }).start(() => {
-      this.props.hidePicker();
-      this.resetState();
-    });
+    this.props.hidePicker();
+    this.resetState();
   }
 
   scrollList = () => {
     return this.state.options.map((option, i) => {
       return (
         <CheckBox
-          center
+          key = { i }
           title = { option.label }
           checked = { option.key === this.state.selected }
         />
@@ -63,10 +56,10 @@ class PaymentModal extends Component {
 
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
-      case Action.WORK_FLOW_PICKER_MAKE:
-      case Action.WORK_FLOW_PICKER_MODEL:
-      case Action.WORK_FLOW_PICKER_STATE:
-      case Action.WORK_FLOW_PICKER_YEAR:
+      case WorkflowAction.WORK_FLOW_PICKER_MAKE:
+      case WorkflowAction.WORK_FLOW_PICKER_MODEL:
+      case WorkflowAction.WORK_FLOW_PICKER_STATE:
+      case WorkflowAction.WORK_FLOW_PICKER_YEAR:
         this.show();
         break;
     }
@@ -76,6 +69,7 @@ class PaymentModal extends Component {
     return (
       <Modal
         transparent
+        animationType = { 'slide' }
         visible = { this.state.visibile }
       >
         <View style = {{
@@ -112,7 +106,6 @@ class PaymentModal extends Component {
             </View>
             <ScrollView style = {{
               height: 350,
-              justifyContent: 'center',
               backgroundColor: eGobie.EGOBIE_WHITE,
             }}>
               { this.scrollList() }

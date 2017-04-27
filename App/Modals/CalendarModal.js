@@ -82,7 +82,7 @@ const dayHeadings = [
 ];
 
 class CalendarModal extends Component {
-
+  showed = false;
   state = {
     scale: new Animated.Value(0),
     translateY: new Animated.Value(250),
@@ -117,6 +117,11 @@ class CalendarModal extends Component {
   }
 
   show = () => {
+    if (this.showed) {
+      return;
+    }
+
+    this.showed = true;
     this.setState({ visible: true });
     setTimeout(() => {
       Animated.spring(this.state.scale, {
@@ -128,6 +133,10 @@ class CalendarModal extends Component {
   };
 
   hide = () => {
+    if (!this.showed) {
+      return;
+    }
+
     Animated.parallel([
       Animated.timing(this.state.translateY, {
         toValue: 250,
@@ -138,13 +147,18 @@ class CalendarModal extends Component {
         easing: Easing.out(Easing.cubic),
       }),
     ]).start(() => {
+      this.resetState();
       this.props.closeModal();
-      this.setState({
-        visible: false,
-        selectedDate: null,
-      });
+      this.showed = false;
     });
   };
+
+  resetState = () => {
+    this.setState({
+      visible: false,
+      selectedDate: null,
+    });
+  }
 
   openingDays() {
     let openings = [];
@@ -171,6 +185,9 @@ class CalendarModal extends Component {
       case WorkflowAction.WORK_FLOW_CALENDAR:
         this.show();
         break;
+
+      default:
+        this.hide();
     }
   }
 
@@ -251,7 +268,6 @@ const mapDispatchToProps = (dispatch) => {
       });
     },
     closeModal: () => {
-      Reactotron.log('dispatch - WorkflowAction.WORK_FLOW_BACK');
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
       });

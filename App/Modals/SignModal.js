@@ -19,6 +19,7 @@ import * as Validator from '../Libs/Validator';
 
 
 class SignModal extends Component {
+  showed = false;
   state = {
     scale: new Animated.Value(0),
     flip: false,
@@ -89,6 +90,11 @@ class SignModal extends Component {
   }
 
   show = () => {
+    if (this.showed) {
+      return;
+    }
+
+    this.showed = true;
     this.setState({ visible: true });
     setTimeout(() => {
       Animated.spring(this.state.scale, {
@@ -100,11 +106,16 @@ class SignModal extends Component {
   }
 
   hide = () => {
+    if (!this.showed) {
+      return;
+    }
+
     Animated.timing(this.state.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
       this.resetState();
+      this.showed = false;
     });
   }
 

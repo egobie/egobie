@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View, Animated, Modal, Easing } from 'react-native';
+import { connect } from 'react-redux';
 
 import { Kaede } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import Dimension from '../Libs/Dimension';
 import States from '../Libs/States';
 import Colors from '../Libs/Colors';
@@ -50,24 +52,25 @@ const dropDownStyle = {
 }
 
 class VehicleModal extends Component {
+  showed = false;
   state = {
     visibile: false,
-  };
-
-  animation = {
     cardScale: new Animated.Value(0),
   };
 
   constructor(props) {
     super(props);
-    this.show = this._show.bind(this);
-    this.hide = this._hide.bind(this);
   }
 
-  _show() {
+  show = () => {
+    if (this.showed) {
+      return;
+    }
+
+    this.showed = true;
     this.setState({ visibile: true });
     setTimeout(() => {
-      Animated.spring(this.animation.cardScale, {
+      Animated.spring(this.state.cardScale, {
         toValue: 0.85,
         friction: 4,
         tension: 40,
@@ -75,17 +78,22 @@ class VehicleModal extends Component {
     }, 200);
   }
 
-  _hide() {
-    Animated.timing(this.animation.cardScale, {
+  hide = () => {
+    if (!this.showed) {
+      return;
+    }
+
+    Animated.timing(this.state.cardScale, {
       toValue: 0,
       duration: 300,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
-      this._resetState();
+      this.resetState();
+      this.showed = false;
     });
   }
 
-  _resetState() {
+  resetState() {
     this.setState({
       visibile: false,
     });
@@ -144,6 +152,17 @@ class VehicleModal extends Component {
     
   }
 
+  componentWillReceiveProps(nextProps) {
+    switch (nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_VEHICLE:
+        this.show();
+        break;
+
+      default:
+        this.hide();
+    }
+  }
+
   render() {
     return (
       <Modal
@@ -162,7 +181,7 @@ class VehicleModal extends Component {
             width: Dimension.width,
             backgroundColor: eGobie.EGOBIE_SHADOW,
             transform: [
-              { scale: this.animation.cardScale },
+              { scale: this.state.cardScale },
             ],
           }}>
             <View style = {{
@@ -204,4 +223,16 @@ class VehicleModal extends Component {
   }
 };
 
-export default VehicleModal;
+const mapStateToProps = (state) => {
+  return {
+    workflow: state.workflow.name,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VehicleModal);

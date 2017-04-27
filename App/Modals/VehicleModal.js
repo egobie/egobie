@@ -68,13 +68,11 @@ class VehicleModal extends Component {
 
   show = () => {
     this.setState({ visibile: true });
-    setTimeout(() => {
-      Animated.spring(this.state.cardScale, {
-        toValue: 0.85,
-        friction: 4,
-        tension: 40,
-      }).start();
-    }, 200);
+    Animated.spring(this.state.cardScale, {
+      toValue: 0.85,
+      friction: 4,
+      tension: 40,
+    }).start();
   }
 
   hide = () => {
@@ -198,7 +196,7 @@ class VehicleModal extends Component {
                 }}
               />
             </View>
-            { this.vehicleForm() }
+            { this.state.visibile && this.vehicleForm() }
             <View style = {{
               height: 70,
               justifyContent: 'flex-start',

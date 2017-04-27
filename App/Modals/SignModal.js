@@ -439,8 +439,8 @@ class SignModal extends Component {
                 borderWidth: 0,
               }}
             >
-              { this.signInSide() }
-              { this.signUpSide() }
+              { this.state.visible && this.signInSide() }
+              { this.state.visible && this.signUpSide() }
             </FlipCard>
           </Animated.View>
           <ErrorMessage ref = { (ref) => { this.errorMessage = ref; } }/>

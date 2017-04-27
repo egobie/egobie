@@ -18,7 +18,7 @@ const inputDefaultProps = {
   labelStyle: {
     fontSize: 16,
     marginLeft: 30,
-    fontWeight: '400',
+    fontWeight: '500',
     color: eGobie.EGOBIE_WHITE,
     backgroundColor: eGobie.EGOBIE_BLUE,
     transform: [
@@ -41,16 +41,20 @@ const inputDefaultProps = {
   height: 40,
 };
 
-const dropDownStyle = {
-  style: {
-    flex: 1,
-    backgroundColor: eGobie.EGOBIE_BLUE,
-    paddingLeft: 5,
-  },
-  styleText: {
-    color: eGobie.EGOBIE_WHITE,
-  }
-}
+const buttonStyle = {
+  height: 40,
+  width: Dimension.width * 0.9,
+  marginBottom: 10,
+  marginLeft: 0,
+  backgroundColor: eGobie.EGOBIE_BLUE,
+  justifyContent: 'flex-start',
+  paddingLeft: 0,
+};
+
+const buttonTextStyle = {
+  fontSize: 16,
+  marginLeft: 30,
+};
 
 class VehicleModal extends Component {
   state = {
@@ -107,7 +111,7 @@ class VehicleModal extends Component {
   vehicleForm() {
     return (
       <View style = {{
-        height: 400,
+        height: 350,
         paddingTop: 25,
         paddingLeft: 15,
         paddingRight: 15,
@@ -119,12 +123,36 @@ class VehicleModal extends Component {
           label = { 'PLATE' }
           { ...inputDefaultProps }
         />
+        <Button
+          title = 'MAKE'
+          onPress = { () => { this.props.showPicker(WorkflowAction.WORK_FLOW_PICKER_MAKE) } }
+          buttonStyle = { buttonStyle }
+          textStyle = { buttonTextStyle }
+        />
+        <Button
+          title = 'MODEL'
+          onPress = { () => { this.props.showPicker(WorkflowAction.WORK_FLOW_PICKER_MODEL) } }
+          buttonStyle = { buttonStyle }
+          textStyle = { buttonTextStyle }
+        />
+        <Button
+          title = 'STATE'
+          onPress = { () => { this.props.showPicker(WorkflowAction.WORK_FLOW_PICKER_STATE) } }
+          buttonStyle = { buttonStyle }
+          textStyle = { buttonTextStyle }
+        />
+        <Button
+          title = 'YEAR'
+          onPress = { () => { this.props.showPicker(WorkflowAction.WORK_FLOW_PICKER_YEAR) } }
+          buttonStyle = { buttonStyle }
+          textStyle = { buttonTextStyle }
+        />
       </View>
     );
   }
 
   saveVehicle() {
-    this.props.showPicker();
+    
   }
 
   componentWillReceiveProps(nextProps) {
@@ -206,9 +234,9 @@ const mapDispatchToProps = (dispatch) => {
         type: WorkflowAction.WORK_FLOW_BACK,
       });
     },
-    showPicker: () => {
+    showPicker: (type) => {
       dispatch({
-        type: WorkflowAction.WORK_FLOW_PICKER_MAKE,
+        type,
       });
     },
   };

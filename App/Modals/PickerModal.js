@@ -105,13 +105,16 @@ class PaymentModal extends Component {
               />
             </View>
             <ScrollView style = {{
-              height: 350,
+              height: 300,
+              paddingTop: 10,
+              paddingLeft: 15,
+              paddingRight: 15,
               backgroundColor: eGobie.EGOBIE_WHITE,
             }}>
               { this.scrollList() }
             </ScrollView>
             <View style = {{
-              height: 100,
+              height: 80,
               justifyContent: 'flex-start',
               backgroundColor: eGobie.EGOBIE_WHITE,
             }}>

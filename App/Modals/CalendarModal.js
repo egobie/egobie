@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Modal, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
+import { View, ScrollView, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
@@ -9,6 +9,7 @@ import { CheckBox, Icon } from 'react-native-elements';
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as CalendarAction from '../Actions/CalendarAction';
 import Range from '../Components/Range';
+import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
@@ -179,10 +180,7 @@ class CalendarModal extends Component {
 
   render() {
     return (
-      <Modal
-        transparent
-        visible = { this.state.visible }
-      >
+      <Modal visible = { this.state.visible } >
         <View style = {{
           height: Dimension.height,
           justifyContent: 'center',

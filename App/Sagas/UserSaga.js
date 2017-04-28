@@ -1,4 +1,4 @@
-import { call, put, cancelled, takeLatest } from 'redux-saga/effects';
+import { put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as Action from '../Actions/UserAction';
 import { signIn, signUp } from '../Requests/UserRequest';

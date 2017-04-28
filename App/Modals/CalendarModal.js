@@ -21,7 +21,7 @@ const customStyle = {
     color: eGobie.EGOBIE_WHITE,
   },
   calendarContainer: {
-
+    
   },
   calendarControls: {
     backgroundColor: eGobie.EGOBIE_BLACK,
@@ -204,9 +204,9 @@ class CalendarModal extends Component {
               </View>
             </TouchableWithoutFeedback>
             <Calendar
-              scrollEnabled
               showControls
               showEventIndicators
+              scrollEnabled
               nextButtonText = { 'Next' }
               prevButtonText = { 'Prev' }
               customStyle = { customStyle }

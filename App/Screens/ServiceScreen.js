@@ -124,10 +124,6 @@ class ServiceScreen extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.initServices();
-  }
-
   renderBanner() {
     return (
       <TouchableWithoutFeedback onPress = { this.toogle }>
@@ -265,18 +261,13 @@ ServiceScreen.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    services: state.service.services,
+    services: state.metadata.services,
     workflow: state.workflow.name,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initServices: () => {
-      dispatch({
-        type: ServiceAction.SERVICE_GET_ALL,
-      });
-    },
     changeWorkflow: (type) => {
       dispatch({
         type,

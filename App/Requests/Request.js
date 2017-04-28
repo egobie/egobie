@@ -2,7 +2,7 @@
 // const baseUrl = 'http://localhost:8000';
 const baseUrl = 'https://api.egobie.com';
 
-export default (method, url, headers, body) => {
+export default (method, url, body, headers) => {
   let _headers = headers ? headers : {};
   let _body = body ? body : {};
 

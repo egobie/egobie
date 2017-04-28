@@ -1,12 +1,12 @@
 import userSaga from './UserSaga';
-import serviceSaga from './ServiceSaga';
+import metadataSaga from './MetadataSaga';
 import locationSaga from './LocationSaga';
 
 
 export default function* eGobieSaga() {
   yield [
     userSaga(),
-    serviceSaga(),
     locationSaga(),
+    metadataSaga(),
   ];
 }

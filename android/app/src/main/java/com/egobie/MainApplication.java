@@ -1,9 +1,9 @@
 package com.egobie;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.facebook.react.ReactApplication;
-<<<<<<< ours
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.reactnativenavigation.RnnPackage;
@@ -11,8 +11,6 @@ import com.airbnb.android.react.maps.MapsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactInstanceManager;
-=======
->>>>>>> theirs
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -25,7 +23,7 @@ public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
-    public boolean getUseDeveloperSupport() {
+    protected boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
     }
 

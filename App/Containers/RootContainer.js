@@ -42,9 +42,7 @@ const configs = {
 
 const stackRouteConfigs = {
   navigationOptions: {
-    header: {
-      visible: false,
-    },
+    header: null,
   },
 };
 

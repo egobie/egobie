@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
-
+import Reactotron from 'reactotron-react-native';
 import { Kaede } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
@@ -159,6 +159,10 @@ class VehicleModal extends Component {
         this.show();
         break;
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.visible !== this.state.visible;
   }
 
   render() {

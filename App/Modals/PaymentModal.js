@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
-
+import Reactotron from 'reactotron-react-native';
 import { CreditCardInput } from 'react-native-credit-card-input';
 import { Button, Icon } from 'react-native-elements';
 
@@ -57,6 +57,10 @@ class PaymentModal extends Component {
         this.show();
         break;
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.visible !== this.state.visible;
   }
 
   render() {

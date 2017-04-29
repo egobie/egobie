@@ -65,6 +65,10 @@ class PaymentModal extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.visible !== this.state.visible;
+  }
+
   render() {
     return (
       <Modal

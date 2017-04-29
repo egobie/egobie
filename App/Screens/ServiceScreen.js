@@ -129,6 +129,22 @@ class ServiceScreen extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.workflow === this.props.workflow) {
+      return false;
+    }
+
+    switch(nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_START:
+      case WorkflowAction.WORK_FLOW_LOCATION:
+      case WorkflowAction.WORK_FLOW_ORDER:
+      case WorkflowAction.WORK_FLOW_SERVICE:
+        return true;
+    }
+
+    return false;
+  }
+
   renderBanner() {
     return (
       <TouchableWithoutFeedback onPress = { this.toogle }>

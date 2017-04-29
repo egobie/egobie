@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
-
+import Reactotron from 'reactotron-react-native';
 import { Button, Icon, SocialIcon } from 'react-native-elements';
 import { Kohana } from 'react-native-textinput-effects';
 import FlipCard from 'react-native-flip-card'
@@ -19,7 +19,6 @@ import * as Validator from '../Libs/Validator';
 
 
 class SignModal extends Component {
-  showed = false;
   state = {
     scale: new Animated.Value(0),
     flip: false,
@@ -90,11 +89,6 @@ class SignModal extends Component {
   }
 
   show = () => {
-    if (this.showed) {
-      return;
-    }
-
-    this.showed = true;
     this.setState({ visible: true });
     setTimeout(() => {
       Animated.spring(this.state.scale, {
@@ -106,16 +100,12 @@ class SignModal extends Component {
   }
 
   hide = () => {
-    if (!this.showed) {
-      return;
-    }
-
     Animated.timing(this.state.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
       this.resetState();
-      this.showed = false;
+      this.props.hideSign();
     });
   }
 
@@ -127,7 +117,7 @@ class SignModal extends Component {
   }
 
   hideSign = () => {
-    this.props.hideSign();
+    this.hide();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -135,11 +125,11 @@ class SignModal extends Component {
       case WorkflowAction.WORK_FLOW_SIGN:
         this.show();
         break;
-
-      default:
-        this.hide();
-        break;
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.visible !== this.state.visible;
   }
 
   signIn = () => {

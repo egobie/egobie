@@ -178,6 +178,10 @@ class CalendarModal extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.visible !== this.state.visible;
+  }
+
   render() {
     return (
       <Modal visible = { this.state.visible } >

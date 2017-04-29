@@ -11,7 +11,7 @@ import eGobie from '../Styles/Egobie';
 
 class PaymentModal extends Component {
   state = {
-    visibile: false,
+    visible: false,
     selected: null,
     pickerScale: new Animated.Value(0.85),
     options: [
@@ -27,7 +27,7 @@ class PaymentModal extends Component {
   }
 
   show = () => {
-    this.setState({ visibile: true });
+    this.setState({ visible: true });
   }
 
   hide = () => {
@@ -49,7 +49,7 @@ class PaymentModal extends Component {
 
   resetState = () => {
     this.setState({
-      visibile: false,
+      visible: false,
       selected: null,
     });
   }
@@ -74,7 +74,7 @@ class PaymentModal extends Component {
       <Modal
         transparent
         animationType = { 'slide' }
-        visible = { this.state.visibile }
+        visible = { this.state.visible }
       >
         <View style = {{
           flex: 1,

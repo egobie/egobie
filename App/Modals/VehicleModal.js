@@ -58,7 +58,7 @@ const buttonTextStyle = {
 
 class VehicleModal extends Component {
   state = {
-    visibile: false,
+    visible: false,
     cardScale: new Animated.Value(0),
   };
 
@@ -67,7 +67,7 @@ class VehicleModal extends Component {
   }
 
   show = () => {
-    this.setState({ visibile: true });
+    this.setState({ visible: true });
     Animated.spring(this.state.cardScale, {
       toValue: 0.85,
       friction: 4,
@@ -78,7 +78,6 @@ class VehicleModal extends Component {
   hide = () => {
     Animated.timing(this.state.cardScale, {
       toValue: 0,
-      duration: 300,
       easing: Easing.out(Easing.cubic),
     }).start(() => {
       this.resetState();
@@ -88,7 +87,7 @@ class VehicleModal extends Component {
 
   resetState() {
     this.setState({
-      visibile: false,
+      visible: false,
     });
   }
 
@@ -167,7 +166,7 @@ class VehicleModal extends Component {
 
   render() {
     return (
-      <Modal visible = { this.state.visibile } >
+      <Modal visible = { this.state.visible } >
         <View style = {{
           flex: 1,
           backgroundColor: eGobie.EGOBIE_SHADOW,
@@ -200,7 +199,7 @@ class VehicleModal extends Component {
                 }}
               />
             </View>
-            { this.state.visibile && this.vehicleForm() }
+            { this.state.visible && this.vehicleForm() }
             <View style = {{
               height: 70,
               justifyContent: 'flex-start',

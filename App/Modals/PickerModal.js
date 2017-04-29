@@ -9,7 +9,7 @@ import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
 
-class PaymentModal extends Component {
+class PickerModal extends Component {
   state = {
     visible: false,
     selected: null,
@@ -150,5 +150,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentModal);
+export default connect(mapStateToProps, mapDispatchToProps)(PickerModal);
 

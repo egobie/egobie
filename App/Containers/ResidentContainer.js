@@ -15,6 +15,7 @@ import CalendarModal from '../Modals/CalendarModal';
 import PaymentModal from '../Modals/PaymentModal';
 import VehicleModal from '../Modals/VehicleModal';
 import PickerModal from '../Modals/PickerModal';
+import ServiceDetailModal from '../Modals/ServiceDetailModal'
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
@@ -41,6 +42,7 @@ export default class extends Component {
         <ScannerScreen />
         <Loading />
         <PickerModal />
+        <ServiceDetailModal />
         {
         // <ScrollView
         //   ref = { (sv) => { this.view = sv; } }

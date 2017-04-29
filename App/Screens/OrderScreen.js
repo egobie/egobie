@@ -624,10 +624,10 @@ class OrderScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  let services = state.service.selected.map((service) => {
+  let services = state.metadata.selectedServices.map((service) => {
     return service.name;
   });
-
+  Reactotron.log(services);
   return {
     address: state.location.formattedAddress,
     workflow: state.workflow.name,
@@ -640,7 +640,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeWorkflow: (type) => {
-      dispatch({ type });
+      dispatch({
+        type,
+      });
     },
   };
 };

@@ -4,7 +4,6 @@ import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
-import * as ServiceAction from '../Actions/ServiceAction';
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import Service from '../Components/Service';
 import Dimension from '../Libs/Dimension';
@@ -194,9 +193,7 @@ class ServiceScreen extends Component {
       <Animated.View style = {{
         height: this.state.height,
       }}>
-        <ScrollView
-          showsVerticalScrollIndicator = { false }
-        >
+        <ScrollView showsVerticalScrollIndicator = { false } >
         {
           this.props.services.map((service, key) => {
             return (
@@ -207,7 +204,6 @@ class ServiceScreen extends Component {
                 title = { service.name }
                 time = { service.time }
                 price = { service.price }
-                onLongPress = { () => {} }
               />
             );
           })

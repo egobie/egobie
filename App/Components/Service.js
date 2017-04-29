@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import Reactotron from 'reactotron-react-native';
 
-import * as Action from '../Actions/ServiceAction';
+import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as MetadataAction from '../Actions/MetadataAction';
 import eGobie from '../Styles/Egobie';
 
 
@@ -103,19 +104,25 @@ Service.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPress: (id, selected) => {
+    onPress: (serviceId, selected) => {
       if (selected) {
         dispatch({
-          type: Action.SERVICE_SELECT,
-          id,
+          type: MetadataAction.SERVICE_SELECT,
+          serviceId,
         });
       } else {
         dispatch({
-          type: Action.SERVICE_DESELECT,
-          id,
+          type: MetadataAction.SERVICE_DESELECT,
+          serviceId,
         });
       }
     },
+    onLongPress: (serviceId) => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_SERVICE_DETAIL,
+        serviceId,
+      });
+    }
   };
 };
 

@@ -16,6 +16,7 @@ export default (state = workflow, action) => {
     case Action.WORK_FLOW_CALENDAR:
     case Action.WORK_FLOW_SIGN:
     case Action.WORK_FLOW_SERVICE:
+    case Action.WORK_FLOW_SERVICE_DETAIL:
     case Action.WORK_FLOW_PAYMENT:
     case Action.WORK_FLOW_VEHICLE:
     case Action.WORK_FLOW_SCANNER:

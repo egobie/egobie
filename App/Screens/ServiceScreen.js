@@ -20,6 +20,7 @@ class ServiceScreen extends Component {
     topDistance: new Animated.Value(0),
     height: new Animated.Value(0),
     rotate: new Animated.Value(0),
+    services: [],
   };
 
   constructor(props) {
@@ -104,6 +105,10 @@ class ServiceScreen extends Component {
       this.show();
       this.focus();
     }
+  }
+
+  componentDidMount() {
+    this.show();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -250,14 +255,6 @@ class ServiceScreen extends Component {
     );
   }
 }
-
-ServiceScreen.propTypes = {
-  services: React.PropTypes.array.isRequired,
-};
-
-ServiceScreen.defaultProps = {
-  services: [],
-};
 
 const mapStateToProps = (state) => {
   return {

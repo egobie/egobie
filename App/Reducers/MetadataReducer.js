@@ -1,5 +1,5 @@
 import * as Action from '../Actions/MetadataAction';
-
+import Reactotron from 'reactotron-react-native';
 
 const metadata = {
   vehicleMakes: {},
@@ -35,16 +35,24 @@ const serializeVehicleModels = (models) => {
 export default (state = metadata, action) => {
   switch (action.type) {
     case Action.METADATA_GET_VEHICLE_MAKE_SUCCESS:
-      return Object.assign({}, state, serializeVehicleMakes(action.vehicleMakes));
+      return Object.assign({}, state, {
+        vehicleMakes: serializeVehicleMakes(action.vehicleMakes),
+      });
 
     case Action.METADATA_GET_VEHICLE_MODEL_SUCCESS:
-      return Object.assign({}, state, serializeVehicleModels(action.vehicleModels));
+      return Object.assign({}, state, {
+        vehicleModels: serializeVehicleModels(action.vehicleModels),
+      });
 
     case Action.METADATA_GET_SERVICE_SUCCESS:
-      return Object.assign({}, state, action.services);
+      return Object.assign({}, state, {
+        services: action.services,
+      });
 
     case Action.METADATA_GET_DISCOUNT_SUCCESS:
-      return Object.assign({}, state, action.discounts);
+      return Object.assign({}, state, {
+        discounts: action.discounts,
+      });
 
     default:
       return state;

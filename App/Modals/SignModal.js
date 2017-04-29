@@ -90,13 +90,11 @@ class SignModal extends Component {
 
   show = () => {
     this.setState({ visible: true });
-    setTimeout(() => {
-      Animated.spring(this.state.scale, {
-        toValue: 1,
-        friction: 4,
-        tension: 40,
-      }).start();
-    }, 100);
+    Animated.spring(this.state.scale, {
+      toValue: 1,
+      friction: 4,
+      tension: 40,
+    }).start();
   }
 
   hide = () => {
@@ -129,7 +127,7 @@ class SignModal extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.visible !== this.state.visible;
+    return nextState.visible !== this.state.visible || nextState.flip !== this.state.flip;
   }
 
   signIn = () => {

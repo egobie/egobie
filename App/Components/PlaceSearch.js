@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
-
+import Reactotron from 'reactotron-react-native'
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import Reactotron from 'reactotron-react-native'
-const { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
 
 import * as LocationAction from '../Actions/LocationAction';
 import * as WorkflowAction from '../Actions/WorkflowAction';
@@ -14,7 +12,10 @@ import BoxShadow from '../Styles/BoxShadow';
 import Dimension from '../Libs/Dimension';
 
 
+const { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
+
 class PlaceSearch extends Component {
+  showed = false;
   state = {
     height: new Animated.Value(50),
     scale: new Animated.Value(0),
@@ -130,6 +131,7 @@ class PlaceSearch extends Component {
   }
 
   show = () => {
+    this.showed = true;
     Animated.timing(this.state.scale, {
       toValue: 0.8,
       easing: Easing.out(Easing.cubic),
@@ -138,6 +140,7 @@ class PlaceSearch extends Component {
   }
 
   hide = () => {
+    this.showed = false;
     Animated.timing(this.state.scale, {
       toValue: 0,
       easing: Easing.out(Easing.cubic),
@@ -158,6 +161,10 @@ class PlaceSearch extends Component {
 
   componentDidMount() {
     this.show();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.showed;
   }
 
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import { ListItem, Button, Icon } from 'react-native-elements';
 
 import PaymentModal from '../Modals/PaymentModal';
@@ -76,6 +76,10 @@ class PaymentScreen extends Component {
         </TouchableWithoutFeedback>
       );
     });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    
   }
 
   render() {

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
-import Reactotron from 'reactotron-react-native';
 import { Icon } from 'react-native-elements';
 
 import * as LocationAction from '../Actions/LocationAction';
@@ -16,6 +15,7 @@ import Dimension from '../Libs/Dimension';
 
 class MapScreen extends Component {
   delta = 0.01;
+  focused = true;
   state = {
     height: new Animated.Value(Dimension.height),
     scale: new Animated.Value(0),
@@ -35,6 +35,7 @@ class MapScreen extends Component {
   }
 
   focus = (showCallout = false) => {
+    this.focused = true;
     Animated.timing(this.state.height, {
       toValue: Dimension.height,
       easing: Easing.out(Easing.cubic),
@@ -46,6 +47,7 @@ class MapScreen extends Component {
   }
 
   blur = (hideCallout = true) => {
+    this.focused = false;
     Animated.timing(this.state.height, {
       toValue: 128,
       easing: Easing.out(Easing.cubic),
@@ -54,20 +56,6 @@ class MapScreen extends Component {
         this.marker.hideCallout();
       }
     });
-  }
-
-  show = () => {
-    Animated.timing(this.state.scale, {
-      toValue: 1,
-      easing: Easing.out(Easing.cubic),
-    }).start();
-  }
-
-  hide = () => {
-    Animated.timing(this.state.scale, {
-      toValue: 0,
-      easing: Easing.out(Easing.cubic),
-    }).start();
   }
 
   goToLocation = (latitude, longitude) => {
@@ -110,6 +98,16 @@ class MapScreen extends Component {
         this.focus(true);
         break;
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.focused) {
+      let { workflow } = nextProps;
+      return workflow !== WorkflowAction.WORK_FLOW_SIGN &&
+        workflow !== WorkflowAction.WORK_FLOW_SCANNER;
+    }
+
+    return false;
   }
 
   renderMarker() {

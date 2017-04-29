@@ -31,7 +31,7 @@ class ServiceDetailModal extends Component {
   }
 
   hide = () => {
-    this.props.hidePicker();
+    this.props.hideDetail();
     this.resetState();
   }
 
@@ -63,10 +63,12 @@ class ServiceDetailModal extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.visible !== this.state.visible;
+    return nextState.visible !== this.state.visible && nextProps.service;
   }
 
   render() {
+    let { service } = this.props;
+
     return (
       <Modal
         transparent
@@ -77,15 +79,19 @@ class ServiceDetailModal extends Component {
           flex: 1,
           backgroundColor: eGobie.EGOBIE_SHADOW,
         }}>
-          <PricingCard
-            color = { eGobie.EGOBIE_BLUE }
-            title = { 'Premium Plus' }
-            price = { '$45.00' }
-            info = { ['1', '2', '3', '4'] }
-            button = {{
-              title: 'Confirm',
-            }}
-          />
+          {
+            service && <PricingCard
+              color = { eGobie.EGOBIE_BLUE }
+              title = { service.name }
+              price = { `$${service.price}.00` }
+              info = { service.items }
+              button = {{
+                title: 'CLOSE',
+                icon: 'close',
+              }}
+              onButtonPress = { this.hide }
+            />
+          }
         </View>
       </Modal>
     );
@@ -94,13 +100,14 @@ class ServiceDetailModal extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    service: state.metadata.service,
     workflow: state.workflow.name,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    hidePicker: () => {
+    hideDetail: () => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
       });

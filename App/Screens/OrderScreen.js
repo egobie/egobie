@@ -627,7 +627,7 @@ const mapStateToProps = (state) => {
   let services = state.metadata.selectedServices.map((service) => {
     return service.name;
   });
-  Reactotron.log(services);
+
   return {
     address: state.location.formattedAddress,
     workflow: state.workflow.name,

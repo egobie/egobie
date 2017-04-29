@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Animated, StyleSheet, Easing, TouchableWithoutFeedback } from 'react-native';
+import { View } from 'react-native';
 
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
@@ -51,43 +51,40 @@ class Service extends Component {
 
   render() {
     return (
-      <TouchableWithoutFeedback
-        onPress = { this.onPress }
-        onLongPress = { this.onLongPress }
-      >
-        <Animated.View style = {{
-          backgroundColor: this.state.backgroundColor,
-        }}>
-          <ListItem
-            hideChevron
-            title = { this.props.title }
-            titleStyle = {{
-              color: this.state.color,
-              fontWeight: '600',
-            }}
-            subtitle = { `Estimated Time: ${this.props.time}min` }
-            subtitleStyle = {{
-              color: this.state.color,
-              width: 150,
-              fontWeight: '300',
-            }}
-            rightTitle = { `$${this.props.price}.00` }
-            rightTitleStyle = {{
-              color: this.state.color,
-              fontWeight: '600',
-            }}
-            leftIcon = { this.serviceIcon(this.props.type) }
-            containerStyle = {{
-              height: 70,
-              marginLeft: 10,
-              marginRight: 10,
-              justifyContent: 'center',
-              borderBottomWidth: 0.5,
-              borderBottomColor: eGobie.EGOBIE_GREY,
-            }}
-          />
-        </Animated.View>
-      </TouchableWithoutFeedback>
+      <View style = {{
+        backgroundColor: this.state.backgroundColor,
+      }}>
+        <ListItem
+          hideChevron
+          title = { this.props.title }
+          titleStyle = {{
+            color: this.state.color,
+            fontWeight: '600',
+          }}
+          subtitle = { `Estimated Time: ${this.props.time}min` }
+          subtitleStyle = {{
+            color: this.state.color,
+            width: 150,
+            fontWeight: '300',
+          }}
+          rightTitle = { `$${this.props.price}.00` }
+          rightTitleStyle = {{
+            color: this.state.color,
+            fontWeight: '600',
+          }}
+          leftIcon = { this.serviceIcon(this.props.type) }
+          containerStyle = {{
+            height: 70,
+            marginLeft: 10,
+            marginRight: 10,
+            justifyContent: 'center',
+            borderBottomWidth: 0.5,
+            borderBottomColor: eGobie.EGOBIE_GREY,
+          }}
+          onPress = { this.onPress }
+          onLongPress = { this.onLongPress }
+        />
+      </View>
     );
   }
 }
@@ -119,6 +116,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     onLongPress: (serviceId) => {
       dispatch({
+        type: MetadataAction.SERVICE_DETAIL,
+        serviceId,
+      });
+      dispatch({
         type: WorkflowAction.WORK_FLOW_SERVICE_DETAIL,
         serviceId,
       });
@@ -126,4 +127,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(Service);
+export default connect(null, mapDispatchToProps)(Service);

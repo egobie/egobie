@@ -7,6 +7,11 @@ const metadata = {
   services: [],
   discounts: [],
   selectedServices: [],
+
+  vehicleMake: null,
+  vehicleModel: null,
+  service: null,
+
 };
 
 const serializeVehicleMakes = (makes) => {
@@ -81,6 +86,16 @@ export default (state = metadata, action) => {
 
       return Object.assign({}, state, {
         selectedServices: selected2,
+      });
+
+    case Action.SERVICE_DETAIL:
+      let service = state.services.find((service) => {
+        return service.id === action.serviceId;
+      });
+
+      Reactotron.log(service);
+      return Object.assign({}, state, {
+        service,
       });
 
     default:

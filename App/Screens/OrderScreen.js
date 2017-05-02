@@ -118,17 +118,16 @@ class OrderScreen extends Component {
   }
 
   rightIcon() {
-    return null;
-    // return {
-    //   type: 'material-community',
-    //   name: 'pencil',
-    //   color: eGobie.EGOBIE_BLUE,
-    //   style: {
-    //     fontSize: 15,
-    //     marginRight: 10,
-    //     marginTop: 15,
-    //   }
-    // };
+    return {
+      type: 'material-community',
+      name: 'pencil',
+      color: eGobie.EGOBIE_BLUE,
+      style: {
+        fontSize: 18,
+        marginRight: 10,
+        marginTop: 15,
+      }
+    };
   }
 
   location() {
@@ -239,46 +238,20 @@ class OrderScreen extends Component {
     );
   }
 
-  paymentViechle() {
+  viechle() {
     return (
       <Animated.View style = {{
-        flexDirection: 'row',
         marginBottom: 5,
       }}>
         <Label
-          onPress = { this.showChild('payment') }
-          title = 'Payment'
-          value = '5860'
-          titleStyle = {{
-            color: eGobie.EGOBIE_GREY,
-            fontSize: 12,
-          }}
-          valueStyle = {{
-            color: eGobie.EGOBIE_BLACK,
-            fontSize: 12,
-          }}
-          leftIcon = {{
-            type: 'font-awesome',
-            name: 'credit-card-alt',
-            color: eGobie.EGOBIE_BLUE,
-            style: {
-              fontSize: 18,
-            }
-          }}
-          style = {{
-            marginLeft: 15,
-            marginRight: 5,
-            paddingTop: 5,
-            paddingBottom: 5,
-            borderBottomWidth: 1,
-            borderBottomColor: eGobie.EGOBIE_GREY,
-            flex: 1,
-          }}
-        />
-        <Label
           onPress = { this.showChild('vehicle') }
           title = 'Viehcle'
-          value = 'Y96EUV'
+          value = 'Honda Accord Y96EUV'
+          leftIcon = {{
+            type: 'material-community',
+            name: 'car',
+            color: eGobie.EGOBIE_BLUE,
+          }}
           titleStyle = {{
             color: eGobie.EGOBIE_GREY,
             fontSize: 12,
@@ -287,22 +260,14 @@ class OrderScreen extends Component {
             color: eGobie.EGOBIE_BLACK,
             fontSize: 12,
           }}
-          leftIcon = {{
-            type: 'font-awesome',
-            name: 'car',
-            color: eGobie.EGOBIE_BLUE,
-            style: {
-              fontSize: 18,
-            }
-          }}
+          rightIcon = { this.rightIcon() }
           style = {{
-            marginLeft: 5,
+            marginLeft: 15,
             marginRight: 15,
             paddingTop: 5,
             paddingBottom: 5,
             borderBottomWidth: 1,
             borderBottomColor: eGobie.EGOBIE_GREY,
-            flex: 1,
           }}
         />
       </Animated.View>
@@ -330,7 +295,6 @@ class OrderScreen extends Component {
             name: 'av-timer',
             color: eGobie.EGOBIE_BLUE,
           }}
-          rightIcon = { this.rightIcon() }
           style = {{
             flex: 1,
             marginLeft: 15,
@@ -358,7 +322,6 @@ class OrderScreen extends Component {
             color: eGobie.EGOBIE_BLUE,
             size: 20,
           }}
-          rightIcon = { this.rightIcon() }
           style = {{
             flex: 1,
             marginLeft: 5,
@@ -367,92 +330,6 @@ class OrderScreen extends Component {
             paddingBottom: 5,
             borderBottomWidth: 1,
             borderBottomColor: eGobie.EGOBIE_GREY,
-          }}
-        />
-      </Animated.View>
-    );
-  }
-
-  payments() {
-    let cards = [];
-
-    if (cards.length === 0) {
-      return [-1].map((_, i) => {
-        return (
-          <Button
-            key = { i }
-            raised
-            onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_PAYMENT); } }
-            title = { 'ADD PAYMENT' }
-            icon = {{
-              type: 'material-community',
-              name: 'credit-card-plus',
-            }}
-            color = { eGobie.EGOBIE_WHITE }
-            backgroundColor = { eGobie.EGOBIE_BLUE }
-            buttonStyle = {{
-              width: 180,
-              marginTop: 80,
-              marginLeft: Dimension.width / 2 - 90,
-            }}/>
-        );
-      });
-    } else {
-      return cards.map((_, i) => {
-        return (
-          <CreditCard
-            key = { i }
-            number = '1234'
-            expiry = '12/23'
-            name = 'Bo Huang'
-            type = 'visa'
-            cardScale = { 0.7 }
-            containerStyle = {{
-              width: Dimension.width,
-            }}
-          />
-        );
-      });
-    }
-  }
-
-  payment() {
-    return (
-      <Animated.View style = {{
-        flex: 1,
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        position: 'absolute',
-        backgroundColor: eGobie.EGOBIE_WHITE,
-        opacity: this.state.paymentOpacity,
-        transform: [
-          { translateY: this.state.paymentTranslateY },
-        ],
-      }}>
-        <Carousel
-          sliderWidth = { Dimension.width }
-          itemWidth = { Dimension.width }
-          inactiveSlideScale = { 0.94 }
-          inactiveSlideOpacity = { 0.6 }
-          enableMomentum = { true }
-          showsHorizontalScrollIndicator = { false }
-          snapOnAndroid = { true }
-          removeClippedSubviews = { false }
-          swipeThreshold = { 1 }
-        >
-          { this.payments() }
-        </Carousel>
-        <Icon
-          name = 'close'
-          color = { eGobie.EGOBIE_RED }
-          size = { 20 }
-          onPress = { this.hideChild('payment') }
-          containerStyle = {{
-            top: 5,
-            right: 30,
-            position: 'absolute',
           }}
         />
       </Animated.View>
@@ -510,7 +387,7 @@ class OrderScreen extends Component {
     }
   }
 
-  vehicle() {
+  vehicleCarousel() {
     return (
       <Animated.View style = {{
         flex: 1,
@@ -576,8 +453,7 @@ class OrderScreen extends Component {
             }}
           />
         </Animated.View>
-        { this.payment() }
-        { this.vehicle() }
+        { this.vehicleCarousel() }
       </Animated.View>
     );
   }
@@ -612,7 +488,7 @@ class OrderScreen extends Component {
         }}>
           { this.location() }
           { this.service() }
-          { this.paymentViechle() }
+          { this.viechle() }
           { this.schedule() }
           { this.estimatedTimeAndPrice() }
         </Animated.View>

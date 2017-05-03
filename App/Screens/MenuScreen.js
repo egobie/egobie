@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Animated, View, ScrollView, Easing } from 'react-native';
+import { Animated, View, PanResponder, Easing, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
-
+import Reactotron from 'reactotron-react-native';
 import I18n from 'react-native-i18n';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import eGobie from '../Styles/Egobie';
@@ -69,24 +69,43 @@ class MenuScreen extends Component {
 
   state = {
     translateX: new Animated.Value(-1 * Dimensions.width),
+    showed: false,
   }
+
+  panResponder = PanResponder.create({
+    onMoveShouldSetResponderCapture: () => true,
+    onMoveShouldSetPanResponderCapture: () => true,
+    onPanResponderMove: (e, gestureState) => {
+      if (gestureState.dx < -30) {
+        this.hide();
+      }
+    }
+  });
 
   constructor(props) {
     super(props);
   }
 
   show = () => {
+    this.setState({
+      showed: true,
+    });
     Animated.timing(this.state.translateX, {
       toValue: 0,
-      easing: Easing.cubic(Easing.out),
+      easing: Easing.out(Easing.cubic),
     }).start();
   }
 
   hide = () => {
     Animated.timing(this.state.translateX, {
       toValue: -1 * Dimensions.width,
-      easing: Easing.cubic(Easing.out),
-    }).start();
+      easing: Easing.out(Easing.cubic),
+    }).start(() => {
+      this.setState({
+        showed: false,
+      });
+      this.props.hideMenu();
+    });
   }
 
   user() {
@@ -174,32 +193,33 @@ class MenuScreen extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.showed !== this.state.showed;
+  }
+
   render() {
     return (
-      <Animated.View style = {{
-        position: 'absolute',
-        width: Dimensions.width,
-        height: Dimensions.height,
-        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-        transform: [
-          { translateX: this.state.translateX },
-        ],
-      }}>
-        <ScrollView
-          showsHorizontalScrollIndicator = { false }
-          showsVerticalScrollIndicator = { false }
-        >
-          <View style = {{
-            height: Dimensions.height,
-            width: Dimensions.width * 0.8,
-            paddingTop: 30,
-            backgroundColor: eGobie.EGOBIE_WHITE,
-          }}>
-            { this.user() }
-            { this.menu() }
-            { this.other() }
-          </View>
-        </ScrollView>
+      <Animated.View
+        style = {{
+          position: 'absolute',
+          width: Dimensions.width,
+          height: Dimensions.height,
+          transform: [
+            { translateX: this.state.translateX },
+          ],
+        }}
+        { ...this.panResponder.panHandlers }
+      >
+        <View style = {{
+          height: Dimensions.height,
+          width: Dimensions.width * 0.8,
+          paddingTop: 30,
+          backgroundColor: eGobie.EGOBIE_WHITE,
+        }}>
+          { this.user() }
+          { this.menu() }
+          { this.other() }
+        </View>
       </Animated.View>
     );
   }

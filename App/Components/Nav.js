@@ -47,6 +47,10 @@ class Nav extends Component {
     this.props.showSign();
   }
 
+  showMenu = () => {
+    this.props.showMenu();
+  }
+
   componentWillReceiveProps(nextProps) {
     switch(nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_ORDER:
@@ -63,7 +67,7 @@ class Nav extends Component {
     return nextProps.userId !== this.props.userId || nextState.showed !== this.state.showed;
   }
 
-  renderUserIcon() {``
+  renderUserIcon() {
     if (this.props.userId === -1) {
       return (
         <TouchableWithoutFeedback onPress = { this.showSign }>
@@ -86,7 +90,7 @@ class Nav extends Component {
       );
     } else {
       return (
-        <TouchableWithoutFeedback onPress = { () => {} }>
+        <TouchableWithoutFeedback onPress = { this.showMenu }>
           <View style = {{
             position: 'absolute',
             justifyContent: 'center',
@@ -161,6 +165,11 @@ const mapDispatchToProps = (dispatch) => {
         type: WorkflowAction.WORK_FLOW_SIGN,
       });
     },
+    showMenu: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_MENU,
+      });
+    }
   };
 };
 

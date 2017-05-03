@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Steps from '../Components/Steps';
 import Loading from '../Components/Loading';
+import Mask from '../Components/Mask';
 import ScannerScreen from '../Screens/ScannerScreen';
 import MapScreen from '../Screens/MapScreen';
 import ServiceScreen from '../Screens/ServiceScreen';
@@ -35,6 +36,7 @@ export default class extends Component {
         <MapScreen />
         <OrderScreen />
         <ServiceScreen />
+        <Mask />
         <MenuScreen />
         <CalendarModal />
         <SignModal />

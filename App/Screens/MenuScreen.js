@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { Animated, View, ScrollView, Easing } from 'react-native';
+import { connect } from 'react-redux';
 
 import I18n from 'react-native-i18n';
 import { List, ListItem } from 'react-native-elements';
 
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import eGobie from '../Styles/Egobie';
+import Dimensions from '../Libs/Dimension';
 
 
 const titleStyle = {
@@ -28,7 +31,6 @@ const leftIconStyle = {
 }
 
 class MenuScreen extends Component {
-
   menuItems = [
     {
       title: I18n.t('menu.myServices'),
@@ -64,6 +66,28 @@ class MenuScreen extends Component {
       onPress: () => { this.props.navigation.navigate('About') },
     },
   ];
+
+  state = {
+    translateX: new Animated.Value(-1 * Dimensions.width),
+  }
+
+  constructor(props) {
+    super(props);
+  }
+
+  show = () => {
+    Animated.timing(this.state.translateX, {
+      toValue: 0,
+      easing: Easing.cubic(Easing.out),
+    }).start();
+  }
+
+  hide = () => {
+    Animated.timing(this.state.translateX, {
+      toValue: -1 * Dimensions.width,
+      easing: Easing.cubic(Easing.out),
+    }).start();
+  }
 
   user() {
     return (
@@ -142,32 +166,59 @@ class MenuScreen extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    switch (nextProps.workflow) {
+      case WorkflowAction.WORK_FLOW_MENU:
+        this.show();
+        break;
+    }
+  }
+
   render() {
     return (
-      <ScrollView
-        showsHorizontalScrollIndicator = { false }
-        showsVerticalScrollIndicator = { false }
-      >
-        <View>
-          { this.user() }
-        </View>
-        <View style = {{
-          marginTop: 15,
-        }}>
-          { this.menu() }
-        </View>
-        <View style = {{
-          marginTop: 15,
-        }}>
-        { this.other() }
-        </View>
-      </ScrollView>
+      <Animated.View style = {{
+        position: 'absolute',
+        width: Dimensions.width,
+        height: Dimensions.height,
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        transform: [
+          { translateX: this.state.translateX },
+        ],
+      }}>
+        <ScrollView
+          showsHorizontalScrollIndicator = { false }
+          showsVerticalScrollIndicator = { false }
+        >
+          <View style = {{
+            height: Dimensions.height,
+            width: Dimensions.width * 0.8,
+            paddingTop: 30,
+            backgroundColor: eGobie.EGOBIE_WHITE,
+          }}>
+            { this.user() }
+            { this.menu() }
+            { this.other() }
+          </View>
+        </ScrollView>
+      </Animated.View>
     );
   }
 };
 
-MenuScreen.propTypes = {
-
+const mapStateToProps = (state) => {
+  return {
+    workflow: state.workflow.name,
+  };
 };
 
-export default MenuScreen;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    hideMenu: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_BACK,
+      });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuScreen);

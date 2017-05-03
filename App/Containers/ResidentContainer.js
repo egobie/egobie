@@ -10,6 +10,7 @@ import ScannerScreen from '../Screens/ScannerScreen';
 import MapScreen from '../Screens/MapScreen';
 import ServiceScreen from '../Screens/ServiceScreen';
 import OrderScreen from '../Screens/OrderScreen';
+import MenuScreen from '../Screens/MenuScreen';
 import SignModal from '../Modals/SignModal';
 import CalendarModal from '../Modals/CalendarModal';
 import VehicleModal from '../Modals/VehicleModal';
@@ -34,6 +35,7 @@ export default class extends Component {
         <MapScreen />
         <OrderScreen />
         <ServiceScreen />
+        <MenuScreen />
         <CalendarModal />
         <SignModal />
         <VehicleModal />

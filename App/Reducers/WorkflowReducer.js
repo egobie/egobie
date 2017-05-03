@@ -25,6 +25,7 @@ export default (state = workflow, action) => {
     case Action.WORK_FLOW_PICKER_MODEL:
     case Action.WORK_FLOW_PICKER_STATE:
     case Action.WORK_FLOW_PICKER_YEAR:
+    case Action.WORK_FLOW_MENU:
       prev.push(state.name);
       return Object.assign({}, state, {
         prev,

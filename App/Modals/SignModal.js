@@ -124,6 +124,10 @@ class SignModal extends Component {
         this.show();
         break;
     }
+
+    if (nextProps.userId !== -1) {
+      this.hide();
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -441,6 +445,7 @@ class SignModal extends Component {
 const mapStateToProps = (state) => {
   return {
     workflow: state.workflow.name,
+    userId: state.user.id,
   };
 };
 

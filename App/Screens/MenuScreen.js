@@ -43,11 +43,6 @@ class MenuScreen extends Component {
       onPress: () => { this.props.navigation.navigate('Vehicles') },
     },
     {
-      title: I18n.t('menu.payments'),
-      icon: 'credit-card',
-      onPress: () => { this.props.navigation.navigate('Payments') },
-    },
-    {
       title: I18n.t('menu.coupons'),
       icon: 'barcode',
       onPress: () => { },
@@ -76,10 +71,10 @@ class MenuScreen extends Component {
     onMoveShouldSetResponderCapture: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
     onPanResponderMove: (e, gestureState) => {
-      if (gestureState.dx < -30) {
+      if (gestureState.dx <= -50) {
         this.hide();
       }
-    }
+    },
   });
 
   constructor(props) {

@@ -1,51 +1,45 @@
 import React, { Component } from 'react';
 import { View, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
-
+import { connect } from 'react-redux';
 import { ListItem, Button, Icon } from 'react-native-elements';
 
-import ViechleModal from '../Modals/VehicleModal';
+import * as WorkflowAction from '../Actions/WorkflowAction';
 import VehicleIcons from '../Libs/VehicleIcon';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 
 
 class VehicleScreen extends Component {
-  static navigationOptions = {
-    title: 'Vehicles',
-    header: ({ goBack }) => ({
-      titleStyle: {
-        fontWeight: '400',
-      },
-      left: (
-        <TouchableWithoutFeedback
-          onPress = { () => goBack() }
-        >
-          <View>
-            <Icon
-              type = { 'material-community' }
-              name = { 'chevron-left' }
-              iconStyle = {{
-                color: eGobie.EGOBIE_BLUE,
-                fontWeight: '400',
-                fontSize: 35,
-              }}
-            />
-          </View>
-        </TouchableWithoutFeedback>
-      ),
-    }),
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: 'VEHICLES',
+    headerTitleStyle: {
+      fontWeight: '400',
+    },
+    headerLeft: (
+      <TouchableWithoutFeedback onPress = { () => navigation.goBack() } >
+        <View>
+          <Icon
+            type = { 'material-community' }
+            name = { 'chevron-left' }
+            iconStyle = {{
+              color: eGobie.EGOBIE_BLUE,
+              fontWeight: '400',
+              fontSize: 35,
+            }}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+    ),
+  });
 
-  showVehicleModal() {
-    this.refs.vehicle.show();
+  addVehicle = () => {
+    this.props.addVehicle();
   }
 
   vehicles() {
     return ['suv', 'sedan', 'truck', 'van'].map((mode, i) => {
       return (
-        <TouchableWithoutFeedback
-          key = { i }
-        >
+        <TouchableWithoutFeedback key = { i } >
           <View>
             <ListItem
               hideChevron
@@ -81,21 +75,40 @@ class VehicleScreen extends Component {
 
   render() {
     return (
-      <ScrollView>
-        { this.vehicles() }
+      <View style = {{
+        flex: 1,
+      }}>
+        <ScrollView>
+          { this.vehicles() }
+        </ScrollView>
         <Button
-          onPress = { () => { this.showVehicleModal() } }
+          onPress = { this.addVehicle }
           title = 'ADD NEW VEHICLE'
           buttonStyle = {{
-            marginTop: 10,
+            marginBottom: 30,
             backgroundColor: eGobie.EGOBIE_BLUE,
             ...BoxShadow
           }}
         />
-        <ViechleModal ref = { 'vehicle' }/>
-      </ScrollView>
+      </View>
     );
   }
 };
 
-export default VehicleScreen;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ...ownProps,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addVehicle: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_VEHICLE,
+      });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VehicleScreen);

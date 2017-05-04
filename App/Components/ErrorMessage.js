@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated, Text, Easing } from 'react-native';
-
+import { connect } from 'react-redux';
+import Reactotron from 'reactotron-react-native';
 import * as ErrorAction from '../Actions/ErrorAction';
 import Dimensions from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
@@ -9,7 +10,7 @@ import eGobie from '../Styles/Egobie';
 class ErrorMessage extends Component {
   state = {
     top: new Animated.Value(-70),
-    errorMessage: ' ',
+    errorMessage: null,
   };
   timer = null;
 
@@ -36,10 +37,25 @@ class ErrorMessage extends Component {
   }
 
   hide() {
+    this.props.hideError();
     Animated.timing(this.state.top, {
       toValue: -70,
       easing: Easing.out(Easing.cubic),
     }).start();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.error) {
+      this.show(nextProps.error);
+    } else {
+      this.setState({
+        errorMessage: null,
+      });
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.error !== this.state.errorMessage;
   }
 
   render() {
@@ -54,13 +70,33 @@ class ErrorMessage extends Component {
         paddingBottom: 10,
         backgroundColor: eGobie.EGOBIE_RED,
         top: this.state.top,
+        zIndex: 4,
       }}>
-        <Text style = {{
-          color: eGobie.EGOBIE_WHITE,
-        }}>{ this.state.errorMessage }</Text>
+        {
+          this.state.errorMessage && <Text style = {{
+            color: eGobie.EGOBIE_WHITE,
+          }}>{ this.state.errorMessage }</Text>
+        }
       </Animated.View>
     );
   }
 }
 
-export default ErrorMessage;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    error: state.error.message,
+    ...ownProps
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    hideError: () => {
+      dispatch({
+        type: ErrorAction.ERROR_HIDE,
+      });
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorMessage);

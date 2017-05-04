@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableWithoutFeedback } from 'react-native';
-
+import { connect } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Kohana } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
@@ -29,29 +29,34 @@ const customStyle = {
 }
 
 class UserScreen extends Component {
-  static navigationOptions = {
-    title: 'User',
-    header: ({ goBack }) => ({
-      titleStyle: {
-        fontWeight: '400',
-      },
-      left: (
-        <TouchableWithoutFeedback onPress = { () => goBack() }>
-          <View>
-            <Icon
-              type = { 'material-community' }
-              name = { 'chevron-left' }
-              iconStyle = {{
-                color: eGobie.EGOBIE_BLUE,
-                fontWeight: '400',
-                fontSize: 35,
-              }}
-            />
-          </View>
-        </TouchableWithoutFeedback>
-      ),
-    }),
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: 'USER',
+    headerTitleStyle: {
+      fontWeight: '400',
+    },
+    headerLeft: (
+      <TouchableWithoutFeedback onPress = { () => navigation.goBack() } >
+        <View>
+          <Icon
+            type = { 'material-community' }
+            name = { 'chevron-left' }
+            iconStyle = {{
+              color: eGobie.EGOBIE_BLUE,
+              fontWeight: '400',
+              fontSize: 35,
+            }}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+    ),
+  });
+
+  user = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+  }
 
   constructor(props) {
     super(props);
@@ -74,24 +79,32 @@ class UserScreen extends Component {
             label = { 'First Name' }
             iconName = { 'account' }
             autoCapitalize = { 'words' }
+            defaultValue = { this.props.firstName }
+            onChangeText = { (text) => { this.user.firstName = text; } }
             { ...customStyle }
           />
           <Kohana
             label = { 'Last Name' }
             iconName = { 'account' }
             autoCapitalize = { 'words' }
+            defaultValue = { this.props.lastName }
+            onChangeText = { (text) => { this.user.lastName = text; } }
             { ...customStyle }
           />
           <Kohana
             label = { 'Email' }
             keyboardType = { 'email-address' }
             iconName = { 'email' }
+            defaultValue = { this.props.email }
+            onChangeText = { (text) => { this.user.email = text; } }
             { ...customStyle }
           />
           <Kohana
             label = { 'Phone Number' }
             keyboardType = { 'phone-pad' }
             iconName = { 'cellphone' }
+            defaultValue = { this.props.phoneNumber }
+            onChangeText = { (text) => { this.user.phoneNumber = text; } }
             { ...customStyle }
           />
         </View>
@@ -110,8 +123,20 @@ class UserScreen extends Component {
   }
 };
 
-UserScreen.propTypes = {
-
+const mapStateToProps = (state, ownProps) => {
+  return {
+    firstName: state.user.firstName,
+    lastName: state.user.lastName,
+    email: state.user.email,
+    phoneNumber: state.user.phoneNumber,
+    ...ownProps,
+  };
 };
 
-export default UserScreen;
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserScreen);

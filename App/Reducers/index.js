@@ -6,6 +6,7 @@ import location from './LocationReducer';
 import workflow from './WorkflowReducer';
 import calendar from './CalendarReducer';
 import payment from './PaymentReducer';
+import error from './ErrorReducer';
 
 
 export default combineReducers({
@@ -15,4 +16,5 @@ export default combineReducers({
   calendar,
   payment,
   metadata,
+  error,
 });

@@ -1,28 +1,20 @@
 import React, { Component } from 'react'
+import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
+import Loading from '../Components/Loading';
+import ErrorMessage from '../Components/ErrorMessage';
 import ResidentContainer from './ResidentContainer';
-import BusinessContainer from './BusinessContainer';
-import MoreContainer from './MoreContainer';
 import UserScreen from '../Screens/UserScreen';
-import PaymentScreen from '../Screens/PaymentScreen';
 import VehicleScreen from '../Screens/VehicleScreen';
 import AboutScreen from '../Screens/AboutScreen';
+import VehicleModal from '../Modals/VehicleModal';
+import SignModal from '../Modals/SignModal';
+import CalendarModal from '../Modals/CalendarModal';
+import PickerModal from '../Modals/PickerModal';
+import ServiceDetailModal from '../Modals/ServiceDetailModal'
 import eGobie from '../Styles/Egobie';
-
-
-const routes = {
-  Resident: {
-    screen: ResidentContainer,
-  },
-  Business: {
-    screen: BusinessContainer,
-  },
-  More: {
-    screen: MoreContainer,
-  },
-};
 
 const configs = {
   tabBarPosition: 'bottom',
@@ -46,10 +38,7 @@ const stackRouteConfigs = {
   },
 };
 
-export default StackNavigator({
-  // Home: {
-  //   screen: TabNavigator(routes, configs),
-  // },
+const Navigator = StackNavigator({
   Resident: {
     screen: ResidentContainer,
     ...stackRouteConfigs,
@@ -60,12 +49,28 @@ export default StackNavigator({
   Vehicles: {
     screen: VehicleScreen,
   },
-  Payments: {
-    screen: PaymentScreen,
-  },
   About: {
     screen: AboutScreen,
   }
 }, {
   headerMode: 'screen',
+});
+
+export default React.createClass({
+  render: () => {
+    return (
+      <View style = {{
+        flex: 1,
+      }}>
+        <Navigator { ...this.props } />
+        <VehicleModal />
+        <CalendarModal />
+        <SignModal />
+        <Loading />
+        <PickerModal />
+        <ServiceDetailModal />
+        <ErrorMessage />
+      </View>
+    );
+  }
 });

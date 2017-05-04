@@ -18,31 +18,27 @@ const rightIcon = {
 };
 
 class AboutScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'About',
-    header: ({ goBack }) => ({
-      titleStyle: {
-        fontWeight: '400',
-      },
-      left: (
-        <TouchableWithoutFeedback
-          onPress = { () => goBack() }
-        >
-          <View>
-            <Icon
-              type = { 'material-community' }
-              name = { 'chevron-left' }
-              iconStyle = {{
-                color: eGobie.EGOBIE_BLUE,
-                fontWeight: '400',
-                fontSize: 35,
-              }}
-            />
-          </View>
-        </TouchableWithoutFeedback>
-      ),
-    }),
-  };
+    headerTitleStyle: {
+      fontWeight: '400',
+    },
+    headerLeft: (
+      <TouchableWithoutFeedback onPress = { () => navigation.goBack() } >
+        <View>
+          <Icon
+            type = { 'material-community' }
+            name = { 'chevron-left' }
+            iconStyle = {{
+              color: eGobie.EGOBIE_BLUE,
+              fontWeight: '400',
+              fontSize: 35,
+            }}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  });
 
   render() {
     return (

@@ -121,9 +121,9 @@ class MenuScreen extends Component {
           name: 'chevron-right',
           color: eGobie.EGOBIE_GREY,
         }}
-        title = { 'Bo Huang' }
+        title = { `${this.props.firstName} ${this.props.lastName}` }
         titleStyle = { titleStyle }
-        subtitle = { `eGobie Account: bhuang3` }
+        subtitle = { `Account: ${this.props.username}` }
         subtitleStyle = { subtitleStyle }
         containerStyle = { containerStyle }
       />
@@ -224,9 +224,13 @@ class MenuScreen extends Component {
   }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     workflow: state.workflow.name,
+    username: state.user.username,
+    firstName: state.user.firstName,
+    lastName: state.user.lastName,
+    ...ownProps,
   };
 };
 

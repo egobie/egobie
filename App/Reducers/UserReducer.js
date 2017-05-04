@@ -23,7 +23,7 @@ const user = {
   workAddressZip: '',
   workAddressCity: '',
   workAddressStreet: '',
-  signnedIn: false,
+  signedIn: false,
   loading: false,
 };
 

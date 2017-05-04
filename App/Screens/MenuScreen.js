@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Animated, View, PanResponder, Easing, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
+
 import I18n from 'react-native-i18n';
 import { List, ListItem, Icon } from 'react-native-elements';
 
@@ -62,19 +62,23 @@ class MenuScreen extends Component {
     },
   ];
 
+  swipeDx = 0;
   state = {
     translateX: new Animated.Value(-1 * Dimensions.width),
     showed: false,
-  }
+  };
 
   panResponder = PanResponder.create({
     onMoveShouldSetResponderCapture: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
     onPanResponderMove: (e, gestureState) => {
-      if (gestureState.dx <= -50) {
+      this.swipeDx = gestureState.dx;
+    },
+    onPanResponderRelease: () => {
+      if (this.swipeDx < 0) {
         this.hide();
       }
-    },
+    }
   });
 
   constructor(props) {
@@ -92,6 +96,7 @@ class MenuScreen extends Component {
   }
 
   hide = () => {
+    this.props.hideMenu();
     Animated.timing(this.state.translateX, {
       toValue: -1 * Dimensions.width,
       easing: Easing.out(Easing.cubic),
@@ -99,7 +104,6 @@ class MenuScreen extends Component {
       this.setState({
         showed: false,
       });
-      this.props.hideMenu();
     });
   }
 

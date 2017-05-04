@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
+
 import { CreditCardInput } from 'react-native-credit-card-input';
 import { Button, Icon } from 'react-native-elements';
 
@@ -53,7 +53,6 @@ class PaymentModal extends Component {
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_PAYMENT:
-        Reactotron.log('WORK_FLOW_PAYMENT');
         this.show();
         break;
     }

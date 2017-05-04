@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
+
 import { Button, Icon, SocialIcon } from 'react-native-elements';
 import { Kohana } from 'react-native-textinput-effects';
 import FlipCard from 'react-native-flip-card'
@@ -23,6 +23,7 @@ class SignModal extends Component {
     scale: new Animated.Value(0),
     flip: false,
     visible: false,
+    signedIn: false,
   };
   defaultWidth = 260;
   inputDefaultProps = {
@@ -114,10 +115,6 @@ class SignModal extends Component {
     });
   }
 
-  hideSign = () => {
-    this.hide();
-  }
-
   componentWillReceiveProps(nextProps) {
     switch(nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_SIGN:
@@ -125,8 +122,13 @@ class SignModal extends Component {
         break;
     }
 
-    if (nextProps.userId !== -1) {
-      this.hide();
+    if (nextProps.signedIn) {
+      if (!this.state.signedIn) {
+        this.setState({
+          signedIn: nextProps.signedIn,
+        });
+        this.hide();
+      }
     }
   }
 
@@ -198,7 +200,7 @@ class SignModal extends Component {
           backgroundColor: eGobie.EGOBIE_WHITE,
           ...BoxShadow,
         }}>
-          <TouchableWithoutFeedback onPress = { this.hideSign } >
+          <TouchableWithoutFeedback onPress = { this.hide } >
             <View style = {{
               width: this.defaultWidth,
               height: 30,
@@ -335,7 +337,7 @@ class SignModal extends Component {
                 { '< Sign In' }
               </Text>
             </View>
-            <TouchableWithoutFeedback onPress = { this.hideSign } >
+            <TouchableWithoutFeedback onPress = { this.hide } >
               <View style = {{
                 flex: 1,
                 alignItems: 'flex-end',
@@ -445,7 +447,7 @@ class SignModal extends Component {
 const mapStateToProps = (state) => {
   return {
     workflow: state.workflow.name,
-    userId: state.user.id,
+    signedIn: state.user.signedIn,
   };
 };
 

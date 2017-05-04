@@ -29,6 +29,7 @@ class ScannerScreen extends Component {
   }
 
   cancel = () => {
+    this.hide();
     this.props.hideScanner();
   }
 
@@ -50,10 +51,6 @@ class ScannerScreen extends Component {
     switch(nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_SCANNER:
         this.show();
-        break;
-
-      default:
-        this.hide();
         break;
     }
   }

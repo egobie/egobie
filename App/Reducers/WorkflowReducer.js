@@ -33,9 +33,9 @@ export default (state = workflow, action) => {
       });
 
     case Action.WORK_FLOW_BACK:
-      Reactotron.log(Action.WORK_FLOW_BACK);
       let back = prev.splice(-1, 1);
       let name = back.length === 1 ? back[0] : Action.WORK_FLOW_START;
+
       return Object.assign({}, state, {
         prev,
         name,

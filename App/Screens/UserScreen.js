@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
+import Reactotron from 'reactotron-react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Kohana } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
+import * as ErrorAction from '../Actions/ErrorAction';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 import Dimension from '../Libs/Dimension';
@@ -62,6 +64,10 @@ class UserScreen extends Component {
     super(props);
   }
 
+  changeUser = () => {
+    this.props.showErrorMessage('Hahahah');
+  }
+
   render() {
     return (
       <View style = {{
@@ -109,6 +115,7 @@ class UserScreen extends Component {
           />
         </View>
         <Button
+          onPress = { this.changeUser }
           title = 'Save'
           buttonStyle = {{
             width: Dimension.width - 20,
@@ -135,7 +142,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    showErrorMessage: (error) => {
+      dispatch({
+        type: ErrorAction.ERROR_SHOW,
+        error,
+      });
+    },
   };
 };
 

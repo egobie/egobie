@@ -61,7 +61,6 @@ const buttonTextStyle = {
 class VehicleModal extends Component {
   state = {
     visible: false,
-    activePicker: null,
     cardScale: new Animated.Value(0),
   };
   car = {
@@ -109,39 +108,42 @@ class VehicleModal extends Component {
     let limit = 1980;
 
     for (let i = year; i >= limit; i--) {
-      years.push({ key: `${y}`, label: `${y}` });
+      years.push({ key: `${i}`, label: `${i}` });
     }
 
     return years;
   };
 
   showMakePicker = () => {
-    this.setState({ activePicker: 'make' });
-    this.props.showPicker(this.props.makes, this.car.make);
+    this.props.showPicker(this.props.makes, this.props.make, 'make');
   };
 
   showModelPicker = () => {
-    if (this.car.make) {
-      this.setState({ activePicker: 'model' });
-      this.props.showPicker(this.props.models[this.car.make], this.car.model);
+    if (this.props.make) {
+      this.props.showPicker(this.props.models[this.props.make], this.props.model, 'model');
     } else {
       this.props.showErrorMessage('Please choose Make first');
     }
   };
 
   showColorPicker = () => {
-    this.setState({ activePicker: 'color' });
-    this.props.showPicker(Colors, this.car.color);
+    this.props.showPicker(Colors, this.props.color, 'color');
   };
 
   showStatePicker = () => {
-    this.setState({ activePicker: 'state' });
-    this.props.showPicker(States, this.car.state);
+    this.props.showPicker(States, this.props.state, 'state');
   };
 
   showYearPicker = () => {
-    this.setState({ activePicker: 'year' });
-    this.props.showPicker(this.getYears(), this.car.year);
+    this.props.showPicker(this.getYears(), this.props.year, 'year');
+  }
+
+  getLabel = (options, key) => {
+    let find = options.find((option) => {
+      return option.key === key;
+    });
+
+    return find.label;
   }
 
   vehicleForm() {
@@ -157,36 +159,36 @@ class VehicleModal extends Component {
       }}>
         <Kaede
           label = { 'PLATE' }
-          defaultValue = { this.car.plate }
-          onChangeText = { (text) => { this.car.plate = text; } }
+          defaultValue = { this.props.plate }
+          onChangeText = { (text) => { this.props.plate = text; } }
           { ...inputDefaultProps }
         />
         <Button
-          title = { this.car.make ? this.car.make : 'MAKE' }
+          title = { this.props.make ? this.getLabel(this.props.makes, this.props.make) : 'MAKE' }
           onPress = { this.showMakePicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
         />
         <Button
-          title = { this.car.model ? this.car.model : 'MODEL' }
+          title = { this.props.make && this.props.model ? this.getLabel(this.props.models[this.props.make], this.props.model) : 'MODEL' }
           onPress = { this.showModelPicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
         />
         <Button
-          title = { this.car.color ? this.car.color : 'COLOR' }
+          title = { this.props.color ? this.props.color : 'COLOR' }
           onPress = { this.showColorPicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
         />
         <Button
-          title = { this.car.state ? this.car.state : 'STATE' }
+          title = { this.props.state ? this.getLabel(States, this.props.state) : 'STATE' }
           onPress = { this.showStatePicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
         />
         <Button
-          title = { this.car.year ? this.car.year : 'YEAR' }
+          title = { this.props.year ? this.props.year : 'YEAR' }
           onPress = { this.showYearPicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
@@ -196,27 +198,27 @@ class VehicleModal extends Component {
   }
 
   saveVehicle = () => {
-    if (!this.car.plate) {
+    if (!this.props.plate) {
       this.props.showErrorMessage('Please input the Plate.');
       return;
     }
 
-    if (!this.car.make) {
+    if (!this.props.make) {
       this.props.showErrorMessage('Please choose Make.');
       return;
     }
 
-    if (!this.car.model) {
+    if (!this.props.model) {
       this.props.showErrorMessage('Please choose Model.');
       return;
     }
 
-    if (!this.car.state) {
+    if (!this.props.state) {
       this.props.showErrorMessage('Please choose State.');
       return;
     }
 
-    if (!this.car.year) {
+    if (!this.props.year) {
       this.props.showErrorMessage('Please choose Year.');
       return;
     }
@@ -225,17 +227,16 @@ class VehicleModal extends Component {
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_VEHICLE:
+        Reactotron.log('show vehicle');
         this.show();
         break;
-    }
-
-    if (nextProps.selected) {
-      this.car[this.state.activePicker] = nextProps.selected;
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.visible !== this.state.visible;
+    return nextState.visible !== this.state.visible || nextProps.make !== this.props.make ||
+      nextProps.model !== this.props.model || nextProps.color !== this.props.color ||
+      nextProps.state !== this.props.state || nextProps.year !== this.props.year;
   }
 
   render() {
@@ -301,7 +302,11 @@ const mapStateToProps = (state) => {
     workflow: state.workflow.name,
     makes: state.metadata.vehicleMakes,
     models: state.metadata.vehicleModels,
-    selected: state.picker.selected,
+    make: state.picker.vehicleMake,
+    model: state.picker.vehicleModel,
+    state: state.picker.vehicleState,
+    color: state.picker.vehicleColor,
+    year: state.picker.vehicleYear,
   };
 };
 
@@ -311,11 +316,14 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
       });
+      dispatch({
+        type: PickerAction.PICKER_PICK_RESET,
+      });
     },
-    showPicker: (options, selected) => {
+    showPicker: (options, selected, target) => {
       dispatch({
         type: PickerAction.PICKER_SHOW,
-        options, selected,
+        options, selected, target,
       });
     },
     showErrorMessage: (error) => {

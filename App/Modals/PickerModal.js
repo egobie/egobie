@@ -36,7 +36,28 @@ class PickerModal extends Component {
   }
 
   pick = (selected) => {
-    this.props.pick(selected);
+    switch (this.props.target) {
+      case 'make':
+        this.props.pick(PickerAction.PICKER_PICK_VEHICLE_MAKE, selected);
+        break;
+
+      case 'model':
+        this.props.pick(PickerAction.PICKER_PICK_VEHICLE_MODEL, selected);
+        break
+
+      case 'state':
+        this.props.pick(PickerAction.PICKER_PICK_VEHICLE_STATE, selected);
+        break
+
+      case 'color':
+        this.props.pick(PickerAction.PICKER_PICK_VEHICLE_COLOR, selected);
+        break
+
+      case 'year':
+        this.props.pick(PickerAction.PICKER_PICK_VEHICLE_YEAR, selected);
+        break
+    }
+
     this.setState({
       selected,
     });
@@ -56,9 +77,7 @@ class PickerModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    Reactotron.log(nextProps);
     if (nextProps.options.length > 0) {
-      Reactotron.log('Show Picker');
       this.show(nextProps.selected);
     } else if (this.state.visible) {
       this.hide();
@@ -66,11 +85,8 @@ class PickerModal extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let update = nextState.visible !== this.state.visible || nextState.selected !== this.state.selected;
-    if (update) {
-      Reactotron.log('shouldComponentUpdate - Picker');
-    }
-    return update;
+    return nextState.visible !== this.state.visible ||
+      nextState.selected !== this.state.selected || nextProps.target !== this.props.target;
   }
 
   render() {
@@ -95,25 +111,9 @@ class PickerModal extends Component {
               { scale: this.state.pickerScale },
             ],
           }}>
-            <View style = {{
-              height: 30,
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              backgroundColor: eGobie.EGOBIE_WHITE,
-            }}>
-              <Icon
-                onPress = { this.hide }
-                type = { 'material-community' }
-                name = { 'close' }
-                iconStyle = {{
-                  color: eGobie.EGOBIE_RED,
-                  marginTop: 20,
-                  marginRight: 20,
-                }}
-              />
-            </View>
             <ScrollView style = {{
               height: 300,
+              marginTop: 15,
               paddingTop: 10,
               paddingLeft: 15,
               paddingRight: 15,
@@ -127,9 +127,10 @@ class PickerModal extends Component {
               backgroundColor: eGobie.EGOBIE_WHITE,
             }}>
               <Button
-                title = 'CONFIRM'
+                onPress = { this.hide }
+                title = 'CLOSE'
                 buttonStyle = {{
-                  marginTop: 20,
+                  marginTop: 15,
                 }}
                 backgroundColor = { eGobie.EGOBIE_BLUE }
               />
@@ -145,6 +146,7 @@ const mapStateToProps = (state) => {
   return {
     options: state.picker.options,
     selected: state.picker.selected,
+    target: state.picker.target,
   };
 };
 
@@ -155,10 +157,9 @@ const mapDispatchToProps = (dispatch) => {
         type: PickerAction.PICKER_HIDE,
       });
     },
-    pick: (selected) => {
+    pick: (type, selected) => {
       dispatch({
-        type: PickerAction.PICKER_PICK,
-        selected,
+        type, selected,
       });
     }
   };

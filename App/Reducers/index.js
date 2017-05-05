@@ -7,6 +7,7 @@ import workflow from './WorkflowReducer';
 import calendar from './CalendarReducer';
 import payment from './PaymentReducer';
 import error from './ErrorReducer';
+import picker from './PickerReducer';
 
 
 export default combineReducers({
@@ -17,4 +18,5 @@ export default combineReducers({
   payment,
   metadata,
   error,
+  picker,
 });

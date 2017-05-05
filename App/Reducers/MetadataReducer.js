@@ -1,8 +1,8 @@
 import * as Action from '../Actions/MetadataAction';
-import Reactotron from 'reactotron-react-native';
+
 
 const metadata = {
-  vehicleMakes: {},
+  vehicleMakes: [],
   vehicleModels: {},
   services: [],
   discounts: [],
@@ -15,25 +15,24 @@ const metadata = {
 };
 
 const serializeVehicleMakes = (makes) => {
-  let result = {};
-
-  for (let make of makes) {
-    result[make.id] = make.title;
-  }
-
-  return result;
+  return makes.map((make) => {
+    return {
+      key: make.id,
+      label: make.title,
+    };
+  });
 };
 
 const serializeVehicleModels = (models) => {
   let result = {};
 
-  for (let model of models) {
+  models.forEach((model) => {
     result[model.maker_id] = result[model.maker_id] ? result[model.maker_id] : [];
     result[model.maker_id].push({
-      id: model.id,
-      title: model.title,
+      key: model.id,
+      label: model.title,
     });
-  }
+  });
 
   return result;
 };
@@ -93,7 +92,6 @@ export default (state = metadata, action) => {
         return service.id === action.serviceId;
       });
 
-      Reactotron.log(service);
       return Object.assign({}, state, {
         service,
       });

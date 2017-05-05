@@ -6,6 +6,8 @@ import { Kaede } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as PickerAction from '../Actions/PickerAction';
+import * as ErrorAction from '../Actions/ErrorAction';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import States from '../Libs/States';
@@ -59,7 +61,17 @@ const buttonTextStyle = {
 class VehicleModal extends Component {
   state = {
     visible: false,
+    activePicker: null,
     cardScale: new Animated.Value(0),
+  };
+  car = {
+    id: null,
+    plate: null,
+    make: null,
+    model: null,
+    color: null,
+    state: null,
+    year: null,
   };
 
   constructor(props) {
@@ -73,7 +85,7 @@ class VehicleModal extends Component {
       friction: 4,
       tension: 40,
     }).start();
-  }
+  };
 
   hide = () => {
     Animated.timing(this.state.cardScale, {
@@ -83,26 +95,53 @@ class VehicleModal extends Component {
       this.resetState();
       this.props.hideVehicle();
     });
-  }
+  };
 
-  resetState() {
+  resetState = () => {
     this.setState({
       visible: false,
     });
-  }
+  };
 
-  getYears() {
+  getYears = () => {
     let year = new Date().getFullYear() + 1;
     let years = [];
     let limit = 1980;
 
     for (let i = year; i >= limit; i--) {
-      years.push(i);
+      years.push({ key: `${y}`, label: `${y}` });
     }
 
-    return years.map((y) => {
-      return { key: `${y}`, label: `${y}` };
-    });
+    return years;
+  };
+
+  showMakePicker = () => {
+    this.setState({ activePicker: 'make' });
+    this.props.showPicker(this.props.makes, this.car.make);
+  };
+
+  showModelPicker = () => {
+    if (this.car.make) {
+      this.setState({ activePicker: 'model' });
+      this.props.showPicker(this.props.models[this.car.make], this.car.model);
+    } else {
+      this.props.showErrorMessage('Please choose Make first');
+    }
+  };
+
+  showColorPicker = () => {
+    this.setState({ activePicker: 'color' });
+    this.props.showPicker(Colors, this.car.color);
+  };
+
+  showStatePicker = () => {
+    this.setState({ activePicker: 'state' });
+    this.props.showPicker(States, this.car.state);
+  };
+
+  showYearPicker = () => {
+    this.setState({ activePicker: 'year' });
+    this.props.showPicker(this.getYears(), this.car.year);
   }
 
   vehicleForm() {
@@ -118,29 +157,37 @@ class VehicleModal extends Component {
       }}>
         <Kaede
           label = { 'PLATE' }
+          defaultValue = { this.car.plate }
+          onChangeText = { (text) => { this.car.plate = text; } }
           { ...inputDefaultProps }
         />
         <Button
-          title = 'MAKE'
-          onPress = { () => { this.props.showPicker(WorkflowAction.WORK_FLOW_PICKER_MAKE) } }
+          title = { this.car.make ? this.car.make : 'MAKE' }
+          onPress = { this.showMakePicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
         />
         <Button
-          title = 'MODEL'
-          onPress = { () => { this.props.showPicker(WorkflowAction.WORK_FLOW_PICKER_MODEL) } }
+          title = { this.car.model ? this.car.model : 'MODEL' }
+          onPress = { this.showModelPicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
         />
         <Button
-          title = 'STATE'
-          onPress = { () => { this.props.showPicker(WorkflowAction.WORK_FLOW_PICKER_STATE) } }
+          title = { this.car.color ? this.car.color : 'COLOR' }
+          onPress = { this.showColorPicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
         />
         <Button
-          title = 'YEAR'
-          onPress = { () => { this.props.showPicker(WorkflowAction.WORK_FLOW_PICKER_YEAR) } }
+          title = { this.car.state ? this.car.state : 'STATE' }
+          onPress = { this.showStatePicker }
+          buttonStyle = { buttonStyle }
+          textStyle = { buttonTextStyle }
+        />
+        <Button
+          title = { this.car.year ? this.car.year : 'YEAR' }
+          onPress = { this.showYearPicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
         />
@@ -148,15 +195,42 @@ class VehicleModal extends Component {
     );
   }
 
-  saveVehicle() {
-    
-  }
+  saveVehicle = () => {
+    if (!this.car.plate) {
+      this.props.showErrorMessage('Please input the Plate.');
+      return;
+    }
+
+    if (!this.car.make) {
+      this.props.showErrorMessage('Please choose Make.');
+      return;
+    }
+
+    if (!this.car.model) {
+      this.props.showErrorMessage('Please choose Model.');
+      return;
+    }
+
+    if (!this.car.state) {
+      this.props.showErrorMessage('Please choose State.');
+      return;
+    }
+
+    if (!this.car.year) {
+      this.props.showErrorMessage('Please choose Year.');
+      return;
+    }
+  };
 
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_VEHICLE:
         this.show();
         break;
+    }
+
+    if (nextProps.selected) {
+      this.car[this.state.activePicker] = nextProps.selected;
     }
   }
 
@@ -207,7 +281,7 @@ class VehicleModal extends Component {
               zIndex: -1,
             }}>
               <Button
-                onPress = { () => { this.saveVehicle() } }
+                onPress = { this.saveVehicle }
                 title = 'ADD VEHICLE'
                 buttonStyle = {{
                   backgroundColor: eGobie.EGOBIE_BLUE,
@@ -225,6 +299,9 @@ class VehicleModal extends Component {
 const mapStateToProps = (state) => {
   return {
     workflow: state.workflow.name,
+    makes: state.metadata.vehicleMakes,
+    models: state.metadata.vehicleModels,
+    selected: state.picker.selected,
   };
 };
 
@@ -235,9 +312,16 @@ const mapDispatchToProps = (dispatch) => {
         type: WorkflowAction.WORK_FLOW_BACK,
       });
     },
-    showPicker: (type) => {
+    showPicker: (options, selected) => {
       dispatch({
-        type,
+        type: PickerAction.PICKER_SHOW,
+        options, selected,
+      });
+    },
+    showErrorMessage: (error) => {
+      dispatch({
+        type: ErrorAction.ERROR_SHOW,
+        error,
       });
     },
   };

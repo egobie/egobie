@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Animated, Modal, Easing } from 'react-native';
 import { connect } from 'react-redux';
-
+import Reactotron from 'reactotron-react-native';
 import { Button, Icon, CheckBox } from 'react-native-elements';
 
-import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as PickerAction from '../Actions/PickerAction';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
@@ -14,59 +14,63 @@ class PickerModal extends Component {
     visible: false,
     selected: null,
     pickerScale: new Animated.Value(0.85),
-    options: [
-      { key: '1', label: '1', },
-      { key: '2', label: '2', },
-      { key: '3', label: '3', },
-      { key: '4', label: '4', },
-    ],
   };
 
   constructor(props) {
     super(props);
   }
 
-  show = () => {
-    this.setState({ visible: true });
+  show = (selected) => {
+    this.setState({
+      visible: true,
+      selected,
+    });
   }
 
   hide = () => {
     this.props.hidePicker();
-    this.resetState();
-  }
-
-  scrollList = () => {
-    return this.state.options.map((option, i) => {
-      return (
-        <CheckBox
-          key = { i }
-          title = { option.label }
-          checked = { option.key === this.state.selected }
-        />
-      );
-    });
-  }
-
-  resetState = () => {
     this.setState({
       visible: false,
       selected: null,
     });
   }
 
+  pick = (selected) => {
+    this.props.pick(selected);
+    this.setState({
+      selected,
+    });
+  }
+
+  scrollList = () => {
+    return this.props.options.map((option, i) => {
+      return (
+        <CheckBox
+          key = { i }
+          title = { option.label }
+          checked = { option.key === this.state.selected }
+          onPress = { () => { this.pick(option.key); } }
+        />
+      );
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
-    switch (nextProps.workflow) {
-      case WorkflowAction.WORK_FLOW_PICKER_MAKE:
-      case WorkflowAction.WORK_FLOW_PICKER_MODEL:
-      case WorkflowAction.WORK_FLOW_PICKER_STATE:
-      case WorkflowAction.WORK_FLOW_PICKER_YEAR:
-        this.show();
-        break;
+    Reactotron.log(nextProps);
+    if (nextProps.options.length > 0) {
+      Reactotron.log('Show Picker');
+      this.show(nextProps.selected);
+    } else if (this.state.visible) {
+      this.hide();
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.visible !== this.state.visible;
+    let update = nextState.visible !== this.state.visible || nextState.selected !== this.state.selected;
+    if (update) {
+      Reactotron.log('shouldComponentUpdate - Picker');
+    }
+    return update;
   }
 
   render() {
@@ -124,6 +128,9 @@ class PickerModal extends Component {
             }}>
               <Button
                 title = 'CONFIRM'
+                buttonStyle = {{
+                  marginTop: 20,
+                }}
                 backgroundColor = { eGobie.EGOBIE_BLUE }
               />
             </View>
@@ -136,7 +143,8 @@ class PickerModal extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    workflow: state.workflow.name,
+    options: state.picker.options,
+    selected: state.picker.selected,
   };
 };
 
@@ -144,7 +152,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     hidePicker: () => {
       dispatch({
-        type: WorkflowAction.WORK_FLOW_BACK,
+        type: PickerAction.PICKER_HIDE,
+      });
+    },
+    pick: (selected) => {
+      dispatch({
+        type: PickerAction.PICKER_PICK,
+        selected,
       });
     }
   };

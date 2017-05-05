@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
-import Reactotron from 'reactotron-react-native'
+
 import { Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';

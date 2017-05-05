@@ -1,5 +1,5 @@
 import * as Action from '../Actions/UserAction';
-
+import Reactotron from 'reactotron-react-native';
 
 const user = {
   id: -1,
@@ -75,7 +75,31 @@ export default (state = user, action) => {
     case Action.USER_SIGN_UP_FAIL:
     case Action.USER_SIGN_UP_ERROR:
     case Action.USER_SIGN_OUT:
-      return Object.assign({}, user);
+      return Object.assign({}, state, {
+        id: -1,
+        type: '',
+        username: '',
+        password: '',
+        coupon: '',
+        discount: -1,
+        firstTime: -1,
+        couponDiscount: -1,
+        firstName: '',
+        lastName: '',
+        middleName: '',
+        email: '',
+        phoneNumber: '',
+        homeAddressState: '',
+        homeAddressZip: '',
+        homeAddressCity: '',
+        homeAddressStreet: '',
+        workAddressState: '',
+        workAddressZip: '',
+        workAddressCity: '',
+        workAddressStreet: '',
+        signedIn: false,
+        loading: false,
+      });
 
     default:
       return state;

@@ -1,5 +1,5 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
-
+import Reactotron from 'reactotron-react-native';
 import * as UserAction from '../Actions/UserAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import { signIn, signUp } from '../Requests/UserRequest';
@@ -8,10 +8,16 @@ import { signIn, signUp } from '../Requests/UserRequest';
 function* signInTask(action) {
   try {
     const user = yield signIn(action.username, action.password);
-    yield put({
-      type: UserAction.USER_SIGN_IN_SUCCESS,
-      user,
-    });
+    if (user.error) {
+      yield put({
+        type: UserAction.USER_SIGN_IN_FAIL,
+      });
+    } else {
+      yield put({
+        type: UserAction.USER_SIGN_IN_SUCCESS,
+        user,
+      });
+    }
   } catch (error) {
     yield put({
       type: UserAction.USER_SIGN_IN_ERROR,

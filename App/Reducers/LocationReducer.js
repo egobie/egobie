@@ -70,7 +70,19 @@ export default (state = location, action) => {
     case Action.LOCATION_GET_CURRENT_FAIL:
     case Action.LOCATION_GET_CURRENT_ERROR:
     case Action.LOCATION_DESELECT:
-      return Object.assign({}, state, location);
+      return Object.assign({}, state, {
+        address: '',
+        formattedAddress: ' ',
+        streetNumber: '',
+        street: '',
+        city: '',
+        county: '',
+        state: '',
+        zipcode: '',
+        latitude: '',
+        longitude: '',
+        utcOffset: '',
+      });
 
     default:
       return state;

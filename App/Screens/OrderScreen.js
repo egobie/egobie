@@ -336,31 +336,47 @@ class OrderScreen extends Component {
   }
 
   vehicles() {
-    let cars = [];
-
-    if (cars.length === 0) {
-      return [-1].map((_, i) => {
-        return (
-          <Button
-            key = { i }
-            raised
-            onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_VEHICLE); } }
-            title = { 'ADD VEHICLE' }
-            icon = {{
-              type: 'material-community',
-              name: 'plus',
-            }}
-            color = { eGobie.EGOBIE_WHITE }
-            backgroundColor = { eGobie.EGOBIE_BLUE }
-            buttonStyle = {{
-              width: 180,
-              marginTop: 80,
-              marginLeft: Dimension.width / 2 - 90,
-            }}/>
-        );
-      });
+    if (!this.props.userSignedIn) {
+      return (
+        <Button
+          raised
+          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SIGN); } }
+          title = { 'SIGN IN' }
+          icon = {{
+            type: 'material-community',
+            name: 'account',
+            size: 20,
+          }}
+          color = { eGobie.EGOBIE_WHITE }
+          backgroundColor = { eGobie.EGOBIE_BLUE }
+          buttonStyle = {{
+            width: 180,
+            marginTop: 80,
+            marginLeft: Dimension.width / 2 - 90,
+          }}
+        />
+      );
+    } else if (this.props.cars.length === 0) {
+      return (
+        <Button
+          raised
+          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_VEHICLE); } }
+          title = { 'ADD VEHICLE' }
+          icon = {{
+            type: 'material-community',
+            name: 'plus',
+          }}
+          color = { eGobie.EGOBIE_WHITE }
+          backgroundColor = { eGobie.EGOBIE_BLUE }
+          buttonStyle = {{
+            width: 180,
+            marginTop: 80,
+            marginLeft: Dimension.width / 2 - 90,
+          }}
+        />
+      );
     } else {
-      return cars.map((type, i) => {
+      return this.props.cars.map((car, i) => {
         return (
           <View
             key = { i }
@@ -373,12 +389,12 @@ class OrderScreen extends Component {
           >
           <Vehicle
             key = { i }
-            plate = 'Y96EUV'
-            make = 'Honda'
-            model = 'Accord'
-            year = '2013'
-            color = 'White'
-            type = { type }
+            plate = { car.plate }
+            make = { car.make }
+            model = { car.model }
+            year = { `${car.year}` }
+            color = { car.color }
+            type = { 'sedan' }
           />
           </View>
         );
@@ -508,6 +524,8 @@ const mapStateToProps = (state) => {
     workflow: state.workflow.name,
     schedule: `${state.calendar.date} ${state.calendar.range}`,
     services: services.length > 0 ? services.join(', ') : ' ',
+    cars: state.vehicle.all,
+    userSignedIn: state.user.signedIn,
     price: Price.totalPrice([], 0),
   };
 };

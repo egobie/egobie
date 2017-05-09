@@ -1,5 +1,5 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
-import Reactotron from 'reactotron-react-native';
+
 import * as VehicleAction from '../Actions/VehicleAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
+import { connect } from 'react-redux';
 
 import Label from './Label';
 import VehicleIcons from '../Libs/VehicleIcon';
@@ -39,7 +40,7 @@ class Vehicle extends Component {
         height: 40,
       }}>
         <Label
-          title = 'Plate Number'
+          title = 'Plate'
           value = { this.props.plate }
           avatar = { VehicleIcons[this.props.type] }
           avatarStyle = {{
@@ -100,6 +101,9 @@ class Vehicle extends Component {
         width: 180,
         paddingTop: 5,
         backgroundColor: eGobie.EGOBIE_WHITE,
+        transform: [
+          { scale: 0.9 },
+        ],
         ...BoxShadow,
       }}>
         { this.plate() }
@@ -110,13 +114,13 @@ class Vehicle extends Component {
   }
 }
 
-Vehicle.propTypes = {
-  plate: React.PropTypes.string.isRequired,
-  make: React.PropTypes.string.isRequired,
-  model: React.PropTypes.string.isRequired,
-  year: React.PropTypes.string.isRequired,
-  color: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired,
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    chooseVehicle: () => {
+      
+    }
+  };
+};
+
 
 export default Vehicle;

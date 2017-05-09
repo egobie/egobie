@@ -6,6 +6,7 @@ const vehicle = {
   makes: [],
   models: {},
   loading: false,
+  selected: null,
 };
 
 const serializeVehicle = (car) => {
@@ -134,6 +135,16 @@ export default (state = vehicle, action) => {
     case Action.VEHICLE_GET_MODEL_ERROR:
       return Object.assign({}, state, {
         loading: false,
+      });
+
+    case Action.VEHICLE_SELECT:
+      let car = state.all.find((car) => {
+        return car
+      });
+
+    case Action.VEHICLE_DESELECT:
+      return Object.assign({}. state, {
+        selected: null,
       });
 
     default:

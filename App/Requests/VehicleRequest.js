@@ -26,7 +26,7 @@ export const addVehicle = (plate, state, year, color, make, model) => {
 };
 
 export const updateVehicle = (carId, plate, state, year, color, make, model) => {
-  return send('POST', `${prefix}/new`, {
+  return send('POST', `${prefix}/update`, {
     id: carId,
     plate, state, year, color, model,
     maker: make,

@@ -1,5 +1,5 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
-
+import Reactotron from 'reactotron-react-native';
 import * as VehicleAction from '../Actions/VehicleAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import {
@@ -54,7 +54,7 @@ function* getAllVehiclesTask(action) {
     const cars = yield getAllVehicles(action.userId);
     yield put({
       type: VehicleAction.VEHICLE_GET_ALL_SUCCESS,
-      cars,
+      cars: cars ? cars : [],
     });
   } catch (error) {
     yield put({
@@ -74,7 +74,20 @@ function* getAllVehiclesTask(action) {
 }
 
 function* addVehicleTask(action) {
-
+  try {
+    const car = yield addVehicle(
+      action.plate, action.state, action.year, action.color, action.make, action.model,
+    );
+    yield put({
+      type: VehicleAction.VEHICLE_ADD_SUCCESS,
+      car,
+    });
+    yield put({
+      type: VehicleAction.VEHICLE_GET_ALL,
+    });
+  } catch (error) {
+    
+  }
 }
 
 function* updateVehicleTask(action) {

@@ -1,7 +1,9 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
 import Reactotron from 'reactotron-react-native';
+
 import * as UserAction from '../Actions/UserAction';
 import * as ErrorAction from '../Actions/ErrorAction';
+import * as VehicleAction from '../Actions/VehicleAction';
 import { signIn, signUp } from '../Requests/UserRequest';
 
 
@@ -16,6 +18,10 @@ function* signInTask(action) {
       yield put({
         type: UserAction.USER_SIGN_IN_SUCCESS,
         user,
+      });
+      yield put({
+        type: VehicleAction.VEHICLE_GET_ALL,
+        userId: user.id,
       });
     }
   } catch (error) {

@@ -2,7 +2,7 @@ import * as Action from '../Actions/VehicleAction';
 
 
 const vehicle = {
-  all: {},
+  all: [],
   makes: [],
   models: {},
   loading: false,

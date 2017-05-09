@@ -8,6 +8,7 @@ import { Button, Icon } from 'react-native-elements';
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as PickerAction from '../Actions/PickerAction';
 import * as ErrorAction from '../Actions/ErrorAction';
+import * as VehicleAction from '../Actions/VehicleAction';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import States from '../Libs/States';
@@ -59,18 +60,10 @@ const buttonTextStyle = {
 };
 
 class VehicleModal extends Component {
+  plate;
   state = {
     visible: false,
     cardScale: new Animated.Value(0),
-  };
-  car = {
-    id: null,
-    plate: null,
-    make: null,
-    model: null,
-    color: null,
-    state: null,
-    year: null,
   };
 
   constructor(props) {
@@ -108,7 +101,7 @@ class VehicleModal extends Component {
     let limit = 1980;
 
     for (let i = year; i >= limit; i--) {
-      years.push({ key: `${i}`, label: `${i}` });
+      years.push({ key: i, label: i });
     }
 
     return years;
@@ -160,7 +153,7 @@ class VehicleModal extends Component {
         <Kaede
           label = { 'PLATE' }
           defaultValue = { this.props.plate }
-          onChangeText = { (text) => { this.props.plate = text; } }
+          onChangeText = { (text) => { this.plate = text; }}
           { ...inputDefaultProps }
         />
         <Button
@@ -188,7 +181,7 @@ class VehicleModal extends Component {
           textStyle = { buttonTextStyle }
         />
         <Button
-          title = { this.props.year ? this.props.year : 'YEAR' }
+          title = { this.props.year ? `${this.props.year}` : 'YEAR' }
           onPress = { this.showYearPicker }
           buttonStyle = { buttonStyle }
           textStyle = { buttonTextStyle }
@@ -198,7 +191,7 @@ class VehicleModal extends Component {
   }
 
   saveVehicle = () => {
-    if (!this.props.plate) {
+    if (!this.plate) {
       this.props.showErrorMessage('Please input the Plate.');
       return;
     }
@@ -222,6 +215,20 @@ class VehicleModal extends Component {
       this.props.showErrorMessage('Please choose Year.');
       return;
     }
+
+    if (this.props.carId) {
+      this.props.updateVehicle(
+        this.props.carId, this.plate, this.props.state, this.props.year,
+        this.props.color, this.props.make, this.props.model
+      );
+    } else {
+      this.props.addVehicle(
+        this.plate, this.props.state, this.props.year,
+        this.props.color, this.props.make, this.props.model
+      );
+    }
+
+    this.hide();
   };
 
   componentWillReceiveProps(nextProps) {
@@ -301,6 +308,8 @@ const mapStateToProps = (state) => {
     workflow: state.workflow.name,
     makes: state.vehicle.makes,
     models: state.vehicle.models,
+    carId: state.vehicle.vehicleId,
+    plate: state.picker.vehiclePlate,
     make: state.picker.vehicleMake,
     model: state.picker.vehicleModel,
     state: state.picker.vehicleState,
@@ -329,6 +338,18 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: ErrorAction.ERROR_SHOW,
         error,
+      });
+    },
+    addVehicle: (plate, state, year, color, make, model) => {
+      dispatch({
+        type: VehicleAction.VEHICLE_ADD,
+        plate, state, year, color, make, model,
+      });
+    },
+    updateVehicle: (carId, plate, state, year, color, make, model) => {
+      dispatch({
+        type: VehicleAction.VEHICLE_UPdate,
+        carId, plate, state, year, color, make, model,
       });
     },
   };

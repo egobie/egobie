@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
+
 import { connect } from 'react-redux';
 import { ListItem, Button, Icon } from 'react-native-elements';
 
@@ -37,25 +38,26 @@ class VehicleScreen extends Component {
   }
 
   vehicles() {
-    return ['suv', 'sedan', 'truck', 'van'].map((mode, i) => {
+    // ['suv', 'sedan', 'truck', 'van']
+    return this.props.cars.map((car, i) => {
       return (
         <TouchableWithoutFeedback key = { i } >
           <View>
             <ListItem
               hideChevron
-              avatar = { VehicleIcons[mode] }
+              avatar = { VehicleIcons['sedan'] }
               avatarStyle = {{
                 width: 40,
                 borderRadius: 5,
               }}
-              title = { 'Y96EUV' }
+              title = { car.plate }
               titleStyle = {{
                 color: eGobie.EGOBIE_BLACK,
                 fontSize: 16,
                 fontWeight: '500',
               }}
-              rightTitle = { 'NJ 2012' }
-              subtitle = { 'Honda Accord' }
+              rightTitle = { `${car.state} ${car.year}` }
+              subtitle = { `${car.make} ${car.model}` }
               subtitleStyle = {{
                 fontSize: 14,
                 fontWeight: '400',
@@ -97,6 +99,7 @@ class VehicleScreen extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    cars: state.vehicle.all,
     ...ownProps,
   };
 };

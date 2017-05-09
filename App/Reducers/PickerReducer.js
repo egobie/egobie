@@ -5,6 +5,7 @@ import Reactotron from 'reactotron-react-native';
 const picker = {
   options: [],
   target: null,
+  vehiclePlate: null,
   vehicleMake: null,
   vehicleModel: null,
   vehicleColor: null,
@@ -57,6 +58,8 @@ export default (state = picker, action) => {
       return Object.assign({}, state, {
         options: [],
         target: null,
+        vehicleId: null,
+        vehiclePlate: null,
         vehicleMake: null,
         vehicleModel: null,
         vehicleColor: null,

@@ -8,6 +8,7 @@ import calendar from './CalendarReducer';
 import payment from './PaymentReducer';
 import error from './ErrorReducer';
 import picker from './PickerReducer';
+import service from './ServiceReducer';
 
 
 export default combineReducers({
@@ -19,4 +20,5 @@ export default combineReducers({
   metadata,
   error,
   picker,
+  service,
 });

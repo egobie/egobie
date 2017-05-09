@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, Modal, Animated, Easing } from 'react-native';
 
 import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
 import { Button, Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 
@@ -500,7 +499,7 @@ class OrderScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  let services = state.metadata.selectedServices.map((service) => {
+  let services = state.service.selected.map((service) => {
     return service.name;
   });
 

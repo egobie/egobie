@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { PricingCard } from 'react-native-elements';
 
-import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as ServiceAction from '../Actions/ServiceAction';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
@@ -14,12 +14,6 @@ class ServiceDetailModal extends Component {
     visible: false,
     selected: null,
     pickerScale: new Animated.Value(0.85),
-    options: [
-      { key: '1', label: '1', },
-      { key: '2', label: '2', },
-      { key: '3', label: '3', },
-      { key: '4', label: '4', },
-    ],
   };
 
   constructor(props) {
@@ -31,20 +25,8 @@ class ServiceDetailModal extends Component {
   }
 
   hide = () => {
-    this.props.hideDetail();
+    this.props.hideServiceDetail();
     this.resetState();
-  }
-
-  scrollList = () => {
-    return this.state.options.map((option, i) => {
-      return (
-        <CheckBox
-          key = { i }
-          title = { option.label }
-          checked = { option.key === this.state.selected }
-        />
-      );
-    });
   }
 
   resetState = () => {
@@ -55,10 +37,10 @@ class ServiceDetailModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    switch (nextProps.workflow) {
-      case WorkflowAction.WORK_FLOW_SERVICE_DETAIL:
-        this.show();
-        break;
+    if (nextProps.service) {
+      this.show();
+    } else {
+      this.hide();
     }
   }
 
@@ -100,16 +82,15 @@ class ServiceDetailModal extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    service: state.metadata.service,
-    workflow: state.workflow.name,
+    service: state.service.detail,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    hideDetail: () => {
+    hideServiceDetail: () => {
       dispatch({
-        type: WorkflowAction.WORK_FLOW_BACK,
+        type: ServiceAction.SERVICE_HIDE,
       });
     }
   };

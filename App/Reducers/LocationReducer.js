@@ -1,5 +1,5 @@
 import * as Action from '../Actions/LocationAction';
-import Reactotron from 'reactotron-react-native';
+
 
 const location = {
   address: '',

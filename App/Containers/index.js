@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 
 import * as MetadataAction from '../Actions/MetadataAction';
+import * as ServiceAction from '../Actions/ServiceAction';
 import eGobieReducer from '../Reducers';
 import eGobieSaga from '../Sagas';
 import RootContainer from './RootContainer';
@@ -21,7 +22,7 @@ export default class extends Component {
   componentDidMount() {
     /* Init Services */
     store.dispatch({
-      type: MetadataAction.METADATA_GET_SERVICE,
+      type: ServiceAction.SERVICE_GET_ALL,
     });
     /* Init Vehicle Makes */
     store.dispatch({

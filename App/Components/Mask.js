@@ -39,7 +39,6 @@ class Mask extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    Reactotron.log(nextProps.workflow);
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_MENU:
         this.show();
@@ -51,11 +50,7 @@ class Mask extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let update = nextState.visible !== this.state.visible;
-    if (update) {
-      Reactotron.log('shouldComponentUpdate - Mask');
-    }
-    return update;
+    return nextState.visible !== this.state.visible;
   }
 
   render() {

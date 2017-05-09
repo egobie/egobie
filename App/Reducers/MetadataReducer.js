@@ -4,14 +4,10 @@ import * as Action from '../Actions/MetadataAction';
 const metadata = {
   vehicleMakes: [],
   vehicleModels: {},
-  services: [],
   discounts: [],
-  selectedServices: [],
 
   vehicleMake: null,
   vehicleModel: null,
-  service: null,
-
 };
 
 const serializeVehicleMakes = (makes) => {
@@ -49,51 +45,9 @@ export default (state = metadata, action) => {
         vehicleModels: serializeVehicleModels(action.vehicleModels),
       });
 
-    case Action.METADATA_GET_SERVICE_SUCCESS:
-      return Object.assign({}, state, {
-        services: action.services,
-      });
-
     case Action.METADATA_GET_DISCOUNT_SUCCESS:
       return Object.assign({}, state, {
         discounts: action.discounts,
-      });
-
-    case Action.SERVICE_SELECT:
-      let selected1 = [].concat(state.selectedServices);
-      let find1 = state.services.find((service) => {
-        return service.id === action.serviceId;
-      });
-
-      if (find1) {
-        selected1.push(find1);
-      }
-
-      return Object.assign({}, state, {
-        selectedServices: selected1,
-      });
-
-    case Action.SERVICE_DESELECT:
-      let selected2 = [].concat(state.selectedServices);
-      let index = selected2.findIndex((service) => {
-        return service.id === action.serviceId;
-      });
-
-      if (index >= 0) {
-        selected2.splice(index, 1);
-      }
-
-      return Object.assign({}, state, {
-        selectedServices: selected2,
-      });
-
-    case Action.SERVICE_DETAIL:
-      let service = state.services.find((service) => {
-        return service.id === action.serviceId;
-      });
-
-      return Object.assign({}, state, {
-        service,
       });
 
     default:

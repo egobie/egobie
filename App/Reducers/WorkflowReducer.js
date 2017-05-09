@@ -16,12 +16,12 @@ export default (state = workflow, action) => {
     case Action.WORK_FLOW_CALENDAR:
     case Action.WORK_FLOW_SIGN:
     case Action.WORK_FLOW_SERVICE:
-    case Action.WORK_FLOW_SERVICE_DETAIL:
     case Action.WORK_FLOW_PAYMENT:
     case Action.WORK_FLOW_VEHICLE:
     case Action.WORK_FLOW_SCANNER:
     case Action.WORK_FLOW_LOADING:
     case Action.WORK_FLOW_MENU:
+      Reactotron.log(action.type);
       prev.push(state.name);
       return Object.assign({}, state, {
         prev,
@@ -29,6 +29,7 @@ export default (state = workflow, action) => {
       });
 
     case Action.WORK_FLOW_BACK:
+      Reactotron.log(action.type);
       let back = prev.splice(-1, 1);
       let name = back.length === 1 ? back[0] : Action.WORK_FLOW_START;
 

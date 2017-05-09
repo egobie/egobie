@@ -227,7 +227,6 @@ class VehicleModal extends Component {
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_VEHICLE:
-        Reactotron.log('show vehicle');
         this.show();
         break;
     }

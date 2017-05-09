@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
-import Reactotron from 'reactotron-react-native';
+
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
@@ -93,7 +93,7 @@ class ServiceScreen extends Component {
     }).start();
   }
 
-  toogle = () => {
+  toggle = () => {
     if (this.focused) {
       this.blur();
 
@@ -146,7 +146,7 @@ class ServiceScreen extends Component {
 
   renderBanner() {
     return (
-      <TouchableWithoutFeedback onPress = { this.toogle }>
+      <TouchableWithoutFeedback onPress = { this.toggle }>
       <View style = {{
         flexDirection: 'row',
         alignItems: 'center',
@@ -270,7 +270,7 @@ class ServiceScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    services: state.metadata.services,
+    services: state.service.all,
     workflow: state.workflow.name,
   };
 };

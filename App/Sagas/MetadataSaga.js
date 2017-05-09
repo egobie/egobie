@@ -1,29 +1,8 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as Action from '../Actions/MetadataAction';
-import { getServices, getVehicleMakes, getVehicleModels, getDiscounts } from '../Requests/MetadataRequest';
+import { getVehicleMakes, getVehicleModels, getDiscounts } from '../Requests/MetadataRequest';
 
-
-function* getServicesTask() {
-  try {
-    const services = yield getServices()
-    yield put({
-      type: Action.METADATA_GET_SERVICE_SUCCESS,
-      services,
-    });
-  } catch (error) {
-    yield put({
-      type: Action.METADATA_GET_SERVICE_ERROR,
-      error,
-    });
-  } finally {
-    if (yield cancelled()) {
-      yield put({
-        type: Action.METADATA_GET_SERVICE_FAIL,
-      });
-    }
-  }
-}
 
 function* getVehicleMakesTask() {
   try {
@@ -89,7 +68,6 @@ function* getDiscountsTask() {
 }
 
 export default function* metadataSaga() {
-  yield takeLatest(Action.METADATA_GET_SERVICE, getServicesTask);
   yield takeLatest(Action.METADATA_GET_VEHICLE_MAKE, getVehicleMakesTask);
   yield takeLatest(Action.METADATA_GET_VEHICLE_MODEL, getVehicleModelsTask);
   yield takeLatest(Action.METADATA_GET_DISCOUNT, getDiscountsTask);

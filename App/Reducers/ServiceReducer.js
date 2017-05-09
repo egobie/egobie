@@ -19,6 +19,10 @@ export default (state = service, action) => {
         return service.id === action.id;
       });
 
+      return Object.assign({}, state, {
+        detail: service,
+      });
+
     case Action.SERVICE_HIDE:
       return Object.assign({}, state, {
         detail: null,

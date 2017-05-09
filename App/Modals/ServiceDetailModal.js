@@ -45,7 +45,7 @@ class ServiceDetailModal extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.visible !== this.state.visible && nextProps.service;
+    return nextState.visible !== this.state.visible && nextProps.service !== this.props.service;
   }
 
   render() {

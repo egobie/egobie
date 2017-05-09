@@ -4,6 +4,14 @@ import send from './Request';
 // No starting and trailing `/`
 const prefix = 'car';
 
+export const getVehicleMakes = () => {
+  return send('POST', `${prefix}/maker`);
+};
+
+export const getVehicleModels = () => {
+  return send('POST', `${prefix}/model`);
+};
+
 export const getAllVehicles = (userId) => {
   return send('POST', `${prefix}/user`, {
     user_id: userId,

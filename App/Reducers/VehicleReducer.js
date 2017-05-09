@@ -1,7 +1,10 @@
 import * as Action from '../Actions/VehicleAction';
 
+
 const vehicle = {
   all: {},
+  makes: [],
+  models: {},
   loading: false,
 };
 
@@ -22,12 +25,37 @@ const serializeVehicle = (car) => {
   };
 };
 
+const serializeVehicleMakes = (makes) => {
+  return makes.map((make) => {
+    return {
+      key: make.id,
+      label: make.title,
+    };
+  });
+};
+
+const serializeVehicleModels = (models) => {
+  let result = {};
+
+  models.forEach((model) => {
+    result[model.maker_id] = result[model.maker_id] ? result[model.maker_id] : [];
+    result[model.maker_id].push({
+      key: model.id,
+      label: model.title,
+    });
+  });
+
+  return result;
+};
+
 export default (state = vehicle, action) => {
   switch (action.type) {
     case Action.VEHICLE_ADD:
     case Action.VEHICLE_UPDATE:
     case Action.VEHICLE_DELETE:
     case Action.VEHICLE_GET_ALL:
+    case Action.VEHICLE_GET_MAKE:
+    case Action.VEHICLE_GET_MODEL:
       return Object.assign({}, state, {
         loading: true,
       });
@@ -80,6 +108,18 @@ export default (state = vehicle, action) => {
         loading: false,
       });
 
+    case Action.VEHICLE_GET_MAKE_SUCCESS:
+      return Object.assign({}, state, {
+        makes: serializeVehicleMakes(action.makes),
+        loading: false,
+      });
+
+    case Action.VEHICLE_GET_MODEL_SUCCESS:
+      return Object.assign({}, state, {
+        models: serializeVehicleModels(action.models),
+        loading: false,
+      });
+
     case Action.VEHICLE_ADD_FAIL:
     case Action.VEHICLE_ADD_ERROR:
     case Action.VEHICLE_UPDATE_FAIL:
@@ -88,6 +128,10 @@ export default (state = vehicle, action) => {
     case Action.VEHICLE_DELETE_ERROR:
     case Action.VEHICLE_GET_ALL_FAIL:
     case Action.VEHICLE_GET_ALL_ERROR:
+    case Action.VEHICLE_GET_MAKE_FAIL:
+    case Action.VEHICLE_GET_MAKE_ERROR:
+    case Action.VEHICLE_GET_MODEL_FAIL:
+    case Action.VEHICLE_GET_MODEL_ERROR:
       return Object.assign({}, state, {
         loading: false,
       });

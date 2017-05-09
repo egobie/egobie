@@ -8,6 +8,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import * as MetadataAction from '../Actions/MetadataAction';
 import * as ServiceAction from '../Actions/ServiceAction';
+import * as VehicleAction from '../Actions/VehicleAction';
 import eGobieReducer from '../Reducers';
 import eGobieSaga from '../Sagas';
 import RootContainer from './RootContainer';
@@ -26,11 +27,11 @@ export default class extends Component {
     });
     /* Init Vehicle Makes */
     store.dispatch({
-      type: MetadataAction.METADATA_GET_VEHICLE_MAKE,
+      type: VehicleAction.VEHICLE_GET_MAKE,
     });
     /* Init Vehicle Models */
     store.dispatch({
-      type: MetadataAction.METADATA_GET_VEHICLE_MODEL,
+      type: VehicleAction.VEHICLE_GET_MODEL,
     });
     /* Init Discounts Info */
     store.dispatch({

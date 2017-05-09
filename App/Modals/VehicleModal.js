@@ -299,8 +299,8 @@ class VehicleModal extends Component {
 const mapStateToProps = (state) => {
   return {
     workflow: state.workflow.name,
-    makes: state.metadata.vehicleMakes,
-    models: state.metadata.vehicleModels,
+    makes: state.vehicle.makes,
+    models: state.vehicle.models,
     make: state.picker.vehicleMake,
     model: state.picker.vehicleModel,
     state: state.picker.vehicleState,

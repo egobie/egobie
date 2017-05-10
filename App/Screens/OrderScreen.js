@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Modal, Animated, Easing } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { Button, Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
@@ -238,6 +238,8 @@ class OrderScreen extends Component {
   }
 
   viechle() {
+    let { car } = this.props;
+
     return (
       <Animated.View style = {{
         marginBottom: 5,
@@ -245,7 +247,7 @@ class OrderScreen extends Component {
         <Label
           onPress = { this.showChild('vehicle') }
           title = 'Viehcle'
-          value = 'Honda Accord Y96EUV'
+          value = { car ? `${car.make} ${car.model} ${car.plate}` : ' ' }
           leftIcon = {{
             type: 'material-community',
             name: 'car',
@@ -387,15 +389,16 @@ class OrderScreen extends Component {
               alignItems: 'center',
             }}
           >
-          <Vehicle
-            key = { i }
-            plate = { car.plate }
-            make = { car.make }
-            model = { car.model }
-            year = { `${car.year}` }
-            color = { car.color }
-            type = { 'sedan' }
-          />
+            <Vehicle
+              key = { i }
+              carId = { car.id }
+              plate = { car.plate }
+              make = { car.make }
+              model = { car.model }
+              year = { `${car.year}` }
+              color = { car.color }
+              type = { 'sedan' }
+            />
           </View>
         );
       });
@@ -525,6 +528,7 @@ const mapStateToProps = (state) => {
     schedule: `${state.calendar.date} ${state.calendar.range}`,
     services: services.length > 0 ? services.join(', ') : ' ',
     cars: state.vehicle.all,
+    car: state.vehicle.selected,
     userSignedIn: state.user.signedIn,
     price: Price.totalPrice([], 0),
   };

@@ -139,7 +139,11 @@ export default (state = vehicle, action) => {
 
     case Action.VEHICLE_SELECT:
       let car = state.all.find((car) => {
-        return car
+        return car.id === action.id;
+      });
+
+      return Object.assign({}, state, {
+        selected: car,
       });
 
     case Action.VEHICLE_DESELECT:

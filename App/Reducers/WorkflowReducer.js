@@ -21,6 +21,7 @@ export default (state = workflow, action) => {
     case Action.WORK_FLOW_SCANNER:
     case Action.WORK_FLOW_LOADING:
     case Action.WORK_FLOW_MENU:
+    case Action.WORK_FLOW_RESET_PASSWORD:
       Reactotron.log(action.type);
       prev.push(state.name);
       return Object.assign({}, state, {

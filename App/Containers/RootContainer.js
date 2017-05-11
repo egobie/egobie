@@ -14,7 +14,9 @@ import SignModal from '../Modals/SignModal';
 import CalendarModal from '../Modals/CalendarModal';
 import PickerModal from '../Modals/PickerModal';
 import ServiceDetailModal from '../Modals/ServiceDetailModal'
+import ResetPasswordModal from '../Modals/ResetPasswordModal';
 import eGobie from '../Styles/Egobie';
+
 
 const configs = {
   tabBarPosition: 'bottom',
@@ -66,6 +68,7 @@ export default React.createClass({
         <VehicleModal />
         <CalendarModal />
         <SignModal />
+        <ResetPasswordModal />
         <Loading />
         <PickerModal />
         <ServiceDetailModal />

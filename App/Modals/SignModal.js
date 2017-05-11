@@ -66,6 +66,7 @@ class SignModal extends Component {
     username: '',
     password1: '',
     password2: '',
+    fullname: '',
     email: '',
     phoneNumber: '',
   };
@@ -84,6 +85,10 @@ class SignModal extends Component {
     this.setState({
       flip: false,
     });
+  }
+
+  goToResetPassword = () => {
+    this.props.showResetPassword();
   }
 
   show = () => {
@@ -173,6 +178,11 @@ class SignModal extends Component {
       return;
     }
 
+    if (!Validator.validateEmail(this.signUpForm.fullname)) {
+      this.props.showErrorMessage('Please input Full Name');
+      return;
+    }
+
     if (!Validator.validateEmail(this.signUpForm.email)) {
       this.props.showErrorMessage('Please input valid Email');
       return;
@@ -197,20 +207,19 @@ class SignModal extends Component {
           backgroundColor: eGobie.EGOBIE_WHITE,
           ...BoxShadow,
         }}>
-          <TouchableWithoutFeedback onPress = { this.hide } >
-            <View style = {{
-              width: this.defaultWidth,
-              height: 30,
-              marginTop: 15,
-              alignItems: 'flex-end',
-            }}>
-              <Icon
-                type = { 'material-community' }
-                name = { 'close' }
-                color = { eGobie.EGOBIE_RED }
-              />
-            </View>
-          </TouchableWithoutFeedback>
+          <View style = {{
+            width: this.defaultWidth,
+            height: 30,
+            marginTop: 15,
+            alignItems: 'flex-end',
+          }}>
+            <Icon
+              onPress = { this.hide }
+              type = { 'material-community' }
+              name = { 'close' }
+              color = { eGobie.EGOBIE_RED }
+            />
+          </View>
           <View style = {{
             height: 100,
             justifyContent: 'center',
@@ -247,13 +256,16 @@ class SignModal extends Component {
             height: 30,
             marginBottom: 15,
           }}>
-            <Text style = {{
-              flex: 3,
-              fontSize: 12,
-              lineHeight: 30,
-              textAlign: 'left',
-              color: eGobie.EGOBIE_BLUE,
-            }}>
+            <Text
+              onPress = { this.goToResetPassword }
+              style = {{
+                flex: 3,
+                fontSize: 12,
+                lineHeight: 30,
+                textAlign: 'left',
+                color: eGobie.EGOBIE_BLUE,
+              }}
+            >
               Recover your password
             </Text>
             <Text
@@ -334,21 +346,20 @@ class SignModal extends Component {
                 { '< Sign In' }
               </Text>
             </View>
-            <TouchableWithoutFeedback onPress = { this.hide } >
-              <View style = {{
-                flex: 1,
-                alignItems: 'flex-end',
-              }}>
-                <Icon
-                  type = { 'material-community' }
-                  name = { 'close' }
-                  color = { '#E04329' }
-                />
-              </View>
-            </TouchableWithoutFeedback>
+            <View style = {{
+              flex: 1,
+              alignItems: 'flex-end',
+            }}>
+              <Icon
+                onPress = { this.hide }
+                type = { 'material-community' }
+                name = { 'close' }
+                color = { eGobie.EGOBIE_RED }
+              />
+            </View>
           </View>
           <View style = {{
-            height: 250,
+            height: 300,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
@@ -373,9 +384,15 @@ class SignModal extends Component {
               { ...this.inputDefaultProps }
             />
             <Kohana
+              label = { 'Full Name' }
+              iconName = { 'account' }
+              onChangeText = { (text) => { this.signUpForm.email = text; } }
+              { ...this.inputDefaultProps }
+            />
+            <Kohana
               label = { 'Email' }
               iconName = { 'email' }
-              onChangeText = { (text) => { this.signUpForm.email = text; } }
+              onChangeText = { (text) => { this.signUpForm.fullname = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
@@ -459,6 +476,11 @@ const mapDispatchToProps = (dispatch) => {
     hideSign: () => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
+      });
+    },
+    showResetPassword: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_RESET_PASSWORD,
       });
     },
     showErrorMessage: (error) => {

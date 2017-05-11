@@ -77,11 +77,11 @@ class AboutScreen extends Component {
             titleStyle = { titleStyle }
             rightIcon = { rightIcon }
           />
-          <ListItem
+          {/*<ListItem
             title = { 'Feedback' }
             titleStyle = { titleStyle }
             rightIcon = { rightIcon }
-          />
+          />*/}
         </View>
       </View>
     );

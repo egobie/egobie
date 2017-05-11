@@ -87,7 +87,7 @@ export default (state = vehicle, action) => {
     case Action.VEHICLE_DELETE_SUCCESS:
       let deleteAll = [].concat(state.all);
       let deleteIndex = deleteAll.findIndex((car) => {
-        return car.id === action.carId;
+        return car.id === action.id;
       });
 
       if (deleteIndex !== -1) {

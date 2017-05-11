@@ -116,11 +116,11 @@ class Vehicle extends Component {
   }
 
   chooseVehicle = () => {
-    this.props.chooseVehicle(this.props.carId);
+    this.props.chooseVehicle(this.props.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selected && nextProps.selected.id === this.props.carId) {
+    if (nextProps.selected && nextProps.selected.id === this.props.id) {
       this.highlight();
     } else {
       this.resetState();

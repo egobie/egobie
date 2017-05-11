@@ -35,17 +35,32 @@ class Service extends Component {
 
   onPress = () => {
     let selected = this.state.selected;
-    this.props.onPress(this.props.id, !selected);
     this.setState({
       selected: !selected,
       backgroundColor: !selected ? eGobie.EGOBIE_BLACK: eGobie.EGOBIE_WHITE,
       color: !selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLACK,
       iconColor: !selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLUE,
     });
+    this.props.onPress(this.props.id, !selected);
   }
 
   onLongPress = () => {
     this.props.onLongPress(this.props.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let { selected } = nextProps;
+
+    if (selected) {
+      let find = selected.findIndex((service) => {
+        return service.id === this.props.id;
+      });
+
+      if (find === -1 && this.state.selected) {
+        Reactotron.log('unselect');
+        this.onPress();
+      }
+    }
   }
 
   render() {
@@ -88,14 +103,10 @@ class Service extends Component {
   }
 }
 
-Service.propTypes = {
-  id: React.PropTypes.number.isRequired,
-  type: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  time: React.PropTypes.number.isRequired,
-  price: React.PropTypes.number.isRequired,
-  onPress: React.PropTypes.func.isRequired,
-  onLongPress: React.PropTypes.func.isRequired,
+const mapStateToProps = (state) => {
+  return {
+    selected: state.service.selected,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -122,4 +133,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Service);
+export default connect(mapStateToProps, mapDispatchToProps)(Service);

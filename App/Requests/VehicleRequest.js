@@ -25,16 +25,15 @@ export const addVehicle = (plate, state, year, color, make, model) => {
   });
 };
 
-export const updateVehicle = (carId, plate, state, year, color, make, model) => {
+export const updateVehicle = (id, plate, state, year, color, make, model) => {
   return send('POST', `${prefix}/update`, {
-    id: carId,
-    plate, state, year, color, model,
+    id, plate, state, year, color, model,
     maker: make,
   });
 };
 
-export const deleteVehicle = (carId) => {
+export const deleteVehicle = (id) => {
   return send('POST', `${prefix}/delete`, {
-    id: carId,
+    id,
   });
 };

@@ -1,5 +1,5 @@
 import * as Action from '../Actions/ServiceAction';
-
+import Reactotron from 'reactotron-react-native';
 
 const service = {
   all: [],
@@ -35,7 +35,15 @@ export default (state = service, action) => {
       });
 
       if (find1) {
-        selected1.push(find1);
+        let indexOfSameService = selected1.findIndex((service) => {
+          return service.type === find1.type;
+        });
+
+        if (indexOfSameService >= 0) {
+          selected1.splice(indexOfSameService, 1, find1);
+        } else {
+          selected1.push(find1);
+        }
       }
 
       return Object.assign({}, state, {

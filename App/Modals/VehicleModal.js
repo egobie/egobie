@@ -216,9 +216,9 @@ class VehicleModal extends Component {
       return;
     }
 
-    if (this.props.carId) {
+    if (this.props.id) {
       this.props.updateVehicle(
-        this.props.carId, this.plate, this.props.state, this.props.year,
+        this.props.id, this.plate, this.props.state, this.props.year,
         this.props.color, this.props.make, this.props.model
       );
     } else {
@@ -308,7 +308,7 @@ const mapStateToProps = (state) => {
     workflow: state.workflow.name,
     makes: state.vehicle.makes,
     models: state.vehicle.models,
-    carId: state.vehicle.vehicleId,
+    id: state.vehicle.vehicleId,
     plate: state.picker.vehiclePlate,
     make: state.picker.vehicleMake,
     model: state.picker.vehicleModel,
@@ -346,10 +346,10 @@ const mapDispatchToProps = (dispatch) => {
         plate, state, year, color, make, model,
       });
     },
-    updateVehicle: (carId, plate, state, year, color, make, model) => {
+    updateVehicle: (id, plate, state, year, color, make, model) => {
       dispatch({
         type: VehicleAction.VEHICLE_UPdate,
-        carId, plate, state, year, color, make, model,
+        id, plate, state, year, color, make, model,
       });
     },
   };

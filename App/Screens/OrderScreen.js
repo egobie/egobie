@@ -391,7 +391,7 @@ class OrderScreen extends Component {
           >
             <Vehicle
               key = { i }
-              carId = { car.id }
+              id = { car.id }
               plate = { car.plate }
               make = { car.make }
               model = { car.model }

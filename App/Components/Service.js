@@ -57,7 +57,6 @@ class Service extends Component {
       });
 
       if (find === -1 && this.state.selected) {
-        Reactotron.log('unselect');
         this.onPress();
       }
     }

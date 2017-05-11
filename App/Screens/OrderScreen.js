@@ -13,7 +13,7 @@ import Label from '../Components/Label';
 import CalendarModal from '../Modals/CalendarModal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
-import * as Price from '../Libs/Price';
+import * as Calculator from '../Libs/Calculator';
 
 
 class OrderScreen extends Component {
@@ -282,7 +282,7 @@ class OrderScreen extends Component {
       }}>
         <Label
           title = 'Estimated Time'
-          value = '1 hour 30 mins'
+          value = { this.props.time }
           titleStyle = {{
             color: eGobie.EGOBIE_GREY,
             fontSize: 12,
@@ -530,7 +530,8 @@ const mapStateToProps = (state) => {
     cars: state.vehicle.all,
     car: state.vehicle.selected,
     userSignedIn: state.user.signedIn,
-    price: Price.totalPrice([], 0),
+    price: Calculator.totalPrice(state.service.selected, 0),
+    time: Calculator.totalTime(state.service.selected),
   };
 };
 

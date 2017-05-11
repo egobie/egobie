@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, Modal } from 'react-native';
 import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
+
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import Dimensions from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';

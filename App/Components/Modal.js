@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Animated, Easing } from 'react-native';
+
+import Dimension from '../Libs/Dimension';
 
 
 export default class Modal extends Component {
   state = {
     zIndex: -1,
+    top: new Animated.Value(0),
   };
 
   constructor(props) {
@@ -16,25 +19,48 @@ export default class Modal extends Component {
       this.setState({
         zIndex: 2,
       });
+
+      if (this.props.animated) {
+        Animated.timing(this.state.top, {
+          toValue: 0,
+          easing: Easing.out(Easing.cubic),
+        }).start();
+      }
     } else {
-      this.setState({
-        zIndex: -1,
-      });
+      if (this.props.animated) {
+        Animated.timing(this.state.top, {
+          toValue: Dimension.height,
+          easing: Easing.out(Easing.cubic),
+        }).start(() => {
+          // this.resetState();
+        });
+      } else {
+        this.resetState();
+      }
     }
+  }
+
+  resetState = () => {
+    this.setState({
+      zIndex: -1,
+    });
   }
 
   render() {
     return (
-      <View style = {{
+      <Animated.View style = {{
         position: 'absolute',
-        top: 0,
+        top: this.state.top,
         bottom: 0,
         left: 0,
         right: 0,
         zIndex: this.state.zIndex,
+        borderWidth: 10,
       }}>
+        <View style = {{position : 'relative'}}>
         { this.props.children }
-      </View>
+        </View>
+      </Animated.View>
     );
   }
 }

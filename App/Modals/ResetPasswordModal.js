@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Animated, Modal, Easing } from 'react-native';
+import { View, ScrollView, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Kohana } from 'react-native-textinput-effects';
@@ -8,6 +8,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as ErrorAction from '../Actions/ErrorAction';
+import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
@@ -224,9 +225,8 @@ class ResetPasswordModal extends Component {
   render() {
     return (
       <Modal
-        transparent
-        animationType = { 'slide' }
         visible = { this.state.visible }
+        animated = { true }
       >
         <View style = {{
           flex: 1,

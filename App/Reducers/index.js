@@ -10,6 +10,7 @@ import error from './ErrorReducer';
 import picker from './PickerReducer';
 import service from './ServiceReducer';
 import vehicle from './VehicleReducer';
+import resetPassword from './ResetPasswordReducer';
 
 
 export default combineReducers({
@@ -23,4 +24,5 @@ export default combineReducers({
   picker,
   service,
   vehicle,
+  resetPassword,
 });

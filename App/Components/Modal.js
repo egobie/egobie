@@ -7,7 +7,7 @@ import Dimension from '../Libs/Dimension';
 export default class Modal extends Component {
   state = {
     zIndex: -1,
-    top: new Animated.Value(0),
+    translateY: new Animated.Value(0),
   };
 
   constructor(props) {
@@ -21,18 +21,18 @@ export default class Modal extends Component {
       });
 
       if (this.props.animated) {
-        Animated.timing(this.state.top, {
+        Animated.timing(this.state.translateY, {
           toValue: 0,
-          easing: Easing.out(Easing.cubic),
+          easing: Easing.inOut(Easing.ease),
         }).start();
       }
     } else {
       if (this.props.animated) {
-        Animated.timing(this.state.top, {
+        Animated.timing(this.state.translateY, {
           toValue: Dimension.height,
-          easing: Easing.out(Easing.cubic),
+          easing: Easing.inOut(Easing.ease),
         }).start(() => {
-          // this.resetState();
+          this.resetState();
         });
       } else {
         this.resetState();
@@ -46,20 +46,28 @@ export default class Modal extends Component {
     });
   }
 
+  componentDidMount() {
+    if (this.props.animated) {
+      this.setState({
+        translateY: new Animated.Value(Dimension.height),
+      });
+    }
+  }
+
   render() {
     return (
       <Animated.View style = {{
         position: 'absolute',
-        top: this.state.top,
+        top: 0,
         bottom: 0,
         left: 0,
         right: 0,
         zIndex: this.state.zIndex,
-        borderWidth: 10,
+        transform: [
+          { translateY: this.state.translateY },
+        ],
       }}>
-        <View style = {{position : 'relative'}}>
         { this.props.children }
-        </View>
       </Animated.View>
     );
   }

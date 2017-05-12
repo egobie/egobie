@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Animated, Easing } from 'react-native';
+import { View, Text, ScrollView, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
-
+import Reactotron from 'reactotron-react-native';
 import { Kohana } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -41,6 +41,10 @@ class ResetPasswordModal extends Component {
   };
   state = {
     visible: false,
+    email: null,
+    token: null,
+    password1: null,
+    password2: null,
   };
 
   constructor(props) {
@@ -55,9 +59,22 @@ class ResetPasswordModal extends Component {
 
   hide = () => {
     this.props.hideResetPassword();
+    this.resetState();
+  }
+
+  resetState = () => {
     this.setState({
       visible: false,
+      email: null,
+      token: null,
+      password1: null,
+      password2: null,
     });
+    setTimeout(() => {
+      this.scrollView.scrollTo({
+        x: 0,
+      });
+    }, 1000);
   }
 
   renderStep1() {
@@ -69,6 +86,18 @@ class ResetPasswordModal extends Component {
         justifyContent: 'center',
         backgroundColor: eGobie.EGOBIE_WHITE,
       }}>
+        <Text style = {{
+          textAlign: 'center',
+          marginLeft: 15,
+          marginRight: 15,
+          marginBottom: 15,
+          marginTop: -50,
+          fontSize: 12,
+          color: eGobie.EGOBIE_BLACK,
+        }}>
+          Please enter your email address below and we'll email
+          you with security token to reset your password
+        </Text>
         <View style = {{
           height: 50,
           justifyContent: 'center',
@@ -78,9 +107,14 @@ class ResetPasswordModal extends Component {
           marginBottom: 15,
         }}>
           <Kohana
-            label = { 'Please input your Email' }
+            label = { 'Email Address' }
             iconName = { 'email' }
-            onChangeText = { () => { } }
+            value = { this.state.email }
+            onChangeText = {(text) => {
+              this.setState({
+                email: text,
+              });
+            }}
             { ...this.inputDefaultProps }
           />
         </View>
@@ -111,6 +145,18 @@ class ResetPasswordModal extends Component {
         justifyContent: 'center',
         backgroundColor: eGobie.EGOBIE_WHITE,
       }}>
+        <Text style = {{
+          textAlign: 'center',
+          marginLeft: 15,
+          marginRight: 15,
+          marginBottom: 15,
+          marginTop: -50,
+          fontSize: 12,
+          color: eGobie.EGOBIE_BLACK,
+        }}>
+          We sent you an email with security token for resetting
+          your password
+        </Text>
         <View style = {{
           height: 50,
           justifyContent: 'center',
@@ -120,15 +166,21 @@ class ResetPasswordModal extends Component {
           marginBottom: 15,
         }}>
           <Kohana
-            label = { 'Please input the token' }
+            label = { 'Security Token' }
             iconName = { 'lock' }
-            onChangeText = { () => { } }
+            value = { this.state.token }
+            onChangeText = {(text) => {
+              this.setState({
+                token: text,
+              });
+            }}
             { ...this.inputDefaultProps }
           />
         </View>
         <View style = {{
           flexDirection: 'row',
           alignItems: 'center',
+          justifyContent: 'space-between',
         }}>
           <Button
             onPress = { () => {
@@ -176,6 +228,17 @@ class ResetPasswordModal extends Component {
         justifyContent: 'center',
         backgroundColor: eGobie.EGOBIE_WHITE,
       }}>
+        <Text style = {{
+          textAlign: 'center',
+          marginLeft: 15,
+          marginRight: 15,
+          marginBottom: 15,
+          marginTop: -50,
+          fontSize: 12,
+          color: eGobie.EGOBIE_BLACK,
+        }}>
+          Please enter new password
+        </Text>
         <View style = {{
           height: 100,
           justifyContent: 'center',
@@ -185,15 +248,27 @@ class ResetPasswordModal extends Component {
           marginBottom: 15,
         }}>
           <Kohana
+            secureTextEntry
             label = { 'New Password' }
             iconName = { 'key-variant' }
-            onChangeText = { () => { } }
+            value = { this.state.password1 }
+            onChangeText = {(text) => {
+              this.setState({
+                password1: text,
+              });
+            }}
             { ...this.inputDefaultProps }
           />
           <Kohana
+            secureTextEntry
             label = { 'Confirm New Password' }
             iconName = { 'lock' }
-            onChangeText = { () => { } }
+            value = { this.state.password2 }
+            onChangeText = {(text) => {
+              this.setState({
+                password2: text,
+              });
+            }}
             { ...this.inputDefaultProps }
           />
         </View>
@@ -201,9 +276,59 @@ class ResetPasswordModal extends Component {
           title = 'RESET PASSWORD'
           onPress = { () => {
             this.scrollView.scrollTo({
-              x: this.width,
+              x: this.width * 3,
               animated: true,
             });
+          } }
+          backgroundColor = { eGobie.EGOBIE_BLUE }
+          buttonStyle = {{
+            marginBottom: 10,
+            ...BoxShadow,
+          }}
+        />
+      </Animated.View>
+    );
+  }
+
+  renderStep4() {
+    return (
+      <Animated.View style = {{
+        height: this.height,
+        width: this.width,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: eGobie.EGOBIE_WHITE,
+      }}>
+        <View style = {{
+          height: 100,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginLeft: 15,
+          marginRight: 15,
+          marginBottom: 15,
+        }}>
+          <Icon
+            type = { 'material-community' }
+            name = { 'check' }
+            color = { eGobie.EGOBIE_GREEN }
+            size = { 50 }
+          />
+        </View>
+        <Text style = {{
+          textAlign: 'center',
+          marginLeft: 15,
+          marginRight: 15,
+          marginBottom: 40,
+          marginTop: -30,
+          fontSize: 14,
+          color: eGobie.EGOBIE_GREEN,
+        }}>
+          Password reset successfully
+        </Text>
+        <Button
+          title = 'OK'
+          onPress = { () => {
+            this.hide();
           } }
           backgroundColor = { eGobie.EGOBIE_BLUE }
           buttonStyle = {{
@@ -266,6 +391,7 @@ class ResetPasswordModal extends Component {
               { this.renderStep1() }
               { this.renderStep2() }
               { this.renderStep3() }
+              { this.renderStep4() }
             </ScrollView>
           </View>
         </View>

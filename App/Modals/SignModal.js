@@ -140,12 +140,12 @@ class SignModal extends Component {
 
   signIn = () => {
     if (this.signInForm.username.length === 0) {
-      this.props.showErrorMessage('Please input username');
+      this.props.showErrorMessage('Please enter username');
       return;
     }
 
     if (this.signInForm.password.length === 0) {
-      this.props.showErrorMessage('Please input password');
+      this.props.showErrorMessage('Please enter password');
       return;
     }
 
@@ -154,7 +154,7 @@ class SignModal extends Component {
 
   signUp = () => {
     if (this.signUpForm.username.length === 0) {
-      this.props.showErrorMessage('Please input username');
+      this.props.showErrorMessage('Please enter username');
       return;
     }
 
@@ -164,7 +164,7 @@ class SignModal extends Component {
     }
 
     if (this.signUpForm.password1.length === 0) {
-      this.props.showErrorMessage('Please input password');
+      this.props.showErrorMessage('Please enter password');
       return;
     }
 
@@ -179,17 +179,17 @@ class SignModal extends Component {
     }
 
     if (!Validator.validateEmail(this.signUpForm.fullname)) {
-      this.props.showErrorMessage('Please input Full Name');
+      this.props.showErrorMessage('Please enter Full Name');
       return;
     }
 
     if (!Validator.validateEmail(this.signUpForm.email)) {
-      this.props.showErrorMessage('Please input valid Email');
+      this.props.showErrorMessage('Please enter valid Email');
       return;
     }
 
     if (!Validator.validatePhone(this.signUpForm.phoneNumber)) {
-      this.props.showErrorMessage('Please input valid phone number');
+      this.props.showErrorMessage('Please enter valid phone number');
       return;
     }
   }

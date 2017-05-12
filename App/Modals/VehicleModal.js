@@ -192,7 +192,7 @@ class VehicleModal extends Component {
 
   saveVehicle = () => {
     if (!this.plate) {
-      this.props.showErrorMessage('Please input the Plate.');
+      this.props.showErrorMessage('Please enter the Plate.');
       return;
     }
 

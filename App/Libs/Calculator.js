@@ -9,7 +9,7 @@ export const totalPrice = (services, coupon) => {
 
   price *= 1.07 * (services.length > 1 ? 0.9 : 1);
 
-  return price.toFixed(2);
+  return `$${price.toFixed(2)}`;
 };
 
 export const totalTime = (services) => {

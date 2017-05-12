@@ -282,19 +282,30 @@ class VehicleModal extends Component {
             </View>
             { this.state.visible && this.vehicleForm() }
             <View style = {{
-              height: 70,
+              height: this.props.id ? 110 : 70,
               justifyContent: 'flex-start',
               backgroundColor: eGobie.EGOBIE_WHITE,
               zIndex: -1,
             }}>
               <Button
                 onPress = { this.saveVehicle }
-                title = 'ADD VEHICLE'
+                title = { 'SAVE VEHICLE' }
                 buttonStyle = {{
                   backgroundColor: eGobie.EGOBIE_BLUE,
                   ...BoxShadow
                 }}
               />
+              {
+                this.props.id && <Button
+                  onPress = { this.deleteVehicle }
+                  title = { 'DELETE' }
+                  buttonStyle = {{
+                    marginTop: 15,
+                    backgroundColor: eGobie.EGOBIE_RED,
+                    ...BoxShadow
+                  }}
+                />
+              }
             </View>
           </Animated.View>
         </View>
@@ -308,7 +319,7 @@ const mapStateToProps = (state) => {
     workflow: state.workflow.name,
     makes: state.vehicle.makes,
     models: state.vehicle.models,
-    id: state.vehicle.vehicleId,
+    id: state.picker.vehicleId,
     plate: state.picker.vehiclePlate,
     make: state.picker.vehicleMake,
     model: state.picker.vehicleModel,
@@ -348,7 +359,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateVehicle: (id, plate, state, year, color, make, model) => {
       dispatch({
-        type: VehicleAction.VEHICLE_UPdate,
+        type: VehicleAction.VEHICLE_UPDATE,
         id, plate, state, year, color, make, model,
       });
     },

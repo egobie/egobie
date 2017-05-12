@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { ListItem, Button, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as PickerAction from '../Actions/PickerAction';
 import VehicleIcons from '../Libs/VehicleIcon';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
@@ -37,11 +38,21 @@ class VehicleScreen extends Component {
     this.props.addVehicle();
   }
 
+  editVehicle = (car) => {
+    this.props.editVehicle(
+      car.id, car.plate, car.makeId, car.modelId,
+      car.color, car.state, car.year,
+    );
+  };
+
   vehicles() {
     // ['suv', 'sedan', 'truck', 'van']
     return this.props.cars.map((car, i) => {
       return (
-        <TouchableWithoutFeedback key = { i } >
+        <TouchableWithoutFeedback
+          key = { i }
+          onLongPress = { () => { this.editVehicle(car); } }
+        >
           <View>
             <ListItem
               hideChevron
@@ -107,6 +118,15 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addVehicle: () => {
+      dispatch({
+        type: WorkflowAction.WORK_FLOW_VEHICLE,
+      });
+    },
+    editVehicle: (id, plate, make, model, color, state, year) => {
+      dispatch({
+        type: PickerAction.PICKER_PICK_INIT_VEHICLE,
+        id, plate, make, model, color, state, year,
+      });
       dispatch({
         type: WorkflowAction.WORK_FLOW_VEHICLE,
       });

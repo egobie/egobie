@@ -91,11 +91,46 @@ function* addVehicleTask(action) {
 }
 
 function* updateVehicleTask(action) {
-
+  try {
+    const resp = yield updateVehicle(
+      action.id, action.plate, action.state, action.year, action.color,
+      action.make, action.model,
+    );
+    yield put({
+      type: VehicleAction.VEHICLE_UPDATE_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: VehicleAction.VEHICLE_UPDATE_ERROR,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      yield put({
+        type: VehicleAction.VEHICLE_UPDATE_FAIL,
+      });
+    }
+  }
 }
 
 function* deleteVehicleTask(action) {
-
+  try {
+    const resp = yield deleteVehicle(action.id);
+    yield put({
+      type: VehicleAction.VEHICLE_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: VehicleAction.VEHICLE_DELETE_ERROR,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      yield put({
+        type: VehicleAction.VEHICLE_DELETE_FAIL,
+      });
+    }
+  }
 }
 
 export default function* vehicleSaga() {

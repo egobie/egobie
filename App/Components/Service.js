@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 import { connect } from 'react-redux';
-import { ListItem } from 'react-native-elements';
+import { ListItem, Icon } from 'react-native-elements';
 import Reactotron from 'reactotron-react-native';
 
 import * as ServiceAction from '../Actions/ServiceAction';
@@ -33,7 +33,7 @@ class Service extends Component {
     };
   }
 
-  onPress = () => {
+  toggleService = () => {
     let selected = this.state.selected;
     this.setState({
       selected: !selected,
@@ -41,11 +41,11 @@ class Service extends Component {
       color: !selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLACK,
       iconColor: !selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLUE,
     });
-    this.props.onPress(this.props.id, !selected);
+    this.props.toggleService(this.props.id, !selected);
   }
 
-  onLongPress = () => {
-    this.props.onLongPress(this.props.id);
+  showServiceDetail = () => {
+    this.props.showServiceDetail(this.props.id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,7 +57,7 @@ class Service extends Component {
       });
 
       if (find === -1 && this.state.selected) {
-        this.onPress();
+        this.toggleService();
       }
     }
   }
@@ -65,6 +65,7 @@ class Service extends Component {
   render() {
     return (
       <View style = {{
+        position: 'relative',
         backgroundColor: this.state.backgroundColor,
       }}>
         <ListItem
@@ -84,6 +85,7 @@ class Service extends Component {
           rightTitleStyle = {{
             color: this.state.color,
             fontWeight: '600',
+            paddingRight: 20,
           }}
           leftIcon = { this.serviceIcon(this.props.type) }
           containerStyle = {{
@@ -94,9 +96,25 @@ class Service extends Component {
             borderBottomWidth: 0.5,
             borderBottomColor: eGobie.EGOBIE_GREY,
           }}
-          onPress = { this.onPress }
-          onLongPress = { this.onLongPress }
+          onPress = { this.toggleService }
         />
+        <View style = {{
+          position: 'absolute',
+          justifyContent: 'center',
+          alignItems: 'center',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: 40,
+        }}>
+          <Icon
+            name = 'exclamation-circle'
+            type = 'font-awesome'
+            size = { 18 }
+            color = { this.state.selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLUE }
+            onPress = { this.showServiceDetail }
+          />
+        </View>
       </View>
     );
   }
@@ -110,7 +128,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPress: (id, selected) => {
+    toggleService: (id, selected) => {
       if (selected) {
         dispatch({
           type: ServiceAction.SERVICE_SELECT,
@@ -123,7 +141,7 @@ const mapDispatchToProps = (dispatch) => {
         });
       }
     },
-    onLongPress: (id) => {
+    showServiceDetail: (id) => {
       dispatch({
         type: ServiceAction.SERVICE_SHOW,
         id,

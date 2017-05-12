@@ -49,13 +49,11 @@ class VehicleScreen extends Component {
     // ['suv', 'sedan', 'truck', 'van']
     return this.props.cars.map((car, i) => {
       return (
-        <TouchableWithoutFeedback
-          key = { i }
-          onLongPress = { () => { this.editVehicle(car); } }
-        >
+        <TouchableWithoutFeedback key = { i } >
           <View>
             <ListItem
               hideChevron
+              onPress = { () => { this.editVehicle(car); } }
               avatar = { VehicleIcons['sedan'] }
               avatarStyle = {{
                 width: 40,

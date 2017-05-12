@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 
@@ -12,13 +12,12 @@ import BoxShadow from '../Styles/BoxShadow';
 
 
 class ServiceScreen extends Component {
-  focused = false;
   state = {
+    focused: false,
     top: new Animated.Value(Dimension.height),
     scale: new Animated.Value(0.8),
     topDistance: new Animated.Value(0),
     height: new Animated.Value(0),
-    rotate: new Animated.Value(0),
     services: [],
   };
 
@@ -27,7 +26,9 @@ class ServiceScreen extends Component {
   }
 
   focus = () => {
-    this.focused = true;
+    this.setState({
+      focused: true,
+    });
     Animated.parallel([
       Animated.timing(this.state.top, {
         toValue: 0,
@@ -41,10 +42,6 @@ class ServiceScreen extends Component {
         toValue: Dimension.height - 50,
         easing: Easing.out(Easing.cubic),
       }),
-      Animated.timing(this.state.rotate, {
-        toValue: 1,
-        easing: Easing.out(Easing.cubic),
-      }),
       Animated.timing(this.state.topDistance, {
         toValue: 15,
         easing: Easing.out(Easing.cubic),
@@ -53,7 +50,9 @@ class ServiceScreen extends Component {
   }
 
   blur = () => {
-    this.focused = false;
+    this.setState({
+      focused: false,
+    });
     Animated.parallel([
       Animated.timing(this.state.top, {
         toValue: Dimension.height - 80,
@@ -64,10 +63,6 @@ class ServiceScreen extends Component {
         easing: Easing.out(Easing.cubic),
       }),
       Animated.timing(this.state.height, {
-        toValue: 0,
-        easing: Easing.out(Easing.cubic),
-      }),
-      Animated.timing(this.state.rotate, {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
@@ -94,7 +89,7 @@ class ServiceScreen extends Component {
   }
 
   toggle = () => {
-    if (this.focused) {
+    if (this.state.focused) {
       this.blur();
 
       if (this.props.workflow !== WorkflowAction.WORK_FLOW_START && this.props.workflow !== WorkflowAction.WORK_FLOW_LOCATION) {
@@ -129,6 +124,10 @@ class ServiceScreen extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.focused !== this.state.focused) {
+      return true;
+    }
+
     if (nextProps.workflow === this.props.workflow) {
       return false;
     }
@@ -142,6 +141,31 @@ class ServiceScreen extends Component {
     }
 
     return false;
+  }
+
+  renderIcon() {
+    if (this.state.focused) {
+      return (
+        <Icon
+          type = { 'material-community' }
+          name = { 'close' }
+          iconStyle = {{
+            color: eGobie.EGOBIE_WHITE,
+          }}
+        />
+      );
+    } else {
+      return (
+        <Icon
+          type = { 'material-community' }
+          name = { 'chevron-up' }
+          size = { 28 }
+          iconStyle = {{
+            color: eGobie.EGOBIE_WHITE,
+          }}
+        />
+      );
+    }
   }
 
   renderBanner() {
@@ -167,21 +191,8 @@ class ServiceScreen extends Component {
             marginTop: this.state.topDistance,
             justifyContent: 'center',
             alignItems: 'center',
-            transform: [
-              { rotate: this.state.rotate.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['0deg', '180deg'],
-                }),
-              },
-            ],
           }}>
-            <Icon
-              type = { 'material-community' }
-              name = { 'chevron-up' }
-              iconStyle = {{
-                color: eGobie.EGOBIE_WHITE,
-              }}
-            />
+          { this.renderIcon() }
           </Animated.View>
       </View>
       </TouchableWithoutFeedback>

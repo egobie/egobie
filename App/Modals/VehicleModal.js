@@ -231,6 +231,11 @@ class VehicleModal extends Component {
     this.hide();
   };
 
+  deleteVehicle = () => {
+    this.props.deleteVehicle(this.props.id);
+    this.hide();
+  };
+
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_VEHICLE:
@@ -361,6 +366,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: VehicleAction.VEHICLE_UPDATE,
         id, plate, state, year, color, make, model,
+      });
+    },
+    deleteVehicle: (id) => {
+      dispatch({
+        type: VehicleAction.VEHICLE_DELETE,
+        id,
       });
     },
   };

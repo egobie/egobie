@@ -86,18 +86,30 @@ function* addVehicleTask(action) {
       type: VehicleAction.VEHICLE_GET_ALL,
     });
   } catch (error) {
-    
+    yield put({
+      type: VehicleAction.VEHICLE_ADD_ERROR,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      yield put({
+        type: VehicleAction.VEHICLE_ADD_FAIL,
+      });
+    }
   }
 }
 
 function* updateVehicleTask(action) {
   try {
     const resp = yield updateVehicle(
-      action.id, action.plate, action.state, action.year, action.color,
-      action.make, action.model,
+      action.id, action.plate, action.state, action.year,
+      action.color, action.make, action.model,
     );
     yield put({
       type: VehicleAction.VEHICLE_UPDATE_SUCCESS,
+    });
+    yield put({
+      type: VehicleAction.VEHICLE_GET_ALL,
     });
   } catch (error) {
     yield put({
@@ -118,6 +130,9 @@ function* deleteVehicleTask(action) {
     const resp = yield deleteVehicle(action.id);
     yield put({
       type: VehicleAction.VEHICLE_DELETE_SUCCESS,
+    });
+    yield put({
+      type: VehicleAction.VEHICLE_GET_ALL,
     });
   } catch (error) {
     yield put({

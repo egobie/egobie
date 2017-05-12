@@ -70,32 +70,8 @@ export default (state = vehicle, action) => {
       });
 
     case Action.VEHICLE_UPDATE_SUCCESS:
-      let updateAll = [].concat(state.all);
-      let updateIndex = updateAll.findIndex((car) => {
-        return car.id === action.car.id;
-      });
-
-      if (updateIndex !== -1) {
-        updateAll.splice(updateIndex, 1, serializeVehicle(action.car));
-      }
-
-      return Object.assign({}, state, {
-        all: updateAll,
-        loading: false,
-      });
-
     case Action.VEHICLE_DELETE_SUCCESS:
-      let deleteAll = [].concat(state.all);
-      let deleteIndex = deleteAll.findIndex((car) => {
-        return car.id === action.id;
-      });
-
-      if (deleteIndex !== -1) {
-        deleteAll.splice(deleteIndex, 1);
-      }
-
       return Object.assign({}, state, {
-        all: deleteAll,
         loading: false,
       });
 

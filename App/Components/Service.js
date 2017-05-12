@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 
 import { connect } from 'react-redux';
 import { ListItem, Icon } from 'react-native-elements';
@@ -64,58 +64,59 @@ class Service extends Component {
 
   render() {
     return (
-      <View style = {{
-        position: 'relative',
-        backgroundColor: this.state.backgroundColor,
-      }}>
-        <ListItem
-          hideChevron
-          title = { this.props.title }
-          titleStyle = {{
-            color: this.state.color,
-            fontWeight: '600',
-          }}
-          subtitle = { `Estimated Time: ${this.props.time}min` }
-          subtitleStyle = {{
-            color: this.state.color,
-            width: 150,
-            fontWeight: '300',
-          }}
-          rightTitle = { `$${this.props.price}.00` }
-          rightTitleStyle = {{
-            color: this.state.color,
-            fontWeight: '600',
-            paddingRight: 20,
-          }}
-          leftIcon = { this.serviceIcon(this.props.type) }
-          containerStyle = {{
-            height: 70,
-            marginLeft: 10,
-            marginRight: 10,
-            justifyContent: 'center',
-            borderBottomWidth: 0.5,
-            borderBottomColor: eGobie.EGOBIE_GREY,
-          }}
-          onPress = { this.toggleService }
-        />
+      <TouchableWithoutFeedback onPress = { this.toggleService }>
         <View style = {{
-          position: 'absolute',
-          justifyContent: 'center',
-          alignItems: 'center',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          width: 40,
+          position: 'relative',
+          backgroundColor: this.state.backgroundColor,
         }}>
-          <Icon
-            name = 'exclamation-circle'
-            type = 'font-awesome'
-            size = { 18 }
-            color = { this.state.selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLUE }
-            onPress = { this.showServiceDetail }
+          <ListItem
+            hideChevron
+            title = { this.props.title }
+            titleStyle = {{
+              color: this.state.color,
+              fontWeight: '600',
+            }}
+            subtitle = { `Estimated Time: ${this.props.time}min` }
+            subtitleStyle = {{
+              color: this.state.color,
+              width: 150,
+              fontWeight: '300',
+            }}
+            rightTitle = { `$${this.props.price}.00` }
+            rightTitleStyle = {{
+              color: this.state.color,
+              fontWeight: '600',
+              paddingRight: 20,
+            }}
+            leftIcon = { this.serviceIcon(this.props.type) }
+            containerStyle = {{
+              height: 70,
+              marginLeft: 10,
+              marginRight: 10,
+              justifyContent: 'center',
+              borderBottomWidth: 0.5,
+              borderBottomColor: eGobie.EGOBIE_GREY,
+            }}
           />
+          <View style = {{
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: 40,
+          }}>
+            <Icon
+              name = 'exclamation-circle'
+              type = 'font-awesome'
+              size = { 18 }
+              color = { this.state.selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLUE }
+              onPress = { this.showServiceDetail }
+            />
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

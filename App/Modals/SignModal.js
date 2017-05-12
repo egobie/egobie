@@ -178,7 +178,9 @@ class SignModal extends Component {
       return;
     }
 
-    if (!Validator.validateEmail(this.signUpForm.fullname)) {
+    let names = this.signUpForm.fullname.split(' ');
+
+    if (names.length < 2) {
       this.props.showErrorMessage('Please enter Full Name');
       return;
     }
@@ -386,13 +388,13 @@ class SignModal extends Component {
             <Kohana
               label = { 'Full Name' }
               iconName = { 'account' }
-              onChangeText = { (text) => { this.signUpForm.email = text; } }
+              onChangeText = { (text) => { this.signUpForm.fullname = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
               label = { 'Email' }
               iconName = { 'email' }
-              onChangeText = { (text) => { this.signUpForm.fullname = text; } }
+              onChangeText = { (text) => { this.signUpForm.email = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana

@@ -6,6 +6,7 @@ import { Button, Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as ErrorAction from '../Actions/ErrorAction';
 import Vehicle from '../Components/Vehicle';
 import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
@@ -116,6 +117,35 @@ class OrderScreen extends Component {
     return this._hideChild.bind(this, child);
   }
 
+  makeReservation = () => {
+    // address: state.location.formattedAddress,
+    // workflow: state.workflow.name,
+    // schedule: `${state.calendar.date} ${state.calendar.range}`,
+    // services: services.length > 0 ? services.join(', ') : ' ',
+    // cars: state.vehicle.all,
+    // car: state.vehicle.selected,
+    // userSignedIn: state.user.signedIn,
+    // price: Calculator.totalPrice(state.service.selected, 0),
+    // time: Calculator.totalTime(state.service.selected),
+
+    if (!this.props.car) {
+      this.props.showErrorMessage('Please choose the car');
+      return;
+    }
+
+    if (!this.props.services) {
+      this.props.showErrorMessage('Please choose services');
+      return;
+    }
+
+    if (this.props.schedule === ' ') {
+      this.props.showErrorMessage('Please choose date');
+      return;
+    }
+
+    this.props.showErrorMessage('Looks good!');
+  }
+
   rightIcon() {
     return {
       type: 'material-community',
@@ -173,7 +203,7 @@ class OrderScreen extends Component {
         <Label
           onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SERVICE); } }
           title = 'Service'
-          value = { this.props.services }
+          value = { this.props.services ? this.props.services: ' ' }
           titleStyle = {{
             color: eGobie.EGOBIE_GREY,
             fontSize: 12,
@@ -464,6 +494,7 @@ class OrderScreen extends Component {
           }}
         >
           <Button
+            onPress = { this.makeReservation }
             title = 'Make Reservation'
             backgroundColor = { eGobie.EGOBIE_BLUE }
             style = {{
@@ -526,7 +557,7 @@ const mapStateToProps = (state) => {
     address: state.location.formattedAddress,
     workflow: state.workflow.name,
     schedule: `${state.calendar.date} ${state.calendar.range}`,
-    services: services.length > 0 ? services.join(', ') : ' ',
+    services: services.length > 0 ? services.join(', ') : null,
     cars: state.vehicle.all,
     car: state.vehicle.selected,
     userSignedIn: state.user.signedIn,
@@ -540,6 +571,12 @@ const mapDispatchToProps = (dispatch) => {
     changeWorkflow: (type) => {
       dispatch({
         type,
+      });
+    },
+    showErrorMessage: (error) => {
+      dispatch({
+        type: ErrorAction.ERROR_SHOW,
+        error,
       });
     },
   };

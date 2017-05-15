@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, ScrollView, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
+import { View, ScrollView, Text, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import Calendar from 'react-native-calendar';
-import { CheckBox, Icon } from 'react-native-elements';
+import { CheckBox, Icon, Button } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as CalendarAction from '../Actions/CalendarAction';
@@ -110,10 +110,14 @@ class CalendarModal extends Component {
       ]).start();
     }, 500);
 
-    this.props.selectDate(dateString);
     this.setState({
       selectedDate: dateString,
     });
+  }
+
+  confirmDate = () => {
+    this.props.selectDate(this.state.selectedDate);
+    this.hide();
   }
 
   show = () => {
@@ -168,6 +172,30 @@ class CalendarModal extends Component {
         />
       );
     });
+  }
+
+  renderSchedules() {
+    return (
+      <View style = {{
+        flex: 1,
+      }}>
+        <Text style = {{
+          height: 80,
+          lineHeight: 80,
+          fontSize: 14,
+          color: eGobie.EGOBIE_SHADOW,
+          textAlign: 'center',
+        }}>There are 0 people in front of you</Text>
+        <Button
+          onPress = { this.confirmDate }
+          title = { 'Confirm' }
+          backgroundColor = { eGobie.EGOBIE_BLUE }
+          buttonStyle = {{
+            marginTop: 20,
+          }}
+        />
+      </View>
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -228,12 +256,13 @@ class CalendarModal extends Component {
               { translateY: this.state.translateY },
             ],
           }}>
-            <ScrollView
+            {/*<ScrollView
               showsHorizontalScrollIndicator = { false }
               showsVerticalScrollIndicator = { false }
             >
               { this.openingDays() }
-            </ScrollView>
+            </ScrollView>*/}
+            { this.renderSchedules() }
           </Animated.View>
         </View>
       </Modal>

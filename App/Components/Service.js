@@ -98,23 +98,24 @@ class Service extends Component {
               borderBottomColor: eGobie.EGOBIE_GREY,
             }}
           />
-          <View style = {{
-            position: 'absolute',
-            justifyContent: 'center',
-            alignItems: 'center',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            width: 40,
-          }}>
-            <Icon
-              name = 'exclamation-circle'
-              type = 'font-awesome'
-              size = { 18 }
-              color = { this.state.selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLUE }
-              onPress = { this.showServiceDetail }
-            />
-          </View>
+          <TouchableWithoutFeedback onPress = { this.showServiceDetail } >
+            <View style = {{
+              position: 'absolute',
+              justifyContent: 'center',
+              alignItems: 'center',
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: 40,
+            }}>
+              <Icon
+                name = 'exclamation-circle'
+                type = 'font-awesome'
+                size = { 18 }
+                color = { this.state.selected ? eGobie.EGOBIE_WHITE : eGobie.EGOBIE_BLUE }
+              />
+            </View>
+          </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
     );

@@ -8,6 +8,7 @@ import ErrorMessage from '../Components/ErrorMessage';
 import ResidentContainer from './ResidentContainer';
 import UserScreen from '../Screens/UserScreen';
 import VehicleScreen from '../Screens/VehicleScreen';
+import ReservationScreen from '../Screens/ReservationScreen';
 import AboutScreen from '../Screens/AboutScreen';
 import VehicleModal from '../Modals/VehicleModal';
 import SignModal from '../Modals/SignModal';
@@ -50,6 +51,9 @@ const Navigator = StackNavigator({
   },
   Vehicles: {
     screen: VehicleScreen,
+  },
+  Reservations: {
+    screen: ReservationScreen,
   },
   About: {
     screen: AboutScreen,

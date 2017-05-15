@@ -32,15 +32,15 @@ const leftIconStyle = {
 
 class MenuScreen extends Component {
   menuItems = [
-    // {
-    //   title: I18n.t('menu.myServices'),
-    //   icon: 'oil',
-    //   onPress: () => { },
-    // },
     {
       title: I18n.t('menu.vehicles'),
       icon: 'car',
       onPress: () => { this.props.navigation.navigate('Vehicles') },
+    },
+    {
+      title: I18n.t('menu.myReservations'),
+      icon: 'calendar-check',
+      onPress: () => { this.props.navigation.navigate('Reservations') },
     },
     // {
     //   title: I18n.t('menu.coupons'),

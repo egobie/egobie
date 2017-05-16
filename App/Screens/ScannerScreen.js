@@ -6,18 +6,20 @@ import { Icon } from 'react-native-elements';
 import Camera from 'react-native-camera';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as ErrorAction from '../Actions/ErrorAction';
 import Dimensions from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
 
 const mask = {
   flex: 1,
-  opacity: 0.9,
+  opacity: 0.7,
 };
 
 class ScannerScreen extends Component {
   state = {
     top: new Animated.Value(Dimensions.height),
+    barCodeReaded: false,
   };
 
   constructor(props) {
@@ -25,7 +27,14 @@ class ScannerScreen extends Component {
   }
 
   onBarCodeRead = (data, bounds) => {
+    if (this.state.barCodeReaded) {
+      return;
+    }
 
+    this.setState({
+      barCodeReaded: true,
+    });
+    this.props.showErrorMessage(data);
   }
 
   cancel = () => {
@@ -44,7 +53,11 @@ class ScannerScreen extends Component {
     Animated.timing(this.state.top, {
       toValue: Dimensions.height,
       easing: Easing.out(Easing.cubic),
-    }).start();
+    }).start(() => {
+      this.setState({
+        barCodeReaded: false,
+      });
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -144,6 +157,12 @@ const mapDispatchToProps = (dispatch) => {
         type: WorkflowAction.WORK_FLOW_BACK,
       });
     },
+    showErrorMessage: (error) => {
+      dispatch({
+        type: ErrorAction.ERROR_SHOW,
+        error,
+      });
+    }
   };
 };
 

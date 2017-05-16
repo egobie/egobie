@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 import Reactotron from 'reactotron-react-native';
 import { Icon } from 'react-native-elements';
 import Camera from 'react-native-camera';
@@ -13,7 +13,7 @@ import eGobie from '../Styles/Egobie';
 
 const mask = {
   flex: 1,
-  opacity: 0.7,
+  backgroundColor: 'transparent',
 };
 
 class ScannerScreen extends Component {
@@ -79,6 +79,7 @@ class ScannerScreen extends Component {
 
         <View style = {{ flexDirection: 'row' }} >
           <View style = { mask} />
+
           <View style = {{
             width: Dimensions.width * 0.7,
             height: Dimensions.width * 0.7,
@@ -88,7 +89,15 @@ class ScannerScreen extends Component {
 
           <View style = { mask } />
         </View>
-        <View style = { mask } />
+        <View style = { mask } >
+          <Text style = {{
+            height: 50,
+            lineHeight: 50,
+            textAlign: 'center',
+            color: eGobie.EGOBIE_GREY,
+            backgroundColor: 'transparent',
+          }}>Align QR Code withing frame to scan</Text>
+        </View>
       </View>
     );
   }

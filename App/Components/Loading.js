@@ -66,7 +66,7 @@ class Loading extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.user.loading || state.vehicle.loading,
+    loading: state.user.loading || state.vehicle.loading || state.service.loading,
   };
 };
 

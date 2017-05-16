@@ -3,8 +3,27 @@ import Reactotron from 'reactotron-react-native';
 
 const service = {
   all: [],
+  reservations: [],
   selected: [],
   detail: null,
+  loading: false,
+};
+
+const serializeReservation = (reservation) => {
+  let services = reservation.services.map((service) => {
+    return service.name;
+  });
+
+  return {
+    id: reservation.id,
+    reservationId: reservation.reservation_id,
+    location: reservation.location,
+    plate: reservation.plate,
+    time: reservation.time,
+    price: reservation.price,
+    status: reservation.status,
+    services: services,
+  };
 };
 
 export default (state = service, action) => {
@@ -12,6 +31,40 @@ export default (state = service, action) => {
     case Action.SERVICE_GET_ALL_SUCCESS:
       return Object.assign({}, state, {
         all: action.services,
+      });
+
+    case Action.SERVICE_RESERVE:
+    case Action.SERVICE_CANCEL_RESERVATION:
+    case Action.SERVICE_GET_ALL_RESERVATION:
+      return Object.assign({}, state, {
+        loading: true,
+      });
+
+    case Action.SERVICE_RESERVE_SUCCESS:  
+    case Action.SERVICE_RESERVE_ERROR:
+    case Action.SERVICE_RESERVE_FAIL:
+    case Action.SERVICE_CANCEL_RESERVATION_SUCCESS:
+    case Action.SERVICE_CANCEL_RESERVATION_ERROR:
+    case Action.SERVICE_CANCEL_RESERVATION_FAIL:
+      return Object.assign({}, state, {
+        loading: false,
+      });
+
+    case Action.SERVICE_GET_ALL_RESERVATION_SUCCESS:
+      let reservations = action.reservations.map((reservation) => {
+        return serializeReservation(reservation);
+      });
+
+      return Object.assign({}, state, {
+        reservations,
+        loading: false,
+      });
+
+    case Action.SERVICE_GET_ALL_RESERVATION_ERROR:
+    case Action.SERVICE_GET_ALL_RESERVATION_FAIL:
+      return Object.assign({}, state, {
+        reservations: [],
+        loading: false,
       });
 
     case Action.SERVICE_SHOW:

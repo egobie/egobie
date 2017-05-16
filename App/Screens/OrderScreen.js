@@ -143,7 +143,7 @@ class OrderScreen extends Component {
       return;
     }
 
-    this.props.showErrorMessage('Looks good!');
+    this.props.changeWorkflow(WorkflowAction.WORK_FLOW_RESET_ORDER); 
   }
 
   rightIcon() {

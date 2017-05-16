@@ -123,7 +123,7 @@ export default (state = vehicle, action) => {
       });
 
     case Action.VEHICLE_DESELECT:
-      return Object.assign({}. state, {
+      return Object.assign({}, state, {
         selected: null,
       });
 

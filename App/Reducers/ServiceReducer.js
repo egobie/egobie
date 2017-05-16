@@ -136,6 +136,11 @@ export default (state = service, action) => {
         selected: selected2,
       });
 
+    case Action.SERVICE_DESELECT_ALL:
+      return Object.assign({}, state, {
+        selected: [],
+      });
+
     default:
       return state;
   }

@@ -1,4 +1,3 @@
-import Reactotron from 'reactotron-react-native';
 import * as Action from '../Actions/WorkflowAction';
 
 
@@ -22,7 +21,6 @@ export default (state = workflow, action) => {
     case Action.WORK_FLOW_LOADING:
     case Action.WORK_FLOW_MENU:
     case Action.WORK_FLOW_RESET_PASSWORD:
-      Reactotron.log(action.type);
       prev.push(state.name);
       return Object.assign({}, state, {
         prev,
@@ -30,7 +28,6 @@ export default (state = workflow, action) => {
       });
 
     case Action.WORK_FLOW_BACK:
-      Reactotron.log(action.type);
       let back = prev.splice(-1, 1);
       let name = back.length === 1 ? back[0] : Action.WORK_FLOW_START;
 

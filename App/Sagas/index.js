@@ -3,6 +3,7 @@ import metadataSaga from './MetadataSaga';
 import locationSaga from './LocationSaga';
 import vehicleSaga from './VehicleSaga';
 import serviceSaga from './ServiceSaga';
+import workflowSaga from './WorkflowSaga';
 
 
 export default function* eGobieSaga() {
@@ -12,5 +13,6 @@ export default function* eGobieSaga() {
     metadataSaga(),
     vehicleSaga(),
     serviceSaga(),
+    workflowSaga(),
   ];
 }

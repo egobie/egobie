@@ -24,3 +24,9 @@ export const cancelReservation = (id) => {
     id,
   });
 };
+
+export const getQueues = (id) => {
+  return send('POST', `${prefix}/queue`, {
+    id,
+  });
+};

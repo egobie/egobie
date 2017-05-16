@@ -1,7 +1,9 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as ServiceAction from '../Actions/ServiceAction';
-import { getAllServices, getAllReservations, reserveService, cancelReservation } from '../Requests/ServiceRequest';
+import {
+  getAllServices, getAllReservations, reserveService, cancelReservation, getQueues,
+} from '../Requests/ServiceRequest';
 
 
 function* getAllServicesTask() {
@@ -41,6 +43,27 @@ function* getAllReservationsTask() {
     if (yield cancelled()) {
       yield put({
         type: ServiceAction.SERVICE_CANCEL_RESERVATION_FAIL,
+      });
+    }
+  }
+}
+
+function* getQueuesTask(action) {
+  try {
+    const queue = yield getQueues(action.id);
+    yield put({
+      type: ServiceAction.SERVICE_GET_QUEUE_SUCCESS,
+      queue,
+    });
+  } catch (error) {
+    yield put({
+      type: ServiceAction.SERVICE_GET_QUEUE_ERROR,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      yield put({
+        type: ServiceAction.SERVICE_GET_QUEUE_FAIL
       });
     }
   }
@@ -94,6 +117,8 @@ function* cancelReservationTask(action) {
 
 export default function* serviceSaga() {
   yield takeLatest(ServiceAction.SERVICE_GET_ALL, getAllServicesTask);
+  yield takeLatest(ServiceAction.SERVICE_GET_ALL_RESERVATION, getAllReservationsTask);
+  yield takeLatest(ServiceAction.SERVICE_GET_QUEUE, getQueuesTask);
   yield takeLatest(ServiceAction.SERVICE_RESERVE, reserveServiceTask);
   yield takeLatest(ServiceAction.SERVICE_CANCEL_RESERVATION, cancelReservationTask);
 }

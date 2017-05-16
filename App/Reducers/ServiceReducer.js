@@ -6,6 +6,7 @@ const service = {
   reservations: [],
   selected: [],
   detail: null,
+  queue: 0,
   loading: false,
 };
 
@@ -31,13 +32,23 @@ export default (state = service, action) => {
     case Action.SERVICE_GET_ALL_SUCCESS:
       return Object.assign({}, state, {
         all: action.services,
+        loading: false,
       });
 
+    case Action.SERVICE_GET_ALL:
+    case Action.SERVICE_GET_QUEUE:
+    case Action.SERVICE_GET_ALL_RESERVATION:
     case Action.SERVICE_RESERVE:
     case Action.SERVICE_CANCEL_RESERVATION:
-    case Action.SERVICE_GET_ALL_RESERVATION:
       return Object.assign({}, state, {
         loading: true,
+      });
+
+    case Action.SERVICE_GET_ALL_ERROR:
+    case Action.SERVICE_GET_ALL_FAIL:
+      return Object.assign({}, state, {
+        all: [],
+        loading: false,
       });
 
     case Action.SERVICE_RESERVE_SUCCESS:  
@@ -46,6 +57,8 @@ export default (state = service, action) => {
     case Action.SERVICE_CANCEL_RESERVATION_SUCCESS:
     case Action.SERVICE_CANCEL_RESERVATION_ERROR:
     case Action.SERVICE_CANCEL_RESERVATION_FAIL:
+    case Action.SERVICE_GET_QUEUE_ERROR:
+    case Action.SERVICE_GET_QUEUE_FAIL:
       return Object.assign({}, state, {
         loading: false,
       });
@@ -65,6 +78,12 @@ export default (state = service, action) => {
       return Object.assign({}, state, {
         reservations: [],
         loading: false,
+      });
+
+    case Action.SERVICE_GET_QUEUE_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        queue: action.queue,
       });
 
     case Action.SERVICE_SHOW:

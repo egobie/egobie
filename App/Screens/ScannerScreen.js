@@ -34,7 +34,7 @@ class ScannerScreen extends Component {
     this.setState({
       barCodeReaded: true,
     });
-    this.props.showErrorMessage(data);
+    this.props.showErrorMessage(data.data);
   }
 
   cancel = () => {
@@ -68,40 +68,6 @@ class ScannerScreen extends Component {
     }
   }
 
-  renderViewFinder() {
-    return (
-      <View style = {{
-        position: 'absolute',
-        width: Dimensions.width,
-        height: Dimensions.height,
-      }}>
-        <View style = { mask } />
-
-        <View style = {{ flexDirection: 'row' }} >
-          <View style = { mask} />
-
-          <View style = {{
-            width: Dimensions.width * 0.7,
-            height: Dimensions.width * 0.7,
-            borderWidth: 1,
-            borderColor: eGobie.EGOBIE_SHADOW,
-          }}></View>
-
-          <View style = { mask } />
-        </View>
-        <View style = { mask } >
-          <Text style = {{
-            height: 50,
-            lineHeight: 50,
-            textAlign: 'center',
-            color: eGobie.EGOBIE_GREY,
-            backgroundColor: 'transparent',
-          }}>Align QR Code withing frame to scan</Text>
-        </View>
-      </View>
-    );
-  }
-
   renderCancelButton() {
     return (
       <TouchableWithoutFeedback onPress = { this.cancel }>
@@ -126,6 +92,35 @@ class ScannerScreen extends Component {
     );
   }
 
+  renderViewFinder() {
+    return (
+      <View style = {{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+      }}>
+        <View style = {{
+          width: Dimensions.width * 0.7,
+          height: Dimensions.width * 0.7,
+          borderWidth: 1,
+          borderColor: eGobie.EGOBIE_SHADOW,
+        }}/>
+        <View style = {{
+          height: 50,
+        }}>
+          <Text style = {{
+            height: 50,
+            lineHeight: 50,
+            textAlign: 'center',
+            color: eGobie.EGOBIE_GREY,
+            backgroundColor: 'transparent',
+          }}>Align QR Code withing frame to scan</Text>
+        </View>
+      </View>
+    );
+  }
+
   render() {
     return (
       <Animated.View style = {{
@@ -136,6 +131,8 @@ class ScannerScreen extends Component {
         width: Dimensions.width,
         height: Dimensions.height,
         top: this.state.top,
+        borderColor: 'blue',
+        borderWidth: 10,
       }}>
         <Camera
           aspect = { Camera.constants.Aspect.fill }
@@ -145,9 +142,10 @@ class ScannerScreen extends Component {
             width: Dimensions.width,
             height: Dimensions.height,
           }}
-        />
-        { this.renderViewFinder() }
-        { this.renderCancelButton() }
+        >
+          { this.renderViewFinder() }
+          { this.renderCancelButton() }
+        </Camera>
       </Animated.View>
     );
   }

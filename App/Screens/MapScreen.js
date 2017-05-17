@@ -18,7 +18,6 @@ class MapScreen extends Component {
   focused = true;
   state = {
     height: new Animated.Value(Dimension.height),
-    scale: new Animated.Value(0),
     currentLocation: {
       latitude: 0,
       longitude: 0,
@@ -76,6 +75,7 @@ class MapScreen extends Component {
   goToCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       this.props.getCurrentLocation(position.coords.latitude, position.coords.longitude);
+      this.goToLocation(position.coords.latitude, position.coords.longitude);
     });
   }
 
@@ -173,6 +173,7 @@ class MapScreen extends Component {
         {
           <MapView
             ref = { (ref) => { this.map = ref; } }
+            showsCompass = { false }
             showsUserLocation = { false }
             showsMyLocationButton = { false }
             followsUserLocation = { true }
@@ -202,9 +203,6 @@ class MapScreen extends Component {
             height: 30,
             borderRadius: 15,
             backgroundColor: eGobie.EGOBIE_WHITE,
-            transform: [
-              { scale: this.state.scale },
-            ],
           }}>
             <Icon
               type = { 'material' }

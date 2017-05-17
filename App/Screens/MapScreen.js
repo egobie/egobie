@@ -70,6 +70,9 @@ class MapScreen extends Component {
         longitude: longitude,
       }
     });
+    setTimeout(() => {
+      this.marker.showCallout();
+    }, 3000);
   }
 
   goToCurrentLocation = () => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
+import { View, KeyboardAvoidingView, Text, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Button, Icon, SocialIcon } from 'react-native-elements';
@@ -422,12 +422,15 @@ class SignModal extends Component {
   render() {
     return (
       <Modal visible = { this.state.visible } >
-        <View style = {{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: eGobie.EGOBIE_SHADOW,
-        }}>
+        <KeyboardAvoidingView
+          behavior = { 'padding' }
+          style = {{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: eGobie.EGOBIE_SHADOW,
+          }}
+        >
           <Animated.View style = {{
             height: Dimension.height * 0.75,
             alignItems: 'center',
@@ -453,7 +456,7 @@ class SignModal extends Component {
               { this.state.visible && this.signUpSide() }
             </FlipCard>
           </Animated.View>
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
     );
   }

@@ -125,6 +125,13 @@ class ReservationScreen extends Component {
             })
           }
           </View>
+          <Button
+            title = 'CANCEL'
+            backgroundColor = { eGobie.EGOBIE_RED }
+            buttonStyle = {{
+              marginTop: 8,
+            }}
+          />
         </View>
       );
     });

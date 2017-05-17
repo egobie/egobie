@@ -11,6 +11,7 @@ import picker from './PickerReducer';
 import service from './ServiceReducer';
 import vehicle from './VehicleReducer';
 import resetPassword from './ResetPasswordReducer';
+import confirm from './ConfirmReducer';
 
 
 export default combineReducers({
@@ -25,4 +26,5 @@ export default combineReducers({
   service,
   vehicle,
   resetPassword,
+  confirm,
 });

@@ -14,7 +14,7 @@ import VehicleModal from '../Modals/VehicleModal';
 import SignModal from '../Modals/SignModal';
 import CalendarModal from '../Modals/CalendarModal';
 import PickerModal from '../Modals/PickerModal';
-import ConfirmModal from '../Modals/ConfirmModal';
+// import ConfirmModal from '../Modals/ConfirmModal';
 import ServiceDetailModal from '../Modals/ServiceDetailModal'
 import ResetPasswordModal from '../Modals/ResetPasswordModal';
 import eGobie from '../Styles/Egobie';
@@ -77,7 +77,7 @@ export default React.createClass({
         <Loading />
         <PickerModal />
         <ServiceDetailModal />
-        <ConfirmModal />
+        {/* <ConfirmModal /> */}
         <ErrorMessage />
       </View>
     );

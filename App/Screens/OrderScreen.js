@@ -276,7 +276,7 @@ class OrderScreen extends Component {
       }}>
         <Label
           onPress = { this.showChild('vehicle') }
-          title = 'Viehcle'
+          title = 'Vehicle'
           value = { car ? `${car.make} ${car.model} ${car.plate}` : ' ' }
           leftIcon = {{
             type: 'material-community',

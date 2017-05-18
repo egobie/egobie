@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Button } from 'react-native-elements';
 
-import * as ConfirmAction from '../Actions/';
+import * as ConfirmAction from '../Actions/ConfirmAction';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';

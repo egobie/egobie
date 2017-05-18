@@ -183,7 +183,7 @@ class PlaceSearch extends Component {
           }}
           autoFocus = { false }
           fetchDetails = { true }
-          placeholder = { 'Where can we serve your car' }
+          placeholder = { 'Type Your Address' }
           placeholderTextColor = { eGobie.EGOBIE_GREY }
           minLength = { 2 }
           styles = { styles }
@@ -208,7 +208,7 @@ const styles = {
     alignItems: 'center',
   },
   textInput: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: '400',
     marginTop: 0,
     marginLeft: 0,

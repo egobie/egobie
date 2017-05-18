@@ -256,12 +256,14 @@ class CalendarModal extends Component {
               { translateY: this.state.translateY },
             ],
           }}>
-            {/*<ScrollView
+          {/*
+            <ScrollView
               showsHorizontalScrollIndicator = { false }
               showsVerticalScrollIndicator = { false }
             >
               { this.openingDays() }
-            </ScrollView>*/}
+            </ScrollView>
+          */}
             { this.renderSchedules() }
           </Animated.View>
         </View>

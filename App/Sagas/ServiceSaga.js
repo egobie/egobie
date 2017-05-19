@@ -8,7 +8,7 @@ import {
 
 function* getAllServicesTask() {
   try {
-    const services = yield getAllServices()
+    const resp = yield getAllServices()
     yield put({
       type: ServiceAction.SERVICE_GET_ALL_SUCCESS,
       services,

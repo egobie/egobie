@@ -1,6 +1,6 @@
 // No trailing `/`
-// const baseUrl = 'http://localhost:8000';
-const baseUrl = 'https://api.egobie.com';
+const baseUrl = 'http://localhost:8000';
+// const baseUrl = 'https://api.egobie.com';
 
 export default (method, url, body, headers) => {
   let _headers = headers ? headers : {};
@@ -13,11 +13,14 @@ export default (method, url, body, headers) => {
       'Content-Type': 'application/json',
     }),
     body: JSON.stringify(Object.assign(_body, {
-      user_id: 1,
-      user_token: 'bc2543',
+      userId: 1,
+      userToken: 'bc2543',
     })),
   }).then((response) => {
-    return response.json();
+    return {
+      status: response.status,
+      body: response.json()
+    };
   }, (error) => {
     return error;
   });

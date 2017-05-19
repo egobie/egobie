@@ -9,11 +9,18 @@ import {
 
 function* getVehicleMakesTask() {
   try {
-    const makes = yield getVehicleMakes();
-    yield put({
-      type: VehicleAction.VEHICLE_GET_MAKE_SUCCESS,
-      makes,
-    });
+    const resp = yield getVehicleMakes();
+
+    if (resp.status === 200) {
+      yield put({
+        type: VehicleAction.VEHICLE_GET_MAKE_SUCCESS,
+        makes: resp.body,
+      });
+    } else {
+      yield put({
+        type: VehicleAction.VEHICLE_GET_MAKE_FAIL,
+      });
+    }
   } catch (error) {
     yield({
       type: VehicleAction.VEHICLE_GET_MAKE_ERROR,
@@ -30,11 +37,18 @@ function* getVehicleMakesTask() {
 
 function* getVehicleModelsTask() {
   try {
-    const models = yield getVehicleModels();
-    yield put({
-      type: VehicleAction.VEHICLE_GET_MODEL_SUCCESS,
-      models,
-    });
+    const resp = yield getVehicleModels();
+
+    if (resp.status === 200) {
+      yield put({
+        type: VehicleAction.VEHICLE_GET_MODEL_SUCCESS,
+        models: resp.body,
+      });
+    } else {
+      yield put({
+        type: VehicleAction.VEHICLE_GET_MODEL_FAIL,
+      });
+    }
   } catch (error) {
     yield put({
       type: VehicleAction.VEHICLE_GET_MODEL_ERROR,
@@ -51,11 +65,18 @@ function* getVehicleModelsTask() {
 
 function* getAllVehiclesTask(action) {
   try {
-    const cars = yield getAllVehicles(action.userId);
-    yield put({
-      type: VehicleAction.VEHICLE_GET_ALL_SUCCESS,
-      cars: cars ? cars : [],
-    });
+    const resp = yield getAllVehicles(action.userId);
+
+    if (resp.status === 200) {
+      yield put({
+        type: VehicleAction.VEHICLE_GET_ALL_SUCCESS,
+        cars: resp.body ? resp.body : [],
+      });
+    } else {
+      yield put({
+        type: VehicleAction.VEHICLE_GET_ALL_FAIL,
+      });
+    }
   } catch (error) {
     yield put({
       type: VehicleAction.VEHICLE_GET_ALL_ERROR,
@@ -75,16 +96,28 @@ function* getAllVehiclesTask(action) {
 
 function* addVehicleTask(action) {
   try {
-    const car = yield addVehicle(
-      action.plate, action.state, action.year, action.color, action.make, action.model,
+    const resp = yield addVehicle(
+      action.plate, action.state, action.year,
+      action.color, action.make, action.model,
     );
-    yield put({
-      type: VehicleAction.VEHICLE_ADD_SUCCESS,
-      car,
-    });
-    yield put({
-      type: VehicleAction.VEHICLE_GET_ALL,
-    });
+
+    if (resp.status === 200) {
+      yield put({
+        type: VehicleAction.VEHICLE_ADD_SUCCESS,
+        car: resp.body,
+      });
+      yield put({
+        type: VehicleAction.VEHICLE_GET_ALL,
+      });
+    } else {
+      yield put({
+        type: VehicleAction.VEHICLE_ADD_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: VehicleAction.VEHICLE_ADD_ERROR,
@@ -105,12 +138,23 @@ function* updateVehicleTask(action) {
       action.id, action.plate, action.state, action.year,
       action.color, action.make, action.model,
     );
-    yield put({
-      type: VehicleAction.VEHICLE_UPDATE_SUCCESS,
-    });
-    yield put({
-      type: VehicleAction.VEHICLE_GET_ALL,
-    });
+
+    if (resp.status === 200) {
+      yield put({
+        type: VehicleAction.VEHICLE_UPDATE_SUCCESS,
+      });
+      yield put({
+        type: VehicleAction.VEHICLE_GET_ALL,
+      });
+    } else {
+      yield put({
+        type: VehicleAction.VEHICLE_UPDATE_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: VehicleAction.VEHICLE_UPDATE_ERROR,
@@ -128,12 +172,23 @@ function* updateVehicleTask(action) {
 function* deleteVehicleTask(action) {
   try {
     const resp = yield deleteVehicle(action.id);
-    yield put({
-      type: VehicleAction.VEHICLE_DELETE_SUCCESS,
-    });
-    yield put({
-      type: VehicleAction.VEHICLE_GET_ALL,
-    });
+
+    if (resp.status === 200) {
+      yield put({
+        type: VehicleAction.VEHICLE_DELETE_SUCCESS,
+      });
+      yield put({
+        type: VehicleAction.VEHICLE_GET_ALL,
+      });
+    } else {
+      yield put({
+        type: VehicleAction.VEHICLE_DELETE_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: VehicleAction.VEHICLE_DELETE_ERROR,

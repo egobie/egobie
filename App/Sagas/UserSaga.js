@@ -9,19 +9,23 @@ import { signIn, signUp } from '../Requests/UserRequest';
 
 function* signInTask(action) {
   try {
-    const user = yield signIn(action.email, action.password);
-    if (user.error) {
-      yield put({
-        type: UserAction.USER_SIGN_IN_FAIL,
-      });
-    } else {
+    const resp = yield signIn(action.email, action.password);
+    if (resp.status === 200) {
       yield put({
         type: UserAction.USER_SIGN_IN_SUCCESS,
-        user,
+        user: resp.body,
       });
       yield put({
         type: VehicleAction.VEHICLE_GET_ALL,
-        userId: user.id,
+        userId: resp.body.id,
+      });
+    } else {
+      yield put({
+        type: UserAction.USER_SIGN_IN_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
       });
     }
   } catch (error) {
@@ -43,9 +47,29 @@ function* signInTask(action) {
 
 function* signUpTask(action) {
   try {
-    yield put({
-      type: UserAction.USER_SIGN_UP_SUCCESS,
-    });
+    const resp = yield signUp(
+      action.email, action.password, action.firstName, action.lastName,
+      action.phoneNumber, action.coupon,
+    );
+
+    if (resp.status === 200) {
+      yield put({
+        type: UserAction.USER_SIGN_UP_SUCCESS,
+        user: resp.body,
+      });
+      yield put({
+        type: VehicleAction.VEHICLE_GET_ALL,
+        userId: resp.body.id,
+      });
+    } else {
+      yield put({
+        type: UserAction.USER_SIGN_UP_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: UserAction.USER_SIGN_UP_ERROR,

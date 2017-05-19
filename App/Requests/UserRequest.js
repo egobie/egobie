@@ -9,9 +9,8 @@ export const signIn = (email, password) => {
   });
 };
 
-export const signUp = (password, email, phoneNumber, coupon) => {
+export const signUp = (email, password, firstName, lastName, phoneNumber, coupon) => {
   return send('POST', 'signup', {
-    email, password, coupon,
-    phone_number: phoneNumber,
+    email, password, firstName, lastName, phoneNumber, coupon,
   });
 };

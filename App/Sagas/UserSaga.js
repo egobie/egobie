@@ -10,6 +10,7 @@ import { signIn, signUp } from '../Requests/UserRequest';
 function* signInTask(action) {
   try {
     const resp = yield signIn(action.email, action.password);
+
     if (resp.status === 200) {
       yield put({
         type: UserAction.USER_SIGN_IN_SUCCESS,

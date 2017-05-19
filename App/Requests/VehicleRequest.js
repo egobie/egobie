@@ -5,7 +5,7 @@ import send from './Request';
 const prefix = 'car';
 
 export const getVehicleMakes = () => {
-  return send('POST', `${prefix}/maker`);
+  return send('POST', `${prefix}/make`);
 };
 
 export const getVehicleModels = () => {
@@ -14,21 +14,19 @@ export const getVehicleModels = () => {
 
 export const getAllVehicles = (userId) => {
   return send('POST', `${prefix}/user`, {
-    user_id: userId,
+    userId,
   });
 };
 
 export const addVehicle = (plate, state, year, color, make, model) => {
   return send('POST', `${prefix}/new`, {
-    plate, state, year, color, model,
-    maker: make,
+    plate, state, year, color, model, make,
   });
 };
 
 export const updateVehicle = (id, plate, state, year, color, make, model) => {
   return send('POST', `${prefix}/update`, {
-    id, plate, state, year, color, model,
-    maker: make,
+    id, plate, state, year, color, model, make,
   });
 };
 

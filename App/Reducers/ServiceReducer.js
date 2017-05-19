@@ -17,7 +17,7 @@ const serializeReservation = (reservation) => {
 
   return {
     id: reservation.id,
-    reservationId: reservation.reservation_id,
+    reservationId: reservation.reservationId,
     location: reservation.location,
     plate: reservation.plate,
     time: reservation.time,

@@ -1,5 +1,5 @@
 import * as Action from '../Actions/VehicleAction';
-
+import Reactotron from 'reactotron-react-native';
 
 const vehicle = {
   all: [],
@@ -12,16 +12,16 @@ const vehicle = {
 const serializeVehicle = (car) => {
   return {
     id: car.id,
-    userId: car.user_id,
-    reportId: car.report_id,
+    userId: car.userId,
+    reportId: car.reportId,
     plate: car.plate,
     state: car.state,
     year: car.year,
     color: car.color,
-    make: car.maker,
+    make: car.make,
     model: car.model,
-    makeId: car.maker_id,
-    modelId: car.model_id,
+    makeId: car.makeId,
+    modelId: car.modelId,
     reserved: car.reserved,
   };
 };
@@ -37,10 +37,9 @@ const serializeVehicleMakes = (makes) => {
 
 const serializeVehicleModels = (models) => {
   let result = {};
-
   models.forEach((model) => {
-    result[model.maker_id] = result[model.maker_id] ? result[model.maker_id] : [];
-    result[model.maker_id].push({
+    result[model.makeId] = result[model.makeId] ? result[model.makeId] : [];
+    result[model.makeId].push({
       key: model.id,
       label: model.title,
     });

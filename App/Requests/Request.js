@@ -1,3 +1,4 @@
+import Reactotron from 'reactotron-react-native';
 // No trailing `/`
 const baseUrl = 'http://localhost:8000';
 // const baseUrl = 'https://api.egobie.com';
@@ -16,12 +17,24 @@ export default (method, url, body, headers) => {
       userId: 1,
       userToken: 'bc2543',
     })),
-  }).then((response) => {
+  })
+  .then((response) => {
+    if (response.status >= 200 && response.status < 300) {
+      return response.json();
+    } else {
+      throw response._bodyText;
+    }
+  })
+  .then((data) => {
     return {
-      status: response.status,
-      body: response.json()
+      status: 200,
+      body: data,
     };
-  }, (error) => {
-    return error;
+  })
+  .catch((error) => {
+    return {
+      status: 400,
+      body: error.substring(1, error.length - 2),
+    }
   });
 };

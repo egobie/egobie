@@ -1,17 +1,28 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as ResetPasswordAction from '../Actions/ResetPasswordAction';
+import * as ErrorAction from '../Actions/ErrorAction';
 import { validateEmail, validateToken, resendToken, newPassword } from '../Requests/ResetPasswordRequest';
 
 
 function* validateEmailTask(action) {
   try {
     const resp = yield validateEmail(action.email);
-    yield put({
-      type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_EMAIL_SUCCESS,
-      userId: resp.user_id,
-      email: resp.email,
-    });
+
+    if (resp.status === 200) {
+      yield put({
+        type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_EMAIL_SUCCESS,
+        userId: resp.userId,
+      });
+    } else {
+      yield put({
+        type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_EMAIL_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_EMAIL_ERROR,
@@ -29,9 +40,20 @@ function* validateEmailTask(action) {
 function* validateTokenTask(action) {
   try {
     const resp = yield validateToken(action.id, action.token);
-    yield put({
-      type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_TOKEN_SUCCESS,
-    });
+
+    if (resp.status === 200) {
+      yield put({
+        type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_TOKEN_SUCCESS,
+      });
+    } else {
+      yield put({
+        type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_TOKEN_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_TOKEN_ERROR,
@@ -49,9 +71,20 @@ function* validateTokenTask(action) {
 function* resendTokenTask(action) {
   try {
     const resp = yield resendToken(action.userId, action.email);
-    yield put({
-      type: ResetPasswordAction.RESET_PASSWORD_RESEND_SUCCESS,
-    });
+
+    if (resp.status === 200) {
+      yield put({
+        type: ResetPasswordAction.RESET_PASSWORD_RESEND_SUCCESS,
+      });
+    } else {
+      yield put({
+        type: ResetPasswordAction.RESET_PASSWORD_RESEND_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ResetPasswordAction.RESET_PASSWORD_RESEND_ERROR,
@@ -69,9 +102,20 @@ function* resendTokenTask(action) {
 function* newPasswordTask(action) {
   try {
     const resp = yield newPassword(action.userId, action.token, action.password);
-    yield put({
-      type: ResetPasswordAction.RESET_PASSWORD_NEW_PASSWORD_SUCCESS,
-    });
+
+    if (resp.status === 200) {
+      yield put({
+        type: ResetPasswordAction.RESET_PASSWORD_NEW_PASSWORD_SUCCESS,
+      });
+    } else {
+      yield put({
+        type: ResetPasswordAction.RESET_PASSWORD_NEW_PASSWORD_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ResetPasswordAction.RESET_PASSWORD_NEW_PASSWORD_ERROR,

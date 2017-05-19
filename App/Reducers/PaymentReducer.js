@@ -8,7 +8,7 @@ const payment = {
 const serializePayment = (payment) => {
   return {
     id: payment.id,
-    userId: payment.user_id,
+    userId: payment.userId,
     accountName: payment.account_name,
     accountNumber: payment.account_number,
     accountType: payment.account_type,

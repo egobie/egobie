@@ -1,6 +1,7 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as ServiceAction from '../Actions/ServiceAction';
+import * as ErrorAction from '../Actions/ErrorAction';
 import {
   getAllServices, getAllReservations, reserveService, cancelReservation, getQueues,
 } from '../Requests/ServiceRequest';
@@ -9,10 +10,21 @@ import {
 function* getAllServicesTask() {
   try {
     const resp = yield getAllServices()
-    yield put({
-      type: ServiceAction.SERVICE_GET_ALL_SUCCESS,
-      services,
-    });
+
+    if (resp.status === 200) {
+      yield put({
+        type: ServiceAction.SERVICE_GET_ALL_SUCCESS,
+        services: resp.body,
+      });
+    } else {
+      yield put({
+        type: ServiceAction.SERVICE_GET_ALL_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ServiceAction.SERVICE_GET_ALL_ERROR,
@@ -29,11 +41,22 @@ function* getAllServicesTask() {
 
 function* getAllReservationsTask() {
   try {
-    const reservations = yield getAllReservations();
-    yield put({
-      type: ServiceAction.SERVICE_GET_ALL_RESERVATION_SUCCESS,
-      reservations,
-    });
+    const resp = yield getAllReservations();
+
+    if (resp.status === 200) {
+      yield put({
+        type: ServiceAction.SERVICE_GET_ALL_RESERVATION_SUCCESS,
+        reservations: resp.body,
+      });
+    } else {
+      yield put({
+        type: ServiceAction.SERVICE_GET_ALL_RESERVATION_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ServiceAction.SERVICE_GET_ALL_RESERVATION_ERROR,
@@ -50,11 +73,22 @@ function* getAllReservationsTask() {
 
 function* getQueuesTask(action) {
   try {
-    const queue = yield getQueues(action.id);
-    yield put({
-      type: ServiceAction.SERVICE_GET_QUEUE_SUCCESS,
-      queue,
-    });
+    const resp = yield getQueues(action.id);
+
+    if (resp.status === 200) {
+      yield put({
+        type: ServiceAction.SERVICE_GET_QUEUE_SUCCESS,
+        queue: resp.body,
+      });
+    } else {
+      yield put({
+        type: ServiceAction.SERVICE_GET_QUEUE_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ServiceAction.SERVICE_GET_QUEUE_ERROR,
@@ -71,13 +105,26 @@ function* getQueuesTask(action) {
 
 function* reserveServiceTask(action) {
   try {
-    yield reserveService(action.carId, action.note, action.opening, action.services);
-    yield put({
-      type: ServiceAction.SERVICE_RESERVE_SUCCESS,
-    });
-    yield put({
-      type: ServiceAction.SERVICE_GET_ALL_RESERVATION,
-    });
+    const resp = yield reserveService(
+      action.carId, action.note, action.opening, action.services,
+    );
+
+    if (resp.status === 200) {
+      yield put({
+        type: ServiceAction.SERVICE_RESERVE_SUCCESS,
+      });
+      yield put({
+        type: ServiceAction.SERVICE_GET_ALL_RESERVATION,
+      });
+    } else {
+      yield put({
+        type: ServiceAction.SERVICE_RESERVE_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ServiceAction.SERVICE_RESERVE_ERROR,
@@ -94,13 +141,24 @@ function* reserveServiceTask(action) {
 
 function* cancelReservationTask(action) {
   try {
-    yield cancelReservation(action.id);
-    yield put({
-      type: ServiceAction.SERVICE_CANCEL_RESERVATION_SUCCESS,
-    });
-    yield put({
-      type: ServiceAction.SERVICE_GET_ALL_RESERVATION,
-    });
+    const resp = yield cancelReservation(action.id);
+
+    if (resp.status === 200) {
+      yield put({
+        type: ServiceAction.SERVICE_CANCEL_RESERVATION_SUCCESS,
+      });
+      yield put({
+        type: ServiceAction.SERVICE_GET_ALL_RESERVATION,
+      });
+    } else {
+      yield put({
+        type: ServiceAction.SERVICE_CANCEL_RESERVATION_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
   } catch (error) {
     yield put({
       type: ServiceAction.SERVICE_CANCEL_RESERVATION_ERROR,

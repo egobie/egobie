@@ -3,7 +3,8 @@ import { put, cancelled, takeLatest } from 'redux-saga/effects';
 import * as VehicleAction from '../Actions/VehicleAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import {
-  getAllVehicles, addVehicle, updateVehicle, deleteVehicle, getVehicleMakes, getVehicleModels,
+  getAllVehicles, addVehicle, updateVehicle, deleteVehicle,
+  getVehicleMakes, getVehicleModels,
 } from '../Requests/VehicleRequest';
 
 
@@ -47,6 +48,10 @@ function* getVehicleModelsTask() {
     } else {
       yield put({
         type: VehicleAction.VEHICLE_GET_MODEL_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
       });
     }
   } catch (error) {

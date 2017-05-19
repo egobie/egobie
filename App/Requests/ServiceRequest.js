@@ -14,8 +14,7 @@ export const getAllReservations = () => {
 
 export const reserveService = (carId, note, opening, services) => {
   return send('POST', `${prefix}/order`, {
-    car_id: carId,
-    note, opening, services,
+    carId, note, opening, services,
   });
 };
 

@@ -58,12 +58,11 @@ class SignModal extends Component {
   };
 
   signInForm = {
-    username: '',
+    email: '',
     password: '',
   };
 
   signUpForm = {
-    username: '',
     password1: '',
     password2: '',
     fullname: '',
@@ -139,8 +138,8 @@ class SignModal extends Component {
   }
 
   signIn = () => {
-    if (this.signInForm.username.length === 0) {
-      this.props.showErrorMessage('Please enter username');
+    if (!Validator.validateEmail(this.signInForm.email)) {
+      this.props.showErrorMessage('Please enter valid Email');
       return;
     }
 
@@ -149,17 +148,12 @@ class SignModal extends Component {
       return;
     }
 
-    this.props.signIn(this.signInForm.username, this.signInForm.password);
+    this.props.signIn(this.signInForm.email, this.signInForm.password);
   }
 
   signUp = () => {
-    if (this.signUpForm.username.length === 0) {
-      this.props.showErrorMessage('Please enter username');
-      return;
-    }
-
-    if (this.signUpForm.username.length < 5 || this.signUpForm.username.length > 16) {
-      this.props.showErrorMessage('Username must be 5 - 16 characters');
+    if (!Validator.validateEmail(this.signUpForm.email)) {
+      this.props.showErrorMessage('Please enter valid Email');
       return;
     }
 
@@ -182,11 +176,6 @@ class SignModal extends Component {
 
     if (names.length < 2) {
       this.props.showErrorMessage('Please enter Full Name');
-      return;
-    }
-
-    if (!Validator.validateEmail(this.signUpForm.email)) {
-      this.props.showErrorMessage('Please enter valid Email');
       return;
     }
 
@@ -228,9 +217,9 @@ class SignModal extends Component {
             alignItems: 'center',
           }}>
             <Kohana
-              label = { 'Username' }
-              iconName = { 'account' }
-              onChangeText = { (text) => { this.signInForm.username = text; } }
+              label = { 'Email Address' }
+              iconName = { 'email' }
+              onChangeText = { (text) => { this.signInForm.email = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
@@ -366,9 +355,9 @@ class SignModal extends Component {
             alignItems: 'center',
           }}>
             <Kohana
-              label = { 'Username' }
-              iconName = { 'account' }
-              onChangeText = { (text) => { this.signUpForm.username = text; } }
+              label = { 'Email' }
+              iconName = { 'email' }
+              onChangeText = { (text) => { this.signUpForm.email = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
@@ -389,12 +378,6 @@ class SignModal extends Component {
               label = { 'Full Name' }
               iconName = { 'account' }
               onChangeText = { (text) => { this.signUpForm.fullname = text; } }
-              { ...this.inputDefaultProps }
-            />
-            <Kohana
-              label = { 'Email' }
-              iconName = { 'email' }
-              onChangeText = { (text) => { this.signUpForm.email = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
@@ -471,10 +454,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signIn: (username, password) => {
+    signIn: (email, password) => {
       dispatch({
         type: UserAction.USER_SIGN_IN,
-        username,
+        email,
         password,
       });
     },

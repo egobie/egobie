@@ -4,7 +4,6 @@ import Reactotron from 'reactotron-react-native';
 const user = {
   id: -1,
   type: '',
-  username: '',
   password: '',
   coupon: '',
   discount: -1,
@@ -31,7 +30,6 @@ const serializeUser = (user) => {
   return {
     id: user.id,
     type: user.type,
-    username: user.username,
     password: user.password,
     coupon: user.coupon,
     discount: user.discount,
@@ -78,7 +76,6 @@ export default (state = user, action) => {
       return Object.assign({}, state, {
         id: -1,
         type: '',
-        username: '',
         password: '',
         coupon: '',
         discount: -1,

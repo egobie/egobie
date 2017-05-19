@@ -9,7 +9,7 @@ import { signIn, signUp } from '../Requests/UserRequest';
 
 function* signInTask(action) {
   try {
-    const user = yield signIn(action.username, action.password);
+    const user = yield signIn(action.email, action.password);
     if (user.error) {
       yield put({
         type: UserAction.USER_SIGN_IN_FAIL,

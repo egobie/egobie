@@ -3,15 +3,15 @@ import send from './Request';
 
 const prefix = '';
 
-export const signIn = (username, password) => {
+export const signIn = (email, password) => {
   return send('POST', 'signin', {
-    username, password,
+    email, password,
   });
 };
 
-export const signUp = (username, password, email, phoneNumber, coupon) => {
+export const signUp = (password, email, phoneNumber, coupon) => {
   return send('POST', 'signup', {
-    username, password, email, coupon,
+    email, password, coupon,
     phone_number: phoneNumber,
   });
 };

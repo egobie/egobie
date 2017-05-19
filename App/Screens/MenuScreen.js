@@ -123,7 +123,7 @@ class MenuScreen extends Component {
         }}
         title = { `${this.props.firstName} ${this.props.lastName}` }
         titleStyle = { titleStyle }
-        subtitle = { `Account: ${this.props.username}` }
+        subtitle = { `Account: ${this.props.email}` }
         subtitleStyle = { subtitleStyle }
         containerStyle = { containerStyle }
       />
@@ -227,7 +227,7 @@ class MenuScreen extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     workflow: state.workflow.name,
-    username: state.user.username,
+    email: state.user.email,
     firstName: state.user.firstName,
     lastName: state.user.lastName,
     ...ownProps,

@@ -73,14 +73,6 @@ class ServiceScreen extends Component {
     ]).start();
   }
 
-  show = () => {
-    Animated.timing(this.state.top, {
-      toValue: Dimension.height - 80,
-      easing: Easing.out(Easing.cubic),
-      delay: 500,
-    }).start();
-  }
-
   hide = () => {
     Animated.timing(this.state.top, {
       toValue: Dimension.height,
@@ -96,23 +88,12 @@ class ServiceScreen extends Component {
         this.props.changeWorkflow(WorkflowAction.WORK_FLOW_BACK);
       }
     } else {
-      this.show();
       this.focus();
     }
   }
 
-  componentDidMount() {
-    this.show();
-  }
-
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
-      case WorkflowAction.WORK_FLOW_START:
-      case WorkflowAction.WORK_FLOW_LOCATION:
-        this.show();
-        this.blur();
-        break;
-
       case WorkflowAction.WORK_FLOW_ORDER:
         this.hide();
         break;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Animated, Easing } from 'react-native';
+import { View, Text, KeyboardAvoidingView, ScrollView, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
 import Reactotron from 'reactotron-react-native';
 import { Kohana } from 'react-native-textinput-effects';
@@ -353,12 +353,15 @@ class ResetPasswordModal extends Component {
         visible = { this.state.visible }
         animated = { true }
       >
-        <View style = {{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: eGobie.EGOBIE_SHADOW,
-        }}>
+        <KeyboardAvoidingView
+          behavior = { 'padding' }
+          style = {{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: eGobie.EGOBIE_SHADOW,
+          }}
+        >
           <View style = {{
             height: 30,
             width: this.width,
@@ -394,7 +397,7 @@ class ResetPasswordModal extends Component {
               { this.renderStep4() }
             </ScrollView>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
     );
   }

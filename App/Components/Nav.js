@@ -12,7 +12,7 @@ import eGobie from '../Styles/Egobie';
 class Nav extends Component {
   state = {
     showed: true,
-    top: new Animated.Value(20),
+    top: new Animated.Value(30),
   };
 
   constructor(props) {
@@ -24,7 +24,7 @@ class Nav extends Component {
       showed: true,
     });
     Animated.timing(this.state.top, {
-      toValue: 20,
+      toValue: 30,
       easing: Easing.out(Easing.cubic),
     }).start();
   }

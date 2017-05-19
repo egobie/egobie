@@ -18,6 +18,7 @@ class MapScreen extends Component {
   focused = true;
   state = {
     height: new Animated.Value(Dimension.height),
+    scale: new Animated.Value(1),
     currentLocation: {
       latitude: 0,
       longitude: 0,
@@ -33,27 +34,35 @@ class MapScreen extends Component {
     this.props.selectPlace(place);
   }
 
-  focus = (showCallout = false) => {
+  focus = () => {
     this.focused = true;
-    Animated.timing(this.state.height, {
-      toValue: Dimension.height,
-      easing: Easing.out(Easing.cubic),
-    }).start(() => {
-      if (showCallout) {
-        this.marker.showCallout();
-      }
+    Animated.parallel([
+      Animated.timing(this.state.height, {
+        toValue: Dimension.height,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.state.scale, {
+        toValue: 1,
+        easing: Easing.out(Easing.cubic),
+      }),
+    ]).start(() => {
+      this.marker.showCallout();
     });
   }
 
-  blur = (hideCallout = true) => {
+  blur = () => {
     this.focused = false;
-    Animated.timing(this.state.height, {
-      toValue: 128,
-      easing: Easing.out(Easing.cubic),
-    }).start(() => {
-      if (hideCallout) {
-        this.marker.hideCallout();
-      }
+    Animated.parallel([
+      Animated.timing(this.state.height, {
+        toValue: 128,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(this.state.scale, {
+        toValue: 0,
+        easing: Easing.out(Easing.cubic),
+      }),
+    ]).start(() => {
+      this.marker.hideCallout();
     });
   }
 
@@ -200,12 +209,15 @@ class MapScreen extends Component {
             position: 'absolute',
             alignItems: 'center',
             justifyContent: 'center',
-            right: 10,
-            bottom: 100,
-            width: 30,
-            height: 30,
-            borderRadius: 15,
+            right: 20,
+            bottom: 50,
+            width: 40,
+            height: 40,
+            borderRadius: 20,
             backgroundColor: eGobie.EGOBIE_WHITE,
+            transform: [
+              { scale: this.state.scale }
+            ],
           }}>
             <Icon
               type = { 'material' }

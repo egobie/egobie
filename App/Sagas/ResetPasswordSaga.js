@@ -1,5 +1,5 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
-
+import Reactotron from 'reactotron-react-native';
 import * as ResetPasswordAction from '../Actions/ResetPasswordAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import { validateEmail, validateToken, resendToken, newPassword } from '../Requests/ResetPasswordRequest';
@@ -12,7 +12,7 @@ function* validateEmailTask(action) {
     if (resp.status === 200) {
       yield put({
         type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_EMAIL_SUCCESS,
-        userId: resp.userId,
+        userId: resp.body.userId,
       });
     } else {
       yield put({
@@ -39,7 +39,7 @@ function* validateEmailTask(action) {
 
 function* validateTokenTask(action) {
   try {
-    const resp = yield validateToken(action.id, action.token);
+    const resp = yield validateToken(action.userId, action.token);
 
     if (resp.status === 200) {
       yield put({
@@ -134,5 +134,4 @@ export default function* resetPasswordSaga() {
   yield takeLatest(ResetPasswordAction.RESET_PASSWORD_VALIDATE_EMAIL, validateEmailTask);
   yield takeLatest(ResetPasswordAction.RESET_PASSWORD_VALIDATE_TOKEN, validateTokenTask);
   yield takeLatest(ResetPasswordAction.RESET_PASSWORD_NEW_PASSWORD, newPasswordTask);
-  yield takeLatest(ResetPasswordAction.RESET_PASSWORD_RESEND, resendTokenTask);
 };

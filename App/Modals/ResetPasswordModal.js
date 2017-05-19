@@ -7,7 +7,9 @@ import { Button, Icon } from 'react-native-elements';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as ResetPasswordAction from '../Actions/ResetPasswordAction';
 import * as ErrorAction from '../Actions/ErrorAction';
+import * as Validator from '../Libs/Validator';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
@@ -77,6 +79,15 @@ class ResetPasswordModal extends Component {
     }, 1000);
   }
 
+  validateEmail = () => {
+    if (!Validator.validateEmail(this.state.email)) {
+      this.props.showErrorMessage('Please enter valid Email');
+      return;
+    }
+
+    this.props.validateEmail(this.state.email);
+  }
+
   renderStep1() {
     return (
       <Animated.View style = {{
@@ -120,12 +131,7 @@ class ResetPasswordModal extends Component {
         </View>
         <Button
           title = 'SEND TOKEN'
-          onPress = { () => {
-            this.scrollView.scrollTo({
-              x: this.width,
-              animated: true,
-            });
-          } }
+          onPress = { this.validateEmail }
           backgroundColor = { eGobie.EGOBIE_BLUE }
           buttonStyle = {{
             marginBottom: 10,
@@ -134,6 +140,19 @@ class ResetPasswordModal extends Component {
         />
       </Animated.View>
     );
+  }
+
+  validateToken = () => {
+    if (!this.state.token) {
+      this.props.showErrorMessage('Please enter token');
+      return;
+    }
+
+    this.props.validateToken(this.props.userId, this.state.token);
+  }
+
+  resendToken = () => {
+    this.props.resendToken();
   }
 
   renderStep2() {
@@ -183,12 +202,7 @@ class ResetPasswordModal extends Component {
           justifyContent: 'space-between',
         }}>
           <Button
-            onPress = { () => {
-              this.scrollView.scrollTo({
-                x: 0,
-                animated: true,
-              });
-            } }
+            onPress = { this.resendToken }
             icon = {{
               name: 'chevron-left',
               type: 'material-community',
@@ -202,12 +216,7 @@ class ResetPasswordModal extends Component {
           />
           <Button
             title = 'VALIDATE TOKEN'
-            onPress = { () => {
-              this.scrollView.scrollTo({
-                x: this.width * 2,
-                animated: true,
-              });
-            } }
+            onPress = { this.validateToken }
             buttonStyle = {{
               height: 40,
               backgroundColor: eGobie.EGOBIE_BLUE,
@@ -217,6 +226,25 @@ class ResetPasswordModal extends Component {
         </View>
       </Animated.View>
     );
+  }
+
+  newPassword = () => {
+    if (!this.state.password1 || this.state.password1.length === 0) {
+      this.props.showErrorMessage('Please enter password');
+      return;
+    }
+
+    if (this.state.password1.length < 8 || this.state.password1.length > 20) {
+      this.props.showErrorMessage('Password must be 8 - 20 characters');
+      return;
+    }
+
+    if (this.state.password1 !== this.state.password2) {
+      this.props.showErrorMessage('Password does not match');
+      return;
+    }
+
+    this.props.newPassword(this.props.userId, this.props.token, this.state.password1);
   }
 
   renderStep3() {
@@ -274,12 +302,7 @@ class ResetPasswordModal extends Component {
         </View>
         <Button
           title = 'RESET PASSWORD'
-          onPress = { () => {
-            this.scrollView.scrollTo({
-              x: this.width * 3,
-              animated: true,
-            });
-          } }
+          onPress = { this.newPassword }
           backgroundColor = { eGobie.EGOBIE_BLUE }
           buttonStyle = {{
             marginBottom: 10,
@@ -290,7 +313,7 @@ class ResetPasswordModal extends Component {
     );
   }
 
-  renderStep4() {
+  renderDone() {
     return (
       <Animated.View style = {{
         height: this.height,
@@ -345,6 +368,16 @@ class ResetPasswordModal extends Component {
       case WorkflowAction.WORK_FLOW_RESET_PASSWORD:
         this.show();
     }
+
+    nextProps.stepDone >= 0 && this.scrollView.scrollTo({
+      x: this.width * nextProps.stepDone,
+      animated: true,
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.visible !== this.state.visible || nextProps.stepDone !== this.props.stepDone ||
+      nextProps.userId !== this.props.userId || nextProps.token !== this.props.token;
   }
 
   render() {
@@ -394,7 +427,7 @@ class ResetPasswordModal extends Component {
               { this.renderStep1() }
               { this.renderStep2() }
               { this.renderStep3() }
-              { this.renderStep4() }
+              { this.renderDone() }
             </ScrollView>
           </View>
         </KeyboardAvoidingView>
@@ -406,14 +439,43 @@ class ResetPasswordModal extends Component {
 const mapStateToProps = (state) => {
   return {
     workflow: state.workflow.name,
+    userId: state.resetPassword.userId,
+    token: state.resetPassword.token,
+    stepDone: state.resetPassword.stepDone,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    validateEmail: (email) => {
+      dispatch({
+        type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_EMAIL,
+        email,
+      });
+    },
+    validateToken: (userId, token) => {
+      dispatch({
+        type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_TOKEN,
+        userId, token,
+      });
+    },
+    resendToken: () => {
+      dispatch({
+        type: ResetPasswordAction.RESET_PASSWORD_RESEND_TOKEN,
+      });
+    },
+    newPassword: (userId, token, password) => {
+      dispatch({
+        type: ResetPasswordAction.RESET_PASSWORD_NEW_PASSWORD,
+        userId, token, password,
+      });
+    },
     hideResetPassword: () => {
       dispatch({
         type: WorkflowAction.WORK_FLOW_BACK,
+      });
+      dispatch({
+        type: ResetPasswordAction.RESET_PASSWORD_RESET_ALL,
       });
     },
     showErrorMessage: (error) => {

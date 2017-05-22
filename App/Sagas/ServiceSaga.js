@@ -209,6 +209,7 @@ export default function* serviceSaga() {
   yield takeLatest(ServiceAction.SERVICE_GET_ALL, getAllServicesTask);
   yield takeLatest(ServiceAction.SERVICE_GET_ALL_RESERVATION, getAllReservationsTask);
   yield takeLatest(ServiceAction.SERVICE_GET_QUEUE, getQueuesTask);
+  yield takeLatest(ServiceAction.SERVICE_GET_OPENING, getOpeningsTask);
   yield takeLatest(ServiceAction.SERVICE_RESERVE, reserveServiceTask);
   yield takeLatest(ServiceAction.SERVICE_CANCEL_RESERVATION, cancelReservationTask);
 }

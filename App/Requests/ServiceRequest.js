@@ -24,8 +24,10 @@ export const cancelReservation = (id) => {
   });
 };
 
-export const getOpenings = () => {
-  return send('POST', `${prefix}/opening`);
+export const getOpenings = (latitude, longitude) => {
+  return send('POST', `${prefix}/opening`, {
+    latitude, longitude,
+  });
 };
 
 export const getQueues = (date) => {

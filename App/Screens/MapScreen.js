@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements';
 
 import * as LocationAction from '../Actions/LocationAction';
 import * as WorkflowAction from '../Actions/WorkflowAction';
+import * as ServiceAction from '../Actions/ServiceAction';
 import Nav from '../Components/Nav';
 import PlaceSearch from '../Components/PlaceSearch';
 import eGobie from '../Styles/Egobie';
@@ -92,6 +93,9 @@ class MapScreen extends Component {
   }
 
   goToOrder = () => {
+    let { latitude, longitude } = this.state.currentLocation;
+
+    this.props.getOpenings(latitude, longitude);
     this.props.changeWorkflow(WorkflowAction.WORK_FLOW_ORDER);
   }
 
@@ -250,8 +254,13 @@ const mapDispatchToProps = (dispatch) => {
     getCurrentLocation: (latitude, longitude) => {
       dispatch({
         type: LocationAction.LOCATION_GET_CURRENT,
-        latitude,
-        longitude,
+        latitude, longitude,
+      });
+    },
+    getOpenings: (latitude, longitude) => {
+      dispatch({
+        type: ServiceAction.SERVICE_GET_OPENING,
+        latitude, longitude,
       });
     },
     changeWorkflow: (type) => {

@@ -8,13 +8,13 @@ import { CheckBox, Icon, Button } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as CalendarAction from '../Actions/CalendarAction';
-import Range from '../Components/Range';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 
 const moment = require('moment');
+
 
 const customStyle = {
   title: {
@@ -88,6 +88,7 @@ class CalendarModal extends Component {
     translateY: new Animated.Value(250),
     visible: false,
     selectedDate: null,
+    pickUpBy: 0,
   };
 
   constructor(props) {
@@ -154,49 +155,70 @@ class CalendarModal extends Component {
     });
   }
 
-  openingDays() {
-    let openings = [];
-    if (this.state.selectedDate) {
-      if (this.state.selectedDate === '2017-03-31') {
-        openings = [1, 2, 3, 4, 5, 6];
-      } else {
-        openings = [1, 2];
-      }
-    }
-
-    return openings.map((_, i) => {
-      return (
-        <Range
-          key = { i }
-          range = '09:30 A.M. 10:00 A.M.'
-        />
-      );
-    });
-  }
-
   renderSchedules() {
+    let { selectedDate, pickUpBy } = this.state;
+    let dateString = moment().format('YYYY-MM-DD');
+    let available = selectedDate && this.props.openings[selectedDate];
+
     return (
       <View style = {{
         flex: 1,
       }}>
-        <Text style = {{
-          height: 80,
-          lineHeight: 80,
-          fontSize: 14,
-          color: eGobie.EGOBIE_SHADOW,
-          textAlign: 'center',
-        }}>There are 0 people in front of you</Text>
-        <Button
-          onPress = { this.confirmDate }
-          title = { 'Confirm' }
-          backgroundColor = { eGobie.EGOBIE_BLUE }
-          buttonStyle = {{
-            marginTop: 20,
-          }}
-        />
+        {
+          selectedDate === dateString && <Text style = {{
+            height: 80,
+            lineHeight: 80,
+            fontSize: 14,
+            color: eGobie.EGOBIE_SHADOW,
+            textAlign: 'center',
+          }}>There are 0 people in front of you</Text>
+        }
+        {
+          selectedDate !== dateString && available && <View>
+            <CheckBox
+              title = { 'Pick up your car by 01:00 P.M.' }
+              textStyle = {{
+                fontSize: 11,
+                color: eGobie.EGOBIE_SHADOW,
+              }}
+              checked = { pickUpBy === 1 }
+              onPress = { () => { this.setState({ pickUpBy: 1 }); } }
+            />
+            <CheckBox
+              title = { 'Pick up your car by 05:00 P.M.' }
+              textStyle = {{
+                fontSize: 11,
+                color: eGobie.EGOBIE_SHADOW,
+              }}
+              checked = { pickUpBy === 5 }
+              onPress = { () => { this.setState({ pickUpBy: 5 }); } }
+            />
+          </View>
+        }
+        {
+          selectedDate !== dateString && !available && <Text style = {{
+            height: 100,
+            lineHeight: 100,
+            fontSize: 16,
+            color: eGobie.EGOBIE_SHADOW,
+            textAlign: 'center',
+          }}>No openings for this day.</Text>
+        }
+        {
+          (selectedDate === dateString || available) && <Button
+            onPress = { this.confirmDate }
+            title = { 'Confirm' }
+            backgroundColor = { eGobie.EGOBIE_BLUE }
+            buttonStyle = {{
+              marginTop: 20,
+            }}
+          />
+        }
       </View>
     );
   }
+
+
 
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
@@ -207,7 +229,8 @@ class CalendarModal extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.visible !== this.state.visible;
+    return nextState.visible !== this.state.visible || nextState.selectedDate !== this.state.selectedDate ||
+      nextState.pickUpBy !== this.state.pickUpBy;
   }
 
   render() {
@@ -256,14 +279,6 @@ class CalendarModal extends Component {
               { translateY: this.state.translateY },
             ],
           }}>
-          {/*
-            <ScrollView
-              showsHorizontalScrollIndicator = { false }
-              showsVerticalScrollIndicator = { false }
-            >
-              { this.openingDays() }
-            </ScrollView>
-          */}
             { this.renderSchedules() }
           </Animated.View>
         </View>
@@ -275,15 +290,16 @@ class CalendarModal extends Component {
 const mapStateToProps = (state) => {
   return {
     workflow: state.workflow.name,
+    openings: state.service.openings,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectDate: (date, range) => {
+    selectDate: (date, pickUpBy) => {
       dispatch({
         type: CalendarAction.CALENDAR_SELECT_DATE,
-        date,
+        date, pickUpBy,
       });
     },
     hideCalendar: () => {

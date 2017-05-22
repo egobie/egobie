@@ -11,12 +11,12 @@ export default (state = calendar, action) => {
     case Action.CALENDAR_SELECT_DATE:
       return Object.assign({}, state, {
         date: action.date,
-        range: '',
+        pickUpBy: action.pickUpBy,
       });
 
     case Action.CALENDAR_SELECT_RANGE:
       return Object.assign({}, state, {
-        range: action.range,
+        pickUpBy: action.range,
       });
 
     case Action.CALENDAR_DESELECT:

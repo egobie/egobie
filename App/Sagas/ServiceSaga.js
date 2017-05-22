@@ -3,7 +3,7 @@ import { put, cancelled, takeLatest } from 'redux-saga/effects';
 import * as ServiceAction from '../Actions/ServiceAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import {
-  getAllServices, getAllReservations, reserveService, cancelReservation, getQueues,
+  getAllServices, getAllReservations, reserveService, cancelReservation, getQueues, getOpenings,
 } from '../Requests/ServiceRequest';
 
 
@@ -71,9 +71,41 @@ function* getAllReservationsTask() {
   }
 }
 
+function* getOpeningsTask(action) {
+  try {
+    const resp = yield getOpenings();
+
+    if (resp.status === 200) {
+      yield put({
+        type: ServiceAction.SERVICE_GET_OPENING_SUCCESS,
+        openings: resp.body,
+      });
+    } else {
+      yield put({
+        type: ServiceAction.SERVICE_GET_OPENING_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
+  } catch (error) {
+    yield put({
+      type: ServiceAction.SERVICE_GET_OPENING_ERROR,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      yield put({
+        type: ServiceAction.SERVICE_GET_OPENING_FAIL,
+      });
+    }
+  }
+}
+
 function* getQueuesTask(action) {
   try {
-    const resp = yield getQueues(action.id);
+    const resp = yield getQueues(action.date);
 
     if (resp.status === 200) {
       yield put({

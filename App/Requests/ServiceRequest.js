@@ -24,8 +24,12 @@ export const cancelReservation = (id) => {
   });
 };
 
-export const getQueues = (id) => {
+export const getOpenings = () => {
+  return send('POST', `${prefix}/opening`);
+};
+
+export const getQueues = (date) => {
   return send('POST', `${prefix}/queue`, {
-    id,
+    date,
   });
 };

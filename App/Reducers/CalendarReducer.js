@@ -3,7 +3,7 @@ import * as Action from '../Actions/CalendarAction';
 
 const calendar = {
   date: '',
-  range: '',
+  pickUpBy: 0,
 };
 
 export default (state = calendar, action) => {
@@ -14,15 +14,10 @@ export default (state = calendar, action) => {
         pickUpBy: action.pickUpBy,
       });
 
-    case Action.CALENDAR_SELECT_RANGE:
-      return Object.assign({}, state, {
-        pickUpBy: action.range,
-      });
-
     case Action.CALENDAR_DESELECT:
       return Object.assign({}, state, {
         date: '',
-        range: '',
+        pickUpBy: 0,
       });
 
     default:

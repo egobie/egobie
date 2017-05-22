@@ -113,11 +113,12 @@ class CalendarModal extends Component {
 
     this.setState({
       selectedDate: dateString,
+      pickUpBy: 0,
     });
   }
 
   confirmDate = () => {
-    this.props.selectDate(this.state.selectedDate);
+    this.props.selectDate(this.state.selectedDate, this.state.pickUpBy);
     this.hide();
   }
 
@@ -157,8 +158,8 @@ class CalendarModal extends Component {
 
   renderSchedules() {
     let { selectedDate, pickUpBy } = this.state;
+    let available = true; //selectedDate && this.props.openings[selectedDate];
     let dateString = moment().format('YYYY-MM-DD');
-    let available = selectedDate && this.props.openings[selectedDate];
 
     return (
       <View style = {{
@@ -208,6 +209,7 @@ class CalendarModal extends Component {
           (selectedDate === dateString || available) && <Button
             onPress = { this.confirmDate }
             title = { 'Confirm' }
+            disabled = { !(selectedDate === dateString || pickUpBy === 1 || pickUpBy === 5) }
             backgroundColor = { eGobie.EGOBIE_BLUE }
             buttonStyle = {{
               marginTop: 20,

@@ -383,7 +383,7 @@ class OrderScreen extends Component {
           backgroundColor = { eGobie.EGOBIE_BLUE }
           buttonStyle = {{
             width: 180,
-            marginTop: 80,
+            marginTop: 60,
             marginLeft: Dimension.width / 2 - 90,
           }}
         />
@@ -552,11 +552,22 @@ const mapStateToProps = (state) => {
   let services = state.service.selected.map((service) => {
     return service.name;
   });
+  let schedule = `${state.calendar.date} `;
+
+  switch (state.calendar.pickUpBy) {
+    case 1:
+      schedule += '(Pick Up Car by 01:00 P.M.)';
+      break;
+
+    case 5:
+      schedule += '(Pick Up Car by 05:00 P.M.)';
+      break;
+  }
 
   return {
     address: state.location.formattedAddress,
     workflow: state.workflow.name,
-    schedule: `${state.calendar.date} ${state.calendar.range}`,
+    schedule: schedule,
     services: services.length > 0 ? services.join(', ') : null,
     cars: state.vehicle.all,
     car: state.vehicle.selected,

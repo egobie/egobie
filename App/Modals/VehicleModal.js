@@ -10,6 +10,7 @@ import * as PickerAction from '../Actions/PickerAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import * as VehicleAction from '../Actions/VehicleAction';
 import Modal from '../Components/Modal';
+import ConfirmModal from '../Modals/ConfirmModal';
 import Dimension from '../Libs/Dimension';
 import States from '../Libs/States';
 import Colors from '../Libs/Colors';
@@ -232,8 +233,14 @@ class VehicleModal extends Component {
   };
 
   deleteVehicle = () => {
-    this.props.deleteVehicle(this.props.id);
-    this.hide();
+    this.confirmModal.show(
+      'Are you sure to delete this vehicle?',
+      () => {
+        this.props.deleteVehicle(this.props.id);
+        this.hide();
+      },
+      () => { }
+    );
   };
 
   componentWillReceiveProps(nextProps) {
@@ -314,6 +321,7 @@ class VehicleModal extends Component {
             </View>
           </Animated.View>
         </View>
+        <ConfirmModal ref = { (ref) => { this.confirmModal = ref; } } />
       </Modal>
     );
   }

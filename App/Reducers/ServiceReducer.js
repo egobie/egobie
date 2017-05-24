@@ -16,15 +16,16 @@ const serializeReservation = (reservation) => {
     return service.name;
   });
 
+  let day = `${reservation.day} (You can pick up your car by ${reservation.pickUpBy === 1 ? '01:00 P.M.' : '05:00 P.M.'})`;
+
   return {
     id: reservation.id,
     reservationId: reservation.reservationId,
     location: reservation.location,
     plate: reservation.plate,
-    time: reservation.time,
     price: reservation.price,
     status: reservation.status,
-    services: services,
+    day, services,
   };
 };
 

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
 import { Button, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as PickerAction from '../Actions/PickerAction';
+import * as ServiceAction from '../Actions/ServiceAction';
+import ConfirmModal from '../Modals/ConfirmModal';
 import Label from '../Components/Label';
 import VehicleIcons from '../Libs/VehicleIcon';
 import eGobie from '../Styles/Egobie';
@@ -38,33 +40,41 @@ class ReservationScreen extends Component {
   items = {
     location: {
       title: 'Location',
-      value: '414 Hackensack Avenue',
+      key: 'location',
       icon: 'map-marker-radius',
     },
     service: {
       title: 'Services',
-      value: 'Premium',
+      key: 'services',
       icon: 'car-wash',
     },
     schedule: {
       title: 'Date',
-      value: '2017-09-01',
+      key: 'day',
       icon: 'calendar-check',
     },
     car: {
       title: 'Vehicle',
-      value: 'Y96EUV',
+      key: 'plate',
       icon: 'car',
     },
     price: {
       title: 'Price',
-      value: '$80.91',
+      label: 'price',
       icon: 'cash',
     },
   };
 
-  reservations() {
-    return [1].map((car, i) => {
+  cancelReservation = (reservation) => {
+    this.confirmModal.show(
+      'Are you sure to cancel reservation?',
+      () => { this.props.cancelReservation(reservation.id) },
+      () => {},
+    );
+  }
+
+  renderReservations() {
+    return this.props.reservations.map((reservation, i) => {
       return (
         <View key = { i } style = {{
           paddingBottom: 10,
@@ -90,7 +100,7 @@ class ReservationScreen extends Component {
               lineHeight: 40,
               fontSize: 18,
               color: eGobie.EGOBIE_WHITE,
-            }}>YXJDHF1894</Text>
+            }}>{reservation.reservationId}</Text>
           </View>
           <View>
           {
@@ -108,7 +118,7 @@ class ReservationScreen extends Component {
                   color: eGobie.EGOBIE_GREY,
                   fontSize: 12,
                 }}
-                value = { this.items[item].value }
+                value = { reservation[this.items[item].key] }
                 valueStyle = {{
                   color: eGobie.EGOBIE_BLACK,
                   fontSize: 12,
@@ -126,6 +136,7 @@ class ReservationScreen extends Component {
           }
           </View>
           <Button
+            onPress = { () => { this.cancelReservation(reservation) } }
             title = 'CANCEL'
             backgroundColor = { eGobie.EGOBIE_RED }
             buttonStyle = {{
@@ -143,8 +154,17 @@ class ReservationScreen extends Component {
         flex: 1,
       }}>
         <ScrollView>
-          { this.reservations() }
+          { this.renderReservations() }
+          <Button
+            onPress = { () => { this.cancelReservation({id: -1}) } }
+            title = 'CANCEL'
+            backgroundColor = { eGobie.EGOBIE_RED }
+            buttonStyle = {{
+              marginTop: 8,
+            }}
+          />
         </ScrollView>
+        <ConfirmModal ref = { (ref) => { this.confirmModal = ref; } }/>
       </View>
     );
   }
@@ -152,27 +172,19 @@ class ReservationScreen extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    cars: state.vehicle.all,
+    reservations: state.service.reservations,
     ...ownProps,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addVehicle: () => {
+    cancelReservation: (id) => {
       dispatch({
-        type: WorkflowAction.WORK_FLOW_VEHICLE,
+        type: ServiceAction.SERVICE_CANCEL_RESERVATION,
+        id,
       });
     },
-    editVehicle: (id, plate, make, model, color, state, year) => {
-      dispatch({
-        type: PickerAction.PICKER_PICK_INIT_VEHICLE,
-        id, plate, make, model, color, state, year,
-      });
-      dispatch({
-        type: WorkflowAction.WORK_FLOW_VEHICLE,
-      });
-    }
   };
 };
 

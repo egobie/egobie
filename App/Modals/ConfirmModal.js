@@ -4,23 +4,52 @@ import { connect } from 'react-redux';
 
 import { Button } from 'react-native-elements';
 
-import * as ConfirmAction from '../Actions/ConfirmAction';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';
 import eGobie from '../Styles/Egobie';
 
 
-class ConfirmModal extends Component {
+export default class ConfirmModal extends Component {
   state = {
     visible: false,
     message: null,
-    okProps: null,
-    cancelProps: null,
+    confirmCallback: null,
+    cancelCallback: null,
   };
 
   constructor(props) {
     super(props);
+  }
+
+  show = (message, confirmCallback, cancelCallback) => {
+    this.setState({
+      visible: true,
+      message, confirmCallback, cancelCallback,
+    });
+  }
+
+  confirm = () => {
+    if (this.state.confirmCallback) {
+      this.state.confirmCallback();
+    }
+    this.resetState();
+  }
+
+  cancel = () => {
+    if (this.state.cancelCallback) {
+      this.state.cancelCallback();
+    }
+    this.resetState();
+  }
+
+  resetState = () => {
+    this.setState({
+      visible: false,
+      message: null,
+      confirmCallback: null,
+      cancelCallback: null,
+    });
   }
 
   render() {
@@ -58,52 +87,32 @@ class ConfirmModal extends Component {
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}>
-              {
-                this.state.okProps && <Button
-                  title = { this.state.okProps.title }
-                  backgroundColor = { this.state.okProps.backgroundColor }
-                  onPress = { this.state.okProps.callBack }
-                  buttonStyle = {{
-                    width: 90,
-                    ...BoxShadow,
-                  }}
-                />
-              }
-              {
-                this.state.cancelProps && <Button
-                  title = { this.state.cancelProps.title }
-                  backgroundColor = { this.state.cancelProps.backgroundColor }
-                  onPress = { this.state.cancelProps.callBack }
-                  buttonStyle = {{
-                    width: 90,
-                    ...BoxShadow,
-                  }}
-                />
-              }
+              <Button
+                title = { 'Confirm' }
+                backgroundColor = { eGobie.EGOBIE_RED }
+                onPress = { this.confirm }
+                buttonStyle = {{
+                  width: 90,
+                  ...BoxShadow,
+                }}
+              />
+              <Button
+                title = { 'Cancel' }
+                backgroundColor = { eGobie.EGOBIE_BLUE }
+                onPress = { this.cancel }
+                buttonStyle = {{
+                  width: 90,
+                  ...BoxShadow,
+                }}
+              />
             </View>
           </View>
         </Animated.View>
       </Modal>
     );
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.visible !== this.state.visible;
+  }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    visible: state.confirm.visible,
-    from: state.confirm.from,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    makeChoice: (type, from) => {
-      dispatch({
-        type, from,
-      });
-    },
-  };
-};
-
-
-export default connect()(ConfirmModal);

@@ -49,8 +49,7 @@ function* signInTask(action) {
 function* signUpTask(action) {
   try {
     const resp = yield signUp(
-      action.email, action.password, action.firstName, action.lastName,
-      action.phoneNumber, action.coupon,
+      action.email, action.password, action.fullName, action.phoneNumber, null,
     );
 
     if (resp.status === 200) {

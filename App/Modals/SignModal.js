@@ -65,7 +65,7 @@ class SignModal extends Component {
   signUpForm = {
     password1: '',
     password2: '',
-    fullname: '',
+    fullName: '',
     email: '',
     phoneNumber: '',
   };
@@ -172,9 +172,9 @@ class SignModal extends Component {
       return;
     }
 
-    let names = this.signUpForm.fullname.split(' ');
+    let names = this.signUpForm.fullName.split(' ');
 
-    if (names.length < 2) {
+    if (names.length < 2 || names[0].length === 0 || names[1].length === 0) {
       this.props.showErrorMessage('Please enter Full Name');
       return;
     }
@@ -183,6 +183,11 @@ class SignModal extends Component {
       this.props.showErrorMessage('Please enter valid phone number');
       return;
     }
+
+    this.props.signUp(
+      this.signUpForm.email, this.signUpForm.password,
+      this.signUpForm.fullName, this.signUpForm.phoneNumber,
+    );
   }
 
   signInSide() {
@@ -377,7 +382,7 @@ class SignModal extends Component {
             <Kohana
               label = { 'Full Name' }
               iconName = { 'account' }
-              onChangeText = { (text) => { this.signUpForm.fullname = text; } }
+              onChangeText = { (text) => { this.signUpForm.fullName = text; } }
               { ...this.inputDefaultProps }
             />
             <Kohana
@@ -459,6 +464,12 @@ const mapDispatchToProps = (dispatch) => {
         type: UserAction.USER_SIGN_IN,
         email,
         password,
+      });
+    },
+    signUp: (email, password, fullName, phoneNumber) => {
+      dispatch({
+        type: UserAction.USER_SIGN_UP,
+        email, password, fullName, phoneNumber,
       });
     },
     hideSign: () => {

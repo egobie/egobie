@@ -121,13 +121,7 @@ class CalendarModal extends Component {
   }
 
   confirmDate = () => {
-    let { selectDate, pickUpBy } = this.state;
-    let opening = this.state.openings[selectedDate];
-
-    if (opening) {
-      this.props.selectDate(opening, selectedDate, pickUpBy);
-      this.hide();
-    }
+    this.hide(true);
   }
 
   show = () => {
@@ -141,7 +135,7 @@ class CalendarModal extends Component {
     }, 100);
   };
 
-  hide = () => {
+  hide = (setDate = false) => {
     Animated.parallel([
       Animated.timing(this.state.translateY, {
         toValue: 250,
@@ -152,8 +146,15 @@ class CalendarModal extends Component {
         easing: Easing.out(Easing.cubic),
       }),
     ]).start(() => {
+      let { selectedDate, pickUpBy } = this.state;
+      let opening = this.state.openings[selectedDate];
+
       this.resetState();
       this.props.hideCalendar();
+
+      if (setDate) {
+        this.props.selectDate(opening, selectedDate, pickUpBy);
+      }
     });
   };
 
@@ -161,6 +162,9 @@ class CalendarModal extends Component {
     this.setState({
       visible: false,
       selectedDate: null,
+      pickUpBy: 0,
+      openings: [],
+      queue: 0,
     });
   }
 
@@ -228,8 +232,6 @@ class CalendarModal extends Component {
     );
   }
 
-
-
   componentWillReceiveProps(nextProps) {
     switch (nextProps.workflow) {
       case WorkflowAction.WORK_FLOW_CALENDAR:
@@ -262,7 +264,7 @@ class CalendarModal extends Component {
               { scale: this.state.scale },
             ],
           }}>
-            <TouchableWithoutFeedback onPress = { this.hide }>
+            <TouchableWithoutFeedback onPress = { () => { this.hide(false) } }>
               <View>
                 <Icon
                   type = { 'material-community' }
@@ -302,7 +304,15 @@ class CalendarModal extends Component {
 
 const mapStateToProps = (state) => {
   let openings = {};
-  state.service.openings.forEach((opening) => {
+  //state.service.openings
+  [
+    { id: 1, day: '2017-05-11'},
+    { id: 1, day: '2017-05-21'},
+    { id: 1, day: '2017-05-23'},
+    { id: 1, day: '2017-05-25'},
+    { id: 1, day: '2017-05-26'},
+    { id: 1, day: '2017-05-29'},
+  ].forEach((opening) => {
     openings[opening.day] = opening.id;
   });
 

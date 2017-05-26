@@ -7,6 +7,7 @@ import Carousel from 'react-native-snap-carousel';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as ErrorAction from '../Actions/ErrorAction';
+import * as ServiceAction from '../Actions/ServiceAction';
 import Vehicle from '../Components/Vehicle';
 import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
@@ -118,31 +119,24 @@ class OrderScreen extends Component {
   }
 
   makeReservation = () => {
-    // address: state.location.formattedAddress,
-    // workflow: state.workflow.name,
-    // schedule: `${state.calendar.date} ${state.calendar.range}`,
-    // services: services.length > 0 ? services.join(', ') : ' ',
-    // cars: state.vehicle.all,
-    // car: state.vehicle.selected,
-    // userSignedIn: state.user.signedIn,
-    // price: Calculator.totalPrice(state.service.selected, 0),
-    // time: Calculator.totalTime(state.service.selected),
+    let { car, placeId, schedule, opening, pickUpBy, services, serviceIds } = this.props;
 
-    if (!this.props.car) {
-      this.props.showErrorMessage('Please choose the car');
-      return;
-    }
+    // if (!car) {
+    //   this.props.showErrorMessage('Please choose the car');
+    //   return;
+    // }
 
-    if (!this.props.services) {
-      this.props.showErrorMessage('Please choose services');
-      return;
-    }
+    // if (!services) {
+    //   this.props.showErrorMessage('Please choose services');
+    //   return;
+    // }
 
-    if (this.props.schedule === ' ') {
-      this.props.showErrorMessage('Please choose date');
-      return;
-    }
+    // if (schedule === ' ') {
+    //   this.props.showErrorMessage('Please choose date');
+    //   return;
+    // }
 
+    this.props.makeReservation(car ? car.id : -1, '', placeId, opening, pickUpBy, serviceIds);
     this.props.changeWorkflow(WorkflowAction.WORK_FLOW_RESET_ORDER); 
   }
 
@@ -549,7 +543,9 @@ class OrderScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
+  let serviceIds = [];
   let services = state.service.selected.map((service) => {
+    serviceIds.push(service.id);
     return service.name;
   });
   let schedule = `${state.calendar.date} `;
@@ -566,9 +562,13 @@ const mapStateToProps = (state) => {
 
   return {
     address: state.location.formattedAddress,
+    placeId: state.location.eGobieId,
+    opening: state.calendar.opening,
+    pickUpBy: state.calendar.pickUpBy,
     workflow: state.workflow.name,
     schedule: schedule,
     services: services.length > 0 ? services.join(', ') : null,
+    serviceIds: serviceIds,
     cars: state.vehicle.all,
     car: state.vehicle.selected,
     userSignedIn: state.user.signedIn,
@@ -579,6 +579,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    makeReservation: (carId, note, placeId, opening, pickUpBy, services) => {
+      dispatch({
+        type: ServiceAction.SERVICE_RESERVE,
+        carId, note, placeId, opening, pickUpBy, services,
+      });
+    },
     changeWorkflow: (type) => {
       dispatch({
         type,

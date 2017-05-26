@@ -173,8 +173,10 @@ function* getPlacesTask() {
 
 function* reserveServiceTask(action) {
   try {
+    Reactotron.log(action);
     const resp = yield reserveService(
-      action.carId, action.note, action.opening, action.services,
+      action.carId, action.note, action.placeId, action.opening,
+      action.pickUpBy, action.services, [],
     );
 
     if (resp.status === 200) {

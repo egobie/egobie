@@ -12,9 +12,9 @@ export const getAllReservations = () => {
   return send('POST', `${prefix}/reservation`);
 };
 
-export const reserveService = (carId, note, opening, services) => {
+export const reserveService = (carId, note, placeId, opening, pickUpBy, services, addOns) => {
   return send('POST', `${prefix}/order`, {
-    carId, note, opening, services,
+    carId, note, placeId, opening, pickUpBy, services, addons,
   });
 };
 

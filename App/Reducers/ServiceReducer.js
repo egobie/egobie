@@ -81,7 +81,7 @@ export default (state = service, action) => {
         loading: false,
       });
 
-    case Action.SERVICE_RESERVE_SUCCESS:  
+    case Action.SERVICE_RESERVE_SUCCESS:
     case Action.SERVICE_RESERVE_ERROR:
     case Action.SERVICE_RESERVE_FAIL:
     case Action.SERVICE_CANCEL_RESERVATION_SUCCESS:

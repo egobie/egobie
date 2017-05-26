@@ -307,11 +307,11 @@ const mapStateToProps = (state) => {
   //state.service.openings
   [
     { id: 1, day: '2017-05-11'},
-    { id: 1, day: '2017-05-21'},
-    { id: 1, day: '2017-05-23'},
-    { id: 1, day: '2017-05-25'},
-    { id: 1, day: '2017-05-26'},
-    { id: 1, day: '2017-05-29'},
+    { id: 2, day: '2017-05-21'},
+    { id: 3, day: '2017-05-23'},
+    { id: 4, day: '2017-05-25'},
+    { id: 5, day: '2017-05-26'},
+    { id: 6, day: '2017-05-29'},
   ].forEach((opening) => {
     openings[opening.day] = opening.id;
   });

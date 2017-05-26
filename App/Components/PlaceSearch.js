@@ -72,7 +72,7 @@ class PlaceSearch extends Component {
     ]).start();
   }
 
-  blur = () => {
+  blur = (detail = null) => {
     this.googlePlace.triggerBlur();
     Animated.parallel([
       Animated.timing(this.state.padding, {
@@ -103,12 +103,16 @@ class PlaceSearch extends Component {
         toValue: 0,
         easing: Easing.out(Easing.cubic),
       }),
-    ]).start();
+    ]).start(() => {
+      if (detail) {
+        this.props.choosePlace(detail);
+      }
+    });
   }
 
   cancelButton = () => {
     return (
-      <TouchableWithoutFeedback onPress = { this.blur } >
+      <TouchableWithoutFeedback onPress = { () => { this.blur(null) } } >
         <Animated.View style = {{
           top: 4,
           marginRight: this.state.marginRight,
@@ -126,8 +130,7 @@ class PlaceSearch extends Component {
   }
 
   choosePlace = (data, detail) => {
-    this.blur();
-    this.props.choosePlace(detail);
+    this.blur(detail);
   }
 
   show = () => {

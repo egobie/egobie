@@ -8,6 +8,7 @@ import { CheckBox, Icon, Button } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as CalendarAction from '../Actions/CalendarAction';
+import * as ServiceAction from '../Actions/ServiceAction';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
@@ -89,6 +90,8 @@ class CalendarModal extends Component {
     visible: false,
     selectedDate: null,
     pickUpBy: 0,
+    openings: [],
+    queue: 0,
   };
 
   constructor(props) {
@@ -118,8 +121,13 @@ class CalendarModal extends Component {
   }
 
   confirmDate = () => {
-    this.props.selectDate(this.state.selectedDate, this.state.pickUpBy);
-    this.hide();
+    let { selectDate, pickUpBy } = this.state;
+    let opening = this.state.openings[selectedDate];
+
+    if (opening) {
+      this.props.selectDate(opening, selectedDate, pickUpBy);
+      this.hide();
+    }
   }
 
   show = () => {
@@ -157,8 +165,8 @@ class CalendarModal extends Component {
   }
 
   renderSchedules() {
-    let { selectedDate, pickUpBy } = this.state;
-    let available = true; //selectedDate && this.props.openings[selectedDate];
+    let { selectedDate, pickUpBy, openings } = this.state;
+    let available = selectedDate && openings[selectedDate];
     let dateString = moment().format('YYYY-MM-DD');
 
     return (
@@ -166,13 +174,13 @@ class CalendarModal extends Component {
         flex: 1,
       }}>
         {
-          selectedDate === dateString && <Text style = {{
+          selectedDate === dateString && available && <Text style = {{
             height: 80,
             lineHeight: 80,
             fontSize: 14,
             color: eGobie.EGOBIE_SHADOW,
             textAlign: 'center',
-          }}>There are 0 people in front of you</Text>
+          }}>There are {this.state.queue} people in front of you</Text>
         }
         {
           selectedDate !== dateString && available && <View>
@@ -197,7 +205,7 @@ class CalendarModal extends Component {
           </View>
         }
         {
-          selectedDate !== dateString && !available && <Text style = {{
+          !available && <Text style = {{
             height: 100,
             lineHeight: 100,
             fontSize: 16,
@@ -206,7 +214,7 @@ class CalendarModal extends Component {
           }}>No openings for this day.</Text>
         }
         {
-          (selectedDate === dateString || available) && <Button
+          available && <Button
             onPress = { this.confirmDate }
             title = { 'Confirm' }
             disabled = { !(selectedDate === dateString || pickUpBy === 1 || pickUpBy === 5) }
@@ -228,11 +236,14 @@ class CalendarModal extends Component {
         this.show();
         break;
     }
+    this.setState({
+      openings: nextProps.openings,
+      queue: nextProps.queue,
+    });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.visible !== this.state.visible || nextState.selectedDate !== this.state.selectedDate ||
-      nextState.pickUpBy !== this.state.pickUpBy;
+    return nextState.visible !== this.state.visible || this.state.visible;
   }
 
   render() {
@@ -268,7 +279,7 @@ class CalendarModal extends Component {
               prevButtonText = { 'Prev' }
               customStyle = { customStyle }
               dayHeadings = { dayHeadings }
-              eventDates = {['2017-03-30', '2017-03-31', '2017-03-15']}
+              eventDates = { Object.keys(this.state.openings) }
               onDateSelect = { this.onDateSelect }
             />
           </Animated.View>
@@ -290,18 +301,24 @@ class CalendarModal extends Component {
 };
 
 const mapStateToProps = (state) => {
+  let openings = {};
+  state.service.openings.forEach((opening) => {
+    openings[opening.day] = opening.id;
+  });
+
   return {
     workflow: state.workflow.name,
-    openings: state.service.openings,
+    queue: state.service.queue,
+    openings,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectDate: (date, pickUpBy) => {
+    selectDate: (opening, date, pickUpBy) => {
       dispatch({
         type: CalendarAction.CALENDAR_SELECT_DATE,
-        date, pickUpBy,
+        opening, date, pickUpBy,
       });
     },
     hideCalendar: () => {

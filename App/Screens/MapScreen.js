@@ -94,8 +94,9 @@ class MapScreen extends Component {
 
   goToOrder = () => {
     let { latitude, longitude } = this.state.currentLocation;
-
-    this.props.getOpenings(latitude, longitude);
+    Reactotron.log(this.props.eGobieId);
+    this.props.getOpenings(this.props.eGobieId, latitude, longitude);
+    this.props.getTodaySchedule(this.props.eGobieId, latitude, longitude);
     this.props.changeWorkflow(WorkflowAction.WORK_FLOW_ORDER);
   }
 
@@ -245,6 +246,7 @@ const mapStateToProps = (state) => {
     latitude: state.location.latitude,
     longitude: state.location.longitude,
     address: state.location.formattedAddress,
+    eGobieId: state.location.eGobieId,
     workflow: state.workflow.name,
   };
 };
@@ -257,10 +259,16 @@ const mapDispatchToProps = (dispatch) => {
         latitude, longitude,
       });
     },
-    getOpenings: (latitude, longitude) => {
+    getOpenings: (id, latitude, longitude) => {
       dispatch({
         type: ServiceAction.SERVICE_GET_OPENING,
-        latitude, longitude,
+        id, latitude, longitude,
+      });
+    },
+    getTodaySchedule: (id, latitude, longitude) => {
+      dispatch({
+        type: ServiceAction.SERVICE_GET_QUEUE,
+        id, latitude, longitude,
       });
     },
     changeWorkflow: (type) => {

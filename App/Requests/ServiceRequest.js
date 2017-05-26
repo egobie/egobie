@@ -24,14 +24,18 @@ export const cancelReservation = (id) => {
   });
 };
 
-export const getOpenings = (latitude, longitude) => {
+export const getOpenings = (id, latitude, longitude) => {
   return send('POST', `${prefix}/opening`, {
-    latitude, longitude,
+    id, latitude, longitude,
   });
 };
 
-export const getQueues = (date) => {
+export const getQueues = (id, latitude, longitude) => {
   return send('POST', `${prefix}/queue`, {
-    date,
+    id, latitude, longitude,
   });
+};
+
+export const getPlaces = () => {
+  return send('POST', `${prefix}/place`);
 };

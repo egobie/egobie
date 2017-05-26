@@ -1,9 +1,10 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
-
+import Reactotron from 'reactotron-react-native';
 import * as ServiceAction from '../Actions/ServiceAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import {
-  getAllServices, getAllReservations, reserveService, cancelReservation, getQueues, getOpenings,
+  getAllServices, getAllReservations, reserveService, cancelReservation,
+  getQueues, getOpenings, getPlaces,
 } from '../Requests/ServiceRequest';
 
 
@@ -73,21 +74,27 @@ function* getAllReservationsTask() {
 
 function* getOpeningsTask(action) {
   try {
-    const resp = yield getOpenings();
-
-    if (resp.status === 200) {
-      yield put({
-        type: ServiceAction.SERVICE_GET_OPENING_SUCCESS,
-        openings: resp.body,
-      });
-    } else {
+    if (!action.id) {
       yield put({
         type: ServiceAction.SERVICE_GET_OPENING_FAIL,
       });
-      yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
-      });
+    } else {
+      const resp = yield getOpenings(action.id, action.latitude, action.longitude);
+
+      if (resp.status === 200) {
+        yield put({
+          type: ServiceAction.SERVICE_GET_OPENING_SUCCESS,
+          openings: resp.body,
+        });
+      } else {
+        yield put({
+          type: ServiceAction.SERVICE_GET_OPENING_FAIL,
+        });
+        yield put({
+          type: ErrorAction.ERROR_SHOW,
+          error: resp.body,
+        });
+      }
     }
   } catch (error) {
     yield put({
@@ -105,7 +112,7 @@ function* getOpeningsTask(action) {
 
 function* getQueuesTask(action) {
   try {
-    const resp = yield getQueues(action.date);
+    const resp = yield getQueues(action.id, action.latitude, action.longitude);
 
     if (resp.status === 200) {
       yield put({
@@ -130,6 +137,35 @@ function* getQueuesTask(action) {
     if (yield cancelled()) {
       yield put({
         type: ServiceAction.SERVICE_GET_QUEUE_FAIL
+      });
+    }
+  }
+}
+
+function* getPlacesTask() {
+  try {
+    const resp = yield getPlaces()
+
+    if (resp.status === 200) {
+
+    } else {
+      yield put({
+        type: ServiceAction.SERVICE_GET_PLACE_FAIL,
+      });
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
+  } catch (error) {
+    yield put({
+      type: ServiceAction.SERVICE_GET_PLACE_ERROR,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      yield put({
+        type: ServiceAction.SERVICE_GET_PLACE_FAIL,
       });
     }
   }
@@ -208,6 +244,7 @@ function* cancelReservationTask(action) {
 export default function* serviceSaga() {
   yield takeLatest(ServiceAction.SERVICE_GET_ALL, getAllServicesTask);
   yield takeLatest(ServiceAction.SERVICE_GET_ALL_RESERVATION, getAllReservationsTask);
+  yield takeLatest(ServiceAction.SERVICE_GET_PLACE, getPlacesTask);
   yield takeLatest(ServiceAction.SERVICE_GET_QUEUE, getQueuesTask);
   yield takeLatest(ServiceAction.SERVICE_GET_OPENING, getOpeningsTask);
   yield takeLatest(ServiceAction.SERVICE_RESERVE, reserveServiceTask);

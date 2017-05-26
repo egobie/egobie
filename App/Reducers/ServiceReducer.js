@@ -7,7 +7,8 @@ const service = {
   selected: [],
   detail: null,
   queue: 0,
-  openings: {},
+  openings: [],
+  places: [],
   loading: false,
 };
 
@@ -26,6 +27,19 @@ const serializeReservation = (reservation) => {
     price: reservation.price,
     status: reservation.status,
     day, services,
+  };
+};
+
+const serializePlace = (place) => {
+  return {
+    eGobieId: place.id,
+    description: place.name,
+    geometry: {
+      location: {
+        lat: place.latitude,
+        lng: place.longtitude,
+      },
+    },
   };
 };
 
@@ -63,7 +77,7 @@ export default (state = service, action) => {
     case Action.SERVICE_GET_OPENING_ERROR:
     case Action.SERVICE_GET_OPENING_FAIL:
       return Object.assign({}, state, {
-        openings: {},
+        openings: [],
         loading: false,
       });
 
@@ -100,6 +114,28 @@ export default (state = service, action) => {
       return Object.assign({}, state, {
         loading: false,
         queue: action.queue,
+      });
+
+    case Action.SERVICE_GET_PLACE:
+      return Object.assign({}, state, {
+        loading: true,
+      });
+
+    case Action.SERVICE_GET_PLACE_SUCCESS:
+      let places = action.places.map((place) => {
+        return serializePlace(place);
+      });
+
+      return Object.assign({}, state, {
+        places,
+        loading: false,
+      });
+
+    case Action.SERVICE_GET_PLACE_FAIL:
+    case Action.SERVICE_GET_PLACE_ERROR:
+      return Object.assign({}, state, {
+        places: [],
+        loading: true,
       });
 
     case Action.SERVICE_SHOW:

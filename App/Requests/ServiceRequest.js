@@ -31,7 +31,7 @@ export const getOpenings = (id, latitude, longitude) => {
 };
 
 export const getQueues = (id, latitude, longitude) => {
-  return send('POST', `${prefix}/queue`, {
+  return send('POST', `${prefix}/opening/today`, {
     id, latitude, longitude,
   });
 };

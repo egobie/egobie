@@ -94,7 +94,7 @@ class MapScreen extends Component {
 
   goToOrder = () => {
     let { latitude, longitude } = this.state.currentLocation;
-    Reactotron.log(this.props.eGobieId);
+
     this.props.getOpenings(this.props.eGobieId, latitude, longitude);
     this.props.getTodaySchedule(this.props.eGobieId, latitude, longitude);
     this.props.changeWorkflow(WorkflowAction.WORK_FLOW_ORDER);

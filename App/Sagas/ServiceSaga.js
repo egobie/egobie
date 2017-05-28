@@ -79,12 +79,12 @@ function* getOpeningsTask(action) {
         type: ServiceAction.SERVICE_GET_OPENING_FAIL,
       });
     } else {
-      const resp = yield getOpenings(action.id, action.latitude, action.longitude);
-
+      const resp = yield getOpenings(action.id, null, null);
+      Reactotron.log(resp);
       if (resp.status === 200) {
         yield put({
           type: ServiceAction.SERVICE_GET_OPENING_SUCCESS,
-          openings: resp.body,
+          openings: resp.body ? resp.body : [],
         });
       } else {
         yield put({

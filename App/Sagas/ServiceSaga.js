@@ -43,11 +43,11 @@ function* getAllServicesTask() {
 function* getAllReservationsTask() {
   try {
     const resp = yield getAllReservations();
-    Reactotron.log(resp);
+
     if (resp.status === 200) {
       yield put({
         type: ServiceAction.SERVICE_GET_ALL_RESERVATION_SUCCESS,
-        reservations: resp.body,
+        reservations: resp.body ? resp.body : [],
       });
     } else {
       yield put({

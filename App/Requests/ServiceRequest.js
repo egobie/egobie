@@ -1,5 +1,5 @@
 import send from './Request';
-
+import Reactotron from 'reactotron-react-native';
 
 // No starting and trailing `/`
 const prefix = 'service';
@@ -12,7 +12,12 @@ export const getAllReservations = () => {
   return send('POST', `${prefix}/reservation`);
 };
 
-export const reserveService = (carId, note, placeId, opening, pickUpBy, services, addOns) => {
+export const reserveService = (carId, note, placeId, opening, pickUpBy, services, addons) => {
+  Reactotron.log('reserveService');
+  let temp = {
+    carId, note, placeId, opening, pickUpBy, services, addons,
+  };
+  Reactotron.log(temp);
   return send('POST', `${prefix}/order`, {
     carId, note, placeId, opening, pickUpBy, services, addons,
   });

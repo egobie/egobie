@@ -190,6 +190,37 @@ class SignModal extends Component {
     );
   }
 
+  renderSocialSigin() {
+    return (
+      <View style = {{
+        height: 50,
+        width: this.defaultWidth,
+        flexDirection: 'row',
+        marginBottom: 10,
+      }}>
+        <Text style = {{
+          flex: 2,
+          fontSize: 12,
+          fontWeight: '500',
+          lineHeight: 50,
+          color: eGobie.EGOBIE_GREY,
+        }}>
+          or Sign In With
+        </Text>
+        <View style = {{
+          flex: 4,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+        }}>
+          <SocialIcon type = 'google-plus-official' {...this.socialIconProps} />
+          <SocialIcon type = 'facebook' {...this.socialIconProps} />
+          <SocialIcon type = 'twitter' {...this.socialIconProps} />
+        </View>
+      </View>
+    );
+  }
+
   signInSide() {
     return (
       <View style = {{
@@ -277,32 +308,7 @@ class SignModal extends Component {
               Sign Up
             </Text>
           </View>
-          <View style = {{
-            height: 50,
-            width: this.defaultWidth,
-            flexDirection: 'row',
-            marginBottom: 10,
-          }}>
-            <Text style = {{
-              flex: 2,
-              fontSize: 12,
-              fontWeight: '500',
-              lineHeight: 50,
-              color: eGobie.EGOBIE_GREY,
-            }}>
-              or Sign In With
-            </Text>
-            <View style = {{
-              flex: 4,
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-            }}>
-              <SocialIcon type = 'google-plus-official' {...this.socialIconProps} />
-              <SocialIcon type = 'facebook' {...this.socialIconProps} />
-              <SocialIcon type = 'twitter' {...this.socialIconProps} />
-            </View>
-          </View>
+          { /* this.renderSocialSigin() */ }
         </View>
       </View>
     );

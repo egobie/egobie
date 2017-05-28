@@ -155,14 +155,6 @@ class ReservationScreen extends Component {
       }}>
         <ScrollView>
           { this.renderReservations() }
-          <Button
-            onPress = { () => { this.cancelReservation({id: -1}) } }
-            title = 'CANCEL'
-            backgroundColor = { eGobie.EGOBIE_RED }
-            buttonStyle = {{
-              marginTop: 8,
-            }}
-          />
         </ScrollView>
         <ConfirmModal ref = { (ref) => { this.confirmModal = ref; } }/>
       </View>

@@ -121,20 +121,20 @@ class OrderScreen extends Component {
   makeReservation = () => {
     let { car, placeId, schedule, opening, pickUpBy, services, serviceIds } = this.props;
 
-    // if (!car) {
-    //   this.props.showErrorMessage('Please choose the car');
-    //   return;
-    // }
+    if (!car) {
+      this.props.showErrorMessage('Please choose the car');
+      return;
+    }
 
-    // if (!services) {
-    //   this.props.showErrorMessage('Please choose services');
-    //   return;
-    // }
+    if (!services) {
+      this.props.showErrorMessage('Please choose services');
+      return;
+    }
 
-    // if (schedule === ' ') {
-    //   this.props.showErrorMessage('Please choose date');
-    //   return;
-    // }
+    if (schedule === ' ') {
+      this.props.showErrorMessage('Please choose date');
+      return;
+    }
 
     this.props.makeReservation(car ? car.id : -1, '', placeId, opening, pickUpBy, serviceIds);
     this.props.changeWorkflow(WorkflowAction.WORK_FLOW_RESET_ORDER); 

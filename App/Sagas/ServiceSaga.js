@@ -176,12 +176,12 @@ function* getPlacesTask() {
 
 function* reserveServiceTask(action) {
   try {
-    Reactotron.log(action);
     const resp = yield reserveService(
       action.carId, action.note, action.placeId, action.opening,
       action.pickUpBy, action.services, [],
     );
 
+    Reactotron.log(resp)
     if (resp.status === 200) {
       yield put({
         type: ServiceAction.SERVICE_RESERVE_SUCCESS,

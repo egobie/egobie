@@ -147,7 +147,10 @@ function* getPlacesTask() {
     const resp = yield getPlaces()
 
     if (resp.status === 200) {
-
+      yield put({
+        type: ServiceAction.SERVICE_GET_PLACE_SUCCESS,
+        places: resp.body,
+      });
     } else {
       yield put({
         type: ServiceAction.SERVICE_GET_PLACE_FAIL,

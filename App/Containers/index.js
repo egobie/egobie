@@ -37,6 +37,10 @@ export default class extends Component {
     store.dispatch({
       type: MetadataAction.METADATA_GET_DISCOUNT,
     });
+    /* Init Places */
+    store.dispatch({
+      type: ServiceAction.SERVICE_GET_PLACE,
+    });
   }
 
   render() {

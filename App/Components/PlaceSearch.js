@@ -178,25 +178,27 @@ class PlaceSearch extends Component {
         backgroundColor: 'transparent',
         ...this.animatedStyle,
       }}>
-        <GooglePlacesAutocomplete
-          ref = { (ref) => { this.googlePlace = ref; } }
-          query = {{
-            key: ApiKey.GOOGLE_PLACE_KEY,
-            language: 'en',
-          }}
-          autoFocus = { false }
-          fetchDetails = { true }
-          placeholder = { 'Type Your Address' }
-          placeholderTextColor = { eGobie.EGOBIE_GREY }
-          predefinedPlaces = { this.props.places }
-          minLength = { 2 }
-          styles = { styles }
-          renderLeftButton = { this.cancelButton }
-          onPress = { this.choosePlace }
-          textInputProps = {{
-            onFocus: this.focus,
-          }}
-        />
+        {
+          this.props.places.length > 0 && <GooglePlacesAutocomplete
+            ref = { (ref) => { this.googlePlace = ref; } }
+            query = {{
+              key: ApiKey.GOOGLE_PLACE_KEY,
+              language: 'en',
+            }}
+            autoFocus = { false }
+            fetchDetails = { true }
+            placeholder = { 'Type Your Address' }
+            placeholderTextColor = { eGobie.EGOBIE_GREY }
+            predefinedPlaces = { this.props.places }
+            minLength = { 2 }
+            styles = { styles }
+            renderLeftButton = { this.cancelButton }
+            onPress = { this.choosePlace }
+            textInputProps = {{
+              onFocus: this.focus,
+            }}
+          />
+        }
       </Animated.View>
     );
   }
@@ -263,52 +265,9 @@ const styles = {
 
 // predefined = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
 const mapStateToProps = (state) => {
-  let places = [
-    {
-      eGobieId: 1,
-      description: 'Kearny Point',
-      geometry: {
-        location: {
-          lat: 40.72450439999999,
-          lng: -74.10944999999998,
-        },
-      },
-    },
-    {
-      eGobieId: 2,
-      description: '555 US 1, Iselin',
-      geometry: {
-        location: {
-          lat: 40.5592582,
-          lng: -74.30493790000003,
-        },
-      },
-    },
-    {
-      eGobieId: 3,
-      description: '2200 Fletcher, Fort Lee',
-      geometry: {
-        location: {
-          lat: 40.8600983,
-          lng: -73.9719454,
-        },
-      },
-    },
-    {
-      eGobieId: 4,
-      description: '333 Meadowlands, Secaucus',
-      geometry: {
-        location: {
-          lat: 40.7795858,
-          lng: -74.08218390000002,
-        },
-      },
-    },
-  ]
   return {
     workflow: state.workflow.name,
-    places,
-    // places: state.service.places,
+    places: state.service.places,
   };
 };
 

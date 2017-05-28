@@ -37,7 +37,7 @@ const serializePlace = (place) => {
     geometry: {
       location: {
         lat: place.latitude,
-        lng: place.longtitude,
+        lng: place.longitude,
       },
     },
   };

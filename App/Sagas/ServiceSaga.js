@@ -80,7 +80,7 @@ function* getOpeningsTask(action) {
       });
     } else {
       const resp = yield getOpenings(action.id, null, null);
-      Reactotron.log(resp);
+
       if (resp.status === 200) {
         yield put({
           type: ServiceAction.SERVICE_GET_OPENING_SUCCESS,

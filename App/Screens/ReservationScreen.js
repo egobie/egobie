@@ -60,7 +60,7 @@ class ReservationScreen extends Component {
     },
     price: {
       title: 'Price',
-      label: 'price',
+      key: 'price',
       icon: 'cash',
     },
   };

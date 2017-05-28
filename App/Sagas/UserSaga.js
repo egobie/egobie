@@ -4,6 +4,7 @@ import Reactotron from 'reactotron-react-native';
 import * as UserAction from '../Actions/UserAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import * as VehicleAction from '../Actions/VehicleAction';
+import * as ServiceAction from '../Actions/ServiceAction';
 import { signIn, signUp } from '../Requests/UserRequest';
 
 
@@ -19,6 +20,9 @@ function* signInTask(action) {
       yield put({
         type: VehicleAction.VEHICLE_GET_ALL,
         userId: resp.body.id,
+      });
+      yield put({
+        type: ServiceAction.SERVICE_GET_ALL_RESERVATION,
       });
     } else {
       yield put({

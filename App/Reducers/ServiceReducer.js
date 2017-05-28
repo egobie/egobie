@@ -19,14 +19,16 @@ const serializeReservation = (reservation) => {
 
   let day = `${reservation.day} (You can pick up your car by ${reservation.pickUpBy === 1 ? '01:00 P.M.' : '05:00 P.M.'})`;
 
+  Reactotron.log(reservation);
   return {
     id: reservation.id,
     reservationId: reservation.reservationId,
     location: reservation.location,
     plate: reservation.plate,
-    price: reservation.price,
+    price: `$${reservation.price}`,
     status: reservation.status,
-    day, services,
+    services: services.length > 0 ? services.join(', ') : null,
+    day,
   };
 };
 

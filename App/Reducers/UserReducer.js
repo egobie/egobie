@@ -44,6 +44,10 @@ export default (state = user, action) => {
     case Action.USER_SIGN_IN_SUCCESS:
     case Action.USER_SIGN_UP_SUCCESS:
       let user = serializeUser(action.user);
+
+      global.eGobieUserId = user.id;
+      global.eGobieUserToken = user.password;
+
       return Object.assign({}, state, {
         signedIn: true,
         loading: false,

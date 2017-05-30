@@ -377,7 +377,7 @@ class OrderScreen extends Component {
           backgroundColor = { eGobie.EGOBIE_BLUE }
           buttonStyle = {{
             width: 180,
-            marginTop: 60,
+            marginTop: 70,
             marginLeft: Dimension.width / 2 - 90,
           }}
         />

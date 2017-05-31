@@ -7,9 +7,11 @@ import { Kohana } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
 import * as ErrorAction from '../Actions/ErrorAction';
+import * as UserAction from '../Actions/UserAction';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 import Dimension from '../Libs/Dimension';
+import * as Validator from '../Libs/Validator';
 
 
 const customStyle = {
@@ -64,11 +66,38 @@ class UserScreen extends Component {
     super(props);
   }
 
-  changeUser = () => {
-    this.props.showErrorMessage('Hahahah');
+  updateUser = () => {
+    if (!Validator.validateEmail(this.user.email)) {
+      this.props.showErrorMessage('Please enter valid Email');
+      return;
+    }
+
+    if (this.user.firstName.length === 0) {
+      this.props.showErrorMessage('Please enter first name');
+      return;
+    }
+
+    if (this.user.lastName.length === 0) {
+      this.props.showErrorMessage('Please enter last name');
+      return;
+    }
+
+    if (!Validator.validatePhone(this.user.phoneNumber)) {
+      this.props.showErrorMessage('Please enter valid phone number');
+      return;
+    }
+
+    this.props.updateUser(
+      this.user.firstName, this.user.lastName, this.user.email, this.user.phoneNumber,
+    );
   }
 
   render() {
+    let { firstName, lastName, email, phoneNumber } = this.props;
+    this.user = {
+      firstName, lastName, email, phoneNumber,
+    };
+
     return (
       <View style = {{
         height: Dimension.height * 0.75,
@@ -115,7 +144,7 @@ class UserScreen extends Component {
           />
         </View>
         <Button
-          onPress = { this.changeUser }
+          onPress = { this.updateUser }
           title = 'Save'
           buttonStyle = {{
             width: Dimension.width - 20,
@@ -142,6 +171,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateUser: (firstName, lastName, email, phoneNumber) => {
+      dispatch({
+        type: UserAction.USER_UPDATE,
+        firstName, lastName, email, phoneNumber,
+      });
+    },
     showErrorMessage: (error) => {
       dispatch({
         type: ErrorAction.ERROR_SHOW,

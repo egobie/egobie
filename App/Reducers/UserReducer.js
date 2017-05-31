@@ -37,12 +37,14 @@ export default (state = user, action) => {
   switch (action.type) {
     case Action.USER_SIGN_IN:
     case Action.USER_SIGN_UP:
+    case Action.USER_UPDATE:
       return Object.assign({}, state, {
         loading: true,
       });
 
     case Action.USER_SIGN_IN_SUCCESS:
     case Action.USER_SIGN_UP_SUCCESS:
+    case Action.USER_UPDATE_SUCCESS:
       let user = serializeUser(action.user);
 
       global.eGobieUserId = user.id;
@@ -52,6 +54,12 @@ export default (state = user, action) => {
         signedIn: true,
         loading: false,
         ...user,
+      });
+
+    case Action.USER_UPDATE_FAIL:
+    case Action.USER_UPDATE_ERROR:
+      return Object.assign({}, state, {
+        loading: false,
       });
 
     case Action.USER_SIGN_IN_FAIL:

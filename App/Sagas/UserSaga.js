@@ -5,7 +5,7 @@ import * as UserAction from '../Actions/UserAction';
 import * as ErrorAction from '../Actions/ErrorAction';
 import * as VehicleAction from '../Actions/VehicleAction';
 import * as ServiceAction from '../Actions/ServiceAction';
-import { signIn, signUp } from '../Requests/UserRequest';
+import { signIn, signUp, updateUser } from '../Requests/UserRequest';
 
 
 function* signInTask(action) {
@@ -91,7 +91,43 @@ function* signUpTask(action) {
   }
 }
 
+function* updateUserTask(action) {
+  try {
+    const resp = yield updateUser(
+      action.firstName, action.lastName, action.email, action.phoneNumber,
+    );
+
+    if (resp.status === 200) {
+      yield put({
+        type: UserAction.USER_UPDATE_SUCCESS,
+        user: resp.body,
+      });
+    } else {
+      yield put({
+        type: ErrorAction.ERROR_SHOW,
+        error: resp.body,
+      });
+    }
+  } catch (error) {
+    yield put({
+      type: UserAction.USER_UPDATE_ERROR,
+      error,
+    });
+    yield put({
+      type: ErrorAction.ERROR_SHOW,
+      error,
+    });
+  } finally {
+    if (yield cancelled()) {
+      yield put({
+        type: UserAction.USER_UPDATE_FAIL,
+      });
+    }
+  }
+}
+
 export default function* userSaga() {
   yield takeLatest(UserAction.USER_SIGN_IN, signInTask);
   yield takeLatest(UserAction.USER_SIGN_UP, signUpTask);
+  yield takeLatest(UserAction.USER_UPDATE, updateUserTask);
 };

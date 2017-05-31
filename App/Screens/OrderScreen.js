@@ -140,7 +140,10 @@ class OrderScreen extends Component {
     this.confirmModal.show(
       'Place the order',
       () => {
-        this.props.makeReservation(car ? car.id : -1, '', placeId, opening, pickUpBy, serviceIds);
+        this.props.makeReservation(
+          car ? car.id : -1, '', placeId, opening, pickUpBy, serviceIds,
+          () => { this.props.navigation.navigate('Reservations') },
+        );
         this.props.changeWorkflow(WorkflowAction.WORK_FLOW_RESET_ORDER); 
       },
       () => {},
@@ -550,7 +553,7 @@ class OrderScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   let serviceIds = [];
   let services = state.service.selected.map((service) => {
     serviceIds.push(service.id);
@@ -582,15 +585,16 @@ const mapStateToProps = (state) => {
     userSignedIn: state.user.signedIn,
     price: Calculator.totalPrice(state.service.selected, 0),
     time: Calculator.totalTime(state.service.selected),
+    ...ownProps,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    makeReservation: (carId, note, placeId, opening, pickUpBy, services) => {
+    makeReservation: (carId, note, placeId, opening, pickUpBy, services, callback) => {
       dispatch({
         type: ServiceAction.SERVICE_RESERVE,
-        carId, note, placeId, opening, pickUpBy, services,
+        carId, note, placeId, opening, pickUpBy, services, callback,
       });
     },
     changeWorkflow: (type) => {

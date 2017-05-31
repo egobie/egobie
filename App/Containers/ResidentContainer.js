@@ -23,7 +23,7 @@ export default class extends Component {
     return (
       <View style = {{ flex: 1 }}>
         <MapScreen />
-        <OrderScreen />
+        <OrderScreen { ...this.props } />
         <ServiceScreen />
         <Mask />
         <MenuScreen { ...this.props } />

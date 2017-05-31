@@ -1,4 +1,4 @@
-import { put, cancelled, takeLatest } from 'redux-saga/effects';
+import { put, call, cancelled, takeLatest } from 'redux-saga/effects';
 import Reactotron from 'reactotron-react-native';
 import * as ServiceAction from '../Actions/ServiceAction';
 import * as ErrorAction from '../Actions/ErrorAction';
@@ -188,6 +188,7 @@ function* reserveServiceTask(action) {
       yield put({
         type: ServiceAction.SERVICE_GET_ALL_RESERVATION,
       });
+      yield call(action.callback);
     } else {
       yield put({
         type: ServiceAction.SERVICE_RESERVE_FAIL,

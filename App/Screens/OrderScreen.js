@@ -13,6 +13,7 @@ import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
 import Label from '../Components/Label';
 import CalendarModal from '../Modals/CalendarModal';
+import ConfirmModal from '../Modals/ConfirmModal';
 import Dimension from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 import * as Calculator from '../Libs/Calculator';
@@ -121,13 +122,13 @@ class OrderScreen extends Component {
   makeReservation = () => {
     let { car, placeId, schedule, opening, pickUpBy, services, serviceIds } = this.props;
 
-    if (!car) {
-      this.props.showErrorMessage('Please choose the car');
+    if (!services) {
+      this.props.showErrorMessage('Please choose services');
       return;
     }
 
-    if (!services) {
-      this.props.showErrorMessage('Please choose services');
+    if (!car) {
+      this.props.showErrorMessage('Please choose the car');
       return;
     }
 
@@ -136,8 +137,14 @@ class OrderScreen extends Component {
       return;
     }
 
-    this.props.makeReservation(car ? car.id : -1, '', placeId, opening, pickUpBy, serviceIds);
-    this.props.changeWorkflow(WorkflowAction.WORK_FLOW_RESET_ORDER); 
+    this.confirmModal.show(
+      'Place the order',
+      () => {
+        this.props.makeReservation(car ? car.id : -1, '', placeId, opening, pickUpBy, serviceIds);
+        this.props.changeWorkflow(WorkflowAction.WORK_FLOW_RESET_ORDER); 
+      },
+      () => {},
+    );
   }
 
   rightIcon() {
@@ -537,6 +544,7 @@ class OrderScreen extends Component {
         </Animated.View>
         { this.mask() }
         { this.placeOrder() }
+        <ConfirmModal ref = { (ref) => { this.confirmModal = ref; } }/>
       </Animated.View>
     );
   }

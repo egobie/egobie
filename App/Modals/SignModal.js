@@ -9,7 +9,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as UserAction from '../Actions/UserAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
 import BoxShadow from '../Styles/BoxShadow';
@@ -488,10 +488,10 @@ const mapDispatchToProps = (dispatch) => {
         type: WorkflowAction.WORK_FLOW_RESET_PASSWORD,
       });
     },
-    showErrorMessage: (error) => {
+    showErrorMessage: (message) => {
       dispatch({
-        type: ErrorAction.ERROR_SHOW,
-        error,
+        type: MessageAction.MESSAGE_SHOW,
+        message,
       });
     },
   };

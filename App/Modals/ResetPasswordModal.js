@@ -8,7 +8,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as ResetPasswordAction from '../Actions/ResetPasswordAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import * as Validator from '../Libs/Validator';
 import Modal from '../Components/Modal';
 import Dimension from '../Libs/Dimension';
@@ -478,10 +478,10 @@ const mapDispatchToProps = (dispatch) => {
         type: ResetPasswordAction.RESET_PASSWORD_RESET_ALL,
       });
     },
-    showErrorMessage: (error) => {
+    showErrorMessage: (message) => {
       dispatch({
-        type: ErrorAction.ERROR_SHOW,
-        error,
+        type: MessageAction.MESSAGE_SHOW,
+        message,
       });
     },
   };

@@ -1,7 +1,7 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
 import Reactotron from 'reactotron-react-native';
 import * as ResetPasswordAction from '../Actions/ResetPasswordAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import { validateEmail, validateToken, resendToken, newPassword } from '../Requests/ResetPasswordRequest';
 
 
@@ -19,8 +19,8 @@ function* validateEmailTask(action) {
         type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_EMAIL_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -50,8 +50,8 @@ function* validateTokenTask(action) {
         type: ResetPasswordAction.RESET_PASSWORD_VALIDATE_TOKEN_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -81,8 +81,8 @@ function* resendTokenTask(action) {
         type: ResetPasswordAction.RESET_PASSWORD_RESEND_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -112,8 +112,8 @@ function* newPasswordTask(action) {
         type: ResetPasswordAction.RESET_PASSWORD_NEW_PASSWORD_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {

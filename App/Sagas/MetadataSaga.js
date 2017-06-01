@@ -1,7 +1,7 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as MetadataAction from '../Actions/MetadataAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import { getDiscounts } from '../Requests/MetadataRequest';
 
 
@@ -19,8 +19,8 @@ function* getDiscountsTask() {
         type: MetadataAction.METADATA_GET_DISCOUNT_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {

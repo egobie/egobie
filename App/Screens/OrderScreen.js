@@ -6,8 +6,8 @@ import { Button, Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
-import * as ErrorAction from '../Actions/ErrorAction';
 import * as ServiceAction from '../Actions/ServiceAction';
+import * as MessageAction from '../Actions/MessageAction';
 import Vehicle from '../Components/Vehicle';
 import Plate from '../Components/Plate';
 import CreditCard from '../Components/CreditCard';
@@ -602,10 +602,10 @@ const mapDispatchToProps = (dispatch) => {
         type,
       });
     },
-    showErrorMessage: (error) => {
+    showErrorMessage: (message) => {
       dispatch({
-        type: ErrorAction.ERROR_SHOW,
-        error,
+        type: MessageAction.MESSAGE_SHOW,
+        message,
       });
     },
   };

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import Loading from '../Components/Loading';
-import ErrorMessage from '../Components/ErrorMessage';
+import Message from '../Components/Message';
 import ResidentContainer from './ResidentContainer';
 import UserScreen from '../Screens/UserScreen';
 import VehicleScreen from '../Screens/VehicleScreen';
@@ -76,7 +76,7 @@ export default React.createClass({
         <Loading />
         <PickerModal />
         <ServiceDetailModal />
-        <ErrorMessage />
+        <Message />
       </View>
     );
   }

@@ -2,7 +2,7 @@ import { put, cancelled, takeLatest } from 'redux-saga/effects';
 import Reactotron from 'reactotron-react-native';
 
 import * as UserAction from '../Actions/UserAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import * as VehicleAction from '../Actions/VehicleAction';
 import * as ServiceAction from '../Actions/ServiceAction';
 import { signIn, signUp, updateUser } from '../Requests/UserRequest';
@@ -29,16 +29,13 @@ function* signInTask(action) {
         type: UserAction.USER_SIGN_IN_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
     yield put({
       type: UserAction.USER_SIGN_IN_ERROR,
-    });
-    yield put({
-      type: ErrorAction.ERROR_SHOW,
       error,
     });
   } finally {
@@ -70,16 +67,13 @@ function* signUpTask(action) {
         type: UserAction.USER_SIGN_UP_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
     yield put({
       type: UserAction.USER_SIGN_UP_ERROR,
-    });
-    yield put({
-      type: ErrorAction.ERROR_SHOW,
       error,
     });
   } finally {
@@ -102,22 +96,23 @@ function* updateUserTask(action) {
         type: UserAction.USER_UPDATE_SUCCESS,
         user: resp.body,
       });
+      yield put({
+        type: MessageAction.MESSAGE_SHOW,
+        message: 'User\'s profile successfully updated!',
+        messageType: 'success',
+      });
     } else {
       yield put({
         type: UserAction.USER_UPDATE_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
     yield put({
       type: UserAction.USER_UPDATE_ERROR,
-      error,
-    });
-    yield put({
-      type: ErrorAction.ERROR_SHOW,
       error,
     });
   } finally {

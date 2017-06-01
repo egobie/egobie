@@ -1,7 +1,7 @@
 import { put, cancelled, takeLatest } from 'redux-saga/effects';
 
 import * as VehicleAction from '../Actions/VehicleAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import {
   getAllVehicles, addVehicle, updateVehicle, deleteVehicle,
   getVehicleMakes, getVehicleModels,
@@ -49,10 +49,6 @@ function* getVehicleModelsTask() {
       yield put({
         type: VehicleAction.VEHICLE_GET_MODEL_FAIL,
       });
-      yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
-      });
     }
   } catch (error) {
     yield put({
@@ -86,10 +82,6 @@ function* getAllVehiclesTask(action) {
     yield put({
       type: VehicleAction.VEHICLE_GET_ALL_ERROR,
     });
-    yield put({
-      type: ErrorAction.ERROR_SHOW,
-      error,
-    });
   } finally {
     if (yield cancelled()) {
       yield put({
@@ -114,13 +106,18 @@ function* addVehicleTask(action) {
       yield put({
         type: VehicleAction.VEHICLE_GET_ALL,
       });
+      yield put({
+        type: MessageAction.MESSAGE_SHOW,
+        message: 'Vehicle successfully added!',
+        messageType: 'success',
+      });
     } else {
       yield put({
         type: VehicleAction.VEHICLE_ADD_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -151,13 +148,18 @@ function* updateVehicleTask(action) {
       yield put({
         type: VehicleAction.VEHICLE_GET_ALL,
       });
+      yield put({
+        type: MessageAction.MESSAGE_SHOW,
+        message: 'Vehicle successfully updated!',
+        messageType: 'success',
+      });
     } else {
       yield put({
         type: VehicleAction.VEHICLE_UPDATE_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -185,13 +187,18 @@ function* deleteVehicleTask(action) {
       yield put({
         type: VehicleAction.VEHICLE_GET_ALL,
       });
+      yield put({
+        type: MessageAction.MESSAGE_SHOW,
+        message: 'Vehicle successfully deleted!',
+        messageType: 'success',
+      });
     } else {
       yield put({
         type: VehicleAction.VEHICLE_DELETE_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {

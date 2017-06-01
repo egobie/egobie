@@ -6,8 +6,8 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { Kohana } from 'react-native-textinput-effects';
 import { Button, Icon } from 'react-native-elements';
 
-import * as ErrorAction from '../Actions/ErrorAction';
 import * as UserAction from '../Actions/UserAction';
+import * as MessageAction from '../Actions/MessageAction';
 import eGobie from '../Styles/Egobie';
 import BoxShadow from '../Styles/BoxShadow';
 import Dimension from '../Libs/Dimension';
@@ -177,10 +177,10 @@ const mapDispatchToProps = (dispatch) => {
         firstName, lastName, email, phoneNumber,
       });
     },
-    showErrorMessage: (error) => {
+    showErrorMessage: (message) => {
       dispatch({
-        type: ErrorAction.ERROR_SHOW,
-        error,
+        type: MessageAction.MESSAGE_SHOW,
+        message,
       });
     },
   };

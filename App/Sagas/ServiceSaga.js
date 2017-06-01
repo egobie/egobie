@@ -1,7 +1,7 @@
 import { put, call, cancelled, takeLatest } from 'redux-saga/effects';
 import Reactotron from 'reactotron-react-native';
 import * as ServiceAction from '../Actions/ServiceAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import {
   getAllServices, getAllReservations, reserveService, cancelReservation,
   getQueues, getOpenings, getPlaces,
@@ -22,8 +22,8 @@ function* getAllServicesTask() {
         type: ServiceAction.SERVICE_GET_ALL_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -54,8 +54,8 @@ function* getAllReservationsTask() {
         type: ServiceAction.SERVICE_GET_ALL_RESERVATION_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -91,8 +91,8 @@ function* getOpeningsTask(action) {
           type: ServiceAction.SERVICE_GET_OPENING_FAIL,
         });
         yield put({
-          type: ErrorAction.ERROR_SHOW,
-          error: resp.body,
+          type: MessageAction.MESSAGE_SHOW,
+          message: resp.body,
         });
       }
     }
@@ -124,8 +124,8 @@ function* getQueuesTask(action) {
         type: ServiceAction.SERVICE_GET_QUEUE_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -156,8 +156,8 @@ function* getPlacesTask() {
         type: ServiceAction.SERVICE_GET_PLACE_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -188,14 +188,19 @@ function* reserveServiceTask(action) {
       yield put({
         type: ServiceAction.SERVICE_GET_ALL_RESERVATION,
       });
+      yield put({
+        type: MessageAction.MESSAGE_SHOW,
+        message: 'Reservation successfully made!',
+        messageType: 'success',
+      });
       yield call(action.callback);
     } else {
       yield put({
         type: ServiceAction.SERVICE_RESERVE_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {
@@ -223,13 +228,18 @@ function* cancelReservationTask(action) {
       yield put({
         type: ServiceAction.SERVICE_GET_ALL_RESERVATION,
       });
+      yield put({
+        type: MessageAction.MESSAGE_SHOW,
+        message: 'Reservation successfully canceled!',
+        messageType: 'success',
+      });
     } else {
       yield put({
         type: ServiceAction.SERVICE_CANCEL_RESERVATION_FAIL,
       });
       yield put({
-        type: ErrorAction.ERROR_SHOW,
-        error: resp.body,
+        type: MessageAction.MESSAGE_SHOW,
+        message: resp.body,
       });
     }
   } catch (error) {

@@ -7,7 +7,7 @@ import { Button, Icon } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import * as PickerAction from '../Actions/PickerAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import * as VehicleAction from '../Actions/VehicleAction';
 import Modal from '../Components/Modal';
 import ConfirmModal from '../Modals/ConfirmModal';
@@ -358,10 +358,10 @@ const mapDispatchToProps = (dispatch) => {
         options, selected, target,
       });
     },
-    showErrorMessage: (error) => {
+    showErrorMessage: (message) => {
       dispatch({
-        type: ErrorAction.ERROR_SHOW,
-        error,
+        type: MessageAction.MESSAGE_SHOW,
+        message,
       });
     },
     addVehicle: (plate, state, year, color, make, model) => {

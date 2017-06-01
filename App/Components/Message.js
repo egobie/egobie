@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { View, Animated, Text, Easing } from 'react-native';
 import { connect } from 'react-redux';
 import Reactotron from 'reactotron-react-native';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import Dimensions from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
 
-class ErrorMessage extends Component {
+class Message extends Component {
   state = {
     top: new Animated.Value(-70),
-    errorMessage: null,
+    message: null,
+    type: null,
   };
   timer = null;
 
@@ -18,17 +19,17 @@ class ErrorMessage extends Component {
     super(props);
   }
 
-  show(errorMessage) {
+  show(message, type) {
     if (this.timer) {
       clearTimeout(this.timer);
     }
 
     this.timer = setTimeout(() => {
       this.hide();
-    }, 2000);
+    }, 2500);
 
     this.setState({
-      errorMessage,
+      message, type,
     });
     Animated.timing(this.state.top, {
       toValue: 0,
@@ -37,7 +38,7 @@ class ErrorMessage extends Component {
   }
 
   hide() {
-    this.props.hideError();
+    this.props.hideMessage();
     Animated.timing(this.state.top, {
       toValue: -70,
       easing: Easing.out(Easing.cubic),
@@ -45,20 +46,27 @@ class ErrorMessage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.error) {
-      this.show(nextProps.error);
+    if (nextProps.message) {
+      this.show(nextProps.message, nextProps.type);
     } else {
       this.setState({
-        errorMessage: null,
+        message: null,
       });
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.error !== this.state.errorMessage;
+    return nextProps.message !== this.state.message;
   }
 
   render() {
+    let { type } = this.state;
+    let backgroundColor = eGobie.EGOBIE_RED;
+
+    if (type === 'success') {
+      backgroundColor = eGobie.EGOBIE_GREEN;
+    }
+
     return (
       <Animated.View style = {{
         position: 'absolute',
@@ -68,14 +76,14 @@ class ErrorMessage extends Component {
         paddingLeft: 15,
         paddingRight: 15,
         paddingBottom: 10,
-        backgroundColor: eGobie.EGOBIE_RED,
+        backgroundColor: backgroundColor,
         top: this.state.top,
         zIndex: 4,
       }}>
         {
-          this.state.errorMessage && <Text style = {{
+          this.state.message && <Text style = {{
             color: eGobie.EGOBIE_WHITE,
-          }}>{ this.state.errorMessage }</Text>
+          }}>{ this.state.message }</Text>
         }
       </Animated.View>
     );
@@ -84,19 +92,20 @@ class ErrorMessage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    error: state.error.message,
+    message: state.message.context,
+    type: state.message.type,
     ...ownProps
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    hideError: () => {
+    hideMessage: () => {
       dispatch({
-        type: ErrorAction.ERROR_HIDE,
+        type: MessageAction.MESSAGE_HIDE,
       });
     },
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorMessage);
+export default connect(mapStateToProps, mapDispatchToProps)(Message);

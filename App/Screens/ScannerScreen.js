@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements';
 import Camera from 'react-native-camera';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
-import * as ErrorAction from '../Actions/ErrorAction';
+import * as MessageAction from '../Actions/MessageAction';
 import Dimensions from '../Libs/Dimension';
 import eGobie from '../Styles/Egobie';
 
@@ -172,10 +172,10 @@ const mapDispatchToProps = (dispatch) => {
         type: WorkflowAction.WORK_FLOW_BACK,
       });
     },
-    showErrorMessage: (error) => {
+    showErrorMessage: (message) => {
       dispatch({
-        type: ErrorAction.ERROR_SHOW,
-        error,
+        type: MessageAction.MESSAGE_SHOW,
+        message,
       });
     }
   };

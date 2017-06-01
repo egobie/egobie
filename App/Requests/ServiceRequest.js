@@ -13,11 +13,6 @@ export const getAllReservations = () => {
 };
 
 export const reserveService = (carId, note, placeId, opening, pickUpBy, services, addons) => {
-  Reactotron.log('reserveService');
-  let temp = {
-    carId, note, placeId, opening, pickUpBy, services, addons,
-  };
-  Reactotron.log(temp);
   return send('POST', `${prefix}/order`, {
     carId, note, placeId, opening, pickUpBy, services, addons,
   });

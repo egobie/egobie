@@ -127,11 +127,6 @@ class Vehicle extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    Reactotron.log('shouldComponentUpdate - Vehicle');
-    return true;
-  }
-
   render() {
     return (
       <TouchableOpacity onPress = { this.chooseVehicle } >

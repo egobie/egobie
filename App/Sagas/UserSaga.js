@@ -104,6 +104,9 @@ function* updateUserTask(action) {
       });
     } else {
       yield put({
+        type: UserAction.USER_UPDATE_FAIL,
+      });
+      yield put({
         type: ErrorAction.ERROR_SHOW,
         error: resp.body,
       });

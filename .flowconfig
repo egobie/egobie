@@ -14,7 +14,11 @@
 .*/Libraries/react-native/React.js
 .*/Libraries/react-native/ReactNative.js
 
+; Ignore "node_modules"
+./node_modules/**/*
+
 [include]
+./src/
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
@@ -41,4 +45,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 unsafe.enable_getters_and_setters=true
 
 [version]
-^0.36.0
+0.39.0

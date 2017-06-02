@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 import Reactotron from 'reactotron-react-native';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 
 import * as WorkflowAction from '../Actions/WorkflowAction';
 import Service from '../Components/Service';
@@ -151,7 +151,7 @@ class ServiceScreen extends Component {
 
   renderBanner() {
     return (
-      <TouchableWithoutFeedback onPress = { this.toggle }>
+      <TouchableWithoutFeedback onPress = { this.toggle } >
       <View style = {{
         flexDirection: 'row',
         alignItems: 'center',
@@ -201,7 +201,26 @@ class ServiceScreen extends Component {
           })
         }
         </ScrollView>
+        { this.renderConfirmButton() }
       </Animated.View>
+    );
+  }
+
+  renderConfirmButton() {
+    return (
+      <View style = {{
+        paddingTop: 20,
+        marginBottom: 25,
+      }}>
+        <Button
+          onPress = { this.toggle }
+          title = 'Confirm Selection'
+          backgroundColor = { eGobie.EGOBIE_BLUE }
+          buttonStyle = {{
+            ...BoxShadow,
+          }}
+        />
+      </View>
     );
   }
 

@@ -142,7 +142,11 @@ class OrderScreen extends Component {
       () => {
         this.props.makeReservation(
           car ? car.id : -1, '', placeId, opening, pickUpBy, serviceIds,
-          () => { this.props.navigation.navigate('Reservations') },
+          () => {
+            setTimeout(() => {
+              this.props.navigation.navigate('Reservations')
+            }, 500);
+          },
         );
         this.props.changeWorkflow(WorkflowAction.WORK_FLOW_RESET_ORDER); 
       },

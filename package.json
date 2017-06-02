@@ -1,20 +1,42 @@
 {
 	"name": "egobie",
-	"version": "0.0.1",
+	"version": "2.0.0",
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"test": "jest"
 	},
 	"dependencies": {
-		"react": "~15.4.0-rc.4",
-		"react-native": "0.40.0"
+		"apisauce": "0.10.0",
+		"install": "0.8.9",
+		"react": "15.4.0-rc.4",
+		"react-native": "0.40.0",
+		"react-native-calendar": "0.10.0",
+		"react-native-camera": "https://github.com/lwansbrough/react-native-camera.git",
+		"react-native-credit-card-input": "0.3.2",
+		"react-native-elements": "0.9.7",
+		"react-native-facebook-login": "1.5.0",
+		"react-native-google-places-autocomplete": "1.2.12",
+		"react-native-google-signin": "0.10.0",
+		"react-native-i18n": "1.0.0",
+		"react-native-maps": "0.13.0",
+		"react-native-message-bar": "1.6.0",
+		"react-native-navigation": "1.1.38",
+		"react-native-snap-carousel": "2.1.2",
+		"react-native-step-indicator": "0.0.1",
+		"react-native-textinput-effects": "0.3.0",
+		"react-navigation": "1.0.0-beta.9",
+		"react-redux": "5.0.4",
+		"redux": "3.6.0",
+		"redux-saga": "0.14.8"
 	},
 	"devDependencies": {
 		"babel-jest": "18.0.0",
 		"babel-preset-react-native": "1.9.1",
 		"jest": "18.1.0",
-		"react-test-renderer": "~15.4.0-rc.4"
+		"react-native-vector-icons": "4.0.0",
+		"react-test-renderer": "15.4.2",
+		"reactotron-react-native": "1.10.0"
 	},
 	"jest": {
 		"preset": "react-native"

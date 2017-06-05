@@ -1451,6 +1451,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.egobie;
 				PRODUCT_NAME = egobie;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1482,6 +1483,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.egobie;
 				PRODUCT_NAME = egobie;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-maps/ios/AirMaps/**";
 				VERSIONING_SYSTEM = "apple-generic";

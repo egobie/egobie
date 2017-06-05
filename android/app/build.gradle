@@ -83,8 +83,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     defaultConfig {
         applicationId "com.egobie"
@@ -129,7 +129,6 @@ dependencies {
     compile project(':react-native-facebook-login')
     compile project(':react-native-google-signin')
     compile project(':react-native-camera')
-    compile project(':react-native-navigation')
     compile project(':react-native-maps')
     compile project(':react-native-i18n')
     compile project(':react-native-vector-icons')

@@ -7,7 +7,6 @@ import com.facebook.react.ReactApplication;
 import com.magus.fblogin.FacebookLoginPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
-import com.reactnativenavigation.RnnPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -35,7 +34,6 @@ public class MainApplication extends Application implements ReactApplication {
             new FacebookLoginPackage(),
             new RNGoogleSigninPackage(),
             new RCTCameraPackage(),
-            new RnnPackage(),
             new MapsPackage(),
             new ReactNativeI18n(),
             new VectorIconsPackage()

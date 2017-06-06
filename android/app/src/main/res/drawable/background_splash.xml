@@ -3,6 +3,6 @@
     <item>
         <bitmap
             android:gravity="fill"
-            android:src="@drawable/screen"/>
+            android:src="@drawable/background"/>
     </item>
 </selector>

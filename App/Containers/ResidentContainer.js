@@ -5,7 +5,7 @@ import I18n from 'react-native-i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Mask from '../Components/Mask';
-import ScannerScreen from '../Screens/ScannerScreen';
+// import ScannerScreen from '../Screens/ScannerScreen';
 import MapScreen from '../Screens/MapScreen';
 import ServiceScreen from '../Screens/ServiceScreen';
 import OrderScreen from '../Screens/OrderScreen';
@@ -27,7 +27,7 @@ export default class extends Component {
         <ServiceScreen />
         <Mask />
         <MenuScreen { ...this.props } />
-        <ScannerScreen />
+        { /* <ScannerScreen /> */ }
       </View>
     );
   }

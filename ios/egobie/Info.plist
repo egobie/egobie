@@ -52,7 +52,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>FacebookAppID</key>
 	<string>287186355065258</string>
 	<key>FacebookDisplayName</key>
@@ -71,6 +71,8 @@
 		<key>NSExceptionDomains</key>
 		<dict/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>You can scan QR code to make reservations</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We will come to you to serve your vehicle</string>
 	<key>UIAppFonts</key>

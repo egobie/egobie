@@ -18,12 +18,6 @@
 		0D89CD8F1EB10E83005DBE96 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D89CD8C1EB10E83005DBE96 /* FBSDKLoginKit.framework */; };
 		0D89CD901EB10E83005DBE96 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D89CD8D1EB10E83005DBE96 /* FBSDKShareKit.framework */; };
 		0DA4ABE01EAFA5C500E3BA4F /* GoogleSdk in Resources */ = {isa = PBXBuildFile; fileRef = 0DA4ABDF1EAFA5C500E3BA4F /* GoogleSdk */; };
-		0DA4ABE71EAFA65E00E3BA4F /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4ABE11EAFA65E00E3BA4F /* GoogleAppUtilities.framework */; };
-		0DA4ABE81EAFA65E00E3BA4F /* GoogleAuthUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4ABE21EAFA65E00E3BA4F /* GoogleAuthUtilities.framework */; };
-		0DA4ABE91EAFA65E00E3BA4F /* GoogleNetworkingUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4ABE31EAFA65E00E3BA4F /* GoogleNetworkingUtilities.framework */; };
-		0DA4ABEA1EAFA65E00E3BA4F /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4ABE41EAFA65E00E3BA4F /* GoogleSignIn.framework */; };
-		0DA4ABEB1EAFA65E00E3BA4F /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4ABE51EAFA65E00E3BA4F /* GoogleSymbolUtilities.framework */; };
-		0DA4ABEC1EAFA65E00E3BA4F /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4ABE61EAFA65E00E3BA4F /* GoogleUtilities.framework */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -332,12 +326,6 @@
 		0D89CD8C1EB10E83005DBE96 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		0D89CD8D1EB10E83005DBE96 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../node_modules/react-native-facebook-login/FacebookSDK/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		0DA4ABDF1EAFA5C500E3BA4F /* GoogleSdk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = GoogleSdk; sourceTree = "<group>"; };
-		0DA4ABE11EAFA65E00E3BA4F /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppUtilities.framework; path = GoogleSdk/GoogleAppUtilities.framework; sourceTree = "<group>"; };
-		0DA4ABE21EAFA65E00E3BA4F /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAuthUtilities.framework; path = GoogleSdk/GoogleAuthUtilities.framework; sourceTree = "<group>"; };
-		0DA4ABE31EAFA65E00E3BA4F /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = GoogleSdk/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
-		0DA4ABE41EAFA65E00E3BA4F /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = GoogleSdk/GoogleSignIn.framework; sourceTree = "<group>"; };
-		0DA4ABE51EAFA65E00E3BA4F /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = GoogleSdk/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
-		0DA4ABE61EAFA65E00E3BA4F /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = GoogleSdk/GoogleUtilities.framework; sourceTree = "<group>"; };
 		0DAD42381EB10B5D00CCC278 /* RCTFBLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBLogin.xcodeproj; path = "../node_modules/react-native-facebook-login/RCTFBLogin.xcodeproj"; sourceTree = "<group>"; };
 		0DAD423E1EB10B7B00CCC278 /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGoogleSignin.xcodeproj; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; };
 		0FD10181D39242F2933A120D /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
@@ -459,12 +447,6 @@
 				EC3AA19170DB4AE695379691 /* SafariServices.framework in Frameworks */,
 				69FD968F5BEA4A819F1350EA /* SystemConfiguration.framework in Frameworks */,
 				1ECE3270BC764D99AA4D4F72 /* AddressBook.framework in Frameworks */,
-				0DA4ABE71EAFA65E00E3BA4F /* GoogleAppUtilities.framework in Frameworks */,
-				0DA4ABE81EAFA65E00E3BA4F /* GoogleAuthUtilities.framework in Frameworks */,
-				0DA4ABE91EAFA65E00E3BA4F /* GoogleNetworkingUtilities.framework in Frameworks */,
-				0DA4ABEA1EAFA65E00E3BA4F /* GoogleSignIn.framework in Frameworks */,
-				0DA4ABEB1EAFA65E00E3BA4F /* GoogleSymbolUtilities.framework in Frameworks */,
-				0DA4ABEC1EAFA65E00E3BA4F /* GoogleUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,12 +683,6 @@
 				0D89CD8C1EB10E83005DBE96 /* FBSDKLoginKit.framework */,
 				0D89CD8D1EB10E83005DBE96 /* FBSDKShareKit.framework */,
 				4E75A68C90D84104B67C6E05 /* AddressBook.framework */,
-				0DA4ABE11EAFA65E00E3BA4F /* GoogleAppUtilities.framework */,
-				0DA4ABE21EAFA65E00E3BA4F /* GoogleAuthUtilities.framework */,
-				0DA4ABE31EAFA65E00E3BA4F /* GoogleNetworkingUtilities.framework */,
-				0DA4ABE41EAFA65E00E3BA4F /* GoogleSignIn.framework */,
-				0DA4ABE51EAFA65E00E3BA4F /* GoogleSymbolUtilities.framework */,
-				0DA4ABE61EAFA65E00E3BA4F /* GoogleUtilities.framework */,
 				34028913FBF557066B3428CD /* libPods-egobie.a */,
 				3985B3B8E8EA456AA79024AB /* libz.tbd */,
 				42AEADAB31454FBDB7C665A6 /* SafariServices.framework */,

@@ -45,43 +45,12 @@ PODS:
   - React/cxxreact (0.40.0):
     - React/jschelpers
   - React/jschelpers (0.40.0)
-  - React/RCTActionSheet (0.40.0):
-    - React/Core
-  - React/RCTAnimation (0.40.0):
-    - React/Core
-  - React/RCTGeolocation (0.40.0):
-    - React/Core
-  - React/RCTImage (0.40.0):
-    - React/Core
-    - React/RCTNetwork
-  - React/RCTLinkingIOS (0.40.0):
-    - React/Core
-  - React/RCTNetwork (0.40.0):
-    - React/Core
-  - React/RCTSettings (0.40.0):
-    - React/Core
-  - React/RCTText (0.40.0):
-    - React/Core
-  - React/RCTVibration (0.40.0):
-    - React/Core
-  - React/RCTWebSocket (0.40.0):
-    - React/Core
   - React/yoga (0.40.0)
 
 DEPENDENCIES:
   - Google/SignIn
   - GoogleMaps
   - React/Core (from `../node_modules/react-native`)
-  - React/RCTActionSheet (from `../node_modules/react-native`)
-  - React/RCTAnimation (from `../node_modules/react-native`)
-  - React/RCTGeolocation (from `../node_modules/react-native`)
-  - React/RCTImage (from `../node_modules/react-native`)
-  - React/RCTLinkingIOS (from `../node_modules/react-native`)
-  - React/RCTNetwork (from `../node_modules/react-native`)
-  - React/RCTSettings (from `../node_modules/react-native`)
-  - React/RCTText (from `../node_modules/react-native`)
-  - React/RCTVibration (from `../node_modules/react-native`)
-  - React/RCTWebSocket (from `../node_modules/react-native`)
 
 EXTERNAL SOURCES:
   React:
@@ -99,6 +68,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   React: 6dfb2f72edb1d74a800127ae157af038646673ce
 
-PODFILE CHECKSUM: 0c25d469ebca4cc61ff6ab6e82a1a617c7d65166
+PODFILE CHECKSUM: 3b0720579c9366453934e36ee5c9f6f4799408fb
 
 COCOAPODS: 1.2.0

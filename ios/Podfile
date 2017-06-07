@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '8.0'
 
 target 'egobie' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -10,16 +10,16 @@ target 'egobie' do
   # Pods for egobie
   pod 'React', path: '../node_modules/react-native', :subspecs => [
     'Core',
-    'RCTActionSheet',
-    'RCTAnimation',
-    'RCTGeolocation',
-    'RCTImage',
-    'RCTLinkingIOS',
-    'RCTNetwork',
-    'RCTSettings',
-    'RCTText',
-    'RCTVibration',
-    'RCTWebSocket'
+    # 'RCTActionSheet',
+    # 'RCTAnimation',
+    # 'RCTGeolocation',
+    # 'RCTImage',
+    # 'RCTLinkingIOS',
+    # 'RCTNetwork',
+    # 'RCTSettings',
+    # 'RCTText',
+    # 'RCTVibration',
+    # 'RCTWebSocket'
   ]
 
   # Comment this line if you do not want to support GoogleMaps on iOS

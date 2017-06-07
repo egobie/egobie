@@ -1,7 +1,7 @@
 import Reactotron from 'reactotron-react-native';
 // No trailing `/`
-const baseUrl = 'http://localhost:8000';
-// const baseUrl = 'https://api.egobie.com';
+// const baseUrl = 'http://localhost:8000';
+const baseUrl = 'https://api.egobie.com';
 
 export default (method, url, body, headers) => {
   let _headers = headers ? headers : {};

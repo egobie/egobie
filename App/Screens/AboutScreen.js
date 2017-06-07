@@ -78,11 +78,13 @@ class AboutScreen extends Component {
               borderBottomColor: eGobie.EGOBIE_GREY,
             }}
           />
+          { /*
           <ListItem
             title = { 'Rate us in the App Store' }
             titleStyle = { titleStyle }
             rightIcon = { rightIcon }
           />
+          */ }
           <ListItem
             title = { 'eGobie.com' }
             titleStyle = { titleStyle }

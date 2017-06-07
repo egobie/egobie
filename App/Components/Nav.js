@@ -140,7 +140,7 @@ class Nav extends Component {
         top: this.state.top,
       }}>
         { this.renderUserIcon() }
-        { this.renderScannerIcon() }
+        { /* this.renderScannerIcon() */ }
       </Animated.View>
     );
   }

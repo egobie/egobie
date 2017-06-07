@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableWithoutFeedback } from 'react-native';
+import { View, Linking, TouchableWithoutFeedback } from 'react-native';
 
 import { ListItem, Icon } from 'react-native-elements';
 
@@ -40,6 +40,22 @@ class AboutScreen extends Component {
     )
   });
 
+  openEgobie = () => {
+    Linking.canOpenURL('https://www.egobie.com').then((supported) => {
+      if (supported) {
+        Linking.openURL('https://www.egobie.com');
+      }
+    });
+  }
+
+  openFaq = () => {
+    Linking.canOpenURL('https://www.egobie.com/faq').then((supported) => {
+      if (supported) {
+        Linking.openURL('https://www.egobie.com/faq');
+      }
+    });
+  }
+
   render() {
     return (
       <View>
@@ -62,20 +78,24 @@ class AboutScreen extends Component {
               borderBottomColor: eGobie.EGOBIE_GREY,
             }}
           />
+          { /*
           <ListItem
             title = { 'Rate us in the App Store' }
             titleStyle = { titleStyle }
             rightIcon = { rightIcon }
           />
+          */ }
           <ListItem
             title = { 'eGobie.com' }
             titleStyle = { titleStyle }
             rightIcon = { rightIcon }
+            onPress = { this.openEgobie }
           />
           <ListItem
             title = { 'FAQ' }
             titleStyle = { titleStyle }
             rightIcon = { rightIcon }
+            onPress = { this.openFaq }
           />
           {/*<ListItem
             title = { 'Feedback' }

@@ -52,7 +52,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>287186355065258</string>
 	<key>FacebookDisplayName</key>
@@ -74,7 +74,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>We will come to you to serve your vehicle</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

@@ -69,7 +69,16 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
-		<dict/>
+		<!-- Local -->
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+		<!-- Release -->
+		<!--<dict/>-->
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>You can scan QR code to make reservations</string>

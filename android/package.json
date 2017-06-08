@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-native-android-permissions": "^0.0.7"
+  }
+}

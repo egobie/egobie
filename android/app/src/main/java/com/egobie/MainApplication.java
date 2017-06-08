@@ -6,7 +6,7 @@ import android.util.Log;
 import com.facebook.react.ReactApplication;
 import com.magus.fblogin.FacebookLoginPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
-import com.lwansbrough.RCTCamera.RCTCameraPackage;
+// import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -15,6 +15,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.burnweb.rnpermissions.RNPermissionsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,9 +34,10 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new FacebookLoginPackage(),
             new RNGoogleSigninPackage(),
-            new RCTCameraPackage(),
+            // new RCTCameraPackage(),
             new MapsPackage(),
             new ReactNativeI18n(),
+            new RNPermissionsPackage(),
             new VectorIconsPackage()
       );
     }

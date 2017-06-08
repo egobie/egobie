@@ -54,6 +54,7 @@ class ServiceDetailModal extends Component {
     return (
       <Modal
         transparent
+        onRequestClose = { () => {} }
         animationType = { 'slide' }
         visible = { this.state.visible }
       >

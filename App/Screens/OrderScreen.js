@@ -378,42 +378,52 @@ class OrderScreen extends Component {
   vehicles() {
     if (!this.props.userSignedIn) {
       return (
-        <Button
-          raised
-          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SIGN); } }
-          title = { 'SIGN IN' }
-          icon = {{
-            type: 'material-community',
-            name: 'account',
-            size: 20,
-          }}
-          color = { eGobie.EGOBIE_WHITE }
-          backgroundColor = { eGobie.EGOBIE_BLUE }
-          buttonStyle = {{
-            width: 180,
-            marginTop: 70,
-            marginLeft: Dimension.width / 2 - 90,
-          }}
-        />
+        <View style = {{
+          flex: 1,
+          width: Dimension.width,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <Button
+            raised
+            onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_SIGN); } }
+            title = { 'SIGN IN' }
+            icon = {{
+              type: 'material-community',
+              name: 'account',
+              size: 20,
+            }}
+            color = { eGobie.EGOBIE_WHITE }
+            backgroundColor = { eGobie.EGOBIE_BLUE }
+            buttonStyle = {{
+              width: 180,
+            }}
+          />
+        </View>
       );
     } else if (this.props.cars.length === 0) {
       return (
-        <Button
-          raised
-          onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_VEHICLE); } }
-          title = { 'ADD VEHICLE' }
-          icon = {{
-            type: 'material-community',
-            name: 'plus',
-          }}
-          color = { eGobie.EGOBIE_WHITE }
-          backgroundColor = { eGobie.EGOBIE_BLUE }
-          buttonStyle = {{
-            width: 180,
-            marginTop: 80,
-            marginLeft: Dimension.width / 2 - 90,
-          }}
-        />
+        <View style = {{
+          flex: 1,
+          width: Dimension.width,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <Button
+            raised
+            onPress = { () => { this.props.changeWorkflow(WorkflowAction.WORK_FLOW_VEHICLE); } }
+            title = { 'ADD VEHICLE' }
+            icon = {{
+              type: 'material-community',
+              name: 'plus',
+            }}
+            color = { eGobie.EGOBIE_WHITE }
+            backgroundColor = { eGobie.EGOBIE_BLUE }
+            buttonStyle = {{
+              width: 180,
+            }}
+          />
+        </View>
       );
     } else {
       return this.props.cars.map((car, i) => {

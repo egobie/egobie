@@ -70,7 +70,9 @@ class MenuScreen extends Component {
 
   panResponder = PanResponder.create({
     onMoveShouldSetResponderCapture: () => true,
-    onMoveShouldSetPanResponderCapture: () => true,
+    onMoveShouldSetPanResponderCapture: (e, gestureState) => {
+      return gestureState.dx < 0;
+    },
     onPanResponderMove: (e, gestureState) => {
       this.swipeDx = gestureState.dx;
     },

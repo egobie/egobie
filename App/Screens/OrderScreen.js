@@ -26,9 +26,9 @@ class OrderScreen extends Component {
     maskIndex: new Animated.Value(-1),
     maskOpacity: new Animated.Value(0),
     placeOrderOpacity: new Animated.Value(1),
-    paymentTranslateY: new Animated.Value(200),
+    paymentTranslateY: new Animated.Value(Dimension.height),
     paymentOpacity: new Animated.Value(0),
-    vehicleTranslateY: new Animated.Value(200),
+    vehicleTranslateY: new Animated.Value(Dimension.height),
     vehicleOpacity: new Animated.Value(0),
   };
 
@@ -104,8 +104,8 @@ class OrderScreen extends Component {
         delay: 50,
       }),
       Animated.spring(this.state[`${child}TranslateY`], {
-        toValue: 200,
-        duration: 500,
+        toValue: Dimension.height,
+        duration: 1000,
         easing: Easing.out(Easing.cubic),
       }),
     ]).start();

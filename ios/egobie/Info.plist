@@ -70,6 +70,7 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<!-- Local -->
+		<!--
 		<dict>
 			<key>localhost</key>
 			<dict>
@@ -77,8 +78,9 @@
 				<true/>
 			</dict>
 		</dict>
+		-->
 		<!-- Release -->
-		<!--<dict/>-->
+		<dict/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>You can scan QR code to make reservations</string>
